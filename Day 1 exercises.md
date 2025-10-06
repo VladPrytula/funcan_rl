@@ -111,3 +111,72 @@ We now verify the two properties for this measure.
 We have successfully constructed a measure that is semifinite but not σ-finite, completing the proof.
 $\square$
 
+
+***
+
+### **Stretch goal: On the Measurability of Function Compositions**
+
+This appendix provides a detailed, step-by-step proof of Proposition 1.4 concerning the composition of a measurable function with a continuous function. This result is of paramount importance, as it guarantees that many standard transformations preserve the essential property of measurability.
+
+**Proposition 1.4 (Restated).** Let $(X, \mathcal{F})$ be a measurable space. Let $g: X \to \mathbb{R}$ be a measurable function (with respect to the Borel σ-algebra $\mathcal{B}(\mathbb{R})$ on its codomain), and let $f: \mathbb{R} \to \mathbb{R}$ be a continuous function. Then the composition $h = f \circ g: X \to \mathbb{R}$ is a measurable function.
+
+Before proceeding with the proof, let us recall the essential definitions and a key lemma.
+
+---
+
+#### **Prerequisites**
+
+1.  **Measurable Space:** A pair $(X, \mathcal{F})$, where $X$ is a set and $\mathcal{F}$ is a σ-algebra of subsets of $X$.
+
+2.  **Borel σ-Algebra, $\mathcal{B}(\mathbb{R})$:** The smallest σ-algebra on $\mathbb{R}$ that contains all open subsets of $\mathbb{R}$. We say that the open sets *generate* the Borel σ-algebra.
+
+3.  **Measurable Function:** A function $g: (X, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is measurable if for every set $B$ in the codomain's σ-algebra, its preimage is in the domain's σ-algebra. Formally:
+    $$ \forall B \in \mathcal{B}(\mathbb{R}), \quad g^{-1}(B) = \{x \in X \mid g(x) \in B\} \in \mathcal{F} $$
+
+4.  **Continuous Function (Topological Definition):** A function $f: \mathbb{R} \to \mathbb{R}$ is continuous if and only if the preimage of every *open set* is an *open set*. Formally:
+    $$ \forall U \subseteq \mathbb{R} \text{ such that } U \text{ is open}, \quad f^{-1}(U) = \{y \in \mathbb{R} \mid f(y) \in U\} \text{ is also an open set.} $$
+
+5.  **Key Lemma for Verifying Measurability:** To prove that a function $h: (X, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is measurable, it is *sufficient* to show that the preimage $h^{-1}(C)$ is in $\mathcal{F}$ for every set $C$ in a collection $\mathcal{C}$ that generates the codomain σ-algebra $\mathcal{B}(\mathbb{R})$. Since the collection of all open sets generates $\mathcal{B}(\mathbb{R})$, our task simplifies: we only need to prove that the preimage of any *open set* under $h$ is measurable.
+
+---
+
+#### **Detailed Proof**
+
+Our goal is to demonstrate that the composite function $h = f \circ g$ is measurable. Following the Key Lemma above, we must show that for any arbitrary open set $U \subseteq \mathbb{R}$, the preimage $h^{-1}(U)$ is an element of the σ-algebra $\mathcal{F}$.
+
+Let us proceed in a structured manner.
+
+**Step 1: Express the preimage of the composition.**
+Let $h(x) = (f \circ g)(x) = f(g(x))$. By the definition of a function composition, the preimage of a set $U$ under $h$ can be written as:
+$$ h^{-1}(U) = (f \circ g)^{-1}(U) = g^{-1}(f^{-1}(U)) $$
+This identity is the algebraic heart of the proof. It translates the problem into a two-stage process: first, find the preimage under $f$, and second, find the preimage of that resulting set under $g$.
+
+**Step 2: Analyze the inner preimage, $f^{-1}(U)$.**
+*   We begin by choosing an arbitrary open set $U \subseteq \mathbb{R}$.
+*   The function $f: \mathbb{R} \to \mathbb{R}$ is given to be **continuous**.
+*   By the topological definition of continuity (Prerequisite 4), the preimage of any open set under $f$ is itself an open set.
+*   Therefore, the set $V = f^{-1}(U)$ is an open subset of $\mathbb{R}$.
+
+**Step 3: Analyze the outer preimage, $g^{-1}(V)$.**
+*   From Step 2, we have established that $V$ is an open set.
+*   By the definition of the Borel σ-algebra $\mathcal{B}(\mathbb{R})$ (Prerequisite 2), every open set in $\mathbb{R}$ is an element of $\mathcal{B}(\mathbb{R})$. Thus, $V \in \mathcal{B}(\mathbb{R})$.
+*   The function $g: X \to \mathbb{R}$ is given to be **measurable**.
+*   By the definition of a measurable function (Prerequisite 3), the preimage of any set in $\mathcal{B}(\mathbb{R})$ under $g$ must be an element of $\mathcal{F}$.
+*   Since $V \in \mathcal{B}(\mathbb{R})$, it follows directly that its preimage, $g^{-1}(V)$, must be an element of $\mathcal{F}$.
+
+**Step 4: Synthesize and Conclude.**
+By combining our steps, we have shown:
+$$ h^{-1}(U) = g^{-1}(\underbrace{f^{-1}(U)}_{\text{This is an open set } V}) = g^{-1}(V) \in \mathcal{F} $$
+We started with an arbitrary open set $U \subseteq \mathbb{R}$ and have rigorously proven that its preimage under $h = f \circ g$ is a member of the σ-algebra $\mathcal{F}$.
+
+Since this holds for *every* open set in $\mathbb{R}$, and the collection of open sets generates the Borel σ-algebra $\mathcal{B}(\mathbb{R})$, we have satisfied the sufficient condition stated in our Key Lemma (Prerequisite 5).
+
+We can therefore conclude that the function $h = f \circ g$ is $(\mathcal{F}, \mathcal{B}(\mathbb{R}))$-measurable.
+
+$\square$
+
+---
+
+#### **Remark on Significance**
+
+In reinforcement learning, for example, a state representation may be given by a measurable function $g: \mathcal{S} \to \mathbb{R}^d$ that extracts a vector of features. A policy or value function, often represented by a neural network, is then applied to this feature vector. The network itself is a grand composition of linear transformations (which are continuous) and activation functions (e.g., sigmoid, tanh, ReLU, which are also continuous). This proposition is the first and most crucial step in guaranteeing that the final output of the neural network—the policy or value—is a measurable function of the original state, a necessary condition for the entire theoretical framework to be sound.

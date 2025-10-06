@@ -1,6 +1,6 @@
 ### Agenda:
 
-##### 📘 Day 1 — Week 1: Measure Theory Foundations & RL Motivation**
+##### 📘 Day 1 — Week 1: Measure Theory Foundations & RL Motivation
 **Total time: ~90 minutes**
 
 ---
@@ -9,7 +9,7 @@
 
 **Topic:** _Sigma-algebras and measurable functions_
 
-- Read from **Folland, “Real Analysis” §1.1–1.2** or equivalent in Brezis Appendix A.
+- Read from **Folland, “Real Analysis” §1.1–1.2** or equivalent in R. Durrett Ch.1.
 - Focus on:
     - Definition of σ-algebra.
     - Examples: Borel σ-algebra on ℝ.
@@ -103,7 +103,9 @@ With a structure of events $\mathcal{F}$ in place, we can now assign a notion of
 **Definition 1.2 (Measure).** Let $(X, \mathcal{F})$ be a measurable space. A function $\mu: \mathcal{F} \to [0, \infty]$ is a **measure** if it satisfies two conditions:
 1.  $\mu(\emptyset) = 0$.
 2.  (Countable Additivity) For any countable collection $\{A_n\}_{n=1}^{\infty}$ of pairwise disjoint sets in $\mathcal{F}$,
-    $$ \mu\left(\bigcup_{n=1}^{\infty} A_n\right) = \sum_{n=1}^{\infty} \mu(A_n) $$
+    $$ 
+    \mu\left(\bigcup_{n=1}^{\infty} A_n\right) = \sum_{n=1}^{\infty} \mu(A_n) 
+    $$
 
 The triple $(X, \mathcal{F}, \mu)$ is called a **measure space**.
 
