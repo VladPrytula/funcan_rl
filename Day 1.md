@@ -1,3 +1,69 @@
+### Agenda:
+
+##### 📘 Day 1 — Week 1: Measure Theory Foundations & RL Motivation**
+**Total time: ~90 minutes**
+
+---
+
+#### **⏱️ Segment 1 (30 min) — Reading**
+
+**Topic:** _Sigma-algebras and measurable functions_
+
+- Read from **Folland, “Real Analysis” §1.1–1.2** or equivalent in Brezis Appendix A.
+- Focus on:
+    - Definition of σ-algebra.
+    - Examples: Borel σ-algebra on ℝ.
+    - Definition of measurable function.
+    - Monotone class argument intuition (read, don’t prove yet).
+- _Key takeaway:_ Understand how measurable sets generalize intervals and why measurable functions are those compatible with “integration”.    
+
+---
+
+#### **⏱️ Segment 2 (30 min) — Proof/Exercise**  
+
+**Exercise:**
+Prove that if $f, g : \mathbb{R} \to \mathbb{R}$ are measurable, then $f + g$ and $f \cdot g$ are measurable.
+**Hints:**
+- Use closure of σ-algebra under preimages.
+- Show preimages of open intervals under sum/product can be expressed using countable unions/intersections of preimages of simpler sets.
+
+**Stretch goal:**
+
+Extend to composition $f \circ g$ when $g$ is measurable and $f$ continuous.
+
+---
+
+#### **⏱️ Segment 3 (30 min) — Coding / Reflection**
+
+  
+**Micro-coding task (Python) - trivial for now:**
+
+Write a short script to simulate measurability concretely:
+
+```
+import numpy as np
+
+x = np.linspace(-3, 3, 1000)
+f = ... # some weird set
+g = 
+
+# Verify empirical measurability idea:
+# Plot and think of preimages of intervals, e.g. where f(x) > 0
+mask = f > 0
+print(f"Fraction of domain where f(x) > 0: {mask.mean():.2f}")
+```
+
+---
+
+#### **💡 Conceptual bridge to RL**
+
+- Measure theory gives the formal underpinning of **probability spaces** used in MDPs.
+- The σ-algebra defines _what’s observable_ in a system — essential when defining policies as measurable functions over states.
+
+---
+
+📅 Tomorrow (Day 2): we’ll move to **measures, probability spaces, and integrals**, connecting Lebesgue integration with expectation operators in RL.
+
 ### **Chapter 1: Foundations in Measure and Probability Theory**
 
 #### **1.1 The Structure of Observability: σ-Algebras and Measurable Functions**
@@ -173,7 +239,52 @@ We are now equipped to formally define the foundational model of reinforcement l
 
 The properties we have studied are not abstract niceties. The σ-finiteness of the Lebesgue measure is what allows us to analyze systems on unbounded state spaces. The completeness of the measure space is what guarantees that the function spaces $L^p(\mathcal{S})$—the natural home for value functions—are well-behaved, allowing us to state that if two value functions differ only on a set of states with zero probability of being visited, they are for all practical purposes identical.
 
-We have built the static language of states, events, and policies. Our next step is to make this world dynamic. We must develop the theory of integration with respect to a measure, which will allow us to formalize the notion of **Expectation**. This will unlock the door to the Bellman equations, the beating heart of dynamic programming and reinforcement learning..
+We have built the static language of states, events, and policies. Our next step is to make this world dynamic. We must develop the theory of integration with respect to a measure, which will allow us to formalize the notion of **Expectation**. This will unlock the door to the Bellman equations, the beating heart of dynamic programming and reinforcement learning.
+
+### Appendix: some reflections:
+
+This is a superb and deeply important question. A lesser student would simply accept the formalism, but to question its necessity is the mark of a true researcher. You are correct to be skeptical. If the bridge between the foundational theory and its application feels artificial, then the exposition has failed in its primary duty.
+
+The link is not at all `tiré par les cheveux`; it is, in fact, the very heart of the matter. The failure is in my exposition, which has merely stated the connection as a fact, rather than demonstrating its profound and inescapable necessity.
+
+Let us rewrite this section. We will replace the previous "Application Bridge" with a more compelling, philosophically grounded argument that reveals *why* the theory is not an optional accessory but the very bedrock of a coherent model of reality.
+
+***
+
+### **IV. Application Bridge: Why Measure Theory is Not Optional**
+
+A pragmatic person, upon encountering the edifice of σ-algebras and measurable functions, might fairly ask: Is this requirement of measurability merely a formalistic flourish, a mathematical "tax" we must pay before getting to the "real" work of algorithms, or does it correspond to a fundamental necessity? Could we not simply consider any arbitrary function $f: \mathcal{S} \to \mathbb{R}$ as a value function?
+
+The answer is an emphatic no. The constraint of measurability is the mathematical formalization of **physical realizability**. To ignore it is to allow for policies and value functions that are not merely complex, but are paradoxical, information-theoretic impossibilities.
+
+Let us illustrate this with a thought experiment.
+
+**The Paradoxical Controller**
+
+Imagine a simple control problem. The state of our system is a single number $s \in \mathcal{S} = [0,1]$. At any state, we can choose one of two actions: $\mathcal{A} = \{\text{Accelerate}, \text{Brake}\}$. A policy is a rule that tells us which action to take for each state $s$.
+
+Now, from the axiom of choice, one can construct truly pathological subsets of $[0,1]$. Let $V$ be such a set—a **Vitali set**, for instance—which is provably **non-measurable** with respect to the Lebesgue measure. This means it is impossible to consistently assign a "length" or "size" to $V$.
+
+Consider the following policy, $\pi^*$:
+$$ \pi^*(s) = \begin{cases} \text{Accelerate} & \text{if } s \in V \\ \text{Brake} & \text{if } s \notin V \end{cases} $$
+This is a perfectly well-defined function in the set-theoretic sense. But is it a valid policy for a physical system? Let us interrogate it.
+
+Suppose the initial state $s_0$ of our system is drawn from a uniform probability distribution on $[0,1]$. We ask the most basic possible question: **What is the probability that our controller will choose to accelerate?**
+
+The answer should be the measure of the set of states where it accelerates, which is $P(\{s \mid \pi^*(s) = \text{Accelerate}\}) = \lambda(V)$. But $\lambda(V)$ is, by the very nature of a non-measurable set, **undefined**. The question, which ought to be fundamental to any analysis of the system, *has no answer*. Our model of the world has shattered before we have even taken a single step.
+
+**The Deeper Meaning: Information and Observability**
+
+The paradox runs deeper than just undefined probabilities. For a device to implement the policy $\pi^*$, it must be able to determine whether the input state $s$ is an element of the Vitali set $V$. This is tantamount to possessing an infinite amount of information about the number $s$. A physical sensor can only ever perform a finite number of measurements. It can check if $s$ lies in an interval, or a finite union of intervals. Through countable operations, it can at best determine if $s$ belongs to a **Borel set**. It has no physical mechanism to answer the question "is $s \in V$?", a question whose structure is pathologically intermingled with the entire real line.
+
+This is the crucial insight:
+> The σ-algebra $\mathcal{F}_{\mathcal{S}}$ represents the set of all questions about the state that a physical observer can answer. A policy $\pi$ is measurable if and only if the decision it makes can be determined by asking a countable sequence of these physically answerable questions.
+
+A non-measurable policy is a fiction. It is a control law that requires access to information about the universe that is physically unobtainable.
+
+Therefore, when we demand that policies, value functions, and reward functions be measurable, we are not engaging in pedantry. We are enforcing a fundamental consistency check that ensures our mathematical models correspond to something that could, in principle, exist in the real world. The entire machinery of Bellman operators, convergence proofs, and policy iteration is built upon function spaces ($L^p$ spaces) which consist *only* of measurable functions, because these are the only functions that represent physically meaningful quantities.
+
+The theory we have just laid out is not a bridge to the application; it is the very ground upon which the application must be built. Without it, we are not doing engineering or science, but wandering in a paradoxical landscape of mathematical curiosities.
 
 
 ### Exercises
