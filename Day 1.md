@@ -74,6 +74,10 @@ Before we can speak of probabilities, expectations, or stochastic dynamics, we m
 
 The $\sigma$-algebra, therefore, is the mathematical formalization of **observability**. It defines the universe of events to which we can assign a probability. Consequently, any function that represents a quantity of interest—be it a policy $\pi: \mathcal{S} \to \mathcal{A}$ mapping states to actions, or a value function $V: \mathcal{S} \to \mathbb{R}$—must be compatible with this structure of observability. Such functions are termed **measurable**. They are the only functions we can meaningfully integrate to compute expectations, which is the central operation in evaluating and improving policies. This section establishes this fundamental grammar.
 
+**Learning Objectives:**
+*   Define $\sigma$-algebras and measures, and articulate their role in constructing a formal probability space.
+*   Understand the properties of measurable functions and prove their closure under arithmetic operations and composition with continuous functions.
+*   Reflect, why the concept of measurability is an indispensable prerequisite for a coherent theory of stochastic control and reinforcement learning.
 ---
 
 ### **I. Core Theory Part A: σ-Algebras**
