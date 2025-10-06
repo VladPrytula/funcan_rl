@@ -1,0 +1,19 @@
+# macOS noise
+.DS_Store
+._*
+.Icon?
+.Trashes
+.Spotlight-*
+.fseventsd
+# iCloud placeholders/offload markers
+*.icloud
+*.nosync
+*.nosyncbk
+# Obsidian layout/cache that doesn't matter across machines
+.obsidian/workspace*
+.obsidian/workspace.json
+.obsidian/graph.json
+.obsidian/app.json
+# Optional: ignore local plugin caches (keep settings though)
+# .obsidian/plugins/*/cache/
+# If you use Dataview, Canvas etc. you usually DO want those files tracked.
