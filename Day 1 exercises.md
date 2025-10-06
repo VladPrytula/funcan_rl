@@ -116,62 +116,80 @@ $\square$
 
 ### **Stretch goal: On the Measurability of Function Compositions**
 
-This appendix provides a detailed, step-by-step proof of Proposition 1.4 concerning the composition of a measurable function with a continuous function. This result is of paramount importance, as it guarantees that many standard transformations preserve the essential property of measurability.
+This result is of paramount importance, as it guarantees that many standard transformations preserve the essential property of measurability.
+
+**Proposition 1.4.** Let $(X, \mathcal{F})$ be a measurable space. Let $g: X \to \mathbb{R}$ be a measurable function (with respect to the Borel σ-algebra $\mathcal{B}(\mathbb{R})$ on its codomain), and let $f: \mathbb{R} \to \mathbb{R}$ be a continuous function. Then the composition $h = f \circ g: X \to \mathbb{R}$ is a measurable function.
+
+An outstanding point of criticism. You are entirely correct. I have used the phrase "Key Lemma" informally, referring to a concept I had buried within a list of prerequisites. This is a lapse in rigor and clarity that is unacceptable for a text of this nature. A crucial tool for a proof must be stated formally, with the respect it is due.
+
+Let us rewrite the appendix with the proper structure. The lemma will be given its own formal statement and justification, so that the main proof can refer to it without any ambiguity.
+
+***
+
+### **Appendix A: On the Measurability of Function Compositions**
+
+This appendix provides a detailed, step-by-step proof of Proposition 1.4 concerning the composition of a measurable function with a continuous function. This result is of paramount importance, as it forms a crucial link between the topological world of continuity and the measure-theoretic world of measurability.
 
 **Proposition 1.4 (Restated).** Let $(X, \mathcal{F})$ be a measurable space. Let $g: X \to \mathbb{R}$ be a measurable function (with respect to the Borel σ-algebra $\mathcal{B}(\mathbb{R})$ on its codomain), and let $f: \mathbb{R} \to \mathbb{R}$ be a continuous function. Then the composition $h = f \circ g: X \to \mathbb{R}$ is a measurable function.
 
-Before proceeding with the proof, let us recall the essential definitions and a key lemma.
+The proof relies on several foundational concepts and a technical lemma, which we shall state clearly before proceeding.
 
 ---
 
-#### **Prerequisites**
+#### **1. Foundational Concepts**
 
-1.  **Measurable Space:** A pair $(X, \mathcal{F})$, where $X$ is a set and $\mathcal{F}$ is a σ-algebra of subsets of $X$.
-
-2.  **Borel σ-Algebra, $\mathcal{B}(\mathbb{R})$:** The smallest σ-algebra on $\mathbb{R}$ that contains all open subsets of $\mathbb{R}$. We say that the open sets *generate* the Borel σ-algebra.
-
-3.  **Measurable Function:** A function $g: (X, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is measurable if for every set $B$ in the codomain's σ-algebra, its preimage is in the domain's σ-algebra. Formally:
-    $$ \forall B \in \mathcal{B}(\mathbb{R}), \quad g^{-1}(B) = \{x \in X \mid g(x) \in B\} \in \mathcal{F} $$
-
-4.  **Continuous Function (Topological Definition):** A function $f: \mathbb{R} \to \mathbb{R}$ is continuous if and only if the preimage of every *open set* is an *open set*. Formally:
-    $$ \forall U \subseteq \mathbb{R} \text{ such that } U \text{ is open}, \quad f^{-1}(U) = \{y \in \mathbb{R} \mid f(y) \in U\} \text{ is also an open set.} $$
-
-5.  **Key Lemma for Verifying Measurability:** To prove that a function $h: (X, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is measurable, it is *sufficient* to show that the preimage $h^{-1}(C)$ is in $\mathcal{F}$ for every set $C$ in a collection $\mathcal{C}$ that generates the codomain σ-algebra $\mathcal{B}(\mathbb{R})$. Since the collection of all open sets generates $\mathcal{B}(\mathbb{R})$, our task simplifies: we only need to prove that the preimage of any *open set* under $h$ is measurable.
+*   **Measurable Function:** A function $g: (X, \mathcal{F}) \to (Y, \mathcal{G})$ is measurable if for every set $B \in \mathcal{G}$, its preimage $g^{-1}(B)$ is in $\mathcal{F}$.
+*   **Continuous Function (Topological Definition):** A function $f: \mathbb{R} \to \mathbb{R}$ is continuous if and only if the preimage of every *open set* is an *open set*.
+*   **Generating a σ-Algebra:** A collection of subsets $\mathcal{C} \subseteq 2^Y$ is said to *generate* the σ-algebra $\mathcal{G}$ if $\mathcal{G}$ is the smallest σ-algebra containing every set in $\mathcal{C}$. We denote this by $\mathcal{G} = \sigma(\mathcal{C})$. The collection of all open sets in $\mathbb{R}$ generates the Borel σ-algebra, $\mathcal{B}(\mathbb{R})$.
 
 ---
 
-#### **Detailed Proof**
+#### **2. A Key Technical Lemma**
 
-Our goal is to demonstrate that the composite function $h = f \circ g$ is measurable. Following the Key Lemma above, we must show that for any arbitrary open set $U \subseteq \mathbb{R}$, the preimage $h^{-1}(U)$ is an element of the σ-algebra $\mathcal{F}$.
+The definition of measurability requires checking the preimage of *every* set in the codomain's σ-algebra—an uncountable collection in the case of $\mathcal{B}(\mathbb{R})$. The following lemma provides a much more practical criterion.
 
-Let us proceed in a structured manner.
+**Lemma A.1 (Criterion for Measurability).**
+Let $(X, \mathcal{F})$ and $(Y, \mathcal{G})$ be measurable spaces. Suppose $\mathcal{C}$ is a collection of subsets of $Y$ that generates $\mathcal{G}$ (i.e., $\sigma(\mathcal{C}) = \mathcal{G}$). A function $f: X \to Y$ is $(\mathcal{F}, \mathcal{G})$-measurable if and only if $f^{-1}(C) \in \mathcal{F}$ for every $C \in \mathcal{C}$.
+
+**Justification:** The "only if" direction is trivial, since $\mathcal{C} \subseteq \mathcal{G}$. The "if" direction is the powerful part. The proof relies on the "good sets" principle. One defines a collection of "good sets" in $Y$ as $\mathcal{G}' = \{B \subseteq Y \mid f^{-1}(B) \in \mathcal{F}\}$. It is a straightforward exercise to show that if $f^{-1}$ preserves complements and countable unions (which it does), then $\mathcal{G}'$ is itself a σ-algebra. Our hypothesis is that the generating collection $\mathcal{C}$ is contained in $\mathcal{G}'$. Since $\mathcal{G}'$ is a σ-algebra containing $\mathcal{C}$, and $\mathcal{G} = \sigma(\mathcal{C})$ is the *smallest* such σ-algebra, it must be that $\mathcal{G} \subseteq \mathcal{G}'$. This means for any set $B \in \mathcal{G}$, we also have $B \in \mathcal{G}'$, which by definition implies $f^{-1}(B) \in \mathcal{F}$. Thus, $f$ is measurable.
+
+---
+
+#### **3. Detailed Proof of Proposition 1.4**
+
+With Lemma A.1 established, we can proceed with a clear and rigorous proof of the main proposition.
+
+Our goal is to demonstrate that the composite function $h = f \circ g$ is measurable.
+*   The codomain of $h$ is $\mathbb{R}$, equipped with the Borel σ-algebra $\mathcal{B}(\mathbb{R})$.
+*   The collection of all open sets, let us call it $\mathcal{O}(\mathbb{R})$, is a generator for $\mathcal{B}(\mathbb{R})$.
+*   According to **Lemma A.1**, to prove $h$ is measurable, it is sufficient to show that for any arbitrary **open set** $U \in \mathcal{O}(\mathbb{R})$, the preimage $h^{-1}(U)$ is an element of the σ-algebra $\mathcal{F}$.
+
+Let us now execute this plan.
 
 **Step 1: Express the preimage of the composition.**
-Let $h(x) = (f \circ g)(x) = f(g(x))$. By the definition of a function composition, the preimage of a set $U$ under $h$ can be written as:
+Let $h(x) = (f \circ g)(x) = f(g(x))$. By the definition of a function composition, the preimage of a set $U$ under $h$ is:
 $$ h^{-1}(U) = (f \circ g)^{-1}(U) = g^{-1}(f^{-1}(U)) $$
-This identity is the algebraic heart of the proof. It translates the problem into a two-stage process: first, find the preimage under $f$, and second, find the preimage of that resulting set under $g$.
+This identity is the algebraic heart of the proof. It translates the problem into a two-stage process.
 
 **Step 2: Analyze the inner preimage, $f^{-1}(U)$.**
-*   We begin by choosing an arbitrary open set $U \subseteq \mathbb{R}$.
+*   We begin by choosing an arbitrary open set $U \in \mathcal{O}(\mathbb{R})$.
 *   The function $f: \mathbb{R} \to \mathbb{R}$ is given to be **continuous**.
-*   By the topological definition of continuity (Prerequisite 4), the preimage of any open set under $f$ is itself an open set.
-*   Therefore, the set $V = f^{-1}(U)$ is an open subset of $\mathbb{R}$.
+*   By the topological definition of continuity, the preimage of any open set under $f$ is itself an open set.
+*   Therefore, the set we shall call $V = f^{-1}(U)$ is an open subset of $\mathbb{R}$.
 
 **Step 3: Analyze the outer preimage, $g^{-1}(V)$.**
 *   From Step 2, we have established that $V$ is an open set.
-*   By the definition of the Borel σ-algebra $\mathcal{B}(\mathbb{R})$ (Prerequisite 2), every open set in $\mathbb{R}$ is an element of $\mathcal{B}(\mathbb{R})$. Thus, $V \in \mathcal{B}(\mathbb{R})$.
+*   By the definition of the Borel σ-algebra $\mathcal{B}(\mathbb{R})$, every open set in $\mathbb{R}$ is an element of $\mathcal{B}(\mathbb{R})$. Thus, $V \in \mathcal{B}(\mathbb{R})$.
 *   The function $g: X \to \mathbb{R}$ is given to be **measurable**.
-*   By the definition of a measurable function (Prerequisite 3), the preimage of any set in $\mathcal{B}(\mathbb{R})$ under $g$ must be an element of $\mathcal{F}$.
+*   By the definition of a measurable function, the preimage of any set in $\mathcal{B}(\mathbb{R})$ under $g$ must be an element of $\mathcal{F}$.
 *   Since $V \in \mathcal{B}(\mathbb{R})$, it follows directly that its preimage, $g^{-1}(V)$, must be an element of $\mathcal{F}$.
 
 **Step 4: Synthesize and Conclude.**
 By combining our steps, we have shown:
-$$ h^{-1}(U) = g^{-1}(\underbrace{f^{-1}(U)}_{\text{This is an open set } V}) = g^{-1}(V) \in \mathcal{F} $$
+$$ h^{-1}(U) = g^{-1}(\underbrace{f^{-1}(U)}_{\text{This is an open set } V \text{ by continuity}}) = \underbrace{g^{-1}(V)}_{\text{This is in } \mathcal{F} \text{ by measurability}} $$
 We started with an arbitrary open set $U \subseteq \mathbb{R}$ and have rigorously proven that its preimage under $h = f \circ g$ is a member of the σ-algebra $\mathcal{F}$.
 
-Since this holds for *every* open set in $\mathbb{R}$, and the collection of open sets generates the Borel σ-algebra $\mathcal{B}(\mathbb{R})$, we have satisfied the sufficient condition stated in our Key Lemma (Prerequisite 5).
-
-We can therefore conclude that the function $h = f \circ g$ is $(\mathcal{F}, \mathcal{B}(\mathbb{R}))$-measurable.
+Since we have satisfied the condition of **Lemma A.1** using the generating class of open sets, we can conclude that the function $h = f \circ g$ is $(\mathcal{F}, \mathcal{B}(\mathbb{R}))$-measurable.
 
 $\square$
 
