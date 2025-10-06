@@ -149,15 +149,47 @@ $\square$
 
 This property refines the σ-algebra to include all subsets of negligible sets.
 
-**Definition 1.6 (Null Set and Completeness).** Let $(X, \mathcal{F}, \mu)$ be a measure space.
+**Motivation:** Consider the space $(\mathbb{R}, \mathcal{B}(\mathbb{R}), \lambda)$. One can construct the **Cantor set** $C$, which is a Borel set with $\lambda(C) = 0$. However, $C$ contains subsets, say $Z \subset C$, which are provably *not* in the Borel σ-algebra $\mathcal{B}(\mathbb{R})$. This presents a logical deficiency: we have a set $Z$ contained within a set of measure zero, yet we cannot even assign $Z$ a measure. A complete measure space rectifies this.
+
+**Definition 1.5 (Null Set and Completeness).** Let $(X, \mathcal{F}, \mu)$ be a measure space.
 1.  A set $N \in \mathcal{F}$ is a **null set** if $\mu(N) = 0$.
 2.  The measure space is **complete** if for every null set $N \in \mathcal{F}$, every subset $Z \subseteq N$ is also in $\mathcal{F}$.
 
 The Borel measure space $(\mathbb{R}, \mathcal{B}(\mathbb{R}), \lambda)$ is famously *not* complete. However, any measure space can be extended to its completion.
 
-**Theorem 1.2 (The Completion of a Measure Space).** For any measure space $(X, \mathcal{F}, \mu)$, there exists a complete measure space $(X, \overline{\mathcal{F}}, \overline{\mu})$ such that $\mathcal{F} \subseteq \overline{\mathcal{F}}$ and $\overline{\mu}$ agrees with $\mu$ on $\mathcal{F}$. The σ-algebra $\overline{\mathcal{F}}$ consists of all sets of the form $A \cup Z$, where $A \in \mathcal{F}$ and $Z$ is a subset of some null set in $\mathcal{F}$.
+**Proposition 1.3 (The Incompleteness of the Borel-Lebesgue Space).** The measure space $(\mathbb{R}, \mathcal{B}(\mathbb{R}), \lambda)$, consisting of the Borel σ-algebra and the Lebesgue measure, is not complete.
 
-**Definition 1.7 (The Lebesgue σ-Algebra).** The **Lebesgue σ-algebra** on $\mathbb{R}$, denoted $\mathcal{L}(\mathbb{R})$, is the completion of the Borel σ-algebra $\mathcal{B}(\mathbb{R})$ with respect to the Lebesgue measure $\lambda$. For the remainder of this text, unless specified otherwise, analysis on $\mathbb{R}^n$ will implicitly use this complete space.
+*Proof.* To prove this, we must construct a specific counterexample. We must exhibit a set $N \in \mathcal{B}(\mathbb{R})$ with $\lambda(N)=0$, and a subset $Z \subseteq N$ such that $Z \notin \mathcal{B}(\mathbb{R})$.
+
+1.  **Constructing the Null Set.** Let $C$ be the standard Cantor middle-thirds set in $[0,1]$. It is constructed by starting with $C_0 = [0,1]$ and iteratively removing the open middle third of each interval remaining at step $k$ to obtain $C_{k+1}$. Each $C_k$ is a finite union of closed intervals, and is therefore a closed set. The Cantor set is the intersection of all these closed sets: $C = \bigcap_{k=0}^{\infty} C_k$. As a countable intersection of closed sets, $C$ is itself a closed set. Since all closed sets belong to the Borel σ-algebra, we have $C \in \mathcal{B}(\mathbb{R})$. The Lebesgue measure of $C$ is given by $\lambda(C) = \lim_{k \to \infty} (2/3)^k = 0$. We have thus found our null set, $N=C$.
+
+2.  **Demonstrating the Existence of a Non-Borel Subset.** The crux of the argument rests upon a cardinality comparison.
+    *   It is a foundational result of descriptive set theory that the cardinality of the Borel σ-algebra is equal to the cardinality of the continuum, i.e., $|\mathcal{B}(\mathbb{R})| = |\mathbb{R}| = \mathfrak{c}$.
+    *   It is also a standard result that the Cantor set $C$, despite having measure zero, is uncountable and has the cardinality of the continuum, $|C| = \mathfrak{c}$. This can be seen by constructing a bijection between points in $C$ (represented by their ternary expansions using only digits 0 and 2) and points in $[0,1]$ (represented by their binary expansions).
+    *   Consider the power set of $C$, denoted $2^C$, which is the collection of *all* subsets of $C$. By Cantor's theorem, the cardinality of the power set is strictly greater than the cardinality of the set itself: $|2^C| = 2^{|C|} = 2^{\mathfrak{c}}$.
+    *   We are faced with the inequality $2^{\mathfrak{c}} > \mathfrak{c}$.
+
+3.  **Conclusion.** The collection of all subsets of the Cantor set has cardinality $2^{\mathfrak{c}}$. The collection of all Borel sets has cardinality $\mathfrak{c}$. Since there are strictly more subsets of $C$ than there are Borel sets in total, it is a logical necessity that there must exist subsets of $C$ that are not Borel sets. Let $Z$ be one such subset.
+    We have successfully identified a set $C \in \mathcal{B}(\mathbb{R})$ with $\lambda(C)=0$, and a subset $Z \subseteq C$ for which $Z \notin \mathcal{B}(\mathbb{R})$. This violates the definition of a complete measure space.
+$\square$
+
+This flaw is not fatal. The fact that our foundational measure space is incomplete simply means it is not yet the correct analytical object for our purposes. As we shall now prove, any measure space can be uniquely extended to its completion, thereby absorbing these pathological subsets of null sets into the framework in a consistent manner.
+
+**Theorem 1.1 (The Completion of a Measure Space).** For any measure space $(X, \mathcal{F}, \mu)$, there exists a complete measure space $(X, \overline{\mathcal{F}}, \overline{\mu})$ such that $\mathcal{F} \subseteq \overline{\mathcal{F}}$ and $\overline{\mu}$ agrees with $\mu$ on $\mathcal{F}$. The σ-algebra $\overline{\mathcal{F}}$ consists of all sets of the form $A \cup Z$, where $A \in \mathcal{F}$ and $Z$ is a subset of some null set in $\mathcal{F}$.
+
+*Proof (Constructive).* The proof proceeds in four steps: we show (i) that $\overline{\mu}$ is well-defined, (ii) that $\overline{\mathcal{F}}$ is a σ-algebra, (iii) that $\overline{\mu}$ is a measure, and finally (iv) that the resulting space is complete.
+
+(i) **$\overline{\mu}$ is well-defined.** We must show that the value of $\overline{\mu}$ for a set $E \in \overline{\mathcal{F}}$ does not depend on its representation. Suppose $E = A_1 \cup Z_1 = A_2 \cup Z_2$, where $A_i \in \mathcal{F}$ and $Z_i \subseteq N_i$ for some $N_i \in \mathcal{N}$. Observe that $A_1 \subseteq E = A_2 \cup Z_2 \subseteq A_2 \cup N_2$. Thus $A_1 \setminus A_2 \subseteq N_2$. Since $A_1, A_2 \in \mathcal{F}$, the set $A_1 \setminus A_2$ is measurable. By the monotonicity of measures, $\mu(A_1 \setminus A_2) \le \mu(N_2) = 0$. Symmetrically, $A_2 \setminus A_1 \subseteq N_1$, so $\mu(A_2 \setminus A_1) = 0$. Since $\mu(A_1) = \mu(A_1 \cap A_2) + \mu(A_1 \setminus A_2)$ and $\mu(A_2) = \mu(A_1 \cap A_2) + \mu(A_2 \setminus A_1)$, we have $\mu(A_1) = \mu(A_1 \cap A_2) + 0$ and $\mu(A_2) = \mu(A_1 \cap A_2) + 0$. Therefore, $\mu(A_1) = \mu(A_2)$, and our definition of $\overline{\mu}$ is unambiguous.
+
+(ii) **$\overline{\mathcal{F}}$ is a σ-algebra.**
+1.  $X \in \overline{\mathcal{F}}$ since $X = X \cup \emptyset$, $X \in \mathcal{F}$, and $\emptyset$ is a subset of the null set $\emptyset \in \mathcal{N}$.
+2.  (Closure under complementation) Let $E = A \cup Z \in \overline{\mathcal{F}}$, with $A \in \mathcal{F}$ and $Z \subseteq N \in \mathcal{N}$. Its complement is $E^c = (A \cup Z)^c = A^c \cap Z^c$. This form is not immediately useful. The key insight is to write $E^c$ as $(A \cup N)^c \cup (N \setminus Z)$. The set $A' = (A \cup N)^c$ is in $\mathcal{F}$ because $A, N \in \mathcal{F}$. The set $Z' = N \setminus Z$ is a subset of the null set $N$. Thus $E^c = A' \cup Z'$ is of the required form to be in $\overline{\mathcal{F}}$.
+3.  (Closure under countable unions) Let $\{E_n\}_{n=1}^{\infty}$ be a sequence in $\overline{\mathcal{F}}$. For each $n$, $E_n = A_n \cup Z_n$ where $A_n \in \mathcal{F}$ and $Z_n \subseteq N_n$ for some $N_n \in \mathcal{N}$. Their union is $\bigcup_{n=1}^\infty E_n = (\bigcup_{n=1}^\infty A_n) \cup (\bigcup_{n=1}^\infty Z_n)$. Let $A = \bigcup A_n$ and $Z = \bigcup Z_n$. Since $\mathcal{F}$ is a σ-algebra, $A \in \mathcal{F}$. Let $N = \bigcup N_n$. As a countable union of null sets, $N$ is itself a null set in $\mathcal{F}$ (since $\mu(N) \le \sum \mu(N_n) = 0$). Since $Z \subseteq N$, the set $\bigcup E_n = A \cup Z$ is of the required form and is therefore in $\overline{\mathcal{F}}$.
+
+(iii) **$\overline{\mu}$ is a measure.** Let $\{E_n\}$ be a disjoint sequence in $\overline{\mathcal{F}}$, with $E_n = A_n \cup Z_n$. From the disjointness of $\{E_n\}$, the sets $\{A_n\}$ must also be disjoint. Then $\overline{\mu}(\bigcup E_n) = \overline{\mu}((\bigcup A_n) \cup (\bigcup Z_n)) = \mu(\bigcup A_n) = \sum \mu(A_n) = \sum \overline{\mu}(A_n \cup Z_n) = \sum \overline{\mu}(E_n)$.
+$\square$
+
+**Definition 1.6 (The Lebesgue σ-Algebra).** The **Lebesgue σ-algebra** on $\mathbb{R}$, denoted $\mathcal{L}(\mathbb{R})$, is the completion of the Borel σ-algebra $\mathcal{B}(\mathbb{R})$ with respect to the Lebesgue measure $\lambda$. For the remainder of this text, unless specified otherwise, analysis on $\mathbb{R}^n$ will implicitly use this complete space.
 
 ---
 
