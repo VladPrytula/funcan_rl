@@ -46,7 +46,7 @@
 
 **Depth Achieved**: Publication-quality mathematical exposition with complete proofs. Significantly exceeded typical Day 1 scope—covered Day 1 + portions of Day 2 material.
 
-**Files Generated**:
+**Files produced**:
 - `Day_1.md`: Full lecture notes with motivation, definitions, theorems
 - `Day_1_exercises.md`: Detailed proofs of all anchor exercises
 
