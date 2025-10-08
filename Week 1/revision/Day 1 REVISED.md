@@ -281,6 +281,9 @@ plt.show()
 ```
 
 **Interpretation:** This continuous function is non-decreasing yet its derivative is zero "almost everywhere"—all of its growth occurs on the **Cantor set**, a Borel set of Lebesgue measure zero. This illustrates that a measurable function can map a simple codomain interval to a domain set of profound topological complexity. Our theory is robust enough to handle such mappings, which is essential for describing the potentially intricate value functions that arise in complex control landscapes.
+![[obsidan_vault_main_icloud/Study/Week 1/revision/Day2_Appendix_MCT_SimpleFunction.png]]
+
+![[obsidan_vault_main_icloud/Study/Week 1/revision/Day2_Appendix_Riemann_Failure.png]]
 
 ---
 
