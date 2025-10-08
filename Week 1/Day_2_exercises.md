@@ -60,7 +60,7 @@ $\blacksquare$ (Step 1)
 
 ---
 
-#### **Step 2: The "Easy" Inequality $\liminf \int f_n \leq \int f$**
+#### **Step 2: The "Easy" Inequality $\lim \int f_n \leq \int f$**
 
 **Claim:** The sequence of integrals $\{\int f_n \, d\mu\}$ is increasing and bounded above by $\int f \, d\mu$.
 
@@ -88,7 +88,7 @@ $\blacksquare$ (Step 2)
 
 ---
 
-#### **Step 3: The "Hard" Inequality $\int f \, d\mu \leq \liminf \int f_n$**
+#### **Step 3: The "Hard" Inequality $\int f \, d\mu \leq \lim \int f_n$**
 
 This is the crux of the theorem. We must prove that the integral of the limit is no larger than the limit of the integrals. The strategy is to show this inequality by considering simple functions that approximate $f$ from below.
 
@@ -289,11 +289,11 @@ $$
 3. **Monotonicity:** If $f(x) < n$, then $\varphi_n(x) = \lfloor 2^n f(x) \rfloor / 2^n$ and $\varphi_{n+1}(x) = \lfloor 2^{n+1} f(x) \rfloor / 2^{n+1}$. Since the partition for $n+1$ is finer, $\varphi_{n+1}(x) \geq \varphi_n(x)$.
    If $f(x) \geq n$, then $\varphi_n(x) = n \leq n+1 \leq \varphi_{n+1}(x)$.
 
-4. **Convergence:** For $x$ with $f(x) < \infty$, choose $N$ such that $f(x) < N$. For $n \geq N$, we have $\varphi_n(x) = \lfloor 2^n f(x) \rfloor / 2^n$, which satisfies:
+4. **Convergence:** For $x$ with $f(x) < \infty$, choose $N$ such that $f(x) < N$. For $n \geq N$, if $f(x) \in [k/2^n, (k+1)/2^n)$ for some $k < n \cdot 2^n$, then $\varphi_n(x) = k/2^n$, which satisfies:
    $$
-   f(x) - \frac{1}{2^n} < \varphi_n(x) \leq f(x)
+   f(x) - \frac{1}{2^n} < \varphi_n(x) = \frac{k}{2^n} \leq f(x)
    $$
-   As $n \to \infty$, $1/2^n \to 0$, so $\varphi_n(x) \to f(x)$.
+   More precisely, $\varphi_n(x) = \lfloor 2^n f(x) \rfloor / 2^n \in [f(x) - 2^{-n}, f(x)]$, so $|\varphi_n(x) - f(x)| < 2^{-n} \to 0$ as $n \to \infty$.
    
    If $f(x) = \infty$, then $\varphi_n(x) = n \to \infty = f(x)$.
 
@@ -465,7 +465,9 @@ $$
 
 This justifies approximating the optimal expected return $\mathbb{E}_{\mu}[V^*]$ by running value iteration for finitely many steps and computing $\mathbb{E}_{\mu}[V_N]$.
 
-**Critical caveat:** MCT requires **non-negativity**. For MDPs with negative rewards, value iteration still converges (by the contraction mapping theorem), but MCT does not directly apply. We must instead use the fact that the Bellman operator is a contraction in the supremum norm, which gives convergence without appealing to MCT. However, for **policy evaluation** with TD learning, where we have stochastic noise, we will need the **Dominated Convergence Theorem** (Day 3) to justify interchanging limits and expectations.
+**Critical caveat:** MCT requires **non-negativity**. For MDPs with negative rewards, value iteration still converges (by the contraction mapping theorem), but MCT does not directly apply. We must instead use the fact that the Bellman operator is a contraction in the supremum norm, which gives convergence without appealing to MCT. However, MCT can be applied to the shifted value function $\tilde{V}_n = V_n - V_{\min}$ where $V_{\min}$ is a lower bound on all value functions, making all values non-negative.
+
+For **policy evaluation** with TD learning, where we have stochastic noise, MCT alone is insufficient because TD iterates are not monotone—they fluctuate due to sampling noise. We will need the **Dominated Convergence Theorem** (Day 3) to justify interchanging limits and expectations in the stochastic approximation analysis.
 
 ### **Open Question for Further Investigation**
 

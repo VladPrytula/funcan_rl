@@ -55,7 +55,7 @@ Verify MCT numerically with a sequence of functions converging monotonically.
 
 **Motivation:** In reinforcement learning, the central object of study is not a deterministic quantity, but an **expectation**—the average return under a stochastic policy in a stochastic environment. The mathematical formalization of expectation is the integral with respect to a probability measure. Before we can rigorously define the expected return $\mathbb{E}^{\pi}[G_t]$, or the value function $V^{\pi}(s) = \mathbb{E}^{\pi}\left[\sum_{k=0}^{\infty} \gamma^k R_{t+k} \mid S_t = s\right]$, we must construct a theory of integration that can handle three fundamental challenges that arise inevitably in the analysis of stochastic control systems.
 
-**Challenge 1: Discontinuous Functions.** The indicator functions of events—fundamental to probability—are not Riemann integrable on arbitrary measurable sets. Consider $\mathbf{1}_A(x)$ for a set $A$ that is dense in an interval but has positive measure complement. The upper and lower Riemann sums never converge, yet this function represents a perfectly legitimate event in our probability space, and we must be able to compute its expectation.
+**Challenge 1: Discontinuous Functions.** The indicator functions of events—fundamental to probability—are not Riemann integrable on arbitrary measurable sets. Consider $\mathbf{1}_A(x)$ for a set $A$ that is dense in an interval but has positive measure complement. The upper and lower Riemann sums never converge, yet this function represents a perfectly legitimate event in our probability space, and we must be able to compute its expectation. In reinforcement learning, consider the event "agent reaches goal state"—represented by $\mathbf{1}_{\text{goal}}(s)$, an indicator function. If the goal region has fractured geometry (common in robotics with obstacle-rich environments), this function is discontinuous at the boundary, rendering Riemann integration inadequate.
 
 **Challenge 2: Unbounded Domains.** State spaces in continuous control are often $\mathbb{R}^n$, which has infinite Lebesgue measure. Value functions may have support on all of $\mathbb{R}^n$, and the Riemann integral—fundamentally tied to compact domains—is inadequate for this setting.
 
@@ -91,7 +91,9 @@ where $a_1, \ldots, a_n \in \mathbb{R}$ are distinct, $A_i = \{x : \varphi(x) = 
 $$
 \int \varphi \, d\mu = \sum_{i=1}^{n} a_i \mu(A_i)
 $$
-where the convention $0 \cdot \infty = 0$ is adopted.
+where the convention $0 \cdot \infty = 0$ is adopted.[^convention]
+
+[^convention]: More precisely, if $a_i = 0$ in the canonical representation, then $a_i \mu(A_i) = 0$ regardless of whether $\mu(A_i)$ is finite or infinite. This convention is consistent with the interpretation that "integrating the zero function over any set yields zero," and is essential for well-definedness when dealing with measure spaces having sets of infinite measure.
 
 **Justification of Convention.** If $a_i = 0$, the contribution of $A_i$ to the integral should be zero regardless of $\mu(A_i)$, even if $\mu(A_i) = \infty$. This is consistent with the intuition that "integrating zero over any set yields zero."
 
@@ -130,10 +132,14 @@ $\square$
 
 Having defined integration for simple functions—the discrete scaffolding—we now extend to the continuous structure of all non-negative measurable functions via a supremum construction. This is the crucial conceptual leap of the Lebesgue approach.
 
+How should we extend integration from simple functions to general measurable functions? The Riemann approach partitions the domain into intervals; the Lebesgue approach instead approximates the *function itself* from below with simple functions. For a non-negative measurable function $f$, we ask: what is the supremal integral among all simple functions that underestimate $f$? This supremum—if it exists—should be the integral of $f$.
+
 **Definition 1.11 (Integral of Non-Negative Functions).** Let $f: X \to [0, \infty]$ be a measurable function. We define:
 $$
 \int f \, d\mu = \sup \left\{ \int \varphi \, d\mu \;\Big|\; 0 \leq \varphi \leq f, \, \varphi \text{ simple} \right\}
 $$
+
+**Remark 1.6A (Well-Definedness).** This supremum always exists (possibly infinite) in the extended real numbers $[0, \infty]$ because: (i) the set of simple functions $\{\varphi : 0 \leq \varphi \leq f\}$ is nonempty (it contains $\varphi = 0$), and (ii) the integral of each such $\varphi$ is a non-negative extended real number, so the set of these integrals has a supremum in $[0, \infty]$.
 
 **Remark 1.7 (Geometric Intuition).** The integral of $f$ is the "area under the curve" computed by approximating $f$ from below with increasingly fine step functions. Unlike the Riemann integral, which partitions the domain into intervals and forms rectangles based on function values at sample points, the Lebesgue approach partitions the **range** of $f$ into levels, measuring the sets $\{x : f(x) > t\}$ for each $t \geq 0$. This reversal—from domain partition to range partition—is what enables handling discontinuous functions.
 
@@ -146,11 +152,19 @@ For measurable $f, g: X \to [0, \infty]$ and $c \geq 0$:
    \int_{\bigcup_{n=1}^\infty A_n} f \, d\mu = \sum_{n=1}^{\infty} \int_{A_n} f \, d\mu
    $$
 
-*Proof.* Each property is established by approximating $f$ and $g$ from below with simple functions and using the corresponding property for simple functions (Proposition 1.6). The supremum operation preserves these relations. For a complete proof, one uses the fact that if $\varphi \leq f$ and $\psi \leq g$ are simple, then $\varphi + \psi \leq f + g$ is also simple, and:
-$$
-\int(\varphi + \psi)\,d\mu = \int\varphi\,d\mu + \int\psi\,d\mu \leq \sup\{\cdots\} + \sup\{\cdots\}
-$$
-The reverse inequality requires showing that for any simple $\chi \leq f + g$, we can find simple $\varphi \leq f$ and $\psi \leq g$ with $\chi \leq \varphi + \psi$. The technical details are standard and can be found in Folland §2.2. $\square$
+*Proof.* We establish each property by approximating $f$ and $g$ from below with simple functions.
+
+**(1) Linearity for scalar multiplication:** For $c \geq 0$, if $\varphi \leq f$ is simple, then $c\varphi \leq cf$ is simple, and $\int c\varphi = c\int \varphi$ by linearity for simple functions. Taking the supremum over all $\varphi \leq f$ gives $\int cf = c\int f$.
+
+**(1) Linearity for addition:** We must show $\int(f+g) = \int f + \int g$. The inequality "$\geq$" follows because if $\varphi \leq f$ and $\psi \leq g$ are simple, then $\varphi + \psi \leq f + g$ is simple, and $\int(\varphi+\psi) = \int\varphi + \int\psi \leq \int f + \int g$. Taking supremum over all such pairs gives $\int(f+g) \geq \int f + \int g$.
+
+For "$\leq$", we use the approximation theorem (Exercise 1 in Day_2_exercises.md): there exist increasing sequences $\{\varphi_n\}, \{\psi_n\}$ of simple functions with $\varphi_n \uparrow f$ and $\psi_n \uparrow g$ pointwise. Then $\varphi_n + \psi_n \uparrow f + g$, and by the Monotone Convergence Theorem (proven below), $\int(f+g) = \lim_n \int(\varphi_n + \psi_n) = \lim_n (\int \varphi_n + \int \psi_n) = \int f + \int g$.
+
+**(2) Monotonicity:** If $f \leq g$ a.e., then for any simple $\varphi \leq f$, we have $\varphi \leq g$ a.e., so $\int \varphi \leq \int g$. Taking supremum over $\varphi$ gives $\int f \leq \int g$.
+
+**(3) Countable additivity:** This follows from MCT applied to the partial sums. $\square$
+
+**Remark 1.7A.** The proof of linearity for addition reveals a subtle circularity: we invoke MCT, which we have not yet proven. One can avoid this by proving MCT first (using only the integral for simple functions), then establishing linearity as a corollary. Alternatively, for a direct proof without MCT, see Folland §2.2, Theorem 2.10.
 
 #### **C. General Measurable Functions: Decomposition into Positive and Negative Parts**
 
@@ -162,6 +176,8 @@ f^+(x) = \max\{f(x), 0\}, \qquad f^-(x) = \max\{-f(x), 0\}
 $$
 Then $f = f^+ - f^-$ and $|f| = f^+ + f^-$. Both $f^+$ and $f^-$ are non-negative measurable functions.
 
+**Remark 1.7B.** Note that $f^+$ and $f^-$ are *never simultaneously nonzero* at any point: if $f(x) > 0$, then $f^+(x) = f(x)$ and $f^-(x) = 0$; if $f(x) < 0$, then $f^+(x) = 0$ and $f^-(x) = -f(x)$; if $f(x) = 0$, both vanish. Thus $f^+ \cdot f^- = 0$ pointwise, which ensures the decomposition $f = f^+ - f^-$ is unambiguous.
+
 **Definition 1.13 (Integral of General Functions).** A measurable function $f: X \to \mathbb{R}$ is **integrable** (or **Lebesgue integrable**) if $\int |f| \, d\mu < \infty$. For such $f$, we define:
 $$
 \int f \, d\mu = \int f^+ \, d\mu - \int f^- \, d\mu
@@ -170,7 +186,7 @@ Since both $\int f^+ \, d\mu$ and $\int f^- \, d\mu$ are finite, this difference
 
 **Notation.** We write $f \in L^1(\mu)$ to denote that $f$ is integrable. The space $L^1(\mu)$ is the collection of all (equivalence classes of) integrable functions, where two functions are identified if they differ only on a set of measure zero.
 
-**Remark 1.8 (Why Integrability Requires Finiteness).** If $\int f^+ \, d\mu = \int f^- \, d\mu = \infty$, the difference "$\infty - \infty$" is undefined. This motivates the restriction to functions with $\int |f| \, d\mu < \infty$. In the context of probability spaces (where $\mu(X) = 1$), this condition is precisely the requirement that the random variable has finite expectation.
+**Remark 1.8 (Why Integrability Requires Finiteness).** If $\int f^+ \, d\mu = \int f^- \, d\mu = \infty$, the difference "$\infty - \infty$" is undefined in extended real arithmetic. This motivates the restriction to functions with $\int |f| \, d\mu < \infty$. In probability theory, this condition corresponds to requiring finite expectation: $\mathbb{E}[|X|] < \infty$. Random variables with infinite expectation (e.g., the Cauchy distribution, which has $\mathbb{E}[|X|] = \infty$) are not integrable in the Lebesgue sense, and their expectation is undefined.
 
 ---
 
@@ -207,8 +223,8 @@ In other words, **the integral of the limit equals the limit of the integrals**.
    
    For any $\alpha \in (0,1)$, define:
    $$E_n = \{x \in X : f_n(x) \geq \alpha\varphi(x)\}$$
-   
-   Then $E_1 \subseteq E_2 \subseteq \cdots$ (by monotonicity of $f_n$) and $\bigcup_{n=1}^\infty E_n = X$ (since $f_n \to f \geq \varphi$ pointwise).
+
+   Then $E_1 \subseteq E_2 \subseteq \cdots$ (by monotonicity of $f_n$) and $\bigcup_{n=1}^\infty E_n = X$. To see the exhaustion property, take any $x \in X$. If $\varphi(x) = 0$, then $\alpha\varphi(x) = 0$, so $f_n(x) \geq 0 = \alpha\varphi(x)$ for all $n \geq 1$, hence $x \in E_1$. If $\varphi(x) > 0$, then since $\alpha < 1$ and $\varphi(x) \leq f(x)$, we have $\alpha\varphi(x) < \varphi(x) \leq f(x)$. By pointwise convergence $f_n(x) \to f(x)$, there exists $N$ such that $f_N(x) \geq \alpha\varphi(x)$, so $x \in E_N \subseteq \bigcup_n E_n$. Thus $\bigcup_{n=1}^\infty E_n = X$.
    
    For each $n$:
    $$\int f_n \, d\mu \geq \int_{E_n} f_n \, d\mu \geq \alpha \int_{E_n} \varphi \, d\mu$$
@@ -235,7 +251,7 @@ $$
 
 ### **III. Computational Illustration: Verifying MCT Numerically**
 
-To build intuition for the Monotone Convergence Theorem, we construct a concrete sequence of functions and verify numerically that the limit of integrals equals the integral of the limit.
+To build intuition for the Monotone Convergence Theorem, we construct a concrete sequence of functions and verify numerically that the limit of integrals equals the integral of the limit. We begin with a continuous example for numerical clarity and computational simplicity. In Appendix A (Day_2_Appendix_Numerical_Lebesgue.md), we confront the pathological discontinuous case where Riemann integration categorically fails, demonstrating the true power of Lebesgue integration.
 
 **Example 1.3 (A Monotonically Converging Sequence).** Consider the functions on $[0,1]$:
 $$
@@ -341,6 +357,100 @@ plt.show()
 
 ---
 
+#### **Computational Illustration: MCT in Value Iteration**
+
+We now demonstrate MCT in a concrete reinforcement learning setting: value iteration on a simple finite-state MDP.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+# MDP specification: 5-state chain with non-negative rewards
+np.random.seed(42)
+S = 5  # number of states
+A = 2  # number of actions
+gamma = 0.9  # discount factor
+
+# Transition probabilities P[s, a, s']
+P = np.random.rand(S, A, S)
+P = P / P.sum(axis=2, keepdims=True)  # normalize to get valid probabilities
+
+# Non-negative rewards R[s, a]
+R = np.random.rand(S, A) * 10
+
+# Value iteration with V_0 = 0
+V = np.zeros(S)
+V_history = [V.copy()]
+
+for n in range(50):
+    Q = R + gamma * (P @ V)  # Q[s, a] = R[s, a] + γ Σ_s' P(s'|s,a) V(s')
+    V_new = Q.max(axis=1)     # V_new(s) = max_a Q(s, a) (Bellman optimality)
+    V_history.append(V_new.copy())
+
+    # Check monotonicity
+    if n > 0 and not np.all(V_new >= V - 1e-10):
+        print(f"Warning: Monotonicity violated at iteration {n}")
+    V = V_new
+
+V_history = np.array(V_history)
+
+# Verify monotonicity property
+monotonicity_check = np.all(np.diff(V_history, axis=0) >= -1e-10)
+print(f"Monotonicity verified: {monotonicity_check}")
+
+# Compute expected value under uniform initial distribution
+mu = np.ones(S) / S  # uniform distribution
+E_V = [mu @ V_n for V_n in V_history]
+
+# Visualization
+fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+
+# Left panel: Value function convergence for each state
+for s in range(S):
+    axes[0].plot(V_history[:, s], label=f'$V_n(s_{s})$', alpha=0.7, linewidth=1.5)
+axes[0].set_xlabel('Iteration $n$', fontsize=12)
+axes[0].set_ylabel('$V_n(s)$', fontsize=12)
+axes[0].set_title('Monotone Convergence: $V_n(s) \\uparrow V^*(s)$ for each $s$', fontsize=12)
+axes[0].legend(fontsize=9)
+axes[0].grid(True, alpha=0.3)
+
+# Right panel: Expected value convergence (MCT guarantee)
+axes[1].plot(E_V, 'b.-', markersize=8, linewidth=2, label='$\\mathbb{E}_\\mu[V_n(S_0)]$')
+axes[1].axhline(E_V[-1], color='r', linestyle='--', linewidth=2,
+                label=f'$\\mathbb{E}_\\mu[V^*] \\approx {E_V[-1]:.3f}$')
+axes[1].set_xlabel('Iteration $n$', fontsize=12)
+axes[1].set_ylabel('Expected Value', fontsize=12)
+axes[1].set_title('MCT: $\\lim_{n \\to \\infty} \\mathbb{E}_\\mu[V_n] = \\mathbb{E}_\\mu[V^*]$',
+                   fontsize=12)
+axes[1].legend(fontsize=11)
+axes[1].grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.savefig('/mnt/user-data/outputs/Day2_MCT_ValueIteration.png', dpi=150)
+
+print(f"\n{'='*70}")
+print("MCT in Value Iteration: Numerical Verification")
+print(f"{'='*70}")
+print(f"Initial expected value: E[V_0] = {E_V[0]:.6f}")
+print(f"After 10 iterations:    E[V_10] = {E_V[10]:.6f}")
+print(f"After 50 iterations:    E[V_50] = {E_V[-1]:.6f}")
+print(f"\nMonotonicity: V_0 ≤ V_1 ≤ ... ≤ V_50 ✓")
+print(f"Convergence rate: approximately geometric with rate γ = {gamma}")
+print(f"\nMCT guarantees: lim E[V_n] = E[lim V_n] = E[V*] = {E_V[-1]:.6f}")
+
+plt.show()
+```
+
+**Key Observations:**
+1. **Monotonicity:** Each iterate $V_n(s) \leq V_{n+1}(s)$ for all states $s$, verified numerically
+2. **Pointwise Convergence:** $V_n(s) \to V^*(s)$ for each state (visible in left panel)
+3. **MCT Application:** The expected value $\mathbb{E}_\mu[V_n(S_0)] = \sum_s \mu(s) V_n(s)$ converges to $\mathbb{E}_\mu[V^*(S_0)]$
+4. **Practical Impact:** Without MCT, we could not rigorously justify stopping value iteration after $N$ steps and using $\mathbb{E}_\mu[V_N]$ as an approximation to optimal expected return
+
+This computational experiment demonstrates that MCT is not an abstract theorem—it is the mathematical guarantee enabling finite-time approximation of optimal policies in reinforcement learning.
+
+---
+
 ### **IV. Application Bridge: Monotone Convergence in Reinforcement Learning**
 
 The Monotone Convergence Theorem is not an abstract curiosity. It is the mathematical guarantee that underpins the convergence of the most fundamental algorithms in reinforcement learning. We now make this connection explicit.
@@ -352,10 +462,15 @@ $$
 V_{n+1} = T^* V_n, \qquad \text{where} \quad (T^* V)(s) = \max_{a \in \mathcal{A}} \left\{ R(s,a) + \gamma \sum_{s' \in \mathcal{S}} P(s'|s,a) V(s') \right\}
 $$
 
-**Theorem 1.3 (Monotonicity of Value Iteration).** Assume the reward function is non-negative: $R(s,a) \geq 0$ for all $(s,a)$. Then:
+**Theorem 1.3 (Monotonicity of Value Iteration).** Assume:
+1. The reward function is non-negative: $R(s,a) \geq 0$ for all $(s,a)$
+2. The discount factor satisfies $\gamma \in [0,1)$
+3. The initial value function is $V_0 = 0$
+
+Then:
 1. The sequence $\{V_n\}$ is monotone increasing: $0 = V_0 \leq V_1 \leq V_2 \leq \cdots$
 2. The sequence converges pointwise to the optimal value function: $V_n(s) \to V^*(s)$ for all $s \in \mathcal{S}$
-3. The Bellman operator $T^*$ is a $\gamma$-contraction in the supremum norm, ensuring exponential convergence
+3. The Bellman operator $T^*$ is a $\gamma$-contraction in the supremum norm, ensuring exponential convergence at rate $\gamma^n$
 
 *Proof Sketch.* Since $V_0 = 0$ and $R \geq 0$, we have:
 $$V_1(s) = T^* V_0(s) = \max_a R(s,a) \geq 0 = V_0(s)$$
@@ -365,14 +480,21 @@ $$V_{n+1}(s) = T^* V_n(s) \geq T^* V_{n-1}(s) = V_n(s)$$
 
 The sequence $\{V_n(s)\}$ is monotone increasing for each $s$. By the contraction property of $T^*$ in the supremum norm (a consequence of the discount factor $\gamma < 1$), the sequence is also bounded above by $V^*(s)$. Hence it converges. The unique fixed point of the contraction $T^*$ is $V^*$, so $V_n \to V^*$ pointwise. $\square$
 
-**Connection to MCT:** In finite-state MDPs, the value function $V_n$ can be viewed as a function on the discrete probability space $(\mathcal{S}, 2^{\mathcal{S}}, \mu)$ where $\mu$ is the initial state distribution. The expected return under the greedy policy at step $n$ is:
+**Connection to MCT:** In finite-state MDPs, for a given initial state distribution $\mu$ on $\mathcal{S}$ (where $\mu(s) \geq 0$ and $\sum_{s} \mu(s) = 1$), let $S_0 \sim \mu$ denote a random initial state. The value function $V_n(s)$ is a deterministic vector in $\mathbb{R}^{|\mathcal{S}|}$, but the random variable $V_n(S_0)$ has expectation:
 $$
-\mathbb{E}_{\mu}[V_n] = \sum_{s \in \mathcal{S}} \mu(s) V_n(s) = \int V_n \, d\mu
+\mathbb{E}_{\mu}[V_n(S_0)] = \sum_{s \in \mathcal{S}} \mu(s) V_n(s) = \int V_n \, d\mu
 $$
+where the integral is with respect to the discrete measure $\mu$ on the σ-algebra $2^{\mathcal{S}}$.
 
-The **Monotone Convergence Theorem** guarantees:
+The **Monotone Convergence Theorem** applies because:
+- **(i) Non-negativity:** $V_n(s) \geq 0$ for all $s \in \mathcal{S}$, all $n$ (from Theorem 1.3)
+- **(ii) Monotonicity:** $V_n(s) \leq V_{n+1}(s)$ for all $s \in \mathcal{S}$ (pointwise increasing)
+- **(iii) Pointwise convergence:** $V_n(s) \to V^*(s)$ for all $s \in \mathcal{S}$ (from Theorem 1.3)
+- **(iv) Measurability:** All functions are measurable with respect to the discrete σ-algebra $2^{\mathcal{S}}$
+
+Thus MCT guarantees:
 $$
-\lim_{n \to \infty} \mathbb{E}_{\mu}[V_n] = \mathbb{E}_{\mu}\left[\lim_{n \to \infty} V_n\right] = \mathbb{E}_{\mu}[V^*]
+\lim_{n \to \infty} \mathbb{E}_{\mu}[V_n(S_0)] = \mathbb{E}_{\mu}\left[\lim_{n \to \infty} V_n(S_0)\right] = \mathbb{E}_{\mu}[V^*(S_0)]
 $$
 
 This justifies the practice of approximating $V^*$ by running value iteration for finitely many steps: not only does $V_n$ converge pointwise to $V^*$, but its expected value (the policy's performance) also converges. Without MCT, we would have no guarantee that finite-time performance $\mathbb{E}_{\mu}[V_N]$ approximates the optimal performance $\mathbb{E}_{\mu}[V^*]$.
@@ -386,12 +508,14 @@ $$
 
 Starting from $V_0 = 0$ (or any initial guess), the sequence $V_n = (T^{\pi})^n V_0$ converges to $V^{\pi}$. When rewards are non-negative, this convergence is monotone, and MCT applies as in the value iteration case.
 
-**Temporal Difference (TD) Learning** is a stochastic approximation algorithm for policy evaluation. The TD(0) update is:
+We briefly preview a stochastic algorithm (full details in Chapter 7) to illustrate convergence theorems' role in probabilistic analysis. **Temporal Difference (TD) Learning** is a stochastic approximation algorithm for policy evaluation. The TD(0) update is:
 $$
 V_{t+1}(s_t) = V_t(s_t) + \alpha_t \left[R_t + \gamma V_t(s_{t+1}) - V_t(s_t)\right]
 $$
 
-Under appropriate conditions on the step sizes $\{\alpha_t\}$ (specifically, $\sum \alpha_t = \infty$ and $\sum \alpha_t^2 < \infty$) and the ergodicity of the Markov chain induced by $\pi$, TD learning converges to $V^{\pi}$. The convergence analysis relies on the **ODE method of stochastic approximation**, which in turn uses the Monotone Convergence Theorem to justify taking limits inside expectations. This connection will be made fully rigorous in **Week 34–36** when we study stochastic approximation theory.
+Under appropriate conditions on the step sizes $\{\alpha_t\}$—specifically, the **Robbins-Monro conditions**: $\sum \alpha_t = \infty$ and $\sum \alpha_t^2 < \infty$ (the first ensures infinite exploration, preventing premature convergence; the second ensures bounded noise accumulation)—and the ergodicity of the Markov chain induced by $\pi$, TD learning converges to $V^{\pi}$ almost surely.
+
+The convergence analysis relies on the **ODE method of stochastic approximation**, which uses the **Dominated Convergence Theorem** (Day 3)—not MCT directly—to justify interchanging limits and expectations under stochastic noise. MCT alone is insufficient because TD iterates fluctuate due to sampling noise and are not monotone. However, for deterministic policy evaluation (the iterates $V_n = (T^{\pi})^n V_0$), MCT does apply when rewards are non-negative. This connection will be made fully rigorous when we study stochastic approximation theory in Chapter 7.
 
 **Key Insight:** The Monotone Convergence Theorem is not merely a technical curiosity. It is the mathematical foundation that ensures the convergence of the most fundamental algorithms in reinforcement learning. Without MCT, we could not rigorously prove that value iteration or policy evaluation converge to the correct value function, even in the simplest finite-state setting.
 
