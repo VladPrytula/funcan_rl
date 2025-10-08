@@ -4,7 +4,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Progress](https://img.shields.io/badge/Progress-Week%201-green.svg)](Syllabus.md)
 [![Study Plan](https://img.shields.io/badge/Study%20Plan-48%20Weeks-orange.svg)](Syllabus.md)
-[![GitHub stars](https://img.shields.io/github/stars/.com/VladPrytula/funcan_rl.git?style=social)](https://github.com/VladPrytula/funcan_rl.git)
 
 ---
 
