@@ -14,6 +14,10 @@
 .obsidian/workspace.json
 .obsidian/graph.json
 .obsidian/app.json
+.gitignore
 # Optional: ignore local plugin caches (keep settings though)
 # .obsidian/plugins/*/cache/
 # If you use Dataview, Canvas etc. you usually DO want those files tracked.
+.claude/
+.CLAUDE.md
+.agent.md

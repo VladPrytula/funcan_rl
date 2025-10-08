@@ -1,5 +1,4 @@
-
-[[Day_2]]
+[[Day_2 (old)]]
 
 # The Lebesgue Integral and Monotone Convergence Theorem
 
@@ -49,12 +48,12 @@ $$
 \{x \in X : f(x) > a\} = \bigcup_{n=1}^{\infty} \{x \in X : f_n(x) > a\}
 $$
 
-Since each $f_n$ is measurable, the set $\{x : f_n(x) > a\}$ belongs to $\mathcal{F}$ for every $n$. The countable union of measurable sets is measurable (by the definition of a σ-algebra), so:
+Since each $f_n$ is measurable, the set $\{x : f_n(x) > a\}$ belongs to $\mathcal{F}$ for every $n$. The union of countably many measurable sets is measurable (by the definition of a $\sigma$-algebra), so:
 $$
 \{x \in X : f(x) > a\} \in \mathcal{F}
 $$
 
-This holds for every $a \in \mathbb{R}$. Since the sets $\{x : f(x) > a\}$ generate the Borel σ-algebra on the codomain, and since their preimages are all in $\mathcal{F}$, we conclude that $f$ is measurable.
+This holds for every $a \in \mathbb{R}$. Since the sets $\{x : f(x) > a\}$ generate the Borel $\sigma$-algebra on the codomain, and since their preimages are all in $\mathcal{F}$, we conclude that $f$ is measurable.
 
 $\blacksquare$ (Step 1)
 
@@ -66,7 +65,7 @@ $\blacksquare$ (Step 1)
 
 **Proof of Step 2:**
 
-By the monotonicity of the functions, we have $f_n \leq f_{n+1}$ for all $n$. The monotonicity property of the integral (which we established for non-negative measurable functions in Proposition 1.7) gives:
+By the monotonicity of the functions, we have $f_n \leq f_{n+1}$ for all $n$. The monotonicity property of the integral (which we established for non-negative measurable functions) gives:
 $$
 \int f_n \, d\mu \leq \int f_{n+1} \, d\mu
 $$
@@ -96,7 +95,7 @@ This is the crux of the theorem. We must prove that the integral of the limit is
 
 Let $\varphi$ be an arbitrary non-negative simple function with $0 \leq \varphi \leq f$. By the definition of the integral for non-negative functions as a supremum over simple functions, it suffices to prove:
 $$
-\int \varphi \, d\mu \leq \lim_{n\to\infty} \int f_n \, d\mu
+\int \varphi \, d\mu \leq \lim_{n \to \infty} \int f_n \, d\mu
 $$
 
 Once we establish this for all such $\varphi$, taking the supremum over all simple functions $\varphi \leq f$ will give us:
@@ -225,7 +224,7 @@ f_n(x) = \begin{cases}
 \end{cases}
 $$
 
-We have $f_n(x) \to 0$ for all $x \in (0,1]$, and $f_1(0) = f_2(0) = \cdots = 1 \to 0$ at $x=0$ (if we redefine $f_n(0)$ suitably). The limit is $f(x) = 0$ everywhere.
+We have $f_n(x) \to 0$ for all $x \in (0,1]$, and $f_1(0) = f_2(0) = \cdots = 1 \to 0$ at $x=0$. The limit is $f(x) = 0$ everywhere.
 
 However:
 $$

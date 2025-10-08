@@ -1,4 +1,4 @@
-[[Day_2]]
+[[Day_2 (old)]]
 
 # Appendix A: Numerical Integration of Pathological Measurable Functions
 

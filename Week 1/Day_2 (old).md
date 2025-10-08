@@ -350,7 +350,7 @@ Without MCT, we would lack rigorous proofs that these algorithms converge to the
 Tomorrow (Day 3), we will address the final point by developing **Fatou's Lemma** and the **Dominated Convergence Theorem**, which relax the hypotheses of MCT at the cost of weaker conclusions. These three theorems—MCT, Fatou, and DCT—form the **triumvirate of convergence** in integration theory, and they are the mathematical bedrock upon which the entire edifice of stochastic optimization and reinforcement learning is constructed.
 
 ### Exercises
-[[Day_2_exercises]]
+[[Day_2_exercises_old]]
 
 ### Appendix
 [[Day_2_Appendix_Numerical_Lebesgue]]
