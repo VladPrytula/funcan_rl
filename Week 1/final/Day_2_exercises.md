@@ -33,11 +33,11 @@ We proceed in four carefully structured steps, each addressing a distinct aspect
 
 **Proof of Step 1:**
 
-Recall that for any sequence of real numbers, the pointwise limit can be expressed as:
+Since $\{f_n(x)\}$ is a monotone increasing sequence, we have for each $x \in X$:
 $$
 f(x) = \lim_{n \to \infty} f_n(x) = \sup_{n \geq 1} f_n(x)
 $$
-This equality holds because the sequence $\{f_n(x)\}$ is monotone increasing.
+This equality holds because any monotone increasing sequence that is bounded above by $\sup_n f_n(x)$ converges to that supremum (by elementary real analysis: the limit of an increasing sequence equals its supremum when the limit exists).
 
 For any $a \in \mathbb{R}$, consider the set:
 $$
@@ -140,7 +140,18 @@ $$
 
 **Applying continuity of measure:**
 
-Since $\{E_n\}$ is an increasing sequence of measurable sets with $\bigcup E_n = X$, and $\varphi$ is a simple function (hence has finite integral on any set of finite measure), we can apply the **continuity of measure from below**. 
+Since $\{E_n\}$ is an increasing sequence of measurable sets with $\bigcup E_n = X$, and $\varphi$ is a simple function (hence has finite integral on any set of finite measure), we can apply the **continuity of measure from below**.
+
+**Proposition (Continuity of Measure from Below).** Let $(X, \mathcal{F}, \mu)$ be a measure space. If $\{E_n\}$ is an increasing sequence of measurable sets ($E_1 \subseteq E_2 \subseteq \cdots$) with $E = \bigcup_{n=1}^{\infty} E_n$, then:
+$$
+\mu(E) = \lim_{n \to \infty} \mu(E_n)
+$$
+
+*Proof.* Define $F_1 = E_1$ and $F_n = E_n \setminus E_{n-1}$ for $n \geq 2$. The sets $\{F_n\}$ are pairwise disjoint with $\bigcup F_n = E$. By countable additivity:
+$$
+\mu(E) = \sum_{n=1}^{\infty} \mu(F_n) = \lim_{N \to \infty} \sum_{n=1}^{N} \mu(F_n) = \lim_{N \to \infty} \mu(E_N)
+$$
+where the last equality follows from $E_N = \bigcup_{n=1}^{N} F_n$. $\square$ 
 
 For a simple function $\varphi = \sum_{i=1}^{k} a_i \mathbf{1}_{A_i}$ with $a_i \geq 0$:
 $$
@@ -352,9 +363,25 @@ This is **Fatou's Lemma**, which we will study in detail on Day 3. $\square$
 
 ### **Exercise 3: Necessity of Non-Negativity**
 
-**Statement:** Construct an example showing that MCT fails without the non-negativity assumption.
+**Statement:** Explain why the non-negativity hypothesis in MCT is essential for the well-definedness of the Lebesgue integral, and discuss what replaces MCT for signed functions.
 
 **Solution:**
+
+The non-negativity assumption in MCT serves a fundamental purpose: it ensures that integrals are always **well-defined in the extended reals** $[0, \infty]$. Without this hypothesis, we encounter indeterminate forms.
+
+**Why Non-Negativity Matters:**
+
+For a measurable function $f: X \to \mathbb{R}$, the Lebesgue integral is defined via the Jordan decomposition:
+$$
+\int f \, d\mu = \int f^+ \, d\mu - \int f^- \, d\mu
+$$
+where $f^+(x) = \max(f(x), 0)$ and $f^-(x) = \max(-f(x), 0)$.
+
+This integral is **well-defined** only when at least one of $\int f^+$ or $\int f^-$ is finite, avoiding the indeterminate form $\infty - \infty$.
+
+For non-negative functions $f_n \geq 0$, we always have $\int f_n \in [0, \infty]$, so $\lim_{n \to \infty} \int f_n$ is well-defined in the extended reals. Monotonicity then ensures this limit equals $\int f$.
+
+**Example Showing the Issue:**
 
 Consider the sequence on $[0,1]$ with Lebesgue measure:
 $$
@@ -362,40 +389,26 @@ f_n(x) = -\frac{1}{n}
 $$
 
 This sequence is:
-- Monotone increasing: $f_1(x) = -1 \leq f_2(x) = -1/2 \leq \cdots$
+- Monotone increasing: $f_1(x) = -1 \leq f_2(x) = -1/2 \leq \cdots \leq 0$
 - Convergent: $f_n(x) \to 0$ for all $x \in [0,1]$
+- $\int_0^1 f_n \, dx = -1/n \to 0 = \int_0^1 0 \, dx$
 
-However:
-$$
-\int_0^1 f_n(x) \, dx = -\frac{1}{n} \to 0
-$$
-and
-$$
-\int_0^1 \lim_{n \to \infty} f_n(x) \, dx = \int_0^1 0 \, dx = 0
-$$
+Here MCT's conclusion happens to hold, but this is a degenerate case where everything is finite.
 
-In this case, MCT's conclusion holds: $\lim \int f_n = \int f$. But this is a "degenerate" case.
+**The Real Problem:**
 
-**A more pathological example:**
+The issue arises when monotone sequences of signed functions yield $\int f_n = -\infty$ for all $n$, or when partial integrals $\int f_n^+$ and $\int f_n^-$ both diverge to infinity. In such cases, the equation "$\lim \int f_n = \int f$" involves manipulating infinite quantities where standard arithmetic breaks down.
 
-Consider:
+**The Solution: Dominated Convergence Theorem**
+
+For signed functions, we cannot rely on monotonicity alone. Instead, the **Dominated Convergence Theorem** (Day 3) provides the correct generalization: if $|f_n| \leq g$ for some integrable function $g$, then pointwise convergence $f_n \to f$ implies:
 $$
-h_n(x) = -n \mathbf{1}_{[0, 1/n]}(x)
+\lim_{n \to \infty} \int f_n \, d\mu = \int f \, d\mu
 $$
 
-We have:
-- $h_n(x) \to 0$ for all $x \in (0,1]$
-- $h_1(0) = -1, h_2(0) = -2, \ldots \to -\infty$
+The dominating function $g$ ensures that both $\int f_n^+$ and $\int f_n^-$ remain bounded by $\int g < \infty$, avoiding indeterminate forms.
 
-For $x > 0$, eventually $x \notin [0, 1/n]$, so $h_n(x) = 0$ for large $n$. Thus $h_n(x) \to 0$ except at $x = 0$, where it diverges to $-\infty$.
-
-But this sequence is not monotone. To get a true counterexample, we need non-negativity violated with monotonicity preserved.
-
-**Correct counterexample:**
-
-Actually, for **monotone sequences**, even if $f_n < 0$, the MCT conclusion can still hold (as in the $f_n = -1/n$ example). The real issue is when we have $\int f_n = -\infty$ for all $n$ and the limit also has $\int f = -\infty$. The equation "$-\infty = -\infty$" is not meaningful in extended real arithmetic.
-
-The crucial point is that MCT is stated for **non-negative** functions to avoid issues with $\infty - \infty$ in the integral definition. For functions that can be negative, we need the **Dominated Convergence Theorem** (Day 3), which requires a dominating integrable function.
+**Key Insight:** MCT's non-negativity hypothesis is not an artificial restriction—it's a **structural requirement** that ensures the integral is well-defined throughout the limiting process. For signed functions, domination replaces non-negativity as the mechanism guaranteeing integrability.
 
 ---
 

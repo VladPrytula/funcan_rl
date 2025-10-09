@@ -44,7 +44,12 @@ $$
 U(g, P) = \sum_{i=1}^{n} \sup_{x \in [x_{i-1}, x_i]} g(x) \cdot (x_i - x_{i-1})
 $$
 
-Since $C$ is dense in its closure $[0,1]$ (being nowhere dense with positive measure, every interval contains points of $C$), we have $\sup_{x \in [x_{i-1}, x_i]} g(x) = 1$ for every subinterval. Thus:
+The fat Cantor set $C$ is **nowhere dense** (its closure has empty interior), yet has positive measure $\lambda(C) = 1/2$. Crucially, $C$ is closed and uncountable, so every interval $[x_{i-1}, x_i]$ of positive length must intersect $C$ (since $\lambda(C) > 0$ implies $C$ cannot be avoided by any finite partition). Therefore:
+$$
+\sup_{x \in [x_{i-1}, x_i]} g(x) = 1 \quad \text{for every subinterval}
+$$
+
+Thus:
 $$
 U(g, P) = \sum_{i=1}^{n} (x_i - x_{i-1}) = 1
 $$
@@ -54,7 +59,12 @@ $$
 L(g, P) = \sum_{i=1}^{n} \inf_{x \in [x_{i-1}, x_i]} g(x) \cdot (x_i - x_{i-1})
 $$
 
-Since the complement $[0,1] \setminus C$ is also dense (the removed intervals are dense), we have $\inf_{x \in [x_{i-1}, x_i]} g(x) = 0$. Thus:
+The complement $[0,1] \setminus C$ is **open and dense** (the removed intervals form a dense open set). Therefore, every subinterval $[x_{i-1}, x_i]$ contains points outside $C$, so:
+$$
+\inf_{x \in [x_{i-1}, x_i]} g(x) = 0
+$$
+
+Thus:
 $$
 L(g, P) = 0
 $$
@@ -145,7 +155,9 @@ $$
 g(x) = \lim_{n \to \infty} \mathbf{1}_{C_n}(x)
 $$
 
-This is a **monotone decreasing** sequence of simple functions (since $C_n \supseteq C_{n+1}$), converging to a highly discontinuous limit.
+This is a **monotone decreasing** sequence of indicator functions (since $C_0 \supseteq C_1 \supseteq C_2 \supseteq \cdots$, we have $\mathbf{1}_{C_0} \geq \mathbf{1}_{C_1} \geq \mathbf{1}_{C_2} \geq \cdots$), converging to a highly discontinuous limit.
+
+**Note on convergence theorems:** The Monotone Convergence Theorem applies to *increasing* sequences. For this decreasing sequence, we observe that $1 - \mathbf{1}_{C_n}$ is increasing, and we could apply MCT to that. Alternatively, we can use the **Dominated Convergence Theorem** (Day 3) with dominating function $\mathbf{1}_{[0,1]}$, which directly handles this case.
 
 #### **B. Numerical Integration via Finite Approximation**
 
@@ -169,13 +181,19 @@ class FatCantorSet:
         self._construct()
     
     def _construct(self):
-        """Build the interval decomposition at each stage."""
+        """Build the interval decomposition at each stage.
+
+        At stage n, we remove total measure (1/4) * (1/2)^(n-1)
+        distributed equally across 2^(n-1) intervals from stage n-1.
+        """
         # Stage 0: full interval
         current_intervals = [(0.0, 1.0)]
         self.intervals_by_stage.append(current_intervals.copy())
-        
+
         for stage in range(1, self.max_depth + 1):
             next_intervals = []
+            # At stage n: remove (1/4) * (1/2)^(n-1) total length
+            # Split equally among current intervals
             removal_length_per_interval = (1/4) * (1/2)**(stage-1) / len(current_intervals)
             
             for (a, b) in current_intervals:
@@ -278,7 +296,9 @@ Now we compute:
 $$
 \int_0^1 \mathbf{1}_{C_n}(x) \, dx = \lambda(C_n)
 $$
-and verify convergence to $\lambda(C) = 1/2$ via the Monotone Convergence Theorem (applied in reverse, since the sequence is decreasing).
+and verify convergence to $\lambda(C) = 1/2$.
+
+**Remark on convergence:** Since $\{\mathbf{1}_{C_n}\}$ is decreasing (not increasing), MCT does not directly apply. However, convergence follows from elementary measure theory: $\lambda(C_n) \to \lambda(C)$ by construction (finite sum of removed intervals). Alternatively, we could apply MCT to $\mathbf{1}_{[0,1]} - \mathbf{1}_{C_n} = \mathbf{1}_{[0,1] \setminus C_n}$, which is increasing, or invoke the Dominated Convergence Theorem (Day 3).
 
 ```python
 # Part 2: Integrate indicator function 1_C via Lebesgue approximation
@@ -291,9 +311,12 @@ def integrate_lebesgue_indicator(fat_cantor: FatCantorSet, stage: int,
     
     For a measurable set A, we have:
     λ(A) = ∫ 1_A dλ = E[1_A(X)] where X ~ Uniform[0,1]
-    
+
     By Law of Large Numbers:
     λ(A) ≈ (1/N) Σ 1_A(Xᵢ) where Xᵢ ~ Uniform[0,1]
+
+    This demonstrates the bridge between measure theory (Lebesgue integration)
+    and probability theory (expectation under uniform distribution).
     """
     indicator = fat_cantor.indicator_at_stage(stage)
     x_samples = np.random.uniform(0, 1, num_sample_points)
@@ -364,11 +387,17 @@ def dyadic_staircase(x: np.ndarray, n: int) -> np.ndarray:
 def integrate_simple_function(n: int, num_points: int = 10000) -> float:
     """
     Integrate f_n via Lebesgue method: sum measure of each level set.
-    
-    f_n(x) = Σ (k/2^n) · 1_{I_{n,k}}(x)
-    
-    ∫ f_n dλ = Σ (k/2^n) · λ(I_{n,k}) = Σ (k/2^n) · (1/2^n) = (1/2^n)² Σ k
-               = (1/2^{2n}) · (2^n)(2^n - 1)/2 = (2^n - 1) / (2^{n+1})
+
+    f_n(x) = Σ_{k=0}^{2^n - 1} (k/2^n) · 1_{I_{n,k}}(x)
+
+    Derivation:
+    ∫ f_n dλ = Σ_{k=0}^{2^n-1} (k/2^n) · λ(I_{n,k})     (linearity of integral)
+             = Σ_{k=0}^{2^n-1} (k/2^n) · (1/2^n)          (each I_{n,k} has length 1/2^n)
+             = (1/2^{2n}) Σ_{k=0}^{2^n-1} k               (factor out constants)
+             = (1/2^{2n}) · [(2^n-1)(2^n)/2]              (sum formula: Σ_{k=0}^{m-1} k = m(m-1)/2)
+             = (2^n - 1) / (2^{n+1})                      (simplify)
+
+    As n → ∞, this converges to 1/2, verifying MCT.
     """
     # Analytical formula
     analytical = (2**n - 1) / (2**(n+1))
