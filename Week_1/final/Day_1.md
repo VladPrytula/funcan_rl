@@ -344,5 +344,5 @@ Today's foundation—σ-algebras, measures, measurable functions, completeness�
 ### Exercises
 
 Detailed exercises with guided proofs are provided in the companion file:
-**[[Day 1 exercises REVISION_V2]]**
+**[[Day_1_exercises FINAL]]**
 *(Day 1 exercises REVISION_V2.md)*

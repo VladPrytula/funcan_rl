@@ -1,4 +1,4 @@
-[[Day 1 FINAL]]
+[[Day_1_FINAL]]
 
 # Day 1 Exercises: Foundational Tools for Measure-Theoretic RL
 

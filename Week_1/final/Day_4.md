@@ -5,7 +5,15 @@
 ##### 📘 Day 4 – Week 1: Carathéodory Extension and the Construction of Lebesgue Measure
 **Total time: ~90 minutes (Thursday extended proof session)**
 
-**⚠️ Note on Content Density:** This material is dense and technical—the most rigorous construction in Week 1. The theoretical development (Sections I-V) requires careful study. If time constraints become significant (approaching 2.5 hours), focus on understanding the structure of the construction; detailed verification of all steps can be revisited. Section VI provides the payoff (Lebesgue measure), while Section VII connects directly to RL applications.
+**⚠️ Content Density Notice**: This material is the most technically demanding of Week 1.
+- **Target time**: 90 minutes (Syllabus ideal)
+- **Realistic time**: 120-150 minutes for first-time study
+
+**Two Study Paths**:
+- **Core path** (~90 min): Sections I-II (hierarchy + outer measure), IV (Theorem 1.9 structure), VI (Lebesgue measure application)
+- **Extended path** (~150 min): Full proofs of Steps 1-6 in Theorem 1.9 + RL connections (Section VII)
+
+**Recommendation**: If approaching 2.5 hours, complete core path and mark extended proofs for review. Section VI (Lebesgue measure construction) and Section VII (RL applications) are essential; detailed verification of Carathéodory criterion manipulations in Steps 3-5 can be revisited if needed.
 
 ---
 
