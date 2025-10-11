@@ -1,0 +1,13 @@
+{
+  "searxng_url": "http://localhost:9090/",
+  "enable_doi_validation": true,
+  "enable_arxiv_validation": true,
+  "enable_url_validation": true,
+  "enable_searxng_validation": true,
+  "http_timeout_seconds": 10,
+  "cache_results": true,
+  "cache_duration_days": 30,
+  "doi_api_url": "https://doi.org",
+  "arxiv_api_url": "http://export.arxiv.org/api/query",
+  "comment": "Configuration for citation metadata validation. Set enable_* to false to skip specific checks."
+}

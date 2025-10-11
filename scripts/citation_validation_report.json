@@ -1,0 +1,3949 @@
+{
+  "validation_date": "2025-10-11T12:37:55.273886",
+  "total_entries": 36,
+  "summary": {
+    "validated": 36,
+    "warnings": 0,
+    "errors": 0
+  },
+  "entries": {
+    "folland:real_analysis:1999": {
+      "entry_id": "folland:real_analysis:1999",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "brezis:functional_analysis:2011": {
+      "entry_id": "brezis:functional_analysis:2011",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "puterman:mdp:2014": {
+      "entry_id": "puterman:mdp:2014",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "lattimore:bandit_algorithms:2020": {
+      "entry_id": "lattimore:bandit_algorithms:2020",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "url": "\u2705 URL reachable (status 200)",
+        "searxng": "\u2705 Found 10 results (matched in top 3)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 90,
+      "metadata": {}
+    },
+    "durrett:probability:2019": {
+      "entry_id": "durrett:probability:2019",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "levin:markov_chains:2017": {
+      "entry_id": "levin:markov_chains:2017",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "url": "\u2705 URL reachable (status 200)",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "borkar:stochastic_approximation:2008": {
+      "entry_id": "borkar:stochastic_approximation:2008",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "bertsekas:rl_optimal_control:2019": {
+      "entry_id": "bertsekas:rl_optimal_control:2019",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u2705 Found 10 results (matched in top 3)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 90,
+      "metadata": {}
+    },
+    "meyn:markov_chains:2009": {
+      "entry_id": "meyn:markov_chains:2009",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "yong:stochastic_controls:1999": {
+      "entry_id": "yong:stochastic_controls:1999",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u2705 Found 10 results (matched in top 3)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 90,
+      "metadata": {}
+    },
+    "bardi:viscosity_solutions:1997": {
+      "entry_id": "bardi:viscosity_solutions:1997",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "sutton:reinforcement_learning:2018": {
+      "entry_id": "sutton:reinforcement_learning:2018",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "url": "\u2705 URL reachable (status 200)",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "yosida:functional_analysis:1995": {
+      "entry_id": "yosida:functional_analysis:1995",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "adams:sobolev_spaces:2003": {
+      "entry_id": "adams:sobolev_spaces:2003",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u2705 Found 10 results (matched in top 3)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 90,
+      "metadata": {}
+    },
+    "mnih:dqn:2015": {
+      "entry_id": "mnih:dqn:2015",
+      "type": "article",
+      "status": "valid",
+      "checks": {
+        "doi_format": "\u2705 DOI format looks valid",
+        "doi_resolution": "\u2705 DOI resolves correctly",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {
+        "doi": {
+          "indexed": {
+            "date-parts": [
+              [
+                2025,
+                10,
+                11
+              ]
+            ],
+            "date-time": "2025-10-11T08:22:10Z",
+            "timestamp": 1760170930483
+          },
+          "reference-count": 33,
+          "publisher": "Springer Science and Business Media LLC",
+          "issue": "7540",
+          "license": [
+            {
+              "start": {
+                "date-parts": [
+                  [
+                    2015,
+                    2,
+                    25
+                  ]
+                ],
+                "date-time": "2015-02-25T00:00:00Z",
+                "timestamp": 1424822400000
+              },
+              "content-version": "tdm",
+              "delay-in-days": 0,
+              "URL": "https://www.springer.com/tdm"
+            },
+            {
+              "start": {
+                "date-parts": [
+                  [
+                    2015,
+                    2,
+                    25
+                  ]
+                ],
+                "date-time": "2015-02-25T00:00:00Z",
+                "timestamp": 1424822400000
+              },
+              "content-version": "vor",
+              "delay-in-days": 0,
+              "URL": "https://www.springer.com/tdm"
+            }
+          ],
+          "content-domain": {
+            "domain": [
+              "link.springer.com"
+            ],
+            "crossmark-restriction": false
+          },
+          "published-print": {
+            "date-parts": [
+              [
+                2015,
+                2,
+                26
+              ]
+            ]
+          },
+          "DOI": "10.1038/nature14236",
+          "type": "journal-article",
+          "created": {
+            "date-parts": [
+              [
+                2015,
+                2,
+                24
+              ]
+            ],
+            "date-time": "2015-02-24T17:28:05Z",
+            "timestamp": 1424798885000
+          },
+          "page": "529-533",
+          "update-policy": "http://dx.doi.org/10.1007/springer_crossmark_policy",
+          "source": "Crossref",
+          "is-referenced-by-count": 20306,
+          "title": "Human-level control through deep reinforcement learning",
+          "prefix": "10.1038",
+          "volume": "518",
+          "author": [
+            {
+              "given": "Volodymyr",
+              "family": "Mnih",
+              "sequence": "first",
+              "affiliation": []
+            },
+            {
+              "given": "Koray",
+              "family": "Kavukcuoglu",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "David",
+              "family": "Silver",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Andrei A.",
+              "family": "Rusu",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Joel",
+              "family": "Veness",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Marc G.",
+              "family": "Bellemare",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Alex",
+              "family": "Graves",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Martin",
+              "family": "Riedmiller",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Andreas K.",
+              "family": "Fidjeland",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Georg",
+              "family": "Ostrovski",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Stig",
+              "family": "Petersen",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Charles",
+              "family": "Beattie",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Amir",
+              "family": "Sadik",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Ioannis",
+              "family": "Antonoglou",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Helen",
+              "family": "King",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Dharshan",
+              "family": "Kumaran",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Daan",
+              "family": "Wierstra",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Shane",
+              "family": "Legg",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Demis",
+              "family": "Hassabis",
+              "sequence": "additional",
+              "affiliation": []
+            }
+          ],
+          "member": "297",
+          "published-online": {
+            "date-parts": [
+              [
+                2015,
+                2,
+                25
+              ]
+            ]
+          },
+          "reference": [
+            {
+              "key": "BFnature14236_CR1",
+              "volume-title": "Reinforcement Learning: An Introduction",
+              "author": "R Sutton",
+              "year": "1998",
+              "unstructured": "Sutton, R. & Barto, A. Reinforcement Learning: An Introduction (MIT Press, 1998)"
+            },
+            {
+              "key": "BFnature14236_CR2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.5962/bhl.title.55072",
+              "volume-title": "Animal Intelligence: Experimental studies",
+              "author": "EL Thorndike",
+              "year": "1911",
+              "unstructured": "Thorndike, E. L. Animal Intelligence: Experimental studies (Macmillan, 1911)"
+            },
+            {
+              "key": "BFnature14236_CR3",
+              "doi-asserted-by": "publisher",
+              "first-page": "1593",
+              "DOI": "10.1126/science.275.5306.1593",
+              "volume": "275",
+              "author": "W Schultz",
+              "year": "1997",
+              "unstructured": "Schultz, W., Dayan, P. & Montague, P. R. A neural substrate of prediction and reward. Science 275, 1593\u20131599 (1997)",
+              "journal-title": "Science"
+            },
+            {
+              "key": "BFnature14236_CR4",
+              "first-page": "994",
+              "volume-title": "Proc. IEEE. Comput. Soc. Conf. Comput. Vis. Pattern. Recognit.",
+              "author": "T Serre",
+              "year": "2005",
+              "unstructured": "Serre, T., Wolf, L. & Poggio, T. Object recognition with features inspired by visual cortex. Proc. IEEE. Comput. Soc. Conf. Comput. Vis. Pattern. Recognit. 994\u20131000 (2005)"
+            },
+            {
+              "key": "BFnature14236_CR5",
+              "doi-asserted-by": "publisher",
+              "first-page": "193",
+              "DOI": "10.1007/BF00344251",
+              "volume": "36",
+              "author": "K Fukushima",
+              "year": "1980",
+              "unstructured": "Fukushima, K. Neocognitron: A self-organizing neural network model for a mechanism of pattern recognition unaffected by shift in position. Biol. Cybern. 36, 193\u2013202 (1980)",
+              "journal-title": "Biol. Cybern."
+            },
+            {
+              "key": "BFnature14236_CR6",
+              "doi-asserted-by": "publisher",
+              "first-page": "58",
+              "DOI": "10.1145/203330.203343",
+              "volume": "38",
+              "author": "G Tesauro",
+              "year": "1995",
+              "unstructured": "Tesauro, G. Temporal difference learning and TD-Gammon. Commun. ACM 38, 58\u201368 (1995)",
+              "journal-title": "Commun. ACM"
+            },
+            {
+              "key": "BFnature14236_CR7",
+              "doi-asserted-by": "publisher",
+              "first-page": "55",
+              "DOI": "10.1007/s10514-009-9120-4",
+              "volume": "27",
+              "author": "M Riedmiller",
+              "year": "2009",
+              "unstructured": "Riedmiller, M., Gabel, T., Hafner, R. & Lange, S. Reinforcement learning for robot soccer. Auton. Robots 27, 55\u201373 (2009)",
+              "journal-title": "Auton. Robots"
+            },
+            {
+              "key": "BFnature14236_CR8",
+              "first-page": "240",
+              "volume-title": "Proc. Int. Conf. Mach. Learn.",
+              "author": "C Diuk",
+              "year": "2008",
+              "unstructured": "Diuk, C., Cohen, A. & Littman, M. L. An object-oriented representation for efficient reinforcement learning. Proc. Int. Conf. Mach. Learn. 240\u2013247 (2008)"
+            },
+            {
+              "key": "BFnature14236_CR9",
+              "doi-asserted-by": "publisher",
+              "first-page": "1",
+              "DOI": "10.1561/2200000006",
+              "volume": "2",
+              "author": "Y Bengio",
+              "year": "2009",
+              "unstructured": "Bengio, Y. Learning deep architectures for AI. Foundations and Trends in Machine Learning 2, 1\u2013127 (2009)",
+              "journal-title": "Foundations and Trends in Machine Learning"
+            },
+            {
+              "key": "BFnature14236_CR10",
+              "first-page": "1106",
+              "volume": "25",
+              "author": "A Krizhevsky",
+              "year": "2012",
+              "unstructured": "Krizhevsky, A., Sutskever, I. & Hinton, G. ImageNet classification with deep convolutional neural networks. Adv. Neural Inf. Process. Syst. 25, 1106\u20131114 (2012)",
+              "journal-title": "Adv. Neural Inf. Process. Syst."
+            },
+            {
+              "key": "BFnature14236_CR11",
+              "doi-asserted-by": "publisher",
+              "first-page": "504",
+              "DOI": "10.1126/science.1127647",
+              "volume": "313",
+              "author": "GE Hinton",
+              "year": "2006",
+              "unstructured": "Hinton, G. E. & Salakhutdinov, R. R. Reducing the dimensionality of data with neural networks. Science 313, 504\u2013507 (2006)",
+              "journal-title": "Science"
+            },
+            {
+              "key": "BFnature14236_CR12",
+              "doi-asserted-by": "publisher",
+              "first-page": "253",
+              "DOI": "10.1613/jair.3912",
+              "volume": "47",
+              "author": "MG Bellemare",
+              "year": "2013",
+              "unstructured": "Bellemare, M. G., Naddaf, Y., Veness, J. & Bowling, M. The arcade learning environment: An evaluation platform for general agents. J. Artif. Intell. Res. 47, 253\u2013279 (2013)",
+              "journal-title": "J. Artif. Intell. Res."
+            },
+            {
+              "key": "BFnature14236_CR13",
+              "doi-asserted-by": "publisher",
+              "first-page": "391",
+              "DOI": "10.1007/s11023-007-9079-x",
+              "volume": "17",
+              "author": "S Legg",
+              "year": "2007",
+              "unstructured": "Legg, S. & Hutter, M. Universal Intelligence: a definition of machine intelligence. Minds Mach. 17, 391\u2013444 (2007)",
+              "journal-title": "Minds Mach."
+            },
+            {
+              "key": "BFnature14236_CR14",
+              "first-page": "62",
+              "volume": "26",
+              "author": "M Genesereth",
+              "year": "2005",
+              "unstructured": "Genesereth, M., Love, N. & Pell, B. General game playing: overview of the AAAI competition. AI Mag. 26, 62\u201372 (2005)",
+              "journal-title": "AI Mag."
+            },
+            {
+              "key": "BFnature14236_CR15",
+              "first-page": "864",
+              "volume-title": "Proc. Conf. AAAI. Artif. Intell.",
+              "author": "MG Bellemare",
+              "year": "2012",
+              "unstructured": "Bellemare, M. G., Veness, J. & Bowling, M. Investigating contingency awareness using Atari 2600 games. Proc. Conf. AAAI. Artif. Intell. 864\u2013871 (2012)"
+            },
+            {
+              "key": "BFnature14236_CR16",
+              "volume-title": "Parallel Distributed Processing: Explorations in the Microstructure of Cognition",
+              "author": "JL McClelland",
+              "year": "1986",
+              "unstructured": "McClelland, J. L., Rumelhart, D. E. & Group, T. P. R. Parallel Distributed Processing: Explorations in the Microstructure of Cognition (MIT Press, 1986)"
+            },
+            {
+              "key": "BFnature14236_CR17",
+              "doi-asserted-by": "publisher",
+              "first-page": "2278",
+              "DOI": "10.1109/5.726791",
+              "volume": "86",
+              "author": "Y LeCun",
+              "year": "1998",
+              "unstructured": "LeCun, Y., Bottou, L., Bengio, Y. & Haffner, P. Gradient-based learning applied to document recognition. Proc. IEEE 86, 2278\u20132324 (1998)",
+              "journal-title": "Proc. IEEE"
+            },
+            {
+              "key": "BFnature14236_CR18",
+              "doi-asserted-by": "publisher",
+              "first-page": "559",
+              "DOI": "10.1113/jphysiol.1963.sp007079",
+              "volume": "165",
+              "author": "DH Hubel",
+              "year": "1963",
+              "unstructured": "Hubel, D. H. & Wiesel, T. N. Shape and arrangement of columns in cat\u2019s striate cortex. J. Physiol. 165, 559\u2013568 (1963)",
+              "journal-title": "J. Physiol."
+            },
+            {
+              "key": "BFnature14236_CR19",
+              "first-page": "279",
+              "volume": "8",
+              "author": "CJ Watkins",
+              "year": "1992",
+              "unstructured": "Watkins, C. J. & Dayan, P. Q-learning. Mach. Learn. 8, 279\u2013292 (1992)",
+              "journal-title": "Mach. Learn."
+            },
+            {
+              "key": "BFnature14236_CR20",
+              "doi-asserted-by": "publisher",
+              "first-page": "674",
+              "DOI": "10.1109/9.580874",
+              "volume": "42",
+              "author": "J Tsitsiklis",
+              "year": "1997",
+              "unstructured": "Tsitsiklis, J. & Roy, B. V. An analysis of temporal-difference learning with function approximation. IEEE Trans. Automat. Contr. 42, 674\u2013690 (1997)",
+              "journal-title": "IEEE Trans. Automat. Contr."
+            },
+            {
+              "key": "BFnature14236_CR21",
+              "doi-asserted-by": "publisher",
+              "first-page": "419",
+              "DOI": "10.1037/0033-295X.102.3.419",
+              "volume": "102",
+              "author": "JL McClelland",
+              "year": "1995",
+              "unstructured": "McClelland, J. L., McNaughton, B. L. & O\u2019Reilly, R. C. Why there are complementary learning systems in the hippocampus and neocortex: insights from the successes and failures of connectionist models of learning and memory. Psychol. Rev. 102, 419\u2013457 (1995)",
+              "journal-title": "Psychol. Rev."
+            },
+            {
+              "key": "BFnature14236_CR22",
+              "doi-asserted-by": "publisher",
+              "first-page": "220",
+              "DOI": "10.1016/j.tins.2010.01.006",
+              "volume": "33",
+              "author": "J O\u2019Neill",
+              "year": "2010",
+              "unstructured": "O\u2019Neill, J., Pleydell-Bouverie, B., Dupret, D. & Csicsvari, J. Play it again: reactivation of waking experience and memory. Trends Neurosci. 33, 220\u2013229 (2010)",
+              "journal-title": "Trends Neurosci."
+            },
+            {
+              "key": "BFnature14236_CR23",
+              "unstructured": "Lin, L.-J. Reinforcement learning for robots using neural networks. Technical Report, DTIC Document. (1993)"
+            },
+            {
+              "key": "BFnature14236_CR24",
+              "first-page": "317",
+              "volume": "3720",
+              "author": "M Riedmiller",
+              "year": "2005",
+              "unstructured": "Riedmiller, M. Neural fitted Q iteration - first experiences with a data efficient neural reinforcement learning method. Mach. Learn.: ECML 3720, 317\u2013328 (Springer, 2005)",
+              "journal-title": "Mach. Learn.: ECML"
+            },
+            {
+              "key": "BFnature14236_CR25",
+              "first-page": "2579",
+              "volume": "9",
+              "author": "LJP Van der Maaten",
+              "year": "2008",
+              "unstructured": "Van der Maaten, L. J. P. & Hinton, G. E. Visualizing high-dimensional data using t-SNE. J. Mach. Learn. Res. 9, 2579\u20132605 (2008)",
+              "journal-title": "J. Mach. Learn. Res."
+            },
+            {
+              "key": "BFnature14236_CR26",
+              "first-page": "1",
+              "volume-title": "Proc. Int. Jt. Conf. Neural. Netw.",
+              "author": "S Lange",
+              "year": "2010",
+              "unstructured": "Lange, S. & Riedmiller, M. Deep auto-encoder neural networks in reinforcement learning. Proc. Int. Jt. Conf. Neural. Netw. 1\u20138 (2010)"
+            },
+            {
+              "key": "BFnature14236_CR27",
+              "doi-asserted-by": "publisher",
+              "first-page": "655",
+              "DOI": "10.1038/nn.2304",
+              "volume": "12",
+              "author": "C-T Law",
+              "year": "2009",
+              "unstructured": "Law, C.-T. & Gold, J. I. Reinforcement learning can account for associative and perceptual learning on a visual decision task. Nature Neurosci. 12, 655 (2009)",
+              "journal-title": "Nature Neurosci."
+            },
+            {
+              "key": "BFnature14236_CR28",
+              "doi-asserted-by": "publisher",
+              "first-page": "318",
+              "DOI": "10.1038/415318a",
+              "volume": "415",
+              "author": "N Sigala",
+              "year": "2002",
+              "unstructured": "Sigala, N. & Logothetis, N. K. Visual categorization shapes feature selectivity in the primate temporal cortex. Nature 415, 318\u2013320 (2002)",
+              "journal-title": "Nature"
+            },
+            {
+              "key": "BFnature14236_CR29",
+              "doi-asserted-by": "publisher",
+              "first-page": "1439",
+              "DOI": "10.1038/nn.3203",
+              "volume": "15",
+              "author": "D Bendor",
+              "year": "2012",
+              "unstructured": "Bendor, D. & Wilson, M. A. Biasing the content of hippocampal replay during sleep. Nature Neurosci. 15, 1439\u20131444 (2012)",
+              "journal-title": "Nature Neurosci."
+            },
+            {
+              "key": "BFnature14236_CR30",
+              "first-page": "103",
+              "volume": "13",
+              "author": "A Moore",
+              "year": "1993",
+              "unstructured": "Moore, A. & Atkeson, C. Prioritized sweeping: reinforcement learning with less data and less real time. Mach. Learn. 13, 103\u2013130 (1993)",
+              "journal-title": "Mach. Learn."
+            },
+            {
+              "key": "BFnature14236_CR31",
+              "first-page": "2146",
+              "volume-title": "Proc. IEEE. Int. Conf. Comput. Vis.",
+              "author": "K Jarrett",
+              "year": "2009",
+              "unstructured": "Jarrett, K., Kavukcuoglu, K., Ranzato, M. A. & LeCun, Y. What is the best multi-stage architecture for object recognition? Proc. IEEE. Int. Conf. Comput. Vis. 2146\u20132153 (2009)"
+            },
+            {
+              "key": "BFnature14236_CR32",
+              "unstructured": "Nair, V. & Hinton, G. E. Rectified linear units improve restricted Boltzmann machines. Proc. Int. Conf. Mach. Learn. 807\u2013814 (2010)"
+            },
+            {
+              "key": "BFnature14236_CR33",
+              "doi-asserted-by": "publisher",
+              "first-page": "99",
+              "DOI": "10.1016/S0004-3702(98)00023-X",
+              "volume": "101",
+              "author": "LP Kaelbling",
+              "year": "1994",
+              "unstructured": "Kaelbling, L. P., Littman, M. L. & Cassandra, A. R. Planning and acting in partially observable stochastic domains. Artificial Intelligence 101, 99\u2013134 (1994)",
+              "journal-title": "Artificial Intelligence"
+            }
+          ],
+          "container-title": "Nature",
+          "original-title": [],
+          "language": "en",
+          "link": [
+            {
+              "URL": "http://www.nature.com/articles/nature14236.pdf",
+              "content-type": "application/pdf",
+              "content-version": "vor",
+              "intended-application": "text-mining"
+            },
+            {
+              "URL": "http://www.nature.com/articles/nature14236",
+              "content-type": "text/html",
+              "content-version": "vor",
+              "intended-application": "text-mining"
+            },
+            {
+              "URL": "http://www.nature.com/articles/nature14236.pdf",
+              "content-type": "application/pdf",
+              "content-version": "vor",
+              "intended-application": "similarity-checking"
+            }
+          ],
+          "deposited": {
+            "date-parts": [
+              [
+                2023,
+                5,
+                18
+              ]
+            ],
+            "date-time": "2023-05-18T18:29:18Z",
+            "timestamp": 1684434558000
+          },
+          "score": 1,
+          "resource": {
+            "primary": {
+              "URL": "https://www.nature.com/articles/nature14236"
+            }
+          },
+          "subtitle": [],
+          "short-title": [],
+          "issued": {
+            "date-parts": [
+              [
+                2015,
+                2,
+                25
+              ]
+            ]
+          },
+          "references-count": 33,
+          "journal-issue": {
+            "issue": "7540",
+            "published-print": {
+              "date-parts": [
+                [
+                  2015,
+                  2,
+                  26
+                ]
+              ]
+            }
+          },
+          "alternative-id": [
+            "BFnature14236"
+          ],
+          "URL": "http://dx.doi.org/10.1038/nature14236",
+          "relation": {
+            "has-review": [
+              {
+                "id-type": "doi",
+                "id": "10.3410/f.725368782.793506817",
+                "asserted-by": "object"
+              },
+              {
+                "id-type": "doi",
+                "id": "10.3410/f.725368782.793509339",
+                "asserted-by": "object"
+              }
+            ]
+          },
+          "ISSN": [
+            "0028-0836",
+            "1476-4687"
+          ],
+          "subject": [],
+          "container-title-short": "Nature",
+          "published": {
+            "date-parts": [
+              [
+                2015,
+                2,
+                25
+              ]
+            ]
+          },
+          "assertion": [
+            {
+              "value": "10 July 2014",
+              "order": 1,
+              "name": "received",
+              "label": "Received",
+              "group": {
+                "name": "ArticleHistory",
+                "label": "Article History"
+              }
+            },
+            {
+              "value": "16 January 2015",
+              "order": 2,
+              "name": "accepted",
+              "label": "Accepted",
+              "group": {
+                "name": "ArticleHistory",
+                "label": "Article History"
+              }
+            },
+            {
+              "value": "25 February 2015",
+              "order": 3,
+              "name": "first_online",
+              "label": "First Online",
+              "group": {
+                "name": "ArticleHistory",
+                "label": "Article History"
+              }
+            },
+            {
+              "value": "The authors declare no competing financial interests.",
+              "order": 1,
+              "name": "Ethics",
+              "group": {
+                "name": "EthicsHeading",
+                "label": "Competing interests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "schulman:ppo:2017": {
+      "entry_id": "schulman:ppo:2017",
+      "type": "inproceedings",
+      "status": "valid",
+      "checks": {
+        "arxiv": "\u2705 arXiv ID valid",
+        "url": "\u2705 URL reachable (status 200)",
+        "searxng": "\u2705 Found 10 results (matched in top 3)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 90,
+      "metadata": {
+        "arxiv": {
+          "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<feed xmlns=\"http://www.w3.org/2005/Atom\">\n  <link href=\"http://arxiv.org/api/query?search_query%3D%26id_list%3D1707.06347%26start%3D0%26max_results%3D10\" rel=\"self\" type=\"application/atom+xml\"/>\n  <title type=\"html\">ArXiv Query: search_query=&amp;id_list=1707.06347&amp;start=0&amp;max_results=10</title>\n  <id>http://arxiv.org/api/PfPzm4cUYy8YCZhsCIiST6kpmQc</id>\n  <updated>2025-10-11T00:00:00-04:00</updated>\n  <opensearch:totalResults xmlns:opensearch=\"htt"
+        }
+      }
+    },
+    "haarnoja:sac:2018": {
+      "entry_id": "haarnoja:sac:2018",
+      "type": "inproceedings",
+      "status": "valid",
+      "checks": {
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "silver:alphago:2016": {
+      "entry_id": "silver:alphago:2016",
+      "type": "article",
+      "status": "valid",
+      "checks": {
+        "doi_format": "\u2705 DOI format looks valid",
+        "doi_resolution": "\u2705 DOI resolves correctly",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {
+        "doi": {
+          "indexed": {
+            "date-parts": [
+              [
+                2025,
+                10,
+                11
+              ]
+            ],
+            "date-time": "2025-10-11T08:22:53Z",
+            "timestamp": 1760170973552
+          },
+          "reference-count": 62,
+          "publisher": "Springer Science and Business Media LLC",
+          "issue": "7587",
+          "license": [
+            {
+              "start": {
+                "date-parts": [
+                  [
+                    2016,
+                    1,
+                    27
+                  ]
+                ],
+                "date-time": "2016-01-27T00:00:00Z",
+                "timestamp": 1453852800000
+              },
+              "content-version": "tdm",
+              "delay-in-days": 0,
+              "URL": "https://www.springer.com/tdm"
+            },
+            {
+              "start": {
+                "date-parts": [
+                  [
+                    2016,
+                    1,
+                    27
+                  ]
+                ],
+                "date-time": "2016-01-27T00:00:00Z",
+                "timestamp": 1453852800000
+              },
+              "content-version": "vor",
+              "delay-in-days": 0,
+              "URL": "https://www.springer.com/tdm"
+            }
+          ],
+          "content-domain": {
+            "domain": [
+              "link.springer.com"
+            ],
+            "crossmark-restriction": false
+          },
+          "published-print": {
+            "date-parts": [
+              [
+                2016,
+                1,
+                28
+              ]
+            ]
+          },
+          "DOI": "10.1038/nature16961",
+          "type": "journal-article",
+          "created": {
+            "date-parts": [
+              [
+                2016,
+                1,
+                26
+              ]
+            ],
+            "date-time": "2016-01-26T17:44:19Z",
+            "timestamp": 1453830259000
+          },
+          "page": "484-489",
+          "update-policy": "http://dx.doi.org/10.1007/springer_crossmark_policy",
+          "source": "Crossref",
+          "is-referenced-by-count": 10441,
+          "title": "Mastering the game of Go with deep neural networks and tree search",
+          "prefix": "10.1038",
+          "volume": "529",
+          "author": [
+            {
+              "given": "David",
+              "family": "Silver",
+              "sequence": "first",
+              "affiliation": []
+            },
+            {
+              "given": "Aja",
+              "family": "Huang",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Chris J.",
+              "family": "Maddison",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Arthur",
+              "family": "Guez",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Laurent",
+              "family": "Sifre",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "George",
+              "family": "van den Driessche",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Julian",
+              "family": "Schrittwieser",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Ioannis",
+              "family": "Antonoglou",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Veda",
+              "family": "Panneershelvam",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Marc",
+              "family": "Lanctot",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Sander",
+              "family": "Dieleman",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Dominik",
+              "family": "Grewe",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "John",
+              "family": "Nham",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Nal",
+              "family": "Kalchbrenner",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Ilya",
+              "family": "Sutskever",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Timothy",
+              "family": "Lillicrap",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Madeleine",
+              "family": "Leach",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Koray",
+              "family": "Kavukcuoglu",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Thore",
+              "family": "Graepel",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Demis",
+              "family": "Hassabis",
+              "sequence": "additional",
+              "affiliation": []
+            }
+          ],
+          "member": "297",
+          "published-online": {
+            "date-parts": [
+              [
+                2016,
+                1,
+                27
+              ]
+            ]
+          },
+          "reference": [
+            {
+              "key": "BFnature16961_CR1",
+              "unstructured": "Allis, L. V. Searching for Solutions in Games and Artificial Intelligence. PhD thesis, Univ. Limburg, Maastricht, The Netherlands (1994)"
+            },
+            {
+              "key": "BFnature16961_CR2",
+              "doi-asserted-by": "publisher",
+              "first-page": "277",
+              "DOI": "10.1016/S0004-3702(01)00152-7",
+              "volume": "134",
+              "author": "H van den Herik",
+              "year": "2002",
+              "unstructured": "van den Herik, H., Uiterwijk, J. W. & van Rijswijck, J. Games solved: now and in the future. Artif. Intell. 134, 277\u2013311 (2002)",
+              "journal-title": "Artif. Intell."
+            },
+            {
+              "key": "BFnature16961_CR3",
+              "doi-asserted-by": "publisher",
+              "first-page": "189",
+              "DOI": "10.1016/S0065-2458(00)80019-4",
+              "volume": "52",
+              "author": "J Schaeffer",
+              "year": "2000",
+              "unstructured": "Schaeffer, J. The games computers (and people) play. Advances in Computers 52, 189\u2013266 (2000)",
+              "journal-title": "Advances in Computers"
+            },
+            {
+              "key": "BFnature16961_CR4",
+              "doi-asserted-by": "publisher",
+              "first-page": "57",
+              "DOI": "10.1016/S0004-3702(01)00129-1",
+              "volume": "134",
+              "author": "M Campbell",
+              "year": "2002",
+              "unstructured": "Campbell, M., Hoane, A. & Hsu, F. Deep Blue. Artif. Intell. 134, 57\u201383 (2002)",
+              "journal-title": "Artif. Intell."
+            },
+            {
+              "key": "BFnature16961_CR5",
+              "doi-asserted-by": "publisher",
+              "first-page": "273",
+              "DOI": "10.1016/0004-3702(92)90074-8",
+              "volume": "53",
+              "author": "J Schaeffer",
+              "year": "1992",
+              "unstructured": "Schaeffer, J. et al. A world championship caliber checkers program. Artif. Intell. 53, 273\u2013289 (1992)",
+              "journal-title": "Artif. Intell."
+            },
+            {
+              "key": "BFnature16961_CR6",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Buro, M. From simple features to sophisticated evaluation functions. In 1st International Conference on Computers and Games, 126\u2013145 (1999)",
+              "DOI": "10.1007/3-540-48957-6_8"
+            },
+            {
+              "key": "BFnature16961_CR7",
+              "doi-asserted-by": "publisher",
+              "first-page": "145",
+              "DOI": "10.1016/S0004-3702(01)00121-7",
+              "volume": "134",
+              "author": "M M\u00fcller",
+              "year": "2002",
+              "unstructured": "M\u00fcller, M. Computer Go. Artif. Intell. 134, 145\u2013179 (2002)",
+              "journal-title": "Artif. Intell."
+            },
+            {
+              "key": "BFnature16961_CR8",
+              "unstructured": "Tesauro, G. & Galperin, G. On-line policy improvement using Monte-Carlo search. In Advances in Neural Information Processing, 1068\u20131074 (1996)"
+            },
+            {
+              "key": "BFnature16961_CR9",
+              "doi-asserted-by": "publisher",
+              "first-page": "241",
+              "DOI": "10.1016/S0004-3702(01)00166-7",
+              "volume": "134",
+              "author": "B Sheppard",
+              "year": "2002",
+              "unstructured": "Sheppard, B. World-championship-caliber Scrabble. Artif. Intell. 134, 241\u2013275 (2002)",
+              "journal-title": "Artif. Intell."
+            },
+            {
+              "key": "BFnature16961_CR10",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Bouzy, B. & Helmstetter, B. Monte-Carlo Go developments. In 10th International Conference on Advances in Computer Games, 159\u2013174 (2003)",
+              "DOI": "10.1007/978-0-387-35706-5_11"
+            },
+            {
+              "key": "BFnature16961_CR11",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Coulom, R. Efficient selectivity and backup operators in Monte-Carlo tree search. In 5th International Conference on Computers and Games, 72\u201383 (2006)",
+              "DOI": "10.1007/978-3-540-75538-8_7"
+            },
+            {
+              "key": "BFnature16961_CR12",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Kocsis, L. & Szepesv\u00e1ri, C. Bandit based Monte-Carlo planning. In 15th European Conference on Machine Learning, 282\u2013293 (2006)",
+              "DOI": "10.1007/11871842_29"
+            },
+            {
+              "key": "BFnature16961_CR13",
+              "doi-asserted-by": "publisher",
+              "first-page": "198",
+              "DOI": "10.3233/ICG-2007-30403",
+              "volume": "30",
+              "author": "R Coulom",
+              "year": "2007",
+              "unstructured": "Coulom, R. Computing Elo ratings of move patterns in the game of Go. ICGA J. 30, 198\u2013208 (2007)",
+              "journal-title": "ICGA J."
+            },
+            {
+              "key": "BFnature16961_CR14",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Baudi\u0161, P. & Gailly, J.-L. Pachi: State of the art open source Go program. In Advances in Computer Games, 24\u201338 (Springer, 2012)",
+              "DOI": "10.1007/978-3-642-31866-5_3"
+            },
+            {
+              "key": "BFnature16961_CR15",
+              "doi-asserted-by": "publisher",
+              "first-page": "259",
+              "DOI": "10.1109/TCIAIG.2010.2083662",
+              "volume": "2",
+              "author": "M M\u00fcller",
+              "year": "2010",
+              "unstructured": "M\u00fcller, M., Enzenberger, M., Arneson, B. & Segal, R. Fuego \u2013 an open-source framework for board games and Go engine based on Monte-Carlo tree search. IEEE Trans. Comput. Intell. AI in Games 2, 259\u2013270 (2010)",
+              "journal-title": "IEEE Trans. Comput. Intell. AI in Games"
+            },
+            {
+              "key": "BFnature16961_CR16",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Gelly, S. & Silver, D. Combining online and offline learning in UCT. In 17th International Conference on Machine Learning, 273\u2013280 (2007)",
+              "DOI": "10.1145/1273496.1273531"
+            },
+            {
+              "key": "BFnature16961_CR17",
+              "unstructured": "Krizhevsky, A., Sutskever, I. & Hinton, G. ImageNet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems, 1097\u20131105 (2012)"
+            },
+            {
+              "key": "BFnature16961_CR18",
+              "doi-asserted-by": "publisher",
+              "first-page": "98",
+              "DOI": "10.1109/72.554195",
+              "volume": "8",
+              "author": "S Lawrence",
+              "year": "1997",
+              "unstructured": "Lawrence, S., Giles, C. L., Tsoi, A. C. & Back, A. D. Face recognition: a convolutional neural-network approach. IEEE Trans. Neural Netw. 8, 98\u2013113 (1997)",
+              "journal-title": "IEEE Trans. Neural Netw."
+            },
+            {
+              "key": "BFnature16961_CR19",
+              "doi-asserted-by": "publisher",
+              "first-page": "529",
+              "DOI": "10.1038/nature14236",
+              "volume": "518",
+              "author": "V Mnih",
+              "year": "2015",
+              "unstructured": "Mnih, V. et al. Human-level control through deep reinforcement learning. Nature 518, 529\u2013533 (2015)",
+              "journal-title": "Nature"
+            },
+            {
+              "key": "BFnature16961_CR20",
+              "doi-asserted-by": "publisher",
+              "first-page": "436",
+              "DOI": "10.1038/nature14539",
+              "volume": "521",
+              "author": "Y LeCun",
+              "year": "2015",
+              "unstructured": "LeCun, Y., Bengio, Y. & Hinton, G. Deep learning. Nature 521, 436\u2013444 (2015)",
+              "journal-title": "Nature"
+            },
+            {
+              "key": "BFnature16961_CR21",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Stern, D., Herbrich, R. & Graepel, T. Bayesian pattern ranking for move prediction in the game of Go. In International Conference of Machine Learning, 873\u2013880 (2006)",
+              "DOI": "10.1145/1143844.1143954"
+            },
+            {
+              "key": "BFnature16961_CR22",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Sutskever, I. & Nair, V. Mimicking Go experts with convolutional neural networks. In International Conference on Artificial Neural Networks, 101\u2013110 (2008)",
+              "DOI": "10.1007/978-3-540-87559-8_11"
+            },
+            {
+              "key": "BFnature16961_CR23",
+              "unstructured": "Maddison, C. J., Huang, A., Sutskever, I. & Silver, D. Move evaluation in Go using deep convolutional neural networks. 3rd International Conference on Learning Representations (2015)"
+            },
+            {
+              "key": "BFnature16961_CR24",
+              "unstructured": "Clark, C. & Storkey, A. J. Training deep convolutional neural networks to play go. In 32nd International Conference on Machine Learning, 1766\u20131774 (2015)"
+            },
+            {
+              "key": "BFnature16961_CR25",
+              "first-page": "229",
+              "volume": "8",
+              "author": "RJ Williams",
+              "year": "1992",
+              "unstructured": "Williams, R. J. Simple statistical gradient-following algorithms for connectionist reinforcement learning. Mach. Learn. 8, 229\u2013256 (1992)",
+              "journal-title": "Mach. Learn."
+            },
+            {
+              "key": "BFnature16961_CR26",
+              "unstructured": "Sutton, R., McAllester, D., Singh, S. & Mansour, Y. Policy gradient methods for reinforcement learning with function approximation. In Advances in Neural Information Processing Systems, 1057\u20131063 (2000)"
+            },
+            {
+              "key": "BFnature16961_CR27",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Sutton, R. & Barto, A. Reinforcement Learning: an Introduction (MIT Press, 1998)",
+              "DOI": "10.1109/TNN.1998.712192"
+            },
+            {
+              "key": "BFnature16961_CR28",
+              "first-page": "817",
+              "volume": "6",
+              "author": "NN Schraudolph",
+              "year": "1994",
+              "unstructured": "Schraudolph, N. N., Dayan, P. & Sejnowski, T. J. Temporal difference learning of position evaluation in the game of Go. Adv. Neural Inf. Process. Syst. 6, 817\u2013824 (1994)",
+              "journal-title": "Adv. Neural Inf. Process. Syst."
+            },
+            {
+              "key": "BFnature16961_CR29",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Enzenberger, M. Evaluation in Go by a neural network using soft segmentation. In 10th Advances in Computer Games Conference, 97\u2013108 (2003). 267",
+              "DOI": "10.1007/978-0-387-35706-5_7"
+            },
+            {
+              "key": "BFnature16961_CR30",
+              "doi-asserted-by": "publisher",
+              "first-page": "183",
+              "DOI": "10.1007/s10994-012-5280-0",
+              "volume": "87",
+              "author": "D Silver",
+              "year": "2012",
+              "unstructured": "Silver, D., Sutton, R. & M\u00fcller, M. Temporal-difference search in computer Go. Mach. Learn. 87, 183\u2013219 (2012)",
+              "journal-title": "Mach. Learn."
+            },
+            {
+              "key": "BFnature16961_CR31",
+              "unstructured": "Levinovitz, A. The mystery of Go, the ancient game that computers still can\u2019t win. Wired Magazine (2014)"
+            },
+            {
+              "key": "BFnature16961_CR32",
+              "doi-asserted-by": "publisher",
+              "first-page": "32",
+              "DOI": "10.1002/j.2326-1951.1998.tb03356.x",
+              "volume": "38",
+              "author": "D Mechner",
+              "year": "1998",
+              "unstructured": "Mechner, D. All Systems Go. The Sciences 38, 32\u201337 (1998)",
+              "journal-title": "The Sciences"
+            },
+            {
+              "key": "BFnature16961_CR33",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Mandziuk, J. Computational intelligence in mind games. In Challenges for Computational Intelligence, 407\u2013442 (2007)",
+              "DOI": "10.1007/978-3-540-71984-7_15"
+            },
+            {
+              "key": "BFnature16961_CR34",
+              "doi-asserted-by": "publisher",
+              "first-page": "201",
+              "DOI": "10.1016/S0004-3702(78)80012-5",
+              "volume": "10",
+              "author": "H Berliner",
+              "year": "1978",
+              "unstructured": "Berliner, H. A chronology of computer chess and its literature. Artif. Intell. 10, 201\u2013214 (1978)",
+              "journal-title": "Artif. Intell."
+            },
+            {
+              "key": "BFnature16961_CR35",
+              "doi-asserted-by": "publisher",
+              "first-page": "1",
+              "DOI": "10.1109/TCIAIG.2012.2186810",
+              "volume": "4",
+              "author": "C Browne",
+              "year": "2012",
+              "unstructured": "Browne, C. et al. A survey of Monte-Carlo tree search methods. IEEE Trans. Comput. Intell. AI in Games 4, 1\u201343 (2012)",
+              "journal-title": "IEEE Trans. Comput. Intell. AI in Games"
+            },
+            {
+              "key": "BFnature16961_CR36",
+              "doi-asserted-by": "publisher",
+              "first-page": "106",
+              "DOI": "10.1145/2093548.2093574",
+              "volume": "55",
+              "author": "S Gelly",
+              "year": "2012",
+              "unstructured": "Gelly, S. et al. The grand challenge of computer Go: Monte Carlo tree search and extensions. Commun. ACM 55, 106\u2013113 (2012)",
+              "journal-title": "Commun. ACM"
+            },
+            {
+              "key": "BFnature16961_CR37",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Coulom, R. Whole-history rating: A Bayesian rating system for players of time-varying strength. In International Conference on Computers and Games, 113\u2013124 (2008)",
+              "DOI": "10.1007/978-3-540-87608-3_11"
+            },
+            {
+              "key": "BFnature16961_CR38",
+              "unstructured": "KGS. Rating system math. http://www.gokgs.com/help/rmath.html"
+            },
+            {
+              "key": "BFnature16961_CR39",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Littman, M. L. Markov games as a framework for multi-agent reinforcement learning. In 11th International Conference on Machine Learning, 157\u2013163 (1994)",
+              "DOI": "10.1016/B978-1-55860-335-6.50027-1"
+            },
+            {
+              "key": "BFnature16961_CR40",
+              "doi-asserted-by": "publisher",
+              "first-page": "293",
+              "DOI": "10.1016/0004-3702(75)90019-3",
+              "volume": "6",
+              "author": "DE Knuth",
+              "year": "1975",
+              "unstructured": "Knuth, D. E. & Moore, R. W. An analysis of alpha-beta pruning. Artif. Intell. 6, 293\u2013326 (1975)",
+              "journal-title": "Artif. Intell."
+            },
+            {
+              "key": "BFnature16961_CR41",
+              "first-page": "9",
+              "volume": "3",
+              "author": "R Sutton",
+              "year": "1988",
+              "unstructured": "Sutton, R. Learning to predict by the method of temporal differences. Mach. Learn. 3, 9\u201344 (1988)",
+              "journal-title": "Mach. Learn."
+            },
+            {
+              "key": "BFnature16961_CR42",
+              "doi-asserted-by": "publisher",
+              "first-page": "243",
+              "DOI": "10.1023/A:1007634325138",
+              "volume": "40",
+              "author": "J Baxter",
+              "year": "2000",
+              "unstructured": "Baxter, J., Tridgell, A. & Weaver, L. Learning to play chess using temporal differences. Mach. Learn. 40, 243\u2013263 (2000)",
+              "journal-title": "Mach. Learn."
+            },
+            {
+              "key": "BFnature16961_CR43",
+              "unstructured": "Veness, J., Silver, D., Blair, A. & Uther, W. Bootstrapping from game tree search. In Advances in Neural Information Processing Systems (2009)"
+            },
+            {
+              "key": "BFnature16961_CR44",
+              "doi-asserted-by": "publisher",
+              "first-page": "601",
+              "DOI": "10.1147/rd.116.0601",
+              "volume": "11",
+              "author": "AL Samuel",
+              "year": "1967",
+              "unstructured": "Samuel, A. L. Some studies in machine learning using the game of checkers II - recent progress. IBM J. Res. Develop. 11, 601\u2013617 (1967)",
+              "journal-title": "IBM J. Res. Develop."
+            },
+            {
+              "key": "BFnature16961_CR45",
+              "unstructured": "Schaeffer, J., Hlynka, M. & Jussila, V. Temporal difference learning applied to a high-performance game-playing program. In 17th International Joint Conference on Artificial Intelligence, 529\u2013534 (2001)"
+            },
+            {
+              "key": "BFnature16961_CR46",
+              "doi-asserted-by": "publisher",
+              "first-page": "215",
+              "DOI": "10.1162/neco.1994.6.2.215",
+              "volume": "6",
+              "author": "G Tesauro",
+              "year": "1994",
+              "unstructured": "Tesauro, G. TD-gammon, a self-teaching backgammon program, achieves master-level play. Neural Comput. 6, 215\u2013219 (1994)",
+              "journal-title": "Neural Comput."
+            },
+            {
+              "key": "BFnature16961_CR47",
+              "unstructured": "Dahl, F. Honte, a Go-playing program using neural nets. In Machines that learn to play games, 205\u2013223 (Nova Science, 1999)"
+            },
+            {
+              "key": "BFnature16961_CR48",
+              "doi-asserted-by": "publisher",
+              "first-page": "203",
+              "DOI": "10.1007/s10472-011-9258-6",
+              "volume": "61",
+              "author": "CD Rosin",
+              "year": "2011",
+              "unstructured": "Rosin, C. D. Multi-armed bandits with episode context. Ann. Math. Artif. Intell. 61, 203\u2013230 (2011)",
+              "journal-title": "Ann. Math. Artif. Intell."
+            },
+            {
+              "key": "BFnature16961_CR49",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Lanctot, M., Winands, M. H. M., Pepels, T. & Sturtevant, N. R. Monte Carlo tree search with heuristic evaluations using implicit minimax backups. In IEEE Conference on Computational Intelligence and Games, 1\u20138 (2014)",
+              "DOI": "10.1109/CIG.2014.6932903"
+            },
+            {
+              "key": "BFnature16961_CR50",
+              "first-page": "INRIA",
+              "volume": "6062",
+              "author": "S Gelly",
+              "year": "2006",
+              "unstructured": "Gelly, S., Wang, Y., Munos, R. & Teytaud, O. Modification of UCT with patterns in Monte-Carlo Go. Tech. Rep. 6062, INRIA (2006)",
+              "journal-title": "Tech. Rep."
+            },
+            {
+              "key": "BFnature16961_CR51",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Silver, D. & Tesauro, G. Monte-Carlo simulation balancing. In 26th International Conference on Machine Learning, 119 (2009)",
+              "DOI": "10.1145/1553374.1553495"
+            },
+            {
+              "key": "BFnature16961_CR52",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Huang, S.-C., Coulom, R. & Lin, S.-S. Monte-Carlo simulation balancing in practice. In 7th International Conference on Computers and Games, 81\u201392 (Springer-Verlag, 2011)",
+              "DOI": "10.1007/978-3-642-17928-0_8"
+            },
+            {
+              "key": "BFnature16961_CR53",
+              "doi-asserted-by": "publisher",
+              "first-page": "303",
+              "DOI": "10.1109/TCIAIG.2010.2100396",
+              "volume": "2",
+              "author": "H Baier",
+              "year": "2010",
+              "unstructured": "Baier, H. & Drake, P. D. The power of forgetting: improving the last-good-reply policy in Monte Carlo Go. IEEE Trans. Comput. Intell. AI in Games 2, 303\u2013309 (2010)",
+              "journal-title": "IEEE Trans. Comput. Intell. AI in Games"
+            },
+            {
+              "key": "BFnature16961_CR54",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Huang, S. & M\u00fcller, M. Investigating the limits of Monte-Carlo tree search methods in computer Go. In 8th International Conference on Computers and Games, 39\u201348 (2013)",
+              "DOI": "10.1007/978-3-319-09165-5_4"
+            },
+            {
+              "key": "BFnature16961_CR55",
+              "doi-asserted-by": "publisher",
+              "first-page": "36",
+              "DOI": "10.1007/978-3-642-17928-0_4",
+              "volume": "6515",
+              "author": "RB Segal",
+              "year": "2011",
+              "unstructured": "Segal, R. B. On the scalability of parallel UCT. Computers and Games 6515, 36\u201347 (2011)",
+              "journal-title": "Computers and Games"
+            },
+            {
+              "key": "BFnature16961_CR56",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Enzenberger, M. & M\u00fcller, M. A lock-free multithreaded Monte-Carlo tree search algorithm. In 12th Advances in Computer Games Conference, 14\u201320 (2009)",
+              "DOI": "10.1007/978-3-642-12993-3_2"
+            },
+            {
+              "key": "BFnature16961_CR57",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Huang, S.-C., Coulom, R. & Lin, S.-S. Time management for Monte-Carlo tree search applied to the game of Go. In International Conference on Technologies and Applications of Artificial Intelligence, 462\u2013466 (2010)",
+              "DOI": "10.1109/TAAI.2010.78"
+            },
+            {
+              "key": "BFnature16961_CR58",
+              "doi-asserted-by": "publisher",
+              "first-page": "1856",
+              "DOI": "10.1016/j.artint.2011.03.007",
+              "volume": "175",
+              "author": "S Gelly",
+              "year": "2011",
+              "unstructured": "Gelly, S. & Silver, D. Monte-Carlo tree search and rapid action value estimation in computer Go. Artif. Intell. 175, 1856\u20131875 (2011)",
+              "journal-title": "Artif. Intell."
+            },
+            {
+              "key": "BFnature16961_CR59",
+              "doi-asserted-by": "publisher",
+              "first-page": "131",
+              "DOI": "10.3233/ICG-2011-34302",
+              "volume": "34",
+              "author": "P Baudi\u0161",
+              "year": "2011",
+              "unstructured": "Baudi\u0161, P. Balancing MCTS by dynamically adjusting the komi value. ICGA J. 34, 131 (2011)",
+              "journal-title": "ICGA J."
+            },
+            {
+              "key": "BFnature16961_CR60",
+              "unstructured": "Baier, H. & Winands, M. H. Active opening book application for Monte-Carlo tree search in 19\u00d719 Go. In Benelux Conference on Artificial Intelligence, 3\u201310 (2011)"
+            },
+            {
+              "key": "BFnature16961_CR61",
+              "unstructured": "Dean, J. et al. Large scale distributed deep networks. In Advances in Neural Information Processing Systems, 1223\u20131231 (2012)"
+            },
+            {
+              "key": "BFnature16961_CR62",
+              "unstructured": "Go ratings. http://www.goratings.org"
+            }
+          ],
+          "container-title": "Nature",
+          "original-title": [],
+          "language": "en",
+          "link": [
+            {
+              "URL": "http://www.nature.com/articles/nature16961.pdf",
+              "content-type": "application/pdf",
+              "content-version": "vor",
+              "intended-application": "text-mining"
+            },
+            {
+              "URL": "http://www.nature.com/articles/nature16961",
+              "content-type": "text/html",
+              "content-version": "vor",
+              "intended-application": "text-mining"
+            },
+            {
+              "URL": "http://www.nature.com/articles/nature16961.pdf",
+              "content-type": "application/pdf",
+              "content-version": "vor",
+              "intended-application": "similarity-checking"
+            }
+          ],
+          "deposited": {
+            "date-parts": [
+              [
+                2023,
+                5,
+                18
+              ]
+            ],
+            "date-time": "2023-05-18T17:49:53Z",
+            "timestamp": 1684432193000
+          },
+          "score": 1,
+          "resource": {
+            "primary": {
+              "URL": "https://www.nature.com/articles/nature16961"
+            }
+          },
+          "subtitle": [],
+          "short-title": [],
+          "issued": {
+            "date-parts": [
+              [
+                2016,
+                1,
+                27
+              ]
+            ]
+          },
+          "references-count": 62,
+          "journal-issue": {
+            "issue": "7587",
+            "published-print": {
+              "date-parts": [
+                [
+                  2016,
+                  1,
+                  28
+                ]
+              ]
+            }
+          },
+          "alternative-id": [
+            "BFnature16961"
+          ],
+          "URL": "http://dx.doi.org/10.1038/nature16961",
+          "relation": {
+            "has-review": [
+              {
+                "id-type": "doi",
+                "id": "10.3410/f.726105619.793525345",
+                "asserted-by": "object"
+              }
+            ]
+          },
+          "ISSN": [
+            "0028-0836",
+            "1476-4687"
+          ],
+          "subject": [],
+          "container-title-short": "Nature",
+          "published": {
+            "date-parts": [
+              [
+                2016,
+                1,
+                27
+              ]
+            ]
+          },
+          "assertion": [
+            {
+              "value": "11 November 2015",
+              "order": 1,
+              "name": "received",
+              "label": "Received",
+              "group": {
+                "name": "ArticleHistory",
+                "label": "Article History"
+              }
+            },
+            {
+              "value": "5 January 2016",
+              "order": 2,
+              "name": "accepted",
+              "label": "Accepted",
+              "group": {
+                "name": "ArticleHistory",
+                "label": "Article History"
+              }
+            },
+            {
+              "value": "27 January 2016",
+              "order": 3,
+              "name": "first_online",
+              "label": "First Online",
+              "group": {
+                "name": "ArticleHistory",
+                "label": "Article History"
+              }
+            },
+            {
+              "value": "The authors declare no competing financial interests.",
+              "order": 1,
+              "name": "Ethics",
+              "group": {
+                "name": "EthicsHeading",
+                "label": "Competing interests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "silver:alphazero:2018": {
+      "entry_id": "silver:alphazero:2018",
+      "type": "article",
+      "status": "valid",
+      "checks": {
+        "doi_format": "\u2705 DOI format looks valid",
+        "doi_resolution": "\u2705 DOI resolves correctly",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {
+        "doi": {
+          "indexed": {
+            "date-parts": [
+              [
+                2025,
+                10,
+                11
+              ]
+            ],
+            "date-time": "2025-10-11T01:53:15Z",
+            "timestamp": 1760147595626,
+            "version": "3.40.5"
+          },
+          "reference-count": 41,
+          "publisher": "American Association for the Advancement of Science (AAAS)",
+          "issue": "6419",
+          "content-domain": {
+            "domain": [],
+            "crossmark-restriction": false
+          },
+          "published-print": {
+            "date-parts": [
+              [
+                2018,
+                12,
+                7
+              ]
+            ]
+          },
+          "abstract": "<jats:title>One program to rule them all</jats:title>\n          <jats:p>\n            Computers can beat humans at increasingly complex games, including chess and Go. However, these programs are typically constructed for a particular game, exploiting its properties, such as the symmetries of the board on which it is played. Silver\n            <jats:italic>et al.</jats:italic>\n            developed a program called AlphaZero, which taught itself to play Go, chess, and shogi (a Japanese version of chess) (see the Editorial, and the Perspective by Campbell). AlphaZero managed to beat state-of-the-art programs specializing in these three games. The ability of AlphaZero to adapt to various game rules is a notable step toward achieving a general game-playing system.\n          </jats:p>\n          <jats:p>\n            <jats:italic>Science</jats:italic>\n            , this issue p.\n            <jats:related-article xmlns:xlink=\"http://www.w3.org/1999/xlink\" ext-link-type=\"doi\" issue=\"6419\" page=\"1140\" related-article-type=\"in-this-issue\" vol=\"362\" xlink:href=\"10.1126/science.aar6404\">1140</jats:related-article>\n            ; see also pp.\n            <jats:related-article xmlns:xlink=\"http://www.w3.org/1999/xlink\" ext-link-type=\"doi\" issue=\"6419\" page=\"1087\" related-article-type=\"in-this-issue\" vol=\"362\" xlink:href=\"10.1126/science.aaw2221\">1087</jats:related-article>\n            and\n            <jats:related-article xmlns:xlink=\"http://www.w3.org/1999/xlink\" ext-link-type=\"doi\" issue=\"6419\" page=\"1118\" related-article-type=\"in-this-issue\" vol=\"362\" xlink:href=\"10.1126/science.aav1175\">1118</jats:related-article>\n          </jats:p>",
+          "DOI": "10.1126/science.aar6404",
+          "type": "journal-article",
+          "created": {
+            "date-parts": [
+              [
+                2018,
+                12,
+                7
+              ]
+            ],
+            "date-time": "2018-12-07T00:05:32Z",
+            "timestamp": 1544141132000
+          },
+          "page": "1140-1144",
+          "source": "Crossref",
+          "is-referenced-by-count": 2280,
+          "title": "A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play",
+          "prefix": "10.1126",
+          "volume": "362",
+          "author": [
+            {
+              "given": "David",
+              "family": "Silver",
+              "sequence": "first",
+              "affiliation": [
+                {
+                  "name": "DeepMind, 6 Pancras Square, London N1C 4AG, UK."
+                },
+                {
+                  "name": "University College London, Gower Street, London WC1E 6BT, UK."
+                }
+              ]
+            },
+            {
+              "given": "Thomas",
+              "family": "Hubert",
+              "sequence": "additional",
+              "affiliation": [
+                {
+                  "name": "DeepMind, 6 Pancras Square, London N1C 4AG, UK."
+                }
+              ]
+            },
+            {
+              "given": "Julian",
+              "family": "Schrittwieser",
+              "sequence": "additional",
+              "affiliation": [
+                {
+                  "name": "DeepMind, 6 Pancras Square, London N1C 4AG, UK."
+                }
+              ]
+            },
+            {
+              "given": "Ioannis",
+              "family": "Antonoglou",
+              "sequence": "additional",
+              "affiliation": [
+                {
+                  "name": "DeepMind, 6 Pancras Square, London N1C 4AG, UK."
+                }
+              ]
+            },
+            {
+              "given": "Matthew",
+              "family": "Lai",
+              "sequence": "additional",
+              "affiliation": [
+                {
+                  "name": "DeepMind, 6 Pancras Square, London N1C 4AG, UK."
+                }
+              ]
+            },
+            {
+              "given": "Arthur",
+              "family": "Guez",
+              "sequence": "additional",
+              "affiliation": [
+                {
+                  "name": "DeepMind, 6 Pancras Square, London N1C 4AG, UK."
+                }
+              ]
+            },
+            {
+              "given": "Marc",
+              "family": "Lanctot",
+              "sequence": "additional",
+              "affiliation": [
+                {
+                  "name": "DeepMind, 6 Pancras Square, London N1C 4AG, UK."
+                }
+              ]
+            },
+            {
+              "given": "Laurent",
+              "family": "Sifre",
+              "sequence": "additional",
+              "affiliation": [
+                {
+                  "name": "DeepMind, 6 Pancras Square, London N1C 4AG, UK."
+                }
+              ]
+            },
+            {
+              "ORCID": "https://orcid.org/0000-0001-5995-5264",
+              "authenticated-orcid": true,
+              "given": "Dharshan",
+              "family": "Kumaran",
+              "sequence": "additional",
+              "affiliation": [
+                {
+                  "name": "DeepMind, 6 Pancras Square, London N1C 4AG, UK."
+                }
+              ]
+            },
+            {
+              "ORCID": "https://orcid.org/0000-0003-3957-0310",
+              "authenticated-orcid": true,
+              "given": "Thore",
+              "family": "Graepel",
+              "sequence": "additional",
+              "affiliation": [
+                {
+                  "name": "DeepMind, 6 Pancras Square, London N1C 4AG, UK."
+                }
+              ]
+            },
+            {
+              "given": "Timothy",
+              "family": "Lillicrap",
+              "sequence": "additional",
+              "affiliation": [
+                {
+                  "name": "DeepMind, 6 Pancras Square, London N1C 4AG, UK."
+                }
+              ]
+            },
+            {
+              "given": "Karen",
+              "family": "Simonyan",
+              "sequence": "additional",
+              "affiliation": [
+                {
+                  "name": "DeepMind, 6 Pancras Square, London N1C 4AG, UK."
+                }
+              ]
+            },
+            {
+              "given": "Demis",
+              "family": "Hassabis",
+              "sequence": "additional",
+              "affiliation": [
+                {
+                  "name": "DeepMind, 6 Pancras Square, London N1C 4AG, UK."
+                }
+              ]
+            }
+          ],
+          "member": "221",
+          "reference": [
+            {
+              "key": "e_1_3_2_2_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1016/S0004-3702(01)00129-1"
+            },
+            {
+              "key": "e_1_3_2_3_2",
+              "unstructured": "F.-H. Hsu Behind Deep Blue: Building the Computer That Defeated the World Chess Champion (Princeton Univ. 2002)."
+            },
+            {
+              "key": "e_1_3_2_4_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1111/j.1467-8640.1996.tb00258.x"
+            },
+            {
+              "key": "e_1_3_2_5_2",
+              "first-page": "62",
+              "article-title": "General game playing: overview of the AAAI competition",
+              "volume": "26",
+              "author": "Genesereth M. R.",
+              "year": "2005",
+              "unstructured": "M. R. Genesereth, N. Love, B. Pell, General game playing: overview of the AAAI competition. AI Mag. 26, 62\u201372 (2005).",
+              "journal-title": "AI Mag."
+            },
+            {
+              "key": "e_1_3_2_6_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1147/rd.116.0601"
+            },
+            {
+              "key": "e_1_3_2_7_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1162/neco.1994.6.2.215"
+            },
+            {
+              "key": "e_1_3_2_8_2",
+              "unstructured": "C. J. Maddison A. Huang I. Sutskever D. Silver paper presented at the International Conference on Learning Representations 2015 San Diego CA 7 to 9 May 2015."
+            },
+            {
+              "key": "e_1_3_2_9_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1038/nature16961"
+            },
+            {
+              "key": "e_1_3_2_10_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1038/nature24270"
+            },
+            {
+              "key": "e_1_3_2_12_2",
+              "unstructured": "Stockfish: Strong open source chess engine; https://stockfishchess.org/ [accessed 29 November 2017]."
+            },
+            {
+              "key": "e_1_3_2_13_2",
+              "unstructured": "D. N. L. Levy M. Newborn How Computers Play Chess (Ishi Press 2009)."
+            },
+            {
+              "key": "e_1_3_2_14_2",
+              "unstructured": "V. Allis \u201cSearching for solutions in games and artificial intelligence \u201d Ph.D. thesis Transnational University Limburg Maastricht Netherlands (1994)."
+            },
+            {
+              "key": "e_1_3_2_15_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1016/S0004-3702(01)00157-6"
+            },
+            {
+              "key": "e_1_3_2_16_2",
+              "unstructured": "Computer Shogi Association Results of the 27th world computer shogi championship; www2.computer-shogi.org/wcsc27/index_e.html [accessed 29 November 2017]."
+            },
+            {
+              "key": "e_1_3_2_17_2",
+              "unstructured": "W. Steinitz The Modern Chess Instructor (Edition Olms 1990)."
+            },
+            {
+              "key": "e_1_3_2_18_2",
+              "unstructured": "E. Lasker Common Sense in Chess (Dover Publications 1965)."
+            },
+            {
+              "key": "e_1_3_2_19_2",
+              "unstructured": "J. Knudsen Essential Chess Quotations (iUniverse 2000)."
+            },
+            {
+              "key": "e_1_3_2_20_2",
+              "unstructured": "N. P. Jouppi C. Young N. Patil D. Patterson G. Agrawal R. Bajwa S. Bates S. Bhatia N. Boden A. Borchers R. Boyle P. Cantin C. Chao C. Clark J. Coriell M. Daley M. Dau J. Dean B. Gelb T. V. Ghaemmaghami R. Gottipati W. Gulland R. Hagmann C. R. Ho D. Hogberg J. Hu R. Hundt D. Hurt J. Ibarz A. Jaffey A. Jaworski A. Kaplan H. Khaitan D. Killebrew A. Koch N. Kumar S. Lacy J. Laudon J. Law D. Le C. Leary Z. Liu K. Lucke A. Lundin G. MacKean A. Maggiore M. Mahony K. Miller R. Nagarajan R. Narayanaswami R. Ni K. Nix T. Norrie M. Omernick N. Penukonda A. Phelps J. Ross M. Ross A. Salek E. Samadiani C. Severn G. Sizikov M. Snelham J. Souter D. Steinberg A. Swing M. Tan G. Thorson B. Tian H. Toma E. Tuttle V. Vasudevan R. Walter W. Wang E. Wilcox D. H. Yoon in Proceedings of the 44th Annual International Symposium on Computer Architecture Toronto Canada 24 to 28 June 2017 (Association for Computing Machinery 2017) pp. 1\u201312."
+            },
+            {
+              "key": "e_1_3_2_22_2",
+              "doi-asserted-by": "crossref",
+              "unstructured": "R. Coulom in Proceedings of the Sixth International Conference on Computers and Games Beijing China 29 September to 1 October 2008 (Springer 2008) pp. 113\u2013124.",
+              "DOI": "10.1007/978-3-540-87608-3_11"
+            },
+            {
+              "key": "e_1_3_2_28_2",
+              "unstructured": "Newest available version of Stockfish as of 13 January 2018 (resolved_base b508f9561cc2302c129efe8d60f201ff03ee72c8) from https://github.com/official-stockfish/Stockfish/commit/."
+            },
+            {
+              "key": "e_1_3_2_30_2",
+              "unstructured": "Aperyqhapaq\u2019s evaluation files are available at https://github.com/qhapaq-49/qhapaq-bin/releases/tag/eloqhappa."
+            },
+            {
+              "key": "e_1_3_2_31_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1080/14786445008521796"
+            },
+            {
+              "key": "e_1_3_2_32_2",
+              "unstructured": "O. Arenz \u201cMonte Carlo chess \u201d master\u2019s thesis Technische Universit\u00e4t Darmstadt (2012)."
+            },
+            {
+              "key": "e_1_3_2_33_2",
+              "doi-asserted-by": "crossref",
+              "unstructured": "O. E. David N. S. Netanyahu L. Wolf in Artificial Neural Networks and Machine Learning\u2014ICANN 2016 Part II Barcelona Spain 6 to 9 September 2016 (Springer 2016) pp. 88\u201396.",
+              "DOI": "10.1007/978-3-319-44781-0_11"
+            },
+            {
+              "key": "e_1_3_2_34_2",
+              "unstructured": "T. Marsland Encyclopedia of Artificial Intelligence S. Shapiro Ed. (Wiley 1987)."
+            },
+            {
+              "key": "e_1_3_2_35_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1016/S0004-3702(01)00110-2"
+            },
+            {
+              "key": "e_1_3_2_36_2",
+              "first-page": "1068",
+              "article-title": "On-line policy improvement using Monte-Carlo search",
+              "volume": "9",
+              "author": "Tesauro G.",
+              "year": "1996",
+              "unstructured": "G. Tesauro, G. R. Galperin, On-line policy improvement using Monte-Carlo search. Adv. Neural Inf. Process. Syst. 9, 1068\u20131074 (1996).",
+              "journal-title": "Adv. Neural Inf. Process. Syst."
+            },
+            {
+              "key": "e_1_3_2_37_2",
+              "first-page": "1069",
+              "article-title": "Is learning the n-th thing any easier than learning the first?",
+              "volume": "8",
+              "author": "Thrun S.",
+              "year": "1995",
+              "unstructured": "S. Thrun, Is learning the n-th thing any easier than learning the first? Adv. Neural Inf. Process. Syst. 8, 1069\u20131076 (1995).",
+              "journal-title": "Adv. Neural Inf. Process. Syst."
+            },
+            {
+              "key": "e_1_3_2_38_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1016/S0020-0255(99)00093-6"
+            },
+            {
+              "key": "e_1_3_2_39_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1016/S0304-3975(00)00078-5"
+            },
+            {
+              "key": "e_1_3_2_40_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1023/A:1007634325138"
+            },
+            {
+              "key": "e_1_3_2_41_2",
+              "first-page": "1937",
+              "article-title": "Bootstrapping from game tree search",
+              "volume": "22",
+              "author": "Veness J.",
+              "year": "2009",
+              "unstructured": "J. Veness, D. Silver, A. Blair, W. Uther, Bootstrapping from game tree search. Adv. Neural Inf. Process. Syst. 22, 1937\u20131945 (2009).",
+              "journal-title": "Adv. Neural Inf. Process. Syst."
+            },
+            {
+              "key": "e_1_3_2_42_2",
+              "unstructured": "T. Kaneko K. Hoki in Advances in Computer Games \u2013 13th International Conference ACG 2011 Revised Selected Papers Tilburg Netherlands 20 to 22 November 2011 (Springer 2012) pp. 158\u2013169."
+            },
+            {
+              "key": "e_1_3_2_43_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1613/jair.4217"
+            },
+            {
+              "key": "e_1_3_2_44_2",
+              "unstructured": "M. Lai \u201cGiraffe: Using deep reinforcement learning to play chess \u201d master\u2019s thesis Imperial College London (2015)."
+            },
+            {
+              "key": "e_1_3_2_45_2",
+              "first-page": "5366",
+              "article-title": "Thinking fast and slow with Deep Learning and Tree Search",
+              "volume": "30",
+              "author": "Anthony T.",
+              "year": "2017",
+              "unstructured": "T. Anthony, Z. Tian, D. Barber, Thinking fast and slow with Deep Learning and Tree Search. Adv. Neural Inf. Process. Syst. 30, 5366\u20135376 (2017).",
+              "journal-title": "Adv. Neural Inf. Process. Syst."
+            },
+            {
+              "key": "e_1_3_2_46_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1016/0004-3702(75)90019-3"
+            },
+            {
+              "key": "e_1_3_2_47_2",
+              "unstructured": "R. Ramanujan A. Sabharwal B. Selman in Proceedings of the 26th Conference on Uncertainty in Artificial Intelligence (UAI 2010) Catalina Island CA 8 to 11 July (AUAI Press 2010)."
+            },
+            {
+              "key": "e_1_3_2_48_2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1007/s10472-011-9258-6"
+            },
+            {
+              "key": "e_1_3_2_49_2",
+              "doi-asserted-by": "crossref",
+              "unstructured": "K. He X. Zhang S. Ren J. Sun in Computer Vision \u2013 ECCV 2016 14th European Conference Part IV Amsterdam Netherlands 11 to 14 October 2016 (Springer 2016) pp. 630\u2013645.",
+              "DOI": "10.1007/978-3-319-46493-0_38"
+            },
+            {
+              "key": "e_1_3_2_51_2",
+              "unstructured": "365Chess: Chess Games Database Online; https://www.365chess.com/."
+            }
+          ],
+          "container-title": "Science",
+          "original-title": [],
+          "language": "en",
+          "link": [
+            {
+              "URL": "https://www.science.org/doi/pdf/10.1126/science.aar6404",
+              "content-type": "unspecified",
+              "content-version": "vor",
+              "intended-application": "similarity-checking"
+            }
+          ],
+          "deposited": {
+            "date-parts": [
+              [
+                2024,
+                1,
+                15
+              ]
+            ],
+            "date-time": "2024-01-15T16:48:57Z",
+            "timestamp": 1705337337000
+          },
+          "score": 1,
+          "resource": {
+            "primary": {
+              "URL": "https://www.science.org/doi/10.1126/science.aar6404"
+            }
+          },
+          "subtitle": [],
+          "short-title": [],
+          "issued": {
+            "date-parts": [
+              [
+                2018,
+                12,
+                7
+              ]
+            ]
+          },
+          "references-count": 41,
+          "journal-issue": {
+            "issue": "6419",
+            "published-print": {
+              "date-parts": [
+                [
+                  2018,
+                  12,
+                  7
+                ]
+              ]
+            }
+          },
+          "alternative-id": [
+            "10.1126/science.aar6404"
+          ],
+          "URL": "http://dx.doi.org/10.1126/science.aar6404",
+          "relation": {
+            "has-review": [
+              {
+                "id-type": "doi",
+                "id": "10.3410/f.734563425.793562967",
+                "asserted-by": "object"
+              }
+            ]
+          },
+          "ISSN": [
+            "0036-8075",
+            "1095-9203"
+          ],
+          "subject": [],
+          "container-title-short": "Science",
+          "published": {
+            "date-parts": [
+              [
+                2018,
+                12,
+                7
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "schrittwieser:muzero:2020": {
+      "entry_id": "schrittwieser:muzero:2020",
+      "type": "inproceedings",
+      "status": "valid",
+      "checks": {
+        "doi_format": "\u2705 DOI format looks valid",
+        "doi_resolution": "\u2705 DOI resolves correctly",
+        "searxng": "\u2705 Found 10 results (matched in top 3)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 90,
+      "metadata": {
+        "doi": {
+          "indexed": {
+            "date-parts": [
+              [
+                2025,
+                10,
+                11
+              ]
+            ],
+            "date-time": "2025-10-11T08:26:46Z",
+            "timestamp": 1760171206974,
+            "version": "3.37.3"
+          },
+          "reference-count": 52,
+          "publisher": "Springer Science and Business Media LLC",
+          "issue": "7839",
+          "license": [
+            {
+              "start": {
+                "date-parts": [
+                  [
+                    2020,
+                    12,
+                    23
+                  ]
+                ],
+                "date-time": "2020-12-23T00:00:00Z",
+                "timestamp": 1608681600000
+              },
+              "content-version": "tdm",
+              "delay-in-days": 0,
+              "URL": "http://www.springer.com/tdm"
+            },
+            {
+              "start": {
+                "date-parts": [
+                  [
+                    2020,
+                    12,
+                    23
+                  ]
+                ],
+                "date-time": "2020-12-23T00:00:00Z",
+                "timestamp": 1608681600000
+              },
+              "content-version": "vor",
+              "delay-in-days": 0,
+              "URL": "http://www.springer.com/tdm"
+            }
+          ],
+          "content-domain": {
+            "domain": [
+              "link.springer.com"
+            ],
+            "crossmark-restriction": false
+          },
+          "published-print": {
+            "date-parts": [
+              [
+                2020,
+                12,
+                24
+              ]
+            ]
+          },
+          "DOI": "10.1038/s41586-020-03051-4",
+          "type": "journal-article",
+          "created": {
+            "date-parts": [
+              [
+                2020,
+                12,
+                23
+              ]
+            ],
+            "date-time": "2020-12-23T17:02:49Z",
+            "timestamp": 1608742969000
+          },
+          "page": "604-609",
+          "update-policy": "https://doi.org/10.1007/springer_crossmark_policy",
+          "source": "Crossref",
+          "is-referenced-by-count": 894,
+          "title": "Mastering Atari, Go, chess and shogi by planning with a learned model",
+          "prefix": "10.1038",
+          "volume": "588",
+          "author": [
+            {
+              "given": "Julian",
+              "family": "Schrittwieser",
+              "sequence": "first",
+              "affiliation": []
+            },
+            {
+              "given": "Ioannis",
+              "family": "Antonoglou",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Thomas",
+              "family": "Hubert",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Karen",
+              "family": "Simonyan",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Laurent",
+              "family": "Sifre",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Simon",
+              "family": "Schmitt",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Arthur",
+              "family": "Guez",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Edward",
+              "family": "Lockhart",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Demis",
+              "family": "Hassabis",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Thore",
+              "family": "Graepel",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "given": "Timothy",
+              "family": "Lillicrap",
+              "sequence": "additional",
+              "affiliation": []
+            },
+            {
+              "ORCID": "https://orcid.org/0000-0002-5197-2892",
+              "authenticated-orcid": false,
+              "given": "David",
+              "family": "Silver",
+              "sequence": "additional",
+              "affiliation": []
+            }
+          ],
+          "member": "297",
+          "published-online": {
+            "date-parts": [
+              [
+                2020,
+                12,
+                23
+              ]
+            ]
+          },
+          "reference": [
+            {
+              "key": "3051_CR1",
+              "doi-asserted-by": "publisher",
+              "first-page": "57",
+              "DOI": "10.1016/S0004-3702(01)00129-1",
+              "volume": "134",
+              "author": "M Campbell",
+              "year": "2002",
+              "unstructured": "Campbell, M., Hoane, A. J. Jr & Hsu, F.-h. Deep Blue. Artif. Intell. 134, 57\u201383 (2002).",
+              "journal-title": "Artif. Intell."
+            },
+            {
+              "key": "3051_CR2",
+              "doi-asserted-by": "publisher",
+              "first-page": "484",
+              "DOI": "10.1038/nature16961",
+              "volume": "529",
+              "author": "D Silver",
+              "year": "2016",
+              "unstructured": "Silver, D. et al. Mastering the game of Go with deep neural networks and tree search. Nature 529, 484\u2013489 (2016).",
+              "journal-title": "Nature"
+            },
+            {
+              "key": "3051_CR3",
+              "doi-asserted-by": "publisher",
+              "first-page": "253",
+              "DOI": "10.1613/jair.3912",
+              "volume": "47",
+              "author": "MG Bellemare",
+              "year": "2013",
+              "unstructured": "Bellemare, M. G., Naddaf, Y., Veness, J. & Bowling, M. The arcade learning environment: an evaluation platform for general agents. J. Artif. Intell. Res. 47, 253\u2013279 (2013).",
+              "journal-title": "J. Artif. Intell. Res."
+            },
+            {
+              "key": "3051_CR4",
+              "doi-asserted-by": "publisher",
+              "first-page": "523",
+              "DOI": "10.1613/jair.5699",
+              "volume": "61",
+              "author": "M Machado",
+              "year": "2018",
+              "unstructured": "Machado, M. et al. Revisiting the arcade learning environment: evaluation protocols and open problems for general agents. J. Artif. Intell. Res. 61, 523\u2013562 (2018).",
+              "journal-title": "J. Artif. Intell. Res."
+            },
+            {
+              "key": "3051_CR5",
+              "doi-asserted-by": "publisher",
+              "first-page": "1140",
+              "DOI": "10.1126/science.aar6404",
+              "volume": "362",
+              "author": "D Silver",
+              "year": "2018",
+              "unstructured": "Silver, D. et al. A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play. Science 362, 1140\u20131144 (2018).",
+              "journal-title": "Science"
+            },
+            {
+              "key": "3051_CR6",
+              "doi-asserted-by": "publisher",
+              "first-page": "273",
+              "DOI": "10.1016/0004-3702(92)90074-8",
+              "volume": "53",
+              "author": "J Schaeffer",
+              "year": "1992",
+              "unstructured": "Schaeffer, J. et al. A world championship caliber checkers program. Artif. Intell. 53, 273\u2013289 (1992).",
+              "journal-title": "Artif. Intell."
+            },
+            {
+              "key": "3051_CR7",
+              "doi-asserted-by": "publisher",
+              "first-page": "418",
+              "DOI": "10.1126/science.aao1733",
+              "volume": "359",
+              "author": "N Brown",
+              "year": "2018",
+              "unstructured": "Brown, N. & Sandholm, T. Superhuman AI for heads-up no-limit poker: Libratus beats top professionals. Science 359, 418\u2013424 (2018).",
+              "journal-title": "Science"
+            },
+            {
+              "key": "3051_CR8",
+              "doi-asserted-by": "publisher",
+              "first-page": "508",
+              "DOI": "10.1126/science.aam6960",
+              "volume": "356",
+              "author": "M Morav\u010d\u00edk",
+              "year": "2017",
+              "unstructured": "Morav\u010d\u00edk, M. et al. Deepstack: expert-level artificial intelligence in heads-up no-limit poker. Science 356, 508\u2013513 (2017).",
+              "journal-title": "Science"
+            },
+            {
+              "key": "3051_CR9",
+              "unstructured": "Vlahavas, I. & Refanidis, I. Planning and Scheduling Technical Report (EETN, 2013)."
+            },
+            {
+              "key": "3051_CR10",
+              "doi-asserted-by": "publisher",
+              "first-page": "604",
+              "DOI": "10.1038/nature25978",
+              "volume": "555",
+              "author": "MH Segler",
+              "year": "2018",
+              "unstructured": "Segler, M. H., Preuss, M. & Waller, M. P. Planning chemical syntheses with deep neural networks and symbolic AI. Nature 555, 604\u2013610 (2018).",
+              "journal-title": "Nature"
+            },
+            {
+              "key": "3051_CR11",
+              "unstructured": "Sutton, R. S. & Barto, A. G. Reinforcement Learning: An Introduction 2nd edn (MIT Press, 2018)."
+            },
+            {
+              "key": "3051_CR12",
+              "unstructured": "Deisenroth, M. & Rasmussen, C. PILCO: a model-based and data-efficient approach to policy search. In Proc. 28th International Conference on Machine Learning, ICML 2011 465\u2013472 (Omnipress, 2011)."
+            },
+            {
+              "key": "3051_CR13",
+              "unstructured": "Heess, N. et al. Learning continuous control policies by stochastic value gradients. In NIPS\u201915: Proc. 28th International Conference on Neural Information Processing Systems Vol. 2 (eds Cortes, C. et al.) 2944\u20132952 (MIT Press, 2015)."
+            },
+            {
+              "key": "3051_CR14",
+              "first-page": "1071",
+              "volume": "27",
+              "author": "S Levine",
+              "year": "2014",
+              "unstructured": "Levine, S. & Abbeel, P. Learning neural network policies with guided policy search under unknown dynamics. Adv. Neural Inf. Process. Syst. 27, 1071\u20131079 (2014).",
+              "journal-title": "Adv. Neural Inf. Process. Syst."
+            },
+            {
+              "key": "3051_CR15",
+              "unstructured": "Hafner, D. et al. Learning latent dynamics for planning from pixels. Preprint at https://arxiv.org/abs/1811.04551 (2018)."
+            },
+            {
+              "key": "3051_CR16",
+              "unstructured": "Kaiser, L. et al. Model-based reinforcement learning for atari. Preprint at https://arxiv.org/abs/1903.00374 (2019)."
+            },
+            {
+              "key": "3051_CR17",
+              "unstructured": "Buesing, L. et al. Learning and querying fast generative models for reinforcement learning. Preprint at https://arxiv.org/abs/1802.03006 (2018)."
+            },
+            {
+              "key": "3051_CR18",
+              "unstructured": "Espeholt, L. et al. IMPALA: scalable distributed deep-RL with importance weighted actor-learner architectures. In Proc. International Conference on Machine Learning, ICML Vol. 80 (eds Dy, J. & Krause, A.) 1407\u20131416 (2018)."
+            },
+            {
+              "key": "3051_CR19",
+              "unstructured": "Kapturowski, S., Ostrovski, G., Dabney, W., Quan, J. & Munos, R. Recurrent experience replay in distributed reinforcement learning. In International Conference on Learning Representations (2019)."
+            },
+            {
+              "key": "3051_CR20",
+              "unstructured": "Horgan, D. et al. Distributed prioritized experience replay. In International Conference on Learning Representations (2018)."
+            },
+            {
+              "key": "3051_CR21",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Puterman, M. L. Markov Decision Processes: Discrete Stochastic Dynamic Programming 1st edn (John Wiley & Sons, 1994).",
+              "DOI": "10.1002/9780470316887"
+            },
+            {
+              "key": "3051_CR22",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Coulom, R. Efficient selectivity and backup operators in Monte-Carlo tree search. In International Conference on Computers and Games 72\u201383 (Springer, 2006).",
+              "DOI": "10.1007/978-3-540-75538-8_7"
+            },
+            {
+              "key": "3051_CR23",
+              "unstructured": "Wahlstr\u00f6m, N., Sch\u00f6n, T. B. & Deisenroth, M. P. From pixels to torques: policy learning with deep dynamical models. Preprint at http://arxiv.org/abs/1502.02251 (2015)."
+            },
+            {
+              "key": "3051_CR24",
+              "unstructured": "Watter, M., Springenberg, J. T., Boedecker, J. & Riedmiller, M. Embed to control: a locally linear latent dynamics model for control from raw images. In NIPS\u201915: Proc. 28th International Conference on Neural Information Processing Systems Vol. 2 (eds Cortes, C. et al.) 2746\u20132754 (MIT Press, 2015)."
+            },
+            {
+              "key": "3051_CR25",
+              "unstructured": "Ha, D. & Schmidhuber, J. Recurrent world models facilitate policy evolution. In NIPS\u201918: Proc. 32nd International Conference on Neural Information Processing Systems (eds Bengio, S. et al.) 2455\u20132467 (Curran Associates, 2018)."
+            },
+            {
+              "key": "3051_CR26",
+              "unstructured": "Gelada, C., Kumar, S., Buckman, J., Nachum, O. & Bellemare, M. G. DeepMDP: learning continuous latent space models for representation learning. Proc. 36th International Conference on Machine Learning: Volume 97 of Proc. Machine Learning Research (eds Chaudhuri, K. & Salakhutdinov, R.) 2170\u20132179 (PMLR, 2019)."
+            },
+            {
+              "key": "3051_CR27",
+              "unstructured": "van Hasselt, H., Hessel, M. & Aslanides, J. When to use parametric models in reinforcement learning? Preprint at https://arxiv.org/abs/1906.05243 (2019)."
+            },
+            {
+              "key": "3051_CR28",
+              "first-page": "2154",
+              "volume": "29",
+              "author": "A Tamar",
+              "year": "2016",
+              "unstructured": "Tamar, A., Wu, Y., Thomas, G., Levine, S. & Abbeel, P. Value iteration networks. Adv. Neural Inf. Process. Syst. 29, 2154\u20132162 (2016).",
+              "journal-title": "Adv. Neural Inf. Process. Syst."
+            },
+            {
+              "key": "3051_CR29",
+              "unstructured": "Silver, D. et al. The predictron: end-to-end learning and planning. In Proc. 34th International Conference on Machine Learning Vol. 70 (eds Precup, D. & Teh, Y. W.) 3191\u20133199 (JMLR, 2017)."
+            },
+            {
+              "key": "3051_CR30",
+              "unstructured": "Farahmand, A. M., Barreto, A. & Nikovski, D. Value-aware loss function for model-based reinforcement learning. In Proc. 20th International Conference on Artificial Intelligence and Statistics: Volume 54 of Proc. Machine Learning Research (eds Singh, A. & Zhu, J) 1486\u20131494 (PMLR, 2017)."
+            },
+            {
+              "key": "3051_CR31",
+              "first-page": "9090",
+              "volume": "31",
+              "author": "A Farahmand",
+              "year": "2018",
+              "unstructured": "Farahmand, A. Iterative value-aware model learning. Adv. Neural Inf. Process. Syst. 31, 9090\u20139101 (2018).",
+              "journal-title": "Adv. Neural Inf. Process. Syst."
+            },
+            {
+              "key": "3051_CR32",
+              "unstructured": "Farquhar, G., Rocktaeschel, T., Igl, M. & Whiteson, S. TreeQN and ATreeC: differentiable tree planning for deep reinforcement learning. In International Conference on Learning Representations (2018)."
+            },
+            {
+              "key": "3051_CR33",
+              "first-page": "6118",
+              "volume": "30",
+              "author": "J Oh",
+              "year": "2017",
+              "unstructured": "Oh, J., Singh, S. & Lee, H. Value prediction network. Adv. Neural Inf. Process. Syst. 30, 6118\u20136128 (2017).",
+              "journal-title": "Adv. Neural Inf. Process. Syst."
+            },
+            {
+              "key": "3051_CR34",
+              "first-page": "1097",
+              "volume": "25",
+              "author": "A Krizhevsky",
+              "year": "2012",
+              "unstructured": "Krizhevsky, A., Sutskever, I. & Hinton, G. E. Imagenet classification with deep convolutional neural networks. Adv. Neural Inf. Process. Syst. 25, 1097\u20131105 (2012).",
+              "journal-title": "Adv. Neural Inf. Process. Syst."
+            },
+            {
+              "key": "3051_CR35",
+              "doi-asserted-by": "crossref",
+              "unstructured": "He, K., Zhang, X., Ren, S. & Sun, J. Identity mappings in deep residual networks. In 14th European Conference on Computer Vision 630\u2013645 (2016).",
+              "DOI": "10.1007/978-3-319-46493-0_38"
+            },
+            {
+              "key": "3051_CR36",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Hessel, M. et al. Rainbow: combining improvements in deep reinforcement learning. In Thirty-Second AAAI Conference on Artificial Intelligence (2018).",
+              "DOI": "10.1609/aaai.v33i01.33013796"
+            },
+            {
+              "key": "3051_CR37",
+              "unstructured": "Schmitt, S., Hessel, M. & Simonyan, K. Off-policy actor-critic with shared experience replay. Preprint at https://arxiv.org/abs/1909.11583 (2019)."
+            },
+            {
+              "key": "3051_CR38",
+              "unstructured": "Azizzadenesheli, K. et al. Surprising negative results for generative adversarial tree search. Preprint at http://arxiv.org/abs/1806.05780 (2018)."
+            },
+            {
+              "key": "3051_CR39",
+              "doi-asserted-by": "publisher",
+              "first-page": "529",
+              "DOI": "10.1038/nature14236",
+              "volume": "518",
+              "author": "V Mnih",
+              "year": "2015",
+              "unstructured": "Mnih, V. et al. Human-level control through deep reinforcement learning. Nature 518, 529\u2013533 (2015).",
+              "journal-title": "Nature"
+            },
+            {
+              "key": "3051_CR40",
+              "unstructured": "Open, A. I. OpenAI five. OpenAI https://blog.openai.com/openai-five/ (2018)."
+            },
+            {
+              "key": "3051_CR41",
+              "doi-asserted-by": "publisher",
+              "first-page": "350",
+              "DOI": "10.1038/s41586-019-1724-z",
+              "volume": "575",
+              "author": "O Vinyals",
+              "year": "2019",
+              "unstructured": "Vinyals, O. et al. Grandmaster level in StarCraft II using multi-agent reinforcement learning. Nature 575, 350\u2013354 (2019).",
+              "journal-title": "Nature"
+            },
+            {
+              "key": "3051_CR42",
+              "unstructured": "Jaderberg, M. et al. Reinforcement learning with unsupervised auxiliary tasks. Preprint at https://arxiv.org/abs/1611.05397 (2016)."
+            },
+            {
+              "key": "3051_CR43",
+              "doi-asserted-by": "publisher",
+              "first-page": "354",
+              "DOI": "10.1038/nature24270",
+              "volume": "550",
+              "author": "D Silver",
+              "year": "2017",
+              "unstructured": "Silver, D. et al. Mastering the game of Go without human knowledge. Nature 550, 354\u2013359 (2017).",
+              "journal-title": "Nature"
+            },
+            {
+              "key": "3051_CR44",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Kocsis, L. & Szepesv\u00e1ri, C. Bandit based Monte-Carlo planning. In European Conference on Machine Learning 282\u2013293 (Springer, 2006).",
+              "DOI": "10.1007/11871842_29"
+            },
+            {
+              "key": "3051_CR45",
+              "doi-asserted-by": "publisher",
+              "first-page": "203",
+              "DOI": "10.1007/s10472-011-9258-6",
+              "volume": "61",
+              "author": "CD Rosin",
+              "year": "2011",
+              "unstructured": "Rosin, C. D. Multi-armed bandits with episode context. Ann. Math. Artif. Intell. 61, 203\u2013230 (2011).",
+              "journal-title": "Ann. Math. Artif. Intell."
+            },
+            {
+              "key": "3051_CR46",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Schadd, M. P., Winands, M. H., Van Den Herik, H. J., Chaslot, G. M.-B. & Uiterwijk, J. W. Single-player Monte-Carlo tree search. In International Conference on Computers and Games 1\u201312 (Springer, 2008).",
+              "DOI": "10.1007/978-3-540-87608-3_1"
+            },
+            {
+              "key": "3051_CR47",
+              "unstructured": "Pohlen, T. et al. Observe and look further: achieving consistent performance on Atari. Preprint at https://arxiv.org/abs/1805.11593 (2018)."
+            },
+            {
+              "key": "3051_CR48",
+              "unstructured": "Schaul, T., Quan, J., Antonoglou, I. & Silver, D. Prioritized experience replay. In International Conference on Learning Representations (2016)."
+            },
+            {
+              "key": "3051_CR49",
+              "unstructured": "Cloud TPU. Google Cloud https://cloud.google.com/tpu/ (2019)."
+            },
+            {
+              "key": "3051_CR50",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Coulom, R. Whole-history rating: a Bayesian rating system for players of time-varying strength. In International Conference on Computers and Games 113\u2013124 (2008).",
+              "DOI": "10.1007/978-3-540-87608-3_11"
+            },
+            {
+              "key": "3051_CR51",
+              "unstructured": "Nair, A. et al. Massively parallel methods for deep reinforcement learning. Preprint at https://arxiv.org/abs/1507.04296 (2015)."
+            },
+            {
+              "key": "3051_CR52",
+              "unstructured": "Lanctot, M. et al. OpenSpiel: a framework for reinforcement learning in games. Preprint at http://arxiv.org/abs/1908.09453 (2019)."
+            }
+          ],
+          "container-title": "Nature",
+          "original-title": [],
+          "language": "en",
+          "link": [
+            {
+              "URL": "http://www.nature.com/articles/s41586-020-03051-4.pdf",
+              "content-type": "application/pdf",
+              "content-version": "vor",
+              "intended-application": "text-mining"
+            },
+            {
+              "URL": "http://www.nature.com/articles/s41586-020-03051-4",
+              "content-type": "text/html",
+              "content-version": "vor",
+              "intended-application": "text-mining"
+            },
+            {
+              "URL": "http://www.nature.com/articles/s41586-020-03051-4.pdf",
+              "content-type": "application/pdf",
+              "content-version": "vor",
+              "intended-application": "similarity-checking"
+            }
+          ],
+          "deposited": {
+            "date-parts": [
+              [
+                2023,
+                5,
+                20
+              ]
+            ],
+            "date-time": "2023-05-20T22:01:47Z",
+            "timestamp": 1684620107000
+          },
+          "score": 1,
+          "resource": {
+            "primary": {
+              "URL": "https://www.nature.com/articles/s41586-020-03051-4"
+            }
+          },
+          "subtitle": [],
+          "short-title": [],
+          "issued": {
+            "date-parts": [
+              [
+                2020,
+                12,
+                23
+              ]
+            ]
+          },
+          "references-count": 52,
+          "journal-issue": {
+            "issue": "7839",
+            "published-print": {
+              "date-parts": [
+                [
+                  2020,
+                  12,
+                  24
+                ]
+              ]
+            }
+          },
+          "alternative-id": [
+            "3051"
+          ],
+          "URL": "http://dx.doi.org/10.1038/s41586-020-03051-4",
+          "relation": {},
+          "ISSN": [
+            "0028-0836",
+            "1476-4687"
+          ],
+          "subject": [],
+          "container-title-short": "Nature",
+          "published": {
+            "date-parts": [
+              [
+                2020,
+                12,
+                23
+              ]
+            ]
+          },
+          "assertion": [
+            {
+              "value": "3 April 2020",
+              "order": 1,
+              "name": "received",
+              "label": "Received",
+              "group": {
+                "name": "ArticleHistory",
+                "label": "Article History"
+              }
+            },
+            {
+              "value": "7 October 2020",
+              "order": 2,
+              "name": "accepted",
+              "label": "Accepted",
+              "group": {
+                "name": "ArticleHistory",
+                "label": "Article History"
+              }
+            },
+            {
+              "value": "23 December 2020",
+              "order": 3,
+              "name": "first_online",
+              "label": "First Online",
+              "group": {
+                "name": "ArticleHistory",
+                "label": "Article History"
+              }
+            },
+            {
+              "value": "DeepMind filed Greek\u00a0patent GR20200100037 on 28 January 2020, covering the MuZero algorithm described in this paper, listing the authors J.S., I.A. and T.H. as inventors. The other authors declare no competing interests.",
+              "order": 1,
+              "name": "Ethics",
+              "group": {
+                "name": "EthicsHeading",
+                "label": "Competing interests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "hafner:dreamer:2020": {
+      "entry_id": "hafner:dreamer:2020",
+      "type": "article",
+      "status": "valid",
+      "checks": {
+        "arxiv": "\u2705 arXiv ID valid",
+        "url": "\u2705 URL reachable (status 200)",
+        "searxng": "\u2705 Found 10 results (matched in top 3)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 90,
+      "metadata": {
+        "arxiv": {
+          "raw_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<feed xmlns=\"http://www.w3.org/2005/Atom\">\n  <link href=\"http://arxiv.org/api/query?search_query%3D%26id_list%3D1912.01603%26start%3D0%26max_results%3D10\" rel=\"self\" type=\"application/atom+xml\"/>\n  <title type=\"html\">ArXiv Query: search_query=&amp;id_list=1912.01603&amp;start=0&amp;max_results=10</title>\n  <id>http://arxiv.org/api/Ut8Pzo4+K+aEhU79rHX/1cc3jDk</id>\n  <updated>2025-10-11T00:00:00-04:00</updated>\n  <opensearch:totalResults xmlns:opensearch=\"htt"
+        }
+      }
+    },
+    "rudin:real_complex:1987": {
+      "entry_id": "rudin:real_complex:1987",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 1 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 65,
+      "metadata": {}
+    },
+    "rudin:functional_analysis:1991": {
+      "entry_id": "rudin:functional_analysis:1991",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "royden:real_analysis:2010": {
+      "entry_id": "royden:real_analysis:2010",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u2705 Found 10 results (matched in top 3)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 90,
+      "metadata": {}
+    },
+    "billingsley:probability:2012": {
+      "entry_id": "billingsley:probability:2012",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u2705 Found 10 results (matched in top 3)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 90,
+      "metadata": {}
+    },
+    "kallenberg:foundations:2021": {
+      "entry_id": "kallenberg:foundations:2021",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "kushner:stochastic_approximation:2003": {
+      "entry_id": "kushner:stochastic_approximation:2003",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "robbins:stochastic_approximation:1951": {
+      "entry_id": "robbins:stochastic_approximation:1951",
+      "type": "article",
+      "status": "valid",
+      "checks": {
+        "doi_format": "\u2705 DOI format looks valid",
+        "doi_resolution": "\u2705 DOI resolves correctly",
+        "searxng": "\u2705 Found 10 results (matched in top 3)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 90,
+      "metadata": {
+        "doi": {
+          "indexed": {
+            "date-parts": [
+              [
+                2025,
+                10,
+                11
+              ]
+            ],
+            "date-time": "2025-10-11T08:13:42Z",
+            "timestamp": 1760170422042
+          },
+          "reference-count": 0,
+          "publisher": "Institute of Mathematical Statistics",
+          "issue": "3",
+          "content-domain": {
+            "domain": [],
+            "crossmark-restriction": false
+          },
+          "published-print": {
+            "date-parts": [
+              [
+                1951,
+                9
+              ]
+            ]
+          },
+          "DOI": "10.1214/aoms/1177729586",
+          "type": "journal-article",
+          "created": {
+            "date-parts": [
+              [
+                2007,
+                12,
+                17
+              ]
+            ],
+            "date-time": "2007-12-17T22:27:00Z",
+            "timestamp": 1197930420000
+          },
+          "page": "400-407",
+          "source": "Crossref",
+          "is-referenced-by-count": 6194,
+          "title": "A Stochastic Approximation Method",
+          "prefix": "10.1214",
+          "volume": "22",
+          "author": [
+            {
+              "given": "Herbert",
+              "family": "Robbins",
+              "sequence": "first",
+              "affiliation": []
+            },
+            {
+              "given": "Sutton",
+              "family": "Monro",
+              "sequence": "additional",
+              "affiliation": []
+            }
+          ],
+          "member": "108",
+          "container-title": "The Annals of Mathematical Statistics",
+          "original-title": [],
+          "language": "en",
+          "link": [
+            {
+              "URL": "http://projecteuclid.org/download/pdf_1/euclid.aoms/1177729586",
+              "content-type": "unspecified",
+              "content-version": "vor",
+              "intended-application": "similarity-checking"
+            }
+          ],
+          "deposited": {
+            "date-parts": [
+              [
+                2017,
+                5,
+                10
+              ]
+            ],
+            "date-time": "2017-05-10T14:12:37Z",
+            "timestamp": 1494425557000
+          },
+          "score": 1,
+          "resource": {
+            "primary": {
+              "URL": "http://projecteuclid.org/euclid.aoms/1177729586"
+            }
+          },
+          "subtitle": [],
+          "short-title": [],
+          "issued": {
+            "date-parts": [
+              [
+                1951,
+                9
+              ]
+            ]
+          },
+          "references-count": 0,
+          "journal-issue": {
+            "issue": "3",
+            "published-print": {
+              "date-parts": [
+                [
+                  1951,
+                  9
+                ]
+              ]
+            }
+          },
+          "URL": "http://dx.doi.org/10.1214/aoms/1177729586",
+          "relation": {},
+          "ISSN": [
+            "0003-4851"
+          ],
+          "subject": [],
+          "container-title-short": "Ann. Math. Statist.",
+          "published": {
+            "date-parts": [
+              [
+                1951,
+                9
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "bertsekas:dynamic_programming:2017": {
+      "entry_id": "bertsekas:dynamic_programming:2017",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "fleming:controlled_diffusions:2006": {
+      "entry_id": "fleming:controlled_diffusions:2006",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "carmona:mean_field_games:2018": {
+      "entry_id": "carmona:mean_field_games:2018",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "goodfellow:deep_learning:2016": {
+      "entry_id": "goodfellow:deep_learning:2016",
+      "type": "book",
+      "status": "valid",
+      "checks": {
+        "isbn": "\u2705 Valid ISBN-13",
+        "url": "\u2705 URL reachable (status 200)",
+        "searxng": "\u2705 Found 10 results (matched in top 3)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 90,
+      "metadata": {}
+    },
+    "williams:reinforce:1992": {
+      "entry_id": "williams:reinforce:1992",
+      "type": "article",
+      "status": "valid",
+      "checks": {
+        "doi_format": "\u2705 DOI format looks valid",
+        "doi_resolution": "\u2705 DOI resolves correctly",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {
+        "doi": {
+          "indexed": {
+            "date-parts": [
+              [
+                2025,
+                10,
+                11
+              ]
+            ],
+            "date-time": "2025-10-11T08:09:32Z",
+            "timestamp": 1760170172851
+          },
+          "reference-count": 33,
+          "publisher": "Springer Science and Business Media LLC",
+          "issue": "3-4",
+          "license": [
+            {
+              "start": {
+                "date-parts": [
+                  [
+                    1992,
+                    5,
+                    1
+                  ]
+                ],
+                "date-time": "1992-05-01T00:00:00Z",
+                "timestamp": 704678400000
+              },
+              "content-version": "tdm",
+              "delay-in-days": 0,
+              "URL": "http://www.springer.com/tdm"
+            }
+          ],
+          "content-domain": {
+            "domain": [],
+            "crossmark-restriction": false
+          },
+          "published-print": {
+            "date-parts": [
+              [
+                1992,
+                5
+              ]
+            ]
+          },
+          "DOI": "10.1007/bf00992696",
+          "type": "journal-article",
+          "created": {
+            "date-parts": [
+              [
+                2005,
+                1,
+                9
+              ]
+            ],
+            "date-time": "2005-01-09T16:35:16Z",
+            "timestamp": 1105288516000
+          },
+          "page": "229-256",
+          "source": "Crossref",
+          "is-referenced-by-count": 3350,
+          "title": "Simple statistical gradient-following algorithms for connectionist reinforcement learning",
+          "prefix": "10.1007",
+          "volume": "8",
+          "author": [
+            {
+              "given": "Ronald J.",
+              "family": "Williams",
+              "sequence": "first",
+              "affiliation": []
+            }
+          ],
+          "member": "297",
+          "reference": [
+            {
+              "key": "CR1",
+              "first-page": "229",
+              "volume": "4",
+              "author": "A.G. Barto",
+              "year": "1985",
+              "unstructured": "Barto, A.G. (1985). Learning by statistical cooperation of self-interested neuron-like computing elements.Human Neurobiology, 4, 229?256.",
+              "journal-title": "Human Neurobiology"
+            },
+            {
+              "key": "CR2",
+              "doi-asserted-by": "crossref",
+              "first-page": "360",
+              "DOI": "10.1109/TSMC.1985.6313371",
+              "volume": "15",
+              "author": "A.G. Barto",
+              "year": "1985",
+              "unstructured": "Barto, A.G. & Anandan, P. (1985). Pattern recognizing stochastic learning automata.IEEE Transactions on Systems, Man, and Cybernetics, 15, 360?374.",
+              "journal-title": "IEEE Transactions on Systems, Man, and Cybernetics"
+            },
+            {
+              "key": "CR3",
+              "unstructured": "Barto, A.G. & Anderson, C.W. (1985). Structural learning in connectionist systems.Proceedings of the Seventh Annual Conference of the Cognitive Science Society, (pp. 43?53). Irvine, CA."
+            },
+            {
+              "key": "CR4",
+              "doi-asserted-by": "crossref",
+              "first-page": "835",
+              "DOI": "10.1109/TSMC.1983.6313077",
+              "volume": "13",
+              "author": "A.G. Barto",
+              "year": "1983",
+              "unstructured": "Barto, A.G., Sutton, R.S., & Anderson, C.W. (1983). Neuronlike elements that can solve difficult learning control problems.IEEE Transactions on Systems, Man, and Cybernetics, 13, 835?846.",
+              "journal-title": "IEEE Transactions on Systems, Man, and Cybernetics"
+            },
+            {
+              "key": "CR5",
+              "doi-asserted-by": "crossref",
+              "first-page": "201",
+              "DOI": "10.1007/BF00453370",
+              "volume": "40",
+              "author": "A.G. Barto",
+              "year": "1981",
+              "unstructured": "Barto, A.G., Sutton, R.S., & Brouwer, P.S. (1981). Associative search network: A reinforcement learning associative memory.Biological Cybernetics, 40, 201?211.",
+              "journal-title": "Biological Cybernetics"
+            },
+            {
+              "key": "CR6",
+              "unstructured": "Barto, A.G., & Jordan, M.I. (1987). Gradient following without back-propagation in layered networks.Proceedings of the First Annual International Conference on Neural Networks, Vol. II (pp. 629?636). San Diego, CA."
+            },
+            {
+              "key": "CR7",
+              "volume-title": "Learning and computational neuroscience: Foundations of adaptive networks",
+              "author": "A.G. Barto",
+              "year": "1990",
+              "unstructured": "Barto, A.G., Sutton, R.S., & Watkins, C.J.C.H. (1990). Learning and sequential decision making. In: M. Gabriel & J.W. Moore (Eds.),Learning and computational neuroscience: Foundations of adaptive networks. Cambridge, MA: MIT Press."
+            },
+            {
+              "key": "CR8",
+              "first-page": "45",
+              "volume-title": "Proceedings of the 1990 Connectionist Models Summer School",
+              "author": "P. Dayan",
+              "year": "1990",
+              "unstructured": "Dayan, P. (1990). Reinforcement comparison. In D.S. Touretzky, J.L. Elman, T.J. Sejnowski, & G.E. Hinton (Eds.),Proceedings of the 1990 Connectionist Models Summer School (pp. 45?51). San Mateo, CA: Morgan Kaufmann."
+            },
+            {
+              "key": "CR9",
+              "volume-title": "Adaptive filtering prediction and control",
+              "author": "G.C. Goodwin",
+              "year": "1984",
+              "unstructured": "Goodwin, G.C. & Sin, K.S. (1984).Adaptive filtering prediction and control. Englewood Cliffs, NJ: Prentice-Hall."
+            },
+            {
+              "key": "CR10",
+              "doi-asserted-by": "crossref",
+              "first-page": "671",
+              "DOI": "10.1016/0893-6080(90)90056-Q",
+              "volume": "3",
+              "author": "V. Gullapalli",
+              "year": "1990",
+              "unstructured": "Gullapalli, V. (1990). A stochastic reinforcement learning algorithm for learning real-valued functions.Neural Networks, 3, 671?692.",
+              "journal-title": "Neural Networks"
+            },
+            {
+              "key": "CR11",
+              "volume-title": "Parallel distributed processing: Explorations in the microstructure of cognition. Vol. 1: Foundations",
+              "author": "G.E. Hinton",
+              "year": "1986",
+              "unstructured": "Hinton, G.E. & Sejnowski, T.J. (1986). Learning and relearning in Boltzmann machines. In: D.E. Rumelhart & J.L. McClelland, (Eds.),Parallel distributed processing: Explorations in the microstructure of cognition. Vol. 1: Foundations. Cambridge, MA: MIT Press."
+            },
+            {
+              "key": "CR12",
+              "series-title": "Occasional Paper",
+              "volume-title": "Forward models: supervised learning with a distal teacher",
+              "author": "M.I. Jordan",
+              "year": "1990",
+              "unstructured": "Jordan, M.I. & Rumelhart, D.E. (1990).Forward models: supervised learning with a distal teacher. (Occasional Paper ? 40). Cambridge, MA: Massachusetts Institute of Technology, Center for Cognitive Science."
+            },
+            {
+              "key": "CR13",
+              "first-page": "599",
+              "volume": "85",
+              "author": "Y. leCun",
+              "year": "1985",
+              "unstructured": "leCun, Y. (1985). Une procedure d'apprentissage pour resau a sequil assymetrique [A learning procedure for asymmetric threshold networks].Proceedings of Cognitiva, 85, 599?604.",
+              "journal-title": "Proceedings of Cognitiva"
+            },
+            {
+              "key": "CR14",
+              "unstructured": "Munro, P. (1987). A dual back-propagation scheme for scalar reward learning.Proceedings of the Ninth Annual Conference of the Cognitive Science Society (pp. 165?176). Seattle, WA."
+            },
+            {
+              "key": "CR15",
+              "volume-title": "Learning Automata: An introduction",
+              "author": "K.S. Narendra",
+              "year": "1989",
+              "unstructured": "Narendra, K.S. & Thathatchar, M.A.L. (1989).Learning Automata: An introduction. Englewood Cliffs, NJ: Prentice Hall."
+            },
+            {
+              "key": "CR16",
+              "doi-asserted-by": "crossref",
+              "first-page": "1154",
+              "DOI": "10.1109/TSMC.1983.6313193",
+              "volume": "13",
+              "author": "K.S. Narendra",
+              "year": "1983",
+              "unstructured": "Narendra, K.S. & Wheeler, R.M., Jr. (1983). AnN-player sequential stochastic game with identical payoffs.IEEE Transactions on Systems, Man, and Cybernetics, 13, 1154?1158.",
+              "journal-title": "IEEE Transactions on Systems, Man, and Cybernetics"
+            },
+            {
+              "key": "CR17",
+              "volume-title": "Principles of artificial intelligence",
+              "author": "N.J. Nilsson",
+              "year": "1980",
+              "unstructured": "Nilsson, N.J. (1980).Principles of artificial intelligence. Palo Alto, CA: Tioga."
+            },
+            {
+              "key": "CR18",
+              "series-title": "Technical Report",
+              "volume-title": "Learning-logic",
+              "author": "D.B. Parker",
+              "year": "1985",
+              "unstructured": "Parker, D.B. (1985).Learning-logic. (Technical Report TR-47). Cambridge, MA: Massachusetts Institute of Technology, Center for Computational Research in Economics and Management Science."
+            },
+            {
+              "key": "CR19",
+              "volume-title": "An introduction to probability theory and mathematical statistics",
+              "author": "V.K. Rohatgi",
+              "year": "1976",
+              "unstructured": "Rohatgi, V.K. (1976)An introduction to probability theory and mathematical statistics. New York: Wiley."
+            },
+            {
+              "key": "CR20",
+              "doi-asserted-by": "crossref",
+              "DOI": "10.7551/mitpress/5236.001.0001",
+              "volume-title": "Parallel distributed processing: Explorations in the microstructure of cognition. Vol. 1: Foundations",
+              "author": "D.E. Rumelhart",
+              "year": "1986",
+              "unstructured": "Rumelhart, D.E., Hinton, G.E., & Williams, R.J. (1986). Learning internal representations by error propagation. In: D.E. Rumelhart & J.L. McClelland, (Eds.),Parallel distributed processing: Explorations in the microstructure of cognition. Vol. 1: Foundations. Cambridge: MIT Press."
+            },
+            {
+              "key": "CR21",
+              "unstructured": "Schmidhuber, J.H. & Huber, R. (1990). Learning to generate focus trajectories for attentive vision. (Technical Report FKI-128-90). Technische Universit\u00e4t M\u00fcnchen, Institut f\u00fcr Informatik."
+            },
+            {
+              "key": "CR22",
+              "volume-title": "Temporal credit assignment in reinforcement learning",
+              "author": "R.S. Sutton",
+              "year": "1984",
+              "unstructured": "Sutton, R.S. (1984).Temporal credit assignment in reinforcement learning. Ph.D. Dissertation, Dept. of Computer and Information Science, University of Massachusetts, Amherst, MA."
+            },
+            {
+              "key": "CR23",
+              "first-page": "9",
+              "volume": "3",
+              "author": "R.S. Sutton",
+              "year": "1988",
+              "unstructured": "Sutton, R.S. (1988). Learning to predict by the methods of temporal differences.Machine Learning, 3, 9?44.",
+              "journal-title": "Machine Learning"
+            },
+            {
+              "key": "CR24",
+              "doi-asserted-by": "crossref",
+              "first-page": "168",
+              "DOI": "10.1109/TSMC.1985.6313407",
+              "volume": "15",
+              "author": "M.A.L. Thathatchar",
+              "year": "1985",
+              "unstructured": "Thathatchar, M.A.L. & Sastry, P.S. (1985). A new approach to the design of reinforcement schemes for learning automata.IEEE Transactions on Systems, Man, and Cybernetics, 15, 168?175.",
+              "journal-title": "IEEE Transactions on Systems, Man, and Cybernetics"
+            },
+            {
+              "key": "CR25",
+              "doi-asserted-by": "crossref",
+              "first-page": "519",
+              "DOI": "10.1109/TAC.1986.1104342",
+              "volume": "31",
+              "author": "R.M. Wheeler Jr.",
+              "year": "1986",
+              "unstructured": "Wheeler, R.M., Jr. & Narendra K.S. (1986). Decentralized learning in finite Markov chains.IEEE Transactions on Automatic Control, 31, 519?526.",
+              "journal-title": "IEEE Transactions on Automatic Control"
+            },
+            {
+              "key": "CR26",
+              "volume-title": "Learning from delayed rewards",
+              "author": "C.J.C.H. Watkins",
+              "year": "1989",
+              "unstructured": "Watkins, C.J.C.H. (1989).Learning from delayed rewards. Ph.D. Dissertation, Cambridge University, Cambridge, England."
+            },
+            {
+              "key": "CR27",
+              "volume-title": "Beyond regression: new tools for prediction and analysis in the behavioral sciences",
+              "author": "P.J. Werbos",
+              "year": "1974",
+              "unstructured": "Werbos, P.J. (1974).Beyond regression: new tools for prediction and analysis in the behavioral sciences. Ph.D. Dissertation, Harvard University, Cambridge, MA."
+            },
+            {
+              "key": "CR28",
+              "series-title": "Technical Report",
+              "volume-title": "Reinforcement learning in connectionist networks: A mathematical analysis",
+              "author": "R.J. Williams",
+              "year": "1986",
+              "unstructured": "Williams, R.J. (1986).Reinforcement learning in connectionist networks: A mathematical analysis. (Technical Report 8605). San Diego: University of California, Institute for Cognitive Science."
+            },
+            {
+              "key": "CR29",
+              "series-title": "Technical Report",
+              "volume-title": "Reinforcement-learning connectionist systems",
+              "author": "R.J. Williams",
+              "year": "1987",
+              "unstructured": "Williams, R.J. (1987a).Reinforcement-learning connectionist systems. (Technical Report NU-CCS-87-3). Boston, MA: Northeastern University, College of Computer Science."
+            },
+            {
+              "key": "CR30",
+              "unstructured": "Williams, R.J. (1987b). A class of gradient-estimating algorithms for reinforcement learning in neural networks.Proceedings of the First Annual International Conference on Neural Networks, Vol. II (pp. 601?608). San Diego, CA."
+            },
+            {
+              "key": "CR31",
+              "doi-asserted-by": "crossref",
+              "unstructured": "Williams, R.J. (1988a). On the use of backpropagation in associative reinforcement learning.Proceedings of the Second Annual International Conference on Neural Networks, Vol. I (pp. 263?270). San Diego, CA.",
+              "DOI": "10.1109/ICNN.1988.23856"
+            },
+            {
+              "key": "CR32",
+              "series-title": "Technical Report",
+              "volume-title": "Toward a theory of reinforcement-learning connectionist systems",
+              "author": "R.J. Williams",
+              "year": "1988",
+              "unstructured": "Williams, R.J. (1988b).Toward a theory of reinforcement-learning connectionist systems. (Technical Report NU-CCS-88-3). Boston, MA: Northeastern University, College of Computer Science."
+            },
+            {
+              "key": "CR33",
+              "doi-asserted-by": "crossref",
+              "first-page": "241",
+              "DOI": "10.1080/09540099108946587",
+              "volume": "3",
+              "author": "R.J. Williams",
+              "year": "1991",
+              "unstructured": "Williams, R.J. & Peng, J. (1991). Function optimization using connectionist reinforcement learning algorithms.Connection Science, 3, 241?268.",
+              "journal-title": "Connection Science"
+            }
+          ],
+          "container-title": "Machine Learning",
+          "original-title": [],
+          "language": "en",
+          "link": [
+            {
+              "URL": "http://link.springer.com/content/pdf/10.1007/BF00992696.pdf",
+              "content-type": "application/pdf",
+              "content-version": "vor",
+              "intended-application": "text-mining"
+            },
+            {
+              "URL": "http://link.springer.com/article/10.1007/BF00992696/fulltext.html",
+              "content-type": "text/html",
+              "content-version": "vor",
+              "intended-application": "text-mining"
+            },
+            {
+              "URL": "http://link.springer.com/content/pdf/10.1007/BF00992696",
+              "content-type": "unspecified",
+              "content-version": "vor",
+              "intended-application": "similarity-checking"
+            }
+          ],
+          "deposited": {
+            "date-parts": [
+              [
+                2020,
+                4,
+                5
+              ]
+            ],
+            "date-time": "2020-04-05T08:10:57Z",
+            "timestamp": 1586074257000
+          },
+          "score": 1,
+          "resource": {
+            "primary": {
+              "URL": "http://link.springer.com/10.1007/BF00992696"
+            }
+          },
+          "subtitle": [],
+          "short-title": [],
+          "issued": {
+            "date-parts": [
+              [
+                1992,
+                5
+              ]
+            ]
+          },
+          "references-count": 33,
+          "journal-issue": {
+            "issue": "3-4",
+            "published-print": {
+              "date-parts": [
+                [
+                  1992,
+                  5
+                ]
+              ]
+            }
+          },
+          "alternative-id": [
+            "BF00992696"
+          ],
+          "URL": "http://dx.doi.org/10.1007/BF00992696",
+          "relation": {},
+          "ISSN": [
+            "0885-6125",
+            "1573-0565"
+          ],
+          "subject": [],
+          "container-title-short": "Mach Learn",
+          "published": {
+            "date-parts": [
+              [
+                1992,
+                5
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "silver:dpg:2014": {
+      "entry_id": "silver:dpg:2014",
+      "type": "inproceedings",
+      "status": "valid",
+      "checks": {
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {}
+    },
+    "sutton:td_learning:1984": {
+      "entry_id": "sutton:td_learning:1984",
+      "type": "phdthesis",
+      "status": "valid",
+      "checks": {
+        "searxng": "\u2705 Found 10 results (matched in top 3)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 90,
+      "metadata": {}
+    },
+    "tsitsiklis:td_convergence:1997": {
+      "entry_id": "tsitsiklis:td_convergence:1997",
+      "type": "article",
+      "status": "valid",
+      "checks": {
+        "doi_format": "\u2705 DOI format looks valid",
+        "doi_resolution": "\u2705 DOI resolves correctly",
+        "searxng": "\u26a0\ufe0f Found 10 results (no clear match)"
+      },
+      "warnings": [],
+      "errors": [],
+      "confidence": 70,
+      "metadata": {
+        "doi": {
+          "indexed": {
+            "date-parts": [
+              [
+                2025,
+                10,
+                8
+              ]
+            ],
+            "date-time": "2025-10-08T22:18:54Z",
+            "timestamp": 1759961934041
+          },
+          "reference-count": 24,
+          "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+          "issue": "5",
+          "license": [
+            {
+              "start": {
+                "date-parts": [
+                  [
+                    1997,
+                    5,
+                    1
+                  ]
+                ],
+                "date-time": "1997-05-01T00:00:00Z",
+                "timestamp": 862444800000
+              },
+              "content-version": "vor",
+              "delay-in-days": 0,
+              "URL": "https://ieeexplore.ieee.org/Xplorehelp/downloads/license-information/IEEE.html"
+            }
+          ],
+          "content-domain": {
+            "domain": [],
+            "crossmark-restriction": false
+          },
+          "published-print": {
+            "date-parts": [
+              [
+                1997,
+                5
+              ]
+            ]
+          },
+          "DOI": "10.1109/9.580874",
+          "type": "journal-article",
+          "created": {
+            "date-parts": [
+              [
+                2002,
+                8,
+                24
+              ]
+            ],
+            "date-time": "2002-08-24T20:40:30Z",
+            "timestamp": 1030221630000
+          },
+          "page": "674-690",
+          "source": "Crossref",
+          "is-referenced-by-count": 699,
+          "title": "An analysis of temporal-difference learning with function approximation",
+          "prefix": "10.1109",
+          "volume": "42",
+          "author": [
+            {
+              "given": "J.N.",
+              "family": "Tsitsiklis",
+              "sequence": "first",
+              "affiliation": []
+            },
+            {
+              "given": "B.",
+              "family": "Van Roy",
+              "sequence": "additional",
+              "affiliation": []
+            }
+          ],
+          "member": "263",
+          "reference": [
+            {
+              "key": "ref1",
+              "volume-title": "Dynamic Programming and Optimal Control.",
+              "author": "Bertsekas",
+              "year": "1995"
+            },
+            {
+              "key": "ref2",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1007/BF00115009"
+            },
+            {
+              "key": "ref4",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1007/BF00993306"
+            },
+            {
+              "key": "ref6",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1007/BF00993978"
+            },
+            {
+              "key": "ref7",
+              "volume-title": "Incremental learning of evaluation functions for absorbing Markov chains: New methods and theorems",
+              "author": "Gurvits",
+              "year": "1994"
+            },
+            {
+              "key": "ref9",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1007/BF00114725"
+            },
+            {
+              "key": "ref11",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1016/B978-1-55860-377-6.50040-2"
+            },
+            {
+              "key": "ref12",
+              "article-title": "Reinforcement learning with soft state aggregation",
+              "volume-title": "Advances in Neural Information Processing Systems",
+              "volume": "7",
+              "author": "Tesauro",
+              "year": "1995"
+            },
+            {
+              "key": "ref14",
+              "article-title": "Generalization in reinforcement learning: Safely approximating the value function",
+              "volume-title": "Advances in Neural Information Processing Systems",
+              "volume": "7",
+              "author": "Boyan",
+              "year": "1995"
+            },
+            {
+              "key": "ref15",
+              "article-title": "On the virtues of linear learning and trajectory distributions",
+              "volume-title": "Proc. Wkshp. Value Function Approximation, Mach. Learning Conf.",
+              "author": "Sutton",
+              "year": "1995"
+            },
+            {
+              "key": "ref18",
+              "volume-title": "Mean-field analysis for batched TD(\n$\\lambda$\n                     )",
+              "author": "Pineda",
+              "year": "1996"
+            },
+            {
+              "key": "ref20",
+              "volume-title": "An Introduction to Queueing Networks.",
+              "author": "Walrand",
+              "year": "1988"
+            },
+            {
+              "key": "ref22",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.2307/3214502"
+            },
+            {
+              "key": "ref23",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1162/neco.1995.7.2.270"
+            },
+            {
+              "key": "ref24",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1007/BF00114726"
+            },
+            {
+              "key": "ref25",
+              "article-title": "Generalization in reinforcement learning: Successful examples using sparse coarse coding",
+              "volume-title": "Advances in Neural Information Processing Systems",
+              "volume": "8",
+              "author": "Touretzky",
+              "year": "1996"
+            },
+            {
+              "key": "ref3",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1007/BF00992698"
+            },
+            {
+              "key": "ref5",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1162/neco.1994.6.6.1185"
+            },
+            {
+              "key": "ref8",
+              "first-page": "341",
+              "article-title": "The convergence of TD(\n$\\lambda$\n            ) for general\n$\\lambda$",
+              "volume-title": "Mach. Learning",
+              "volume": "8",
+              "author": "Dayan",
+              "year": "1992"
+            },
+            {
+              "key": "ref10",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1007/BF00114724"
+            },
+            {
+              "key": "ref13",
+              "article-title": "Residual algorithms: Reinforcement learning with function approximation",
+              "volume-title": "Machine Learning: Proceedings 12th Int. Conf.",
+              "author": "Prieditis",
+              "year": "1995"
+            },
+            {
+              "key": "ref16",
+              "volume-title": "Neuro-Dynamic Programming.",
+              "author": "Bertsekas",
+              "year": "1996"
+            },
+            {
+              "key": "ref19",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.1007/978-3-642-75894-2"
+            },
+            {
+              "key": "ref21",
+              "doi-asserted-by": "publisher",
+              "DOI": "10.2307/1427569"
+            }
+          ],
+          "container-title": "IEEE Transactions on Automatic Control",
+          "original-title": [],
+          "link": [
+            {
+              "URL": "http://xplorestaging.ieee.org/ielx4/9/12616/00580874.pdf?arnumber=580874",
+              "content-type": "unspecified",
+              "content-version": "vor",
+              "intended-application": "similarity-checking"
+            }
+          ],
+          "deposited": {
+            "date-parts": [
+              [
+                2024,
+                1,
+                23
+              ]
+            ],
+            "date-time": "2024-01-23T22:38:09Z",
+            "timestamp": 1706049489000
+          },
+          "score": 1,
+          "resource": {
+            "primary": {
+              "URL": "http://ieeexplore.ieee.org/document/580874/"
+            }
+          },
+          "subtitle": [],
+          "short-title": [],
+          "issued": {
+            "date-parts": [
+              [
+                1997,
+                5
+              ]
+            ]
+          },
+          "references-count": 24,
+          "journal-issue": {
+            "issue": "5"
+          },
+          "URL": "http://dx.doi.org/10.1109/9.580874",
+          "relation": {},
+          "ISSN": [
+            "0018-9286"
+          ],
+          "subject": [],
+          "container-title-short": "IEEE Trans. Automat. Contr.",
+          "published": {
+            "date-parts": [
+              [
+                1997,
+                5
+              ]
+            ]
+          }
+        }
+      }
+    }
+  }
+}
