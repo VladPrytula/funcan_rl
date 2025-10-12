@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}{{ game_name }} - RL Toolkit{% endblock %}
+
+{% block header %}{{ game_name }}: {{ algorithm_name }}{% endblock %}
+
+{% block content %}
+<div class="game-container">
+    <!-- Theory Connection -->
+    <div class="theory-note">
+        <strong>Theory:</strong> {% block theory_connection %}{% endblock %}
+    </div>
+
+    <div class="game-layout">
+        <!-- Game Board (left side) -->
+        <div class="board-container">
+            <canvas id="gameCanvas" width="500" height="500"></canvas>
+            <div id="game-status" class="status-message">Your turn!</div>
+        </div>
+
+        <!-- Controls & Info (right side) -->
+        <div class="controls-container">
+            <h3>Controls</h3>
+            <button id="newGameBtn" class="btn btn-primary">New Game</button>
+            <button id="undoBtn" class="btn btn-secondary">Undo Move</button>
+
+            <h3>Game Info</h3>
+            <div id="game-info">
+                <p><strong>Moves:</strong> <span id="move-count">0</span></p>
+                <p><strong>Current Player:</strong> <span id="current-player">You (Player 1)</span></p>
+            </div>
+
+            <!-- Algorithm Stats (if applicable) -->
+            {% if show_ai_stats %}
+            <h3>AI Statistics</h3>
+            <div id="ai-stats">
+                <p><strong>Simulations:</strong> <span id="num-simulations">-</span></p>
+                <p><strong>Search Time:</strong> <span id="search-time">-</span></p>
+                <p><strong>Best Move:</strong> <span id="best-move">-</span></p>
+            </div>
+            {% endif %}
+
+            <!-- Theory Reference -->
+            <div class="theory-reference">
+                <h4>Relevant Theorems</h4>
+                {% block theorem_references %}
+                <p>See textbook for complete proofs.</p>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .game-layout {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .board-container {
+        flex: 2;
+    }
+
+    .controls-container {
+        flex: 1;
+        background: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    canvas {
+        border: 2px solid #333;
+        border-radius: 8px;
+        cursor: pointer;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .status-message {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 15px;
+        padding: 10px;
+        background: #e8f5e9;
+        border-radius: 4px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        margin: 5px 0;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .btn-primary {
+        background: #4CAF50;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: #45a049;
+    }
+
+    .btn-secondary {
+        background: #2196F3;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background: #0b7dda;
+    }
+
+    #game-info, #ai-stats {
+        background: white;
+        padding: 10px;
+        border-radius: 4px;
+        margin: 10px 0;
+    }
+
+    .theory-reference {
+        margin-top: 20px;
+        padding: 15px;
+        background: #fff9e6;
+        border-left: 4px solid #ffc107;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Game-specific JavaScript will be loaded here by child templates -->
+{% endblock %}

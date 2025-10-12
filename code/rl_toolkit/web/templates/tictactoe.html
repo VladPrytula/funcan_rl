@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe - AI Thinking Visualization</title>
+    <style>
+        /*
+         * Tic-Tac-Toe Web Interface with AI Thinking Visualization
+         *
+         * Features:
+         * - Dynamic board sizing (3×3, 4×4, 5×5)
+         * - Real-time AI thinking display
+         * - Candidate move evaluations with color coding
+         * - Educational content explaining AI strategies
+         * - Responsive design for mobile/tablet/desktop
+         *
+         * Theory Connection (Week 24):
+         * This interface visualizes minimax search and value iteration,
+         * making abstract RL concepts tangible for students.
+         */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* AI Mode Badge with Info Icon */
+        .ai-mode {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8em;
+            font-weight: 600;
+            cursor: help;
+            position: relative;
+        }
+
+        .ai-optimal {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .ai-strong {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .info-icon {
+            cursor: help;
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+
+        /* Tooltip for AI Mode */
+        .ai-mode:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-weight: normal;
+            white-space: nowrap;
+            z-index: 1000;
+            margin-bottom: 5px;
+        }
+
+        /* Configuration Section */
+        .config-section {
+            background: #f9fafb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .config-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+
+        .config-label {
+            font-weight: 600;
+            color: #333;
+            min-width: 100px;
+        }
+
+        select, .toggle-switch {
+            padding: 8px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            background: white;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Toggle Switch for Settings */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+            padding: 0;
+            border-radius: 13px;
+            background: #e5e7eb;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: #667eea;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            transition: transform 0.3s;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(24px);
+        }
+
+        .toggle-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Status Display */
+        .status {
+            text-align: center;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .status.x-turn { color: #3b82f6; }
+        .status.o-turn { color: #ef4444; }
+        .status.game-over {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        /* Board */
+        .board {
+            display: grid;
+            gap: 8px;
+            margin: 30px auto;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .cell {
+            aspect-ratio: 1;
+            background: #f3f4f6;
+            border: 3px solid #e5e7eb;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            position: relative;
+        }
+
+        .cell:hover:not(.filled) {
+            background: #e5e7eb;
+            transform: scale(1.05);
+        }
+
+        .cell.filled {
+            cursor: not-allowed;
+        }
+
+        .cell.x { color: #3b82f6; }
+        .cell.o { color: #ef4444; }
+
+        .cell.winning {
+            background: #fef3c7;
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Candidate Value Overlay */
+        .move-value {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.7em;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            opacity: 0.9;
+            z-index: 10;
+        }
+
+        .move-value.best-move {
+            animation: glow 1s infinite;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #e5e7eb;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d1d5db;
+        }
+
+        /* Statistics Panel */
+        .stats {
+            background: #f9fafb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+
+        .stats-label {
+            color: #666;
+        }
+
+        .stats-value {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Thinking Overlay Modal */
+        .thinking-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .thinking-modal {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .thinking-modal h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .strategy-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -500px 0; }
+            100% { background-position: 500px 0; }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            color: #666;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .best-move-indicator {
+            text-align: center;
+            padding: 10px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+
+        /* Educational Section */
+        .educational-section {
+            margin-top: 20px;
+            border-top: 2px solid #e5e7eb;
+            padding-top: 20px;
+        }
+
+        .expand-btn {
+            width: 100%;
+            padding: 12px;
+            background: #f3f4f6;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s;
+        }
+
+        .expand-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .expand-icon {
+            transition: transform 0.3s;
+        }
+
+        .expand-icon.expanded {
+            transform: rotate(90deg);
+        }
+
+        .education-content {
+            padding: 20px 0;
+        }
+
+        .strategy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .strategy-table th,
+        .strategy-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .strategy-table th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .strategy-table td {
+            color: #666;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .badge.optimal {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .badge.strong {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .explanation {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .explanation h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .explanation p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        /* Thinking animation */
+        .thinking {
+            display: inline-block;
+            animation: thinking 1s infinite;
+        }
+
+        @keyframes thinking {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3;  }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .strategy-table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Tic-Tac-Toe</h1>
+        <div class="subtitle">
+            Play against a minimax AI
+            <span class="ai-mode" id="ai-mode" data-tooltip="Click for details">
+                <span id="ai-mode-text">Optimal</span>
+                <span class="info-icon">ⓘ</span>
+            </span>
+        </div>
+
+        <!-- Configuration Section -->
+        <div class="config-section">
+            <div class="config-row">
+                <span class="config-label">Board Size:</span>
+                <select id="board-size" onchange="handleBoardSizeChange()">
+                    <option value="3">3×3 (Classic)</option>
+                    <option value="4">4×4 (Challenging)</option>
+                    <option value="5">5×5 (Hard)</option>
+                </select>
+            </div>
+            <div class="config-row">
+                <span class="config-label">First Player:</span>
+                <select id="first-player" onchange="toggleStarter()">
+                    <option value="human">Human (X)</option>
+                    <option value="ai">AI (X)</option>
+                </select>
+            </div>
+            <div class="config-row">
+                <span class="config-label">Show Candidate Moves:</span>
+                <div class="toggle-container">
+                    <div class="toggle-switch" id="show-candidates-toggle" onclick="toggleCandidates()">
+                        <div class="toggle-slider"></div>
+                    </div>
+                    <span class="toggle-label" id="candidates-label">Off</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Display -->
+        <div class="status" id="status">Click to start: You are X</div>
+
+        <!-- Game Board -->
+        <div class="board" id="board"></div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button class="btn-primary" onclick="resetGame()">New Game</button>
+        </div>
+
+        <!-- Statistics Panel -->
+        <div class="stats" id="stats" style="display: none;">
+            <div class="stats-row">
+                <span class="stats-label">Last AI search:</span>
+                <span class="stats-value" id="nodes-explored">-</span>
+            </div>
+            <div class="stats-row">
+                <span class="stats-label">Cache hits:</span>
+                <span class="stats-value" id="cache-hits">-</span>
+            </div>
+            <div class="stats-row">
+                <span class="stats-label">Heuristic evals:</span>
+                <span class="stats-value" id="heuristic-evals">-</span>
+            </div>
+            <div class="stats-row">
+                <span class="stats-label">Computation time:</span>
+                <span class="stats-value" id="compute-time">-</span>
+            </div>
+        </div>
+
+        <!-- Educational Section -->
+        <div class="educational-section">
+            <button class="expand-btn" onclick="toggleEducation()">
+                <span class="expand-icon" id="expand-icon">▸</span>
+                <span>How does the AI work?</span>
+            </button>
+            <div class="education-content" id="education-content" style="display: none;">
+                <table class="strategy-table">
+                    <thead>
+                        <tr>
+                            <th>Board</th>
+                            <th>Strategy</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>3×3</td>
+                            <td><span class="badge optimal">OPTIMAL</span></td>
+                            <td>
+                                • ~5,000 states<br>
+                                • Searches ALL moves<br>
+                                • Proven never to lose<br>
+                                • ~100ms compute time
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4×4</td>
+                            <td><span class="badge strong">STRONG</span></td>
+                            <td>
+                                • ~4 million states<br>
+                                • Depth limit: 8 moves<br>
+                                • Heuristic evaluation<br>
+                                • Very strong play
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5×5</td>
+                            <td><span class="badge strong">STRONG</span></td>
+                            <td>
+                                • ~430 billion states<br>
+                                • Depth limit: 4 moves<br>
+                                • Heuristic evaluation<br>
+                                • Good strategic play
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="explanation">
+                    <h4>What's a "heuristic"?</h4>
+                    <p>
+                        Since the AI can't search billions of positions, it <em>estimates</em>
+                        position value by counting potential winning lines, threats, and control.
+                    </p>
+                    <p>
+                        Think of it like chess intuition - you evaluate positions without
+                        calculating every possible game to the end.
+                    </p>
+                </div>
+
+                <div class="explanation">
+                    <h4>Theory Connection (Week 24)</h4>
+                    <p>
+                        This AI uses <strong>minimax search</strong>, which is equivalent to
+                        value iteration on a game tree. The algorithm computes the optimal
+                        value function V*(s) via backward induction.
+                    </p>
+                    <p>
+                        When you enable "Show Candidate Moves", you're seeing V*(s,a) for
+                        all actions a, demonstrating the Bellman optimality principle:
+                        π*(s) = argmax_a V*(s,a)
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <strong>Theory:</strong> Minimax search with alpha-beta pruning and dynamic programming<br>
+            3×3: Provably optimal (exact search) | 4×4+: Strong play (depth-limited heuristic search)
+        </div>
+    </div>
+
+    <script>
+        /*
+         * Tic-Tac-Toe Game Logic with AI Thinking Visualization
+         *
+         * Features:
+         * - Dynamic board rendering (3×3, 4×4, 5×5)
+         * - Real-time AI move computation
+         * - Optional candidate move visualization
+         * - Thinking overlay with live statistics
+         * - Educational content
+         *
+         * API Endpoints:
+         * - POST /tictactoe/move: Get AI move
+         * - POST /tictactoe/candidates: Get all candidate evaluations
+         */
+
+        // Game State
+        let gameState = {
+            board: [],
+            boardSize: 3,
+            winLength: 3,
+            currentPlayer: 1, // 1 = X (human), -1 = O (AI)
+            humanStarts: true,
+            gameOver: false,
+            winningLine: null,
+            showCandidates: false
+        };
+
+        /**
+         * Initialize the game with current settings.
+         * Resets board, updates UI, and starts AI if needed.
+         */
+        function initGame() {
+            const size = gameState.boardSize;
+            gameState.board = new Array(size * size).fill(0);
+            gameState.currentPlayer = gameState.humanStarts ? 1 : -1;
+            gameState.gameOver = false;
+            gameState.winningLine = null;
+
+            renderBoard();
+            updateStatus();
+            updateAIMode();
+            clearCandidateValues();
+
+            // If AI starts, make first move
+            if (!gameState.humanStarts) {
+                setTimeout(makeAIMove, 500);
+            }
+        }
+
+        /**
+         * Render the board dynamically based on board size.
+         * Creates grid cells and adds event listeners.
+         */
+        function renderBoard() {
+            const boardDiv = document.getElementById('board');
+            const size = gameState.boardSize;
+
+            // Update grid layout
+            boardDiv.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+
+            // Calculate cell font size based on board size
+            const fontSize = size === 3 ? '3em' : size === 4 ? '2.5em' : '2em';
+
+            // Clear and create cells
+            boardDiv.innerHTML = '';
+            for (let i = 0; i < size * size; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                cell.dataset.index = i;
+                cell.style.fontSize = fontSize;
+
+                const value = gameState.board[i];
+                cell.textContent = value === 1 ? 'X' : value === -1 ? 'O' : '';
+
+                if (value !== 0) {
+                    cell.classList.add('filled');
+                    cell.classList.add(value === 1 ? 'x' : 'o');
+                }
+
+                // Highlight winning line
+                if (gameState.winningLine && gameState.winningLine.includes(i)) {
+                    cell.classList.add('winning');
+                }
+
+                cell.addEventListener('click', handleCellClick);
+                boardDiv.appendChild(cell);
+            }
+        }
+
+        /**
+         * Update status message based on game state.
+         */
+        function updateStatus() {
+            const statusDiv = document.getElementById('status');
+
+            if (gameState.gameOver) {
+                const winner = checkWinner();
+                statusDiv.className = 'status game-over';
+
+                if (winner === 1) {
+                    statusDiv.textContent = '🎉 You won! (Impressive!)';
+                } else if (winner === -1) {
+                    statusDiv.textContent = '🤖 AI wins!';
+                } else {
+                    statusDiv.textContent = '🤝 Draw - well played!';
+                }
+            } else {
+                if (gameState.currentPlayer === 1) {
+                    statusDiv.className = 'status x-turn';
+                    statusDiv.textContent = '🧑 Your turn (X)';
+                } else {
+                    statusDiv.className = 'status o-turn';
+                    statusDiv.innerHTML = '🤖 AI thinking<span class="thinking">...</span>';
+                }
+            }
+        }
+
+        /**
+         * Update AI mode badge (Optimal vs Strong).
+         */
+        function updateAIMode() {
+            const modeSpan = document.getElementById('ai-mode');
+            const modeText = document.getElementById('ai-mode-text');
+            const size = gameState.boardSize;
+
+            if (size === 3) {
+                modeText.textContent = 'Optimal';
+                modeSpan.className = 'ai-mode ai-optimal';
+                modeSpan.setAttribute('data-tooltip', 'Exact search - AI never loses!');
+            } else {
+                modeText.textContent = 'Strong';
+                modeSpan.className = 'ai-mode ai-strong';
+                const depth = size === 4 ? '8' : '4';
+                modeSpan.setAttribute('data-tooltip', `Depth-${depth} search with heuristic evaluation`);
+            }
+        }
+
+        /**
+         * Handle human player clicking a cell.
+         */
+        async function handleCellClick(event) {
+            if (gameState.gameOver || gameState.currentPlayer !== 1) return;
+
+            const cell = event.target;
+            const index = parseInt(cell.dataset.index);
+
+            if (gameState.board[index] !== 0) return;
+
+            // Human move
+            gameState.board[index] = 1;
+            gameState.currentPlayer = -1;
+            renderBoard();
+
+            // Check game over
+            if (checkGameOver()) {
+                gameState.gameOver = true;
+                updateStatus();
+                return;
+            }
+
+            updateStatus();
+
+            // AI move
+            setTimeout(makeAIMove, 500);
+        }
+
+        /**
+         * Make AI move with optional thinking visualization.
+         */
+        async function makeAIMove() {
+            const startTime = performance.now();
+
+            try {
+                // If showing candidates, get all evaluations first
+                if (gameState.showCandidates) {
+                    await showCandidateEvaluations();
+                }
+
+                // Get AI move
+                const response = await fetch('/tictactoe/move', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        board: gameState.board,
+                        board_size: gameState.boardSize,
+                        win_length: gameState.winLength
+                    })
+                });
+
+                const data = await response.json();
+                const endTime = performance.now();
+
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                    return;
+                }
+
+                // AI makes move
+                gameState.board[data.move] = -1;
+                gameState.currentPlayer = 1;
+                renderBoard();
+
+                // Update stats
+                document.getElementById('stats').style.display = 'block';
+                document.getElementById('nodes-explored').textContent =
+                    data.stats.nodes_explored.toLocaleString() + ' nodes';
+                document.getElementById('cache-hits').textContent =
+                    data.stats.cache_hits.toLocaleString();
+                document.getElementById('heuristic-evals').textContent =
+                    data.stats.heuristic_evals.toLocaleString();
+                document.getElementById('compute-time').textContent =
+                    (endTime - startTime).toFixed(0) + ' ms';
+
+                // Check game over
+                if (checkGameOver()) {
+                    gameState.gameOver = true;
+                }
+
+                updateStatus();
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to get AI move. Is the server running?');
+            }
+        }
+
+        /**
+         * Show candidate move evaluations with color coding.
+         */
+        async function showCandidateEvaluations() {
+            try {
+                const response = await fetch('/tictactoe/candidates', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        board: gameState.board,
+                        board_size: gameState.boardSize,
+                        win_length: gameState.winLength
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    console.error('Candidates error:', data.error);
+                    return;
+                }
+
+                // Clear previous values
+                clearCandidateValues();
+
+                // Display candidate values
+                for (const [moveIdx, evalData] of Object.entries(data.candidates)) {
+                    const cell = document.querySelector(`[data-index="${moveIdx}"]`);
+                    if (!cell || cell.classList.contains('filled')) continue;
+
+                    // Create value overlay
+                    const valueLabel = document.createElement('div');
+                    valueLabel.className = 'move-value';
+                    valueLabel.textContent = evalData.value.toFixed(2);
+                    valueLabel.title = evalData.reasoning;
+
+                    // Color code based on value
+                    const hue = (evalData.value + 1) * 60; // -1→0° (red), 0→60° (yellow), +1→120° (green)
+                    valueLabel.style.backgroundColor = `hsl(${hue}, 70%, 85%)`;
+                    valueLabel.style.color = `hsl(${hue}, 70%, 25%)`;
+
+                    // Mark best move
+                    if (evalData.is_best) {
+                        valueLabel.classList.add('best-move');
+                    }
+
+                    cell.appendChild(valueLabel);
+                }
+
+            } catch (error) {
+                console.error('Error fetching candidates:', error);
+            }
+        }
+
+        /**
+         * Clear all candidate value overlays from board.
+         */
+        function clearCandidateValues() {
+            document.querySelectorAll('.move-value').forEach(el => el.remove());
+        }
+
+        /**
+         * Generate all possible winning lines for current board.
+         */
+        function generateWinningLines() {
+            const size = gameState.boardSize;
+            const k = gameState.winLength;
+            const lines = [];
+
+            // Rows
+            for (let row = 0; row < size; row++) {
+                for (let col = 0; col <= size - k; col++) {
+                    const line = [];
+                    for (let i = 0; i < k; i++) {
+                        line.push(row * size + col + i);
+                    }
+                    lines.push(line);
+                }
+            }
+
+            // Columns
+            for (let col = 0; col < size; col++) {
+                for (let row = 0; row <= size - k; row++) {
+                    const line = [];
+                    for (let i = 0; i < k; i++) {
+                        line.push((row + i) * size + col);
+                    }
+                    lines.push(line);
+                }
+            }
+
+            // Diagonals (top-left to bottom-right)
+            for (let row = 0; row <= size - k; row++) {
+                for (let col = 0; col <= size - k; col++) {
+                    const line = [];
+                    for (let i = 0; i < k; i++) {
+                        line.push((row + i) * size + col + i);
+                    }
+                    lines.push(line);
+                }
+            }
+
+            // Anti-diagonals (top-right to bottom-left)
+            for (let row = 0; row <= size - k; row++) {
+                for (let col = k - 1; col < size; col++) {
+                    const line = [];
+                    for (let i = 0; i < k; i++) {
+                        line.push((row + i) * size + col - i);
+                    }
+                    lines.push(line);
+                }
+            }
+
+            return lines;
+        }
+
+        /**
+         * Check if there's a winner.
+         * Returns 1, -1, or null.
+         */
+        function checkWinner() {
+            const lines = generateWinningLines();
+
+            for (const line of lines) {
+                const firstValue = gameState.board[line[0]];
+                if (firstValue !== 0 && line.every(idx => gameState.board[idx] === firstValue)) {
+                    gameState.winningLine = line;
+                    return firstValue;
+                }
+            }
+
+            return null;
+        }
+
+        /**
+         * Check if game is over (win or draw).
+         */
+        function checkGameOver() {
+            if (checkWinner() !== null) return true;
+            return gameState.board.every(cell => cell !== 0); // Draw
+        }
+
+        /**
+         * Reset game with current settings.
+         */
+        function resetGame() {
+            initGame();
+        }
+
+        /**
+         * Toggle first player setting.
+         */
+        function toggleStarter() {
+            const select = document.getElementById('first-player');
+            gameState.humanStarts = (select.value === 'human');
+            initGame();
+        }
+
+        /**
+         * Handle board size change.
+         */
+        function handleBoardSizeChange() {
+            const select = document.getElementById('board-size');
+            gameState.boardSize = parseInt(select.value);
+            gameState.winLength = gameState.boardSize; // Default: k = n
+            initGame();
+        }
+
+        /**
+         * Toggle candidate evaluations display.
+         */
+        function toggleCandidates() {
+            const toggle = document.getElementById('show-candidates-toggle');
+            const label = document.getElementById('candidates-label');
+
+            toggle.classList.toggle('active');
+            gameState.showCandidates = toggle.classList.contains('active');
+
+            label.textContent = gameState.showCandidates ? 'On' : 'Off';
+
+            // Clear candidates if turning off
+            if (!gameState.showCandidates) {
+                clearCandidateValues();
+            }
+        }
+
+        /**
+         * Toggle educational content visibility.
+         */
+        function toggleEducation() {
+            const content = document.getElementById('education-content');
+            const icon = document.getElementById('expand-icon');
+
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                icon.classList.add('expanded');
+            } else {
+                content.style.display = 'none';
+                icon.classList.remove('expanded');
+            }
+        }
+
+        // Initialize game on load
+        initGame();
+    </script>
+</body>
+</html>

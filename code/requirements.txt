@@ -1,0 +1,40 @@
+# Core numerical computing
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Deep learning frameworks
+torch>=2.0.0
+jax>=0.4.0
+jaxlib>=0.4.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Web interface
+flask>=2.3.0
+flask-cors>=4.0.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Type checking
+mypy>=1.4.0
+
+# Code formatting
+black>=23.7.0
+
+# Progress bars
+tqdm>=4.65.0
+
+# Jupyter notebooks
+jupyter>=1.0.0
+ipykernel>=6.25.0
+
+# Game visualization (optional)
+pygame>=2.5.0
+
+# Logging
+tensorboard>=2.13.0
+wandb>=0.15.0  # Optional: for experiment tracking
