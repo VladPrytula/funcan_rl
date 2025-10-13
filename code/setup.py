@@ -6,12 +6,12 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="rl-toolkit",
     version="0.1.0",
-    author="",
-    author_email="noreply@example.com",
+    author="Vladyslav Prytula",
+    author_email="vladyslav.prytula@gmail.com",
     description="Reinforcement Learning from Theory to Practice: Companion Code",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/rl-toolkit",  # Update with actual URL
+    url="https://github.com/VladPrytula/funcan_rl",  # Update with actual URL
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

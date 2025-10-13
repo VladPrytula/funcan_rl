@@ -472,11 +472,11 @@ MIT License - See [LICENSE](LICENSE) for details
 **Citation:**
 ```bibtex
 @misc{measure-to-alphazero-2025,
-  author = {[Your Name]},
+  author = {Vladyslav Prytula},
   title = {From Measure Theory to AlphaZero: A 48-Week Journey},
   year = {2025},
   publisher = {GitHub},
-  url = {https://github.com/[your-username]/[repo-name]}
+  url = {https://github.com/VladPrytula/funcan_rl}
 }
 ```
 
