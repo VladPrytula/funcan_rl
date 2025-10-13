@@ -86,25 +86,25 @@ where $\limsup_{n} a_n = \lim_{k \to \infty} \sup_{n \ge k} a_n$ for sequences o
 
 ---
 
-## Exercise 2: $\sigma$-Finite and Semifinite Measures
+## Exercise 2: $\sigma"-Finite and Semifinite Measures
 
 ### Motivation
 
-Not all measures are created equal. The behavior of integrals and the validity of powerful convergence theorems depend critically on certain regularity properties. $\sigma$-Finiteness and semifiniteness are not mere technicalities—they determine when we can apply essential tools.
+Not all measures are created equal. The behavior of integrals and the validity of powerful convergence theorems depend critically on certain regularity properties. $\sigma"-Finiteness and semifiniteness are not mere technicalities—they determine when we can apply essential tools.
 
-**Where $\sigma$-finiteness is required in RL:**
+**Where $\sigma"-finiteness is required in RL:**
 
 1. **Fubini-Tonelli Theorem (Week 2):** For **stochastic policies** $\pi(a|s)$ (formalized Week 23), computing expectations over the joint state-action space $(s, a) \sim \rho(s) \pi(a|s)$—as in policy gradient objectives
    $$\mathbb{E}_{s \sim \rho, a \sim \pi(\cdot|s)}[\nabla \log \pi(a|s) Q(s,a)] = \int_{\mathcal{S}} \int_{\mathcal{A}} \nabla \log \pi(a|s) Q(s,a) \, \pi(da|s) \, \rho(ds)$$
-   requires Fubini-Tonelli to interchange integration order (from $\int_{\mathcal{S}} \int_{\mathcal{A}}$ to $\int_{\mathcal{A}} \int_{\mathcal{S}}$ when needed for derivations), which demands $\sigma$-finiteness of both $\mathcal{S}$ and $\mathcal{A}$ [@folland:real_analysis:1999, §2.4]. This is essential for deriving the policy gradient theorem (Week 37).
+   requires Fubini-Tonelli to interchange integration order (from $\int_{\mathcal{S}} \int_{\mathcal{A}}$ to $\int_{\mathcal{A}} \int_{\mathcal{S}}$ when needed for derivations), which demands $\sigma"-finiteness of both $\mathcal{S}$ and $\mathcal{A}$ [@folland:real_analysis:1999, §2.4]. This is essential for deriving the policy gradient theorem (Week 37).
 
-   **Note:** For **deterministic policies** $\pi: \mathcal{S} \to \mathcal{A}$, iterated integrals suffice, and $\sigma$-finiteness is not required for Fubini. The subtlety arises only for stochastic policies over joint $(s,a)$ spaces.
+   **Note:** For **deterministic policies** $\pi: \mathcal{S} \to \mathcal{A}$, the expectation reduces to a single integral over $\mathcal{S}$: $$\mathbb{E}_{s \sim \rho}[Q(s, \pi(s))] = \int_{\mathcal{S}} Q(s, \pi(s)) \, \rho(ds)$$ No product measure is needed, so $\sigma$-finiteness is not required. The subtlety arises only for stochastic policies over joint $(s,a)$ spaces.
 
-2. **Radon-Nikodym Theorem (Week 3):** Existence of probability densities—likelihood ratios for importance sampling (Week 40), policy gradient theorems [@sutton:policy_gradient:2000] (Week 37-38)—requires $\sigma$-finiteness [@folland:real_analysis:1999, §3.2].
+2. **Radon-Nikodym Theorem (Week 3):** Existence of probability densities—likelihood ratios for importance sampling (Week 40), policy gradient theorems [@sutton:policy_gradient:2000] (Week 37-38)—requires $\sigma"-finiteness [@folland:real_analysis:1999, §3.2].
 
 3. **Product Measures (Weeks 2-4):** Finite product measures are introduced in **Week 2** (Fubini-Tonelli). Constructing probability measures on **infinite** trajectory spaces $(\mathcal{S} \times \mathcal{A})^{\mathbb{N}}$ requires the Kolmogorov extension theorem (**Week 4** preview; full treatment in Week 10 for general state spaces).
 
-Most RL theory assumes $\sigma$-finite measure spaces (e.g., Lebesgue measure on $\mathbb{R}^n$ for continuous states, counting measure on finite/countable state spaces). Understanding the boundaries of this assumption clarifies when our theorems apply.
+Most RL theory assumes $\sigma"-finite measure spaces (e.g., Lebesgue measure on $\mathbb{R}^n$ for continuous states, counting measure on finite/countable state spaces). Understanding the boundaries of this assumption clarifies when our theorems apply.
 
 ### Core Theory
 
@@ -115,12 +115,12 @@ We recall key definitions from Day 1 §II-III:
 2.  (Countable Additivity) For any countable collection $\{A_n\}_{n=1}^{\infty}$ of pairwise disjoint sets in $\mathcal{F}$,
     $$ \mu\left(\bigcup_{n=1}^{\infty} A_n\right) = \sum_{n=1}^{\infty} \mu(A_n) $$
 
-**Definition 2.2 ($\sigma$-Finite Measure).** A measure $\mu$ on $(X, \mathcal{F})$ is **$\sigma$-finite** if there exists a countable collection $\{E_n\}_{n=1}^{\infty} \subseteq \mathcal{F}$ such that:
+**Definition 2.2 ($\sigma"-Finite Measure).** A measure $\mu$ on $(X, \mathcal{F})$ is **$\sigma"-finite** if there exists a countable collection $\{E_n\}_{n=1}^{\infty} \subseteq \mathcal{F}$ such that:
 $$ X = \bigcup_{n=1}^{\infty} E_n \quad \text{and} \quad \mu(E_n) < \infty \text{ for all } n \in \mathbb{N} $$
 
-In essence, a $\sigma$-finite space can be exhausted by a countable sequence of finite-measure "pieces."
+In essence, a $\sigma"-finite space can be exhausted by a countable sequence of finite-measure "pieces."
 
-**Example 2.1 (Lebesgue Measure on $\mathbb{R}^n$).** The standard Lebesgue measure $\lambda$ on $(\mathbb{R}^n, \mathcal{B}(\mathbb{R}^n))$ is $\sigma$-finite [@folland:real_analysis:1999, §1.4]. For $n=1$, write $\mathbb{R} = \bigcup_{k=1}^{\infty} [-k, k]$ with $\lambda([-k, k]) = 2k < \infty$. For general $n$, use $\mathbb{R}^n = \bigcup_{k=1}^{\infty} [-k, k]^n$ with $\lambda([-k,k]^n) = (2k)^n < \infty$. This is the canonical measure for continuous state spaces in RL.
+**Example 2.1 (Lebesgue Measure on $\mathbb{R}^n$).** The standard Lebesgue measure $\lambda$ on $(\mathbb{R}^n, \mathcal{B}(\mathbb{R}^n))$ is $\sigma"-finite [@folland:real_analysis:1999, §1.4]. For $n=1$, write $\mathbb{R} = \bigcup_{k=1}^{\infty} [-k, k]$ with $\lambda([-k, k]) = 2k < \infty$. For general $n$, use $\mathbb{R}^n = \bigcup_{k=1}^{\infty} [-k, k]^n$ with $\lambda([-k,k]^n) = (2k)^n < \infty$. This is the canonical measure for continuous state spaces in RL.
 
 **Definition 2.3 (Semifinite Measure).** A measure $\mu$ on $(X, \mathcal{F})$ is **semifinite** if for every set $A \in \mathcal{F}$ with $\mu(A) = \infty$, there exists a subset $B \in \mathcal{F}$ such that $B \subseteq A$ and $0 < \mu(B) < \infty$.
 
@@ -128,13 +128,13 @@ A semifinite measure does not permit "purely infinite" measurable sets that cont
 
 ### The Relationship Between Classifications
 
-**Proposition 2.1 (Proven in Day 1 FINAL §III.A).** Let $(X, \mathcal{F}, \mu)$ be a measure space. If $\mu$ is $\sigma$-finite, then $\mu$ is semifinite. However, the converse is not true: there exist semifinite measures that are not $\sigma$-finite.
+**Proposition 2.1 (Proven in Day 1 FINAL §III.A).** Let $(X, \mathcal{F}, \mu)$ be a measure space. If $\mu$ is $\sigma"-finite, then $\mu$ is semifinite. However, the converse is not true: there exist semifinite measures that are not $\sigma"-finite.
 
 The proof is given in Day 1 §III.A, Proposition 1.1. The key idea:
-- **$\sigma$-finite ⇒ semifinite:** Decompose any infinite-measure set $A$ using the $\sigma$-finite covering $X = \bigcup E_n$. By subadditivity, at least one $A \cap E_n$ has positive finite measure.
-- **Counterexample:** Counting measure on $\mathbb{R}$ (assigning $|A|$ to finite sets, $\infty$ otherwise) is semifinite but not $\sigma$-finite, since $\mathbb{R}$ cannot be covered by countably many finite sets.
+- **$\sigma"-finite ⇒ semifinite:** Decompose any infinite-measure set $A$ using the $\sigma"-finite covering $X = \bigcup E_n$. By subadditivity, at least one $A \cap E_n$ has positive finite measure.
+- **Counterexample:** Counting measure on $\mathbb{R}$ (assigning $|A|$ to finite sets, $\infty$ otherwise) is semifinite but not $\sigma"-finite, since $\mathbb{R}$ cannot be covered by countably many finite sets.
 
-**Remark.** The pathological counting measure on uncountable spaces is precisely the type of measure we avoid in RL by restricting to **Polish spaces** (complete separable metric spaces) with Radon measures (finite on compact sets). Standard RL state spaces—finite sets, $\mathbb{R}^n$, or Polish spaces like $[0,1]^{\infty}$—all admit natural $\sigma$-finite measures.
+**Remark.** The pathological counting measure on uncountable spaces is precisely the type of measure we avoid in RL by restricting to **Polish spaces** (complete separable metric spaces) with Radon measures (finite on compact sets). Standard RL state spaces—finite sets, $\mathbb{R}^n$, or Polish spaces like $[0,1]^{\infty}$—all admit natural $\sigma"-finite measures.
 
 ---
 
@@ -189,19 +189,17 @@ To prove $h$ is measurable, we must show $h^{-1}(B) \in \mathcal{F}$ for all $B 
 
 **Lemma 3.1 (Measurability Criterion via Generators).** Let $(X, \mathcal{F})$ and $(Y, \mathcal{G})$ be measurable spaces. Suppose $\mathcal{C} \subseteq 2^Y$ generates $\mathcal{G}$ (i.e., $\sigma(\mathcal{C}) = \mathcal{G}$). Then a function $\phi: X \to Y$ is measurable if and only if $\phi^{-1}(C) \in \mathcal{F}$ for every $C \in \mathcal{C}$.
 
-**Remark.** This lemma is a direct application of the **good sets principle** (also called the **Dynkin class method**), which is formalized rigorously in **Appendix A2.1** (Week 2, Day 2) via the π-λ theorem ([THM-2.2.A1]) and λ-systems ([DEF-2.2.A2]). The key insight: to prove a property holds for all sets in a generated σ-algebra $\sigma(\mathcal{C})$, it suffices to verify it for the generating class $\mathcal{C}$ and show that the collection of sets with the property forms a σ-algebra (or λ-system).
-
 *Proof of Lemma.* The "only if" direction is immediate: if $\phi$ is measurable and $\mathcal{C} \subseteq \mathcal{G}$, then $\phi^{-1}(C) \in \mathcal{F}$ for all $C \in \mathcal{C}$.
 
 For the "if" direction, we use the *good sets principle.* Define:
 $$ \mathcal{G}' = \{B \subseteq Y \mid \phi^{-1}(B) \in \mathcal{F}\} $$
 
-We claim $\mathcal{G}'$ is a $\sigma$-algebra:
+We claim $\mathcal{G}'$ is a $\sigma"-algebra:
 1. $Y \in \mathcal{G}'$ since $\phi^{-1}(Y) = X \in \mathcal{F}$.
 2. If $B \in \mathcal{G}'$, then $\phi^{-1}(B^c) = (\phi^{-1}(B))^c \in \mathcal{F}$ (since $\mathcal{F}$ is closed under complements), so $B^c \in \mathcal{G}'$.
 3. If $\{B_n\}_{n=1}^{\infty} \subseteq \mathcal{G}'$, then $\phi^{-1}(\bigcup_{n=1}^{\infty} B_n) = \bigcup_{n=1}^{\infty} \phi^{-1}(B_n) \in \mathcal{F}$ (since $\mathcal{F}$ is closed under countable unions), so $\bigcup_{n=1}^{\infty} B_n \in \mathcal{G}'$.
 
-By hypothesis, $\mathcal{C} \subseteq \mathcal{G}'$. Since $\mathcal{G}'$ is a $\sigma$-algebra containing $\mathcal{C}$, and $\mathcal{G} = \sigma(\mathcal{C})$ is the *smallest* such $\sigma$-algebra, we have $\mathcal{G} \subseteq \mathcal{G}'$. Thus for any $B \in \mathcal{G}$, we have $\phi^{-1}(B) \in \mathcal{F}$, proving $\phi$ is measurable. $\square$
+By hypothesis, $\mathcal{C} \subseteq \mathcal{G}'$. Since $\mathcal{G}'$ is a $\sigma"-algebra containing $\mathcal{C}$, and $\mathcal{G} = \sigma(\mathcal{C})$ is the *smallest* such $\sigma"-algebra, we have $\mathcal{G} \subseteq \mathcal{G}'$. Thus for any $B \in \mathcal{G}$, we have $\phi^{-1}(B) \in \mathcal{F}$, proving $\phi$ is measurable. $\square$
 
 *Proof of Proposition 3.2.*
 
@@ -253,7 +251,7 @@ Each neuron in a ReLU network introduces discontinuities on a hyperplane $\{x \i
 **Concrete example (DQN [@mnih:dqn:2015]):**
 
 In deep Q-learning:
-- States $s \in \mathcal{S}$ (e.g., $84 \times 84$ grayscale images) define a measurable space with Borel $\sigma$-algebra.
+- States $s \in \mathcal{S}$ (e.g., $84 \times 84$ grayscale images) define a measurable space with Borel $\sigma"-algebra.
 - The pixel representation $s \mapsto \text{pixels}(s) \in [0,255]^{84 \times 84}$ is measurable (identity map on a Borel space).
 - The Q-network $Q_\theta: [0,255]^{84 \times 84} \to \mathbb{R}^{|\mathcal{A}|}$ (convolutional layers + ReLU + linear layers) is Borel measurable.
 
@@ -280,7 +278,7 @@ We have developed three foundational tools:
 
 1. **$\limsup$ and $\liminf$ of sets** (Exercise 1) characterize asymptotic behavior of events, essential for analyzing exploration, recurrence, and almost-sure convergence in stochastic approximation (Weeks 34-39).
 
-2. **$\sigma$-Finite measures** (Exercise 2) enable application of Fubini-Tonelli (Week 2), Radon-Nikodym (Week 3), and product measure constructions (Weeks 2-4)—the theoretical bedrock for computing expectations in RL. We proved that $\sigma$-finiteness is stronger than semifiniteness and identified pathological counterexamples.
+2. **$\sigma"-Finite measures** (Exercise 2) enable application of Fubini-Tonelli (Week 2), Radon-Nikodym (Week 3), and product measure constructions (Weeks 2-4)—the theoretical bedrock for computing expectations in RL. We proved that $\sigma"-finiteness is stronger than semifiniteness and identified pathological counterexamples.
 
 3. **Measurability under operations** (Exercise 3) guarantees that:
    - Arithmetic combinations of measurable functions (like Bellman updates) remain measurable

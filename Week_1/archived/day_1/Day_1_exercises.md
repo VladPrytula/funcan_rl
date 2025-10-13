@@ -17,18 +17,10 @@ These exercises develop essential technical skills for working with measure spac
 
 In reinforcement learning, we constantly reason about asymptotic behavior: Does a learning algorithm visit every state infinitely often? Do policy iterates converge almost surely? Does exploration decay appropriately? The mathematical language for such questions is the $\limsup$ and $\liminf$ of sequences of sets.
 
-**Concrete RL application (Week 8 preview):**
-
-Consider a finite-state Markov chain with states $\{s_1, s_2, s_3\}$. Define:
-- $E_n = \{X_n = s_1\}$ (event: visit state $s_1$ at time $n$)
-- $\limsup E_n = \{\text{visit } s_1 \text{ infinitely often}\}$
-- $\liminf E_n = \{\text{eventually stay in } s_1 \text{ forever}\}$
-
-In RL, we care whether a policy $\pi$ ensures $\limsup_n \{S_n = s\}$ has probability 1 for all states $s$ (full exploration). Characterizing this requires the lim sup/lim inf machinery.
-
-**Additional applications** (to be developed later):
-- Q-learning convergence (Week 36): requires visiting all $(s,a)$ infinitely often
-- Stochastic approximation almost-sure convergence (Weeks 34-39): formalized via lim sup of error events
+**Concrete RL applications:**
+- **Exploration in Q-learning:** Convergence theorems (Week 37) require that each state-action pair $(s,a)$ is visited infinitely often almost surely, formalized as $P(\limsup_t \{(S_t, A_t) = (s,a)\}) = 1$.
+- **Markov chain recurrence:** A state $s$ is recurrent (Week 7) if the event "return to $s$" occurs infinitely often with probability 1.
+- **Almost-sure convergence:** Stochastic approximation algorithms (Weeks 34-39) converge if the event "error exceeds $\epsilon$" occurs only finitely often for every $\epsilon > 0$.
 
 These concepts arise in exploration analysis, Markov chain recurrence theory, and almost-sure convergence results that we develop throughout the course.
 
@@ -50,15 +42,15 @@ $$
 
 We establish both the forward and reverse inclusions.
 
-**Forward inclusion ($\subseteq$):** Take $x\in\bigcap_{k\ge1}\bigcup_{n\ge k}E_n$. For each $k \in \mathbb{N}$, since $x \in \bigcup_{n \ge k} E_n$, we can choose an index $n_k\ge k$ such that $x\in E_{n_k}$. Since $k$ ranges over all natural numbers, we obtain a sequence of indices $(n_k)_{k=1}^{\infty}$ with $n_k \ge k$ for all $k$. This sequence is unbounded: if only finitely many distinct values appeared, say $n_k \in \{m_1, \ldots, m_J\}$ for all $k$, then for $k > \max\{m_1, \ldots, m_J\}$, we would need $n_k \ge k > \max\{m_i\}$, contradicting $n_k \in \{m_1, \ldots, m_J\}$. Thus infinitely many distinct indices must appear, so $x$ is in $E_n$ for infinitely many $n$.
+*Forward inclusion* $(\subseteq)$: Take $x\in\bigcap_{k\ge1}\bigcup_{n\ge k}E_n$. For each $k \in \mathbb{N}$, since $x \in \bigcup_{n \ge k} E_n$, we can choose an index $n_k\ge k$ such that $x\in E_{n_k}$. Since $k$ ranges over all natural numbers, we obtain infinitely many indices $n_k$ (not necessarily distinct). As $n_k \ge k$ and $k \to \infty$, the indices are unbounded, so infinitely many distinct values appear among them. Hence $x$ is in $E_n$ for infinitely many $n$.
 
-**Reverse inclusion ($\supseteq$):** Conversely, suppose $x$ belongs to $E_n$ for infinitely many $n$. For any fixed $k \in \mathbb{N}$, the set $\{n \ge k : x \in E_n\}$ is non-empty (since $x$ is in infinitely many $E_n$, at least one such index must be $\ge k$). Therefore there exists $n\ge k$ with $x\in E_n$, which means $x\in\bigcup_{n\ge k}E_n$. Since this holds for every $k$, we have $x\in\bigcap_{k\ge1}\bigcup_{n\ge k}E_n$.
+*Reverse inclusion* $(\supseteq)$: Conversely, suppose $x$ belongs to $E_n$ for infinitely many $n$. For any fixed $k \in \mathbb{N}$, the set $\{n \ge k : x \in E_n\}$ is non-empty (since $x$ is in infinitely many $E_n$, at least one such index must be $\ge k$). Therefore there exists $n\ge k$ with $x\in E_n$, which means $x\in\bigcup_{n\ge k}E_n$. Since this holds for every $k$, we have $x\in\bigcap_{k\ge1}\bigcup_{n\ge k}E_n$.
 
 **Proof of the $\liminf$ characterization.**
 
-**Forward inclusion ($\subseteq$):** Take $x\in\bigcup_{k\ge1}\bigcap_{n\ge k}E_n$. Then for some $k_0 \in \mathbb{N}$, we have $x\in\bigcap_{n\ge k_0}E_n$. This means $x\in E_n$ for all $n\ge k_0$, which is precisely the definition of "$x$ is in $E_n$ for all but finitely many $n$" (the finite exceptions being $n < k_0$).
+*Forward inclusion* $(\subseteq)$: Take $x\in\bigcup_{k\ge1}\bigcap_{n\ge k}E_n$. Then for some $k_0 \in \mathbb{N}$, we have $x\in\bigcap_{n\ge k_0}E_n$. This means $x\in E_n$ for all $n\ge k_0$, which is precisely the definition of "$x$ is in $E_n$ for all but finitely many $n$" (the finite exceptions being $n < k_0$).
 
-**Reverse inclusion ($\supseteq$):** Conversely, if $x$ is in $E_n$ for all but finitely many $n$, then there exists $N \in \mathbb{N}$ such that $x\in E_n$ for all $n\ge N$. Thus $x\in\bigcap_{n\ge N}E_n$, which implies $x\in\bigcup_{k\ge1}\bigcap_{n\ge k}E_n$.
+*Reverse inclusion* $(\supseteq)$: Conversely, if $x$ is in $E_n$ for all but finitely many $n$, then there exists $N \in \mathbb{N}$ such that $x\in E_n$ for all $n\ge N$. Thus $x\in\bigcap_{n\ge N}E_n$, which implies $x\in\bigcup_{k\ge1}\bigcap_{n\ge k}E_n$.
 $\square$
 
 ### Complementary Results
@@ -86,25 +78,18 @@ where $\limsup_{n} a_n = \lim_{k \to \infty} \sup_{n \ge k} a_n$ for sequences o
 
 ---
 
-## Exercise 2: $\sigma$-Finite and Semifinite Measures
+## Exercise 2: σ-Finite and Semifinite Measures
 
 ### Motivation
 
-Not all measures are created equal. The behavior of integrals and the validity of powerful convergence theorems depend critically on certain regularity properties. $\sigma$-Finiteness and semifiniteness are not mere technicalities—they determine when we can apply essential tools.
+Not all measures are created equal. The behavior of integrals and the validity of powerful convergence theorems depend critically on certain regularity properties. σ-Finiteness and semifiniteness are not mere technicalities—they determine when we can apply essential tools.
 
-**Where $\sigma$-finiteness is required in RL:**
+**Where σ-finiteness is required in RL:**
+1. **Fubini-Tonelli Theorem (Week 3):** Interchanging order of integration in $\mathbb{E}[V^\pi(S_0)] = \int \left(\int V^\pi(s') P(ds'|s_0, a)\right) \pi(da|s_0)$ requires σ-finiteness of the state and action spaces [@folland:real_analysis:1999, §2.4], where $P(\cdot|s_0, a)$ is the transition kernel and $\pi(\cdot|s_0)$ is the policy distribution.
+2. **Radon-Nikodym Theorem (Week 4):** Existence of probability densities—likelihood ratios for importance sampling (Week 40), policy gradient theorems [@sutton:policy_gradient:2000] (Week 37-38)—requires σ-finiteness [@folland:real_analysis:1999, §3.2].
+3. **Product Measures (Week 3):** Constructing probability measures on trajectory spaces $(\mathcal{S} \times \mathcal{A})^{\mathbb{N}}$ requires σ-finite marginals.
 
-1. **Fubini-Tonelli Theorem (Week 2):** For **stochastic policies** $\pi(a|s)$ (formalized Week 23), computing expectations over the joint state-action space $(s, a) \sim \rho(s) \pi(a|s)$—as in policy gradient objectives
-   $$\mathbb{E}_{s \sim \rho, a \sim \pi(\cdot|s)}[\nabla \log \pi(a|s) Q(s,a)] = \int_{\mathcal{S}} \int_{\mathcal{A}} \nabla \log \pi(a|s) Q(s,a) \, \pi(da|s) \, \rho(ds)$$
-   requires Fubini-Tonelli to interchange integration order (from $\int_{\mathcal{S}} \int_{\mathcal{A}}$ to $\int_{\mathcal{A}} \int_{\mathcal{S}}$ when needed for derivations), which demands $\sigma$-finiteness of both $\mathcal{S}$ and $\mathcal{A}$ [@folland:real_analysis:1999, §2.4]. This is essential for deriving the policy gradient theorem (Week 37).
-
-   **Note:** For **deterministic policies** $\pi: \mathcal{S} \to \mathcal{A}$, iterated integrals suffice, and $\sigma$-finiteness is not required for Fubini. The subtlety arises only for stochastic policies over joint $(s,a)$ spaces.
-
-2. **Radon-Nikodym Theorem (Week 3):** Existence of probability densities—likelihood ratios for importance sampling (Week 40), policy gradient theorems [@sutton:policy_gradient:2000] (Week 37-38)—requires $\sigma$-finiteness [@folland:real_analysis:1999, §3.2].
-
-3. **Product Measures (Weeks 2-4):** Finite product measures are introduced in **Week 2** (Fubini-Tonelli). Constructing probability measures on **infinite** trajectory spaces $(\mathcal{S} \times \mathcal{A})^{\mathbb{N}}$ requires the Kolmogorov extension theorem (**Week 4** preview; full treatment in Week 10 for general state spaces).
-
-Most RL theory assumes $\sigma$-finite measure spaces (e.g., Lebesgue measure on $\mathbb{R}^n$ for continuous states, counting measure on finite/countable state spaces). Understanding the boundaries of this assumption clarifies when our theorems apply.
+Most RL theory assumes σ-finite measure spaces (e.g., Lebesgue measure on $\mathbb{R}^n$ for continuous states, counting measure on finite/countable state spaces). Understanding the boundaries of this assumption clarifies when our theorems apply.
 
 ### Core Theory
 
@@ -115,12 +100,12 @@ We recall key definitions from Day 1 §II-III:
 2.  (Countable Additivity) For any countable collection $\{A_n\}_{n=1}^{\infty}$ of pairwise disjoint sets in $\mathcal{F}$,
     $$ \mu\left(\bigcup_{n=1}^{\infty} A_n\right) = \sum_{n=1}^{\infty} \mu(A_n) $$
 
-**Definition 2.2 ($\sigma$-Finite Measure).** A measure $\mu$ on $(X, \mathcal{F})$ is **$\sigma$-finite** if there exists a countable collection $\{E_n\}_{n=1}^{\infty} \subseteq \mathcal{F}$ such that:
+**Definition 2.2 (σ-Finite Measure).** A measure $\mu$ on $(X, \mathcal{F})$ is **σ-finite** if there exists a countable collection $\{E_n\}_{n=1}^{\infty} \subseteq \mathcal{F}$ such that:
 $$ X = \bigcup_{n=1}^{\infty} E_n \quad \text{and} \quad \mu(E_n) < \infty \text{ for all } n \in \mathbb{N} $$
 
-In essence, a $\sigma$-finite space can be exhausted by a countable sequence of finite-measure "pieces."
+In essence, a σ-finite space can be exhausted by a countable sequence of finite-measure "pieces."
 
-**Example 2.1 (Lebesgue Measure on $\mathbb{R}^n$).** The standard Lebesgue measure $\lambda$ on $(\mathbb{R}^n, \mathcal{B}(\mathbb{R}^n))$ is $\sigma$-finite [@folland:real_analysis:1999, §1.4]. For $n=1$, write $\mathbb{R} = \bigcup_{k=1}^{\infty} [-k, k]$ with $\lambda([-k, k]) = 2k < \infty$. For general $n$, use $\mathbb{R}^n = \bigcup_{k=1}^{\infty} [-k, k]^n$ with $\lambda([-k,k]^n) = (2k)^n < \infty$. This is the canonical measure for continuous state spaces in RL.
+**Example 2.1 (Lebesgue Measure on $\mathbb{R}^n$).** The standard Lebesgue measure $\lambda$ on $(\mathbb{R}^n, \mathcal{B}(\mathbb{R}^n))$ is σ-finite [@folland:real_analysis:1999, §1.4]. For $n=1$, write $\mathbb{R} = \bigcup_{k=1}^{\infty} [-k, k]$ with $\lambda([-k, k]) = 2k < \infty$. For general $n$, use $\mathbb{R}^n = \bigcup_{k=1}^{\infty} [-k, k]^n$ with $\lambda([-k,k]^n) = (2k)^n < \infty$. This is the canonical measure for continuous state spaces in RL.
 
 **Definition 2.3 (Semifinite Measure).** A measure $\mu$ on $(X, \mathcal{F})$ is **semifinite** if for every set $A \in \mathcal{F}$ with $\mu(A) = \infty$, there exists a subset $B \in \mathcal{F}$ such that $B \subseteq A$ and $0 < \mu(B) < \infty$.
 
@@ -128,13 +113,13 @@ A semifinite measure does not permit "purely infinite" measurable sets that cont
 
 ### The Relationship Between Classifications
 
-**Proposition 2.1 (Proven in Day 1 FINAL §III.A).** Let $(X, \mathcal{F}, \mu)$ be a measure space. If $\mu$ is $\sigma$-finite, then $\mu$ is semifinite. However, the converse is not true: there exist semifinite measures that are not $\sigma$-finite.
+**Proposition 2.1 (Proven in Day 1 FINAL §III.A).** Let $(X, \mathcal{F}, \mu)$ be a measure space. If $\mu$ is σ-finite, then $\mu$ is semifinite. However, the converse is not true: there exist semifinite measures that are not σ-finite.
 
-The proof is given in Day 1 §III.A, Proposition 1.1. The key idea:
-- **$\sigma$-finite ⇒ semifinite:** Decompose any infinite-measure set $A$ using the $\sigma$-finite covering $X = \bigcup E_n$. By subadditivity, at least one $A \cap E_n$ has positive finite measure.
-- **Counterexample:** Counting measure on $\mathbb{R}$ (assigning $|A|$ to finite sets, $\infty$ otherwise) is semifinite but not $\sigma$-finite, since $\mathbb{R}$ cannot be covered by countably many finite sets.
+The proof is given in Day 1 FINAL.md, Proposition 1.1 (lines 140-150). The key idea:
+- **σ-finite ⇒ semifinite:** Decompose any infinite-measure set $A$ using the σ-finite covering $X = \bigcup E_n$. By subadditivity, at least one $A \cap E_n$ has positive finite measure.
+- **Counterexample:** Counting measure on $\mathbb{R}$ (assigning $|A|$ to finite sets, $\infty$ otherwise) is semifinite but not σ-finite, since $\mathbb{R}$ cannot be covered by countably many finite sets.
 
-**Remark.** The pathological counting measure on uncountable spaces is precisely the type of measure we avoid in RL by restricting to **Polish spaces** (complete separable metric spaces) with Radon measures (finite on compact sets). Standard RL state spaces—finite sets, $\mathbb{R}^n$, or Polish spaces like $[0,1]^{\infty}$—all admit natural $\sigma$-finite measures.
+**Remark.** The pathological counting measure on uncountable spaces is precisely the type of measure we avoid in RL by restricting to **Polish spaces** (complete separable metric spaces) with Radon measures (finite on compact sets). Standard RL state spaces—finite sets, $\mathbb{R}^n$, or Polish spaces like $[0,1]^{\infty}$—all admit natural σ-finite measures.
 
 ---
 
@@ -189,19 +174,17 @@ To prove $h$ is measurable, we must show $h^{-1}(B) \in \mathcal{F}$ for all $B 
 
 **Lemma 3.1 (Measurability Criterion via Generators).** Let $(X, \mathcal{F})$ and $(Y, \mathcal{G})$ be measurable spaces. Suppose $\mathcal{C} \subseteq 2^Y$ generates $\mathcal{G}$ (i.e., $\sigma(\mathcal{C}) = \mathcal{G}$). Then a function $\phi: X \to Y$ is measurable if and only if $\phi^{-1}(C) \in \mathcal{F}$ for every $C \in \mathcal{C}$.
 
-**Remark.** This lemma is a direct application of the **good sets principle** (also called the **Dynkin class method**), which is formalized rigorously in **Appendix A2.1** (Week 2, Day 2) via the π-λ theorem ([THM-2.2.A1]) and λ-systems ([DEF-2.2.A2]). The key insight: to prove a property holds for all sets in a generated σ-algebra $\sigma(\mathcal{C})$, it suffices to verify it for the generating class $\mathcal{C}$ and show that the collection of sets with the property forms a σ-algebra (or λ-system).
-
 *Proof of Lemma.* The "only if" direction is immediate: if $\phi$ is measurable and $\mathcal{C} \subseteq \mathcal{G}$, then $\phi^{-1}(C) \in \mathcal{F}$ for all $C \in \mathcal{C}$.
 
 For the "if" direction, we use the *good sets principle.* Define:
 $$ \mathcal{G}' = \{B \subseteq Y \mid \phi^{-1}(B) \in \mathcal{F}\} $$
 
-We claim $\mathcal{G}'$ is a $\sigma$-algebra:
+We claim $\mathcal{G}'$ is a σ-algebra:
 1. $Y \in \mathcal{G}'$ since $\phi^{-1}(Y) = X \in \mathcal{F}$.
 2. If $B \in \mathcal{G}'$, then $\phi^{-1}(B^c) = (\phi^{-1}(B))^c \in \mathcal{F}$ (since $\mathcal{F}$ is closed under complements), so $B^c \in \mathcal{G}'$.
 3. If $\{B_n\}_{n=1}^{\infty} \subseteq \mathcal{G}'$, then $\phi^{-1}(\bigcup_{n=1}^{\infty} B_n) = \bigcup_{n=1}^{\infty} \phi^{-1}(B_n) \in \mathcal{F}$ (since $\mathcal{F}$ is closed under countable unions), so $\bigcup_{n=1}^{\infty} B_n \in \mathcal{G}'$.
 
-By hypothesis, $\mathcal{C} \subseteq \mathcal{G}'$. Since $\mathcal{G}'$ is a $\sigma$-algebra containing $\mathcal{C}$, and $\mathcal{G} = \sigma(\mathcal{C})$ is the *smallest* such $\sigma$-algebra, we have $\mathcal{G} \subseteq \mathcal{G}'$. Thus for any $B \in \mathcal{G}$, we have $\phi^{-1}(B) \in \mathcal{F}$, proving $\phi$ is measurable. $\square$
+By hypothesis, $\mathcal{C} \subseteq \mathcal{G}'$. Since $\mathcal{G}'$ is a σ-algebra containing $\mathcal{C}$, and $\mathcal{G} = \sigma(\mathcal{C})$ is the *smallest* such σ-algebra, we have $\mathcal{G} \subseteq \mathcal{G}'$. Thus for any $B \in \mathcal{G}$, we have $\phi^{-1}(B) \in \mathcal{F}$, proving $\phi$ is measurable. $\square$
 
 *Proof of Proposition 3.2.*
 
@@ -229,7 +212,7 @@ Since $h^{-1}(U) \in \mathcal{F}$ for all $U \in \mathcal{O}(\mathbb{R})$, and $
 
 ### Application to Neural Networks
 
-**Corollary 3.3.** Let $(\mathcal{S}, \mathcal{F}_\mathcal{S})$ be a measurable state space. If $\phi: \mathcal{S} \to \mathbb{R}^d$ is measurable and $\text{NN}_\theta: \mathbb{R}^d \to \mathbb{R}$ is continuous **Lebesgue-almost everywhere** (i.e., continuous except on a set of Lebesgue measure zero in $\mathbb{R}^d$), then $V_\theta = \text{NN}_\theta \circ \phi: \mathcal{S} \to \mathbb{R}$ is measurable.
+**Corollary 3.3.** Let $(\mathcal{S}, \mathcal{F}_\mathcal{S})$ be a measurable state space. If $\phi: \mathcal{S} \to \mathbb{R}^d$ is measurable and $\text{NN}_\theta: \mathbb{R}^d \to \mathbb{R}$ is continuous almost everywhere, then $V_\theta = \text{NN}_\theta \circ \phi: \mathcal{S} \to \mathbb{R}$ is measurable.
 
 **Why neural networks are measurable (addressing ReLU discontinuities):**
 
@@ -239,34 +222,18 @@ $$ \text{ReLU}(\mathbf{x}) = (\max(0, x_1), \ldots, \max(0, x_d)) $$
 Each neuron in a ReLU network introduces discontinuities on a hyperplane $\{x \in \mathbb{R}^d : w^T x + b = 0\}$, which has Lebesgue measure zero in $\mathbb{R}^d$. A composition of ReLU layers thus has discontinuities on **countably many hyperplanes** (one per neuron across all layers), each of measure zero.
 
 **Why measurability still holds:**
-- **Fact from real analysis** [@folland:real_analysis:1999, Proposition 2.8]: A function $f: \mathbb{R}^d \to \mathbb{R}$ that is continuous except on a set of Lebesgue measure zero is Borel measurable.
-- Each hyperplane of ReLU discontinuity $\{x : w^T x + b = 0\}$ has measure zero in $\mathbb{R}^d$ (it is a $(d-1)$-dimensional affine subspace).
-- A feedforward ReLU network with $N$ neurons has discontinuities on at most $N$ hyperplanes (one per neuron).
+- **Fact from real analysis:** A function that is continuous except on a set of Lebesgue measure zero is Borel measurable.
+- Each hyperplane of discontinuity has measure zero in $\mathbb{R}^d$.
 - The countable union of measure-zero sets has measure zero.
 - Therefore, ReLU networks are continuous almost everywhere, hence Borel measurable.
 - By Proposition 3.2, their composition with measurable feature maps yields measurable value/policy functions.
 
-**Practical implication:** Modern deep RL uses ReLU networks with $10^4$–$10^6$ neurons (e.g., Atari DQN has ~$10^6$ parameters). While this seems like "many" discontinuities, the union of $10^6$ hyperplanes in $\mathbb{R}^{84×84×4}$ (Atari observation space) still has Lebesgue measure zero—an uncountable space minus countably many codimension-1 sets. Measurability is preserved even for massive networks.
-
 **Technical note:** Even if we had discontinuities on a measure-positive set, compositions of measurable functions remain measurable (though continuity is not preserved). Measurability is preserved under far more general operations than continuity, which is why it is the correct framework for RL function approximators.
 
-**Concrete example (DQN [@mnih:dqn:2015]):**
-
-In deep Q-learning:
-- States $s \in \mathcal{S}$ (e.g., $84 \times 84$ grayscale images) define a measurable space with Borel $\sigma$-algebra.
+**Concrete example (DQN):** In deep Q-learning [@mnih:dqn:2015]:
+- States $s \in \mathcal{S}$ (e.g., $84 \times 84$ grayscale images) define a measurable space with Borel σ-algebra.
 - The pixel representation $s \mapsto \text{pixels}(s) \in [0,255]^{84 \times 84}$ is measurable (identity map on a Borel space).
 - The Q-network $Q_\theta: [0,255]^{84 \times 84} \to \mathbb{R}^{|\mathcal{A}|}$ (convolutional layers + ReLU + linear layers) is Borel measurable.
-
-**Why $Q_\theta$ is measurable:** The DQN architecture is a composition:
-   $$Q_\theta = \text{Linear}_3 \circ \text{ReLU}_2 \circ \text{Conv}_2 \circ \text{ReLU}_1 \circ \text{Conv}_1$$
-   Each convolutional layer $\text{Conv}_k: \mathbb{R}^{n×m×c} \to \mathbb{R}^{n'×m'×c'}$ is a **linear map** (matrix multiplication in tensor form) followed by bias addition—hence continuous, therefore Borel measurable. Each ReLU layer is continuous a.e. (discontinuous on measure-zero hyperplanes). By Proposition 3.2 applied iteratively:
-   - $\text{Conv}_1$ measurable (continuous)
-   - $\text{ReLU}_1$ measurable (continuous a.e., Proposition 3.2 applies)
-   - $\text{Conv}_2 \circ \text{ReLU}_1$ measurable (Proposition 3.2: continuous ∘ measurable)
-   - Continuing this composition, $Q_\theta$ is measurable.
-
-   **Key insight:** Proposition 3.2 (continuous ∘ measurable = measurable) applies to **each layer**, ensuring the full network is measurable despite ReLU discontinuities.
-
 - By Proposition 3.2, $s \mapsto Q_\theta(s, a)$ is measurable for each action $a$.
 - This ensures the expected Q-value $\mathbb{E}_{s \sim \rho}[Q_\theta(s,a)]$ is well-defined (integration of a measurable function with respect to a probability measure).
 
@@ -280,7 +247,7 @@ We have developed three foundational tools:
 
 1. **$\limsup$ and $\liminf$ of sets** (Exercise 1) characterize asymptotic behavior of events, essential for analyzing exploration, recurrence, and almost-sure convergence in stochastic approximation (Weeks 34-39).
 
-2. **$\sigma$-Finite measures** (Exercise 2) enable application of Fubini-Tonelli (Week 2), Radon-Nikodym (Week 3), and product measure constructions (Weeks 2-4)—the theoretical bedrock for computing expectations in RL. We proved that $\sigma$-finiteness is stronger than semifiniteness and identified pathological counterexamples.
+2. **σ-Finite measures** (Exercise 2) enable application of Fubini-Tonelli (Week 3), Radon-Nikodym (Week 4), and product measure constructions (Week 3)—the theoretical bedrock for computing expectations in RL. We proved that σ-finiteness is stronger than semifiniteness and identified pathological counterexamples.
 
 3. **Measurability under operations** (Exercise 3) guarantees that:
    - Arithmetic combinations of measurable functions (like Bellman updates) remain measurable
