@@ -15,15 +15,15 @@ References:
 - Bertsekas Vol I Ch 1: Dynamic programming and optimal control
 - von Neumann (1928): Minimax theorem for zero-sum games
 
-Author: Dr. Max Rubin
 """
 
 import numpy as np
 from typing import Optional, Tuple, List
 from rl_toolkit.utils.board_viz import render_board_ascii
+from rl_toolkit.envs.base_game import BaseGameEnv
 
 
-class TicTacToe:
+class TicTacToe(BaseGameEnv):
     """
     Generalized Tic-Tac-Toe environment (n×n board with k-in-a-row).
 
@@ -90,12 +90,11 @@ class TicTacToe:
         >>> env = TicTacToe()  # Classic 3×3
         >>> env = TicTacToe(board_size=5, win_length=4)  # 5×5 board, 4-in-a-row wins
         """
-        self.board_size = board_size
+        # Initialize base game environment
+        super().__init__(board_size)
+
+        # Game-specific configuration
         self.win_length = win_length if win_length is not None else board_size
-        self.board = np.zeros((board_size, board_size), dtype=np.int8)
-        self.current_player = 1  # Player 1 starts (X)
-        self.winner = None
-        self.done = False
 
         # Validate parameters
         if self.win_length > self.board_size:
@@ -370,6 +369,218 @@ class TicTacToe:
         """
         # Include both board state and current player
         return f"{self.board.tobytes().hex()}_{self.current_player}"
+
+    def analyze_threats(self, player: int) -> dict:
+        """
+        Analyze threats on the board from the perspective of the specified player.
+
+        Returns information about potential winning lines, threats, and defensive needs.
+
+        Parameters
+        ----------
+        player : int
+            Player to analyze threats for (1 or -1)
+
+        Returns
+        -------
+        dict
+            Dictionary containing:
+            - 'immediate_wins': List[int] - moves that win immediately
+            - 'threats': List[dict] - threatening lines with details
+            - 'blocking_moves': List[int] - moves that block opponent threats
+            - 'opponent_threats': List[dict] - opponent's threatening lines
+
+        Examples
+        --------
+        >>> env = TicTacToe()
+        >>> env.board[0, 0] = 1  # X at a1
+        >>> env.board[1, 1] = 1  # X at b2
+        >>> threats = env.analyze_threats(player=1)
+        >>> threats['threats']  # Will show diagonal threat
+        """
+        opponent = -player
+        k = self.win_length
+        n = self.board_size
+
+        immediate_wins = []
+        threats = []
+        blocking_moves = []
+        opponent_threats = []
+
+        def check_line_threat(cells, positions):
+            """
+            Check if a line is threatening for either player.
+
+            Returns: (is_threat, player_whose_threat, blocking_position, pieces_count)
+            """
+            player_count = np.sum(cells == player)
+            opponent_count = np.sum(cells == opponent)
+            empty_count = np.sum(cells == 0)
+
+            # Line must have pieces from only one player
+            if player_count > 0 and opponent_count > 0:
+                return None  # Mixed line, no threat
+
+            if player_count == k - 1 and empty_count == 1:
+                # Player has k-1 in a row, one move from winning
+                empty_idx = np.where(cells == 0)[0][0]
+                blocking_pos = positions[empty_idx]
+                return ('immediate_win', player, blocking_pos, player_count)
+
+            elif opponent_count == k - 1 and empty_count == 1:
+                # Opponent has k-1 in a row, must block
+                empty_idx = np.where(cells == 0)[0][0]
+                blocking_pos = positions[empty_idx]
+                return ('must_block', opponent, blocking_pos, opponent_count)
+
+            elif player_count >= 2 and opponent_count == 0 and empty_count > 0:
+                # Player has multiple pieces in line, threatening
+                return ('player_threat', player, None, player_count)
+
+            elif opponent_count >= 2 and player_count == 0 and empty_count > 0:
+                # Opponent has multiple pieces in line, concerning
+                return ('opponent_threat', opponent, None, opponent_count)
+
+            return None
+
+        # Check all possible winning lines
+
+        # Rows
+        for row in range(n):
+            for col in range(n - k + 1):
+                positions = [(row, c) for c in range(col, col + k)]
+                cells = self.board[row, col:col+k]
+                result = check_line_threat(cells, positions)
+                if result:
+                    threat_type, threat_player, blocking_pos, count = result
+                    if threat_type == 'immediate_win' and threat_player == player:
+                        immediate_wins.append(blocking_pos)
+                    elif threat_type == 'must_block' and threat_player == opponent:
+                        blocking_moves.append(blocking_pos)
+                        opponent_threats.append({
+                            'type': 'row',
+                            'positions': positions,
+                            'blocking_move': blocking_pos,
+                            'pieces': count
+                        })
+                    elif threat_type == 'player_threat':
+                        threats.append({
+                            'type': 'row',
+                            'positions': positions,
+                            'pieces': count
+                        })
+                    elif threat_type == 'opponent_threat':
+                        opponent_threats.append({
+                            'type': 'row',
+                            'positions': positions,
+                            'pieces': count
+                        })
+
+        # Columns
+        for col in range(n):
+            for row in range(n - k + 1):
+                positions = [(r, col) for r in range(row, row + k)]
+                cells = self.board[row:row+k, col]
+                result = check_line_threat(cells, positions)
+                if result:
+                    threat_type, threat_player, blocking_pos, count = result
+                    if threat_type == 'immediate_win' and threat_player == player:
+                        if blocking_pos not in immediate_wins:
+                            immediate_wins.append(blocking_pos)
+                    elif threat_type == 'must_block' and threat_player == opponent:
+                        if blocking_pos not in blocking_moves:
+                            blocking_moves.append(blocking_pos)
+                        opponent_threats.append({
+                            'type': 'column',
+                            'positions': positions,
+                            'blocking_move': blocking_pos,
+                            'pieces': count
+                        })
+                    elif threat_type == 'player_threat':
+                        threats.append({
+                            'type': 'column',
+                            'positions': positions,
+                            'pieces': count
+                        })
+                    elif threat_type == 'opponent_threat':
+                        opponent_threats.append({
+                            'type': 'column',
+                            'positions': positions,
+                            'pieces': count
+                        })
+
+        # Diagonals
+        for row in range(n - k + 1):
+            for col in range(n - k + 1):
+                positions = [(row + i, col + i) for i in range(k)]
+                cells = np.array([self.board[row+i, col+i] for i in range(k)])
+                result = check_line_threat(cells, positions)
+                if result:
+                    threat_type, threat_player, blocking_pos, count = result
+                    if threat_type == 'immediate_win' and threat_player == player:
+                        if blocking_pos not in immediate_wins:
+                            immediate_wins.append(blocking_pos)
+                    elif threat_type == 'must_block' and threat_player == opponent:
+                        if blocking_pos not in blocking_moves:
+                            blocking_moves.append(blocking_pos)
+                        opponent_threats.append({
+                            'type': 'diagonal',
+                            'positions': positions,
+                            'blocking_move': blocking_pos,
+                            'pieces': count
+                        })
+                    elif threat_type == 'player_threat':
+                        threats.append({
+                            'type': 'diagonal',
+                            'positions': positions,
+                            'pieces': count
+                        })
+                    elif threat_type == 'opponent_threat':
+                        opponent_threats.append({
+                            'type': 'diagonal',
+                            'positions': positions,
+                            'pieces': count
+                        })
+
+        # Anti-diagonals
+        for row in range(n - k + 1):
+            for col in range(k - 1, n):
+                positions = [(row + i, col - i) for i in range(k)]
+                cells = np.array([self.board[row+i, col-i] for i in range(k)])
+                result = check_line_threat(cells, positions)
+                if result:
+                    threat_type, threat_player, blocking_pos, count = result
+                    if threat_type == 'immediate_win' and threat_player == player:
+                        if blocking_pos not in immediate_wins:
+                            immediate_wins.append(blocking_pos)
+                    elif threat_type == 'must_block' and threat_player == opponent:
+                        if blocking_pos not in blocking_moves:
+                            blocking_moves.append(blocking_pos)
+                        opponent_threats.append({
+                            'type': 'anti-diagonal',
+                            'positions': positions,
+                            'blocking_move': blocking_pos,
+                            'pieces': count
+                        })
+                    elif threat_type == 'player_threat':
+                        threats.append({
+                            'type': 'anti-diagonal',
+                            'positions': positions,
+                            'pieces': count
+                        })
+                    elif threat_type == 'opponent_threat':
+                        opponent_threats.append({
+                            'type': 'anti-diagonal',
+                            'positions': positions,
+                            'pieces': count
+                        })
+
+        return {
+            'immediate_wins': immediate_wins,
+            'threats': threats,
+            'blocking_moves': blocking_moves,
+            'opponent_threats': opponent_threats
+        }
 
     def evaluate_heuristic(self, player: int) -> float:
         """

@@ -122,6 +122,92 @@ A **textbook in the making**, written in real-time as daily study notes transfor
 
 ---
 
+## ✨ **What Makes This Different**
+
+Unlike traditional RL courses that separate theory from practice, this journey features **four innovations** that bridge the gap:
+
+### 1. 🔍 **See Algorithms Think in Real-Time**
+
+Every implementation includes **interactive visualization** of AI decision-making:
+
+**Terminal:**
+```bash
+python play_terminal.py --show-thinking
+
+🤔 AI CANDIDATE EVALUATIONS
+Position     Outcome          Assessment             Best
+────────────────────────────────────────────────────────────
+a1 (0)       ⚖️ Draw          Balanced position      ⭐ YES
+b2 (4)       ⚖️ Draw          Balanced position      ⭐ YES
+...
+```
+
+**Web:** Toggle "Show Candidate Moves" to see color-coded value overlays (green = strong, red = weak)
+
+**Impact:** You don't just learn "π*(s) = argmax_a V*(s,a)" — you watch the algorithm evaluate every move and choose the best one.
+
+---
+
+### 2. ♟️ **Professional Standards from Day One**
+
+All board games use algebraic notation (a1, b2, c3) — the universal language of board games:
+- Same coordinate system as chess, Go, Connect Four
+- Works for any board size (3×3 → 15×15 Gomoku)
+- Industry-standard presentation (portfolio-ready demos)
+
+**Why it matters:** "Play a1" vs. "Play position 0" — one is professional, one is toy example.
+
+---
+
+### 3. 🎯 **Honest About Where Theory Fails**
+
+When practice diverges from theory, we show you both and explain the gap:
+
+**Example:**
+- **Theory says:** TD(0) converges to V* (tabular case, Robbins-Monro conditions)
+- **Practice needs:** Target networks + experience replay (neural networks break guarantees)
+- **We show you:** Baird's counterexample (when it fails), DQN tricks (why it still works)
+
+**No hand-waving. No "it just works."** If theory and practice diverge, you'll know exactly why.
+
+---
+
+### 4. 📚 **Complete Tutorials for Every Project**
+
+Each major implementation ships with a Lab Session Appendix (4-7 sessions, 90 min each):
+- Theory recaps connecting to course material
+- Step-by-step code (complete, runnable, explained)
+- Time-calibrated tasks (know exactly how long each part takes)
+- Ready for self-study (no instructor needed)
+
+**Total:** ~8,000 lines of tutorial content across game projects
+
+**Example:** Tic-Tac-Toe Lab Appendix (1600 lines)
+- Lab 1: Game environment (90 min)
+- Lab 2: Minimax solver (90 min)
+- Lab 3: Terminal interface (60 min)
+- Lab 4: Web interface (90 min)
+
+---
+
+### **The Learning Experience**
+
+**Traditional RL course:** Read theory → Run library code → Never really understand
+
+**This course:** Prove theory → Build from scratch → See it work → Play against it
+
+**Concrete example:**
+
+You won't just implement minimax. You'll:
+1. Prove it computes V* correctly (Week 24 theory)
+2. Build it with α-β pruning and memoization (production code)
+3. Visualize it with `--show-thinking` (watch it evaluate all moves)
+4. Play against it in browser (try to beat optimal AI — spoiler: you can't!)
+
+**Result:** Deep understanding you can't get from lectures or library code alone.
+
+---
+
 ## 🗺️ **The Journey (48 Weeks)**
 
 ### **Phase I: Measure-Theoretic Foundations** (Weeks 1-6)

@@ -22,6 +22,125 @@
 
 ---
 
+## ✨ Pedagogical Innovations
+
+This course features **four major innovations** that distinguish it from traditional RL textbooks:
+
+### 1. 🔍 Interactive AI Thinking Visualization
+
+Every algorithm implementation includes **real-time visualization** of the decision-making process:
+
+**Terminal mode:**
+```bash
+python play_terminal.py --show-thinking
+```
+Displays value functions V*(s,a) with natural language reasoning in formatted tables.
+
+**Web interface:**
+- Toggle-based overlays show candidate evaluations with color-coded values
+- Green (strong position) → Yellow (neutral) → Red (weak position)
+- Hover for detailed reasoning
+
+**Example (Tic-Tac-Toe minimax):**
+```
+Position     Outcome          Assessment             Best
+────────────────────────────────────────────────────────────
+a1 (0)       ⚖️ Draw          Balanced position      ⭐ YES
+b2 (4)       ⚖️ Draw          Balanced position      ⭐ YES
+c3 (8)       ⚖️ Draw          Balanced position      ⭐ YES
+```
+
+**Theory bridge:** Students see Bellman optimality principle in action: π*(s) = argmax_a V*(s,a) becomes visual, not abstract.
+
+**Impact:** Algorithms transform from "trust the formula" to "watch it work in real-time."
+
+---
+
+### 2. ♟️ Professional Algebraic Notation
+
+All board games use chess-style coordinate systems (a1, b2, c3) instead of numeric indices:
+
+**Benefits:**
+- Universal standard across games (Tic-Tac-Toe → Connect Four → Gomoku → Reversi)
+- Axis labels on both terminal and web interfaces
+- Scales naturally to larger boards (15×15 Gomoku: a1-o15)
+- Professional presentation (matches published game notation)
+
+**Implementation:**
+```python
+def get_position_name(index: int, board_size: int) -> str:
+    """a1, b2, c3 for 3×3; a1-d4 for 4×4"""
+    row = index // board_size
+    col = index % board_size
+    return f"{chr(ord('a') + col)}{row + 1}"
+```
+
+**Reusable:** Built once, works for all n×n board games throughout the course.
+
+---
+
+### 3. 🎯 Theory-Practice Gap Transparency
+
+Implementations honestly expose when practice diverges from theory:
+
+**Example 1 - Tic-Tac-Toe:**
+- 3×3 board: Exact optimal search (theory works perfectly, V* computable)
+- 5×5 board: Depth-limited heuristic search (exact theory intractable, "good enough" practice)
+- Students see: same algorithm, different computational realities
+
+**Example 2 - Deep RL:**
+- Theory (Tabular TD): Convergence guaranteed under Robbins-Monro conditions
+- Practice (Neural TD): Neural networks break convergence guarantees (deadly triad)
+- Students learn: Why it still works (target networks, experience replay), when it fails (Baird's counterexample)
+
+**Philosophy:** No hand-waving. When theory and practice diverge, we say so explicitly and explain the gap.
+
+---
+
+### 4. 📚 Self-Contained Lab Session Appendices
+
+Each major project includes a complete tutorial (4-7 sessions, 90 minutes each):
+
+**Structure:**
+```
+Lab Session 1: [Component] (90 min)
+  - Theory Recap: Connection to Week N theorems
+  - Task 1.1: [Subtask] (30 min) - step-by-step code
+  - Task 1.2: [Subtask] (20 min) - tests and experiments
+  - Task 1.3: Verification (40 min) - exercises
+```
+
+**Content:**
+- Theory recaps before each lab (bridge to Dubois's proofs)
+- Complete, runnable code with explanations
+- Time-calibrated tasks (each with explicit duration)
+- Exercises testing understanding
+- Ready for independent study or classroom use
+
+**Total:** ~8,000 lines of tutorial content across 4 game projects (Tic-Tac-Toe, Connect Four, Gomoku, Reversi)
+
+**Impact:** Students can work independently without instructor, following structured progression from theory to working code.
+
+---
+
+### Why These Matter
+
+**Traditional RL course:**
+1. Read theorem → Trust it works
+2. See pseudocode → Implement yourself (often fails)
+3. Debug for hours → Give up or copy solution
+4. Never see "why" visually
+
+**This course:**
+1. Read theorem → See it proven (Dubois, Weeks 1-41)
+2. See production code → Understand design choices (Rubin, RL implementations)
+3. Run with `--show-thinking` → Watch algorithm work (visualization)
+4. Play against AI → Feel optimal vs. heuristic (hands-on)
+
+**Result:** Theory + Code + Visualization = Deep Understanding
+
+---
+
 ## Structural Principles
 
 ### Daily Time Allocation

@@ -4,7 +4,6 @@ Board visualization utilities for grid-based games.
 Provides ASCII rendering for n×n board games (Tic-Tac-Toe, Connect Four, Gomoku, Reversi).
 Reusable across all game projects.
 
-Author: Dr. Max Rubin
 """
 
 import numpy as np
@@ -39,13 +38,13 @@ def render_board_ascii(
     --------
     >>> board = np.array([[1, 0, -1], [0, 1, 0], [-1, 0, 1]])
     >>> print(render_board_ascii(board))
-          0   1   2
+          a   b   c
         +---+---+---+
-      0 | X |   | O |
+      1 | X |   | O |
         +---+---+---+
-      1 |   | X |   |
+      2 |   | X |   |
         +---+---+---+
-      2 | O |   | X |
+      3 | O |   | X |
         +---+---+---+
     """
     if symbols is None:
@@ -56,9 +55,9 @@ def render_board_ascii(
     # Build the output string
     lines = []
 
-    # Column indices (if requested)
+    # Column indices (if requested) - use algebraic notation (a, b, c...)
     if show_indices:
-        col_header = "  " + "   ".join(str(i) for i in range(cols))
+        col_header = "  " + "   ".join(chr(ord('a') + i) for i in range(cols))
         lines.append(col_header)
 
     # Top border
@@ -70,7 +69,7 @@ def render_board_ascii(
         # Row with symbols
         row_str = ""
         if show_indices:
-            row_str += f"{i} "
+            row_str += f"{i + 1} "  # 1-indexed row numbers (algebraic notation)
 
         row_str += "|"
         for j in range(cols):

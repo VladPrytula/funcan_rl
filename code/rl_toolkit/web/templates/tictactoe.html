@@ -41,9 +41,266 @@
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            padding: 40px;
-            max-width: 900px;
+            padding: 0;
+            max-width: 1400px;
             width: 100%;
+            display: grid;
+            grid-template-columns: 70% 30%;
+            gap: 0;
+            overflow: hidden;
+        }
+
+        /* Game Panel (Left Side) */
+        .game-panel {
+            padding: 40px;
+            border-right: 2px solid #e5e7eb;
+        }
+
+        /* History Panel (Right Side) */
+        .history-panel {
+            background: #f9fafb;
+            padding: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .history-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .clear-history-btn {
+            padding: 6px 12px;
+            font-size: 0.85em;
+            background: #e5e7eb;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .clear-history-btn:hover {
+            background: #d1d5db;
+        }
+
+        /* History Items */
+        .history-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.2s;
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .history-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .history-item.replay-current {
+            border-color: #667eea;
+            border-width: 2px;
+            background: #f3f4f6;
+        }
+
+        .move-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .move-turn {
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .move-time {
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .move-details {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .move-value {
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .move-value.positive { color: #10b981; }
+        .move-value.neutral { color: #6b7280; }
+        .move-value.negative { color: #ef4444; }
+
+        /* Candidate Details (Expandable) */
+        .candidates-summary {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #f3f4f6;
+            cursor: pointer;
+            font-size: 0.85em;
+            color: #667eea;
+            user-select: none;
+        }
+
+        .candidates-summary:hover {
+            color: #5568d3;
+        }
+
+        .expand-arrow {
+            transition: transform 0.2s;
+        }
+
+        .expand-arrow.expanded {
+            transform: rotate(90deg);
+        }
+
+        .candidates-details {
+            margin-top: 8px;
+            padding: 8px;
+            background: #f9fafb;
+            border-radius: 4px;
+            font-size: 0.85em;
+            display: none;
+        }
+
+        .candidates-details.show {
+            display: block;
+        }
+
+        .candidate-item {
+            padding: 4px 0;
+            color: #666;
+        }
+
+        .candidate-best {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        /* Empty History State */
+        .history-empty {
+            text-align: center;
+            color: #9ca3af;
+            padding: 40px 20px;
+            font-size: 0.9em;
+        }
+
+        /* Replay Controls */
+        .replay-controls {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none; /* Hidden by default */
+        }
+
+        .replay-controls.active {
+            display: block;
+        }
+
+        .replay-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .replay-title {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .replay-exit {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.2s;
+        }
+
+        .replay-exit:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .replay-nav {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .replay-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.2s;
+            flex: 1;
+        }
+
+        .replay-btn:hover:not(:disabled) {
+            background: white;
+            transform: translateY(-1px);
+        }
+
+        .replay-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .replay-info {
+            text-align: center;
+            font-size: 0.9em;
+            margin: 0 10px;
+        }
+
+        .replay-indicator {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            text-align: center;
+            font-size: 0.9em;
         }
 
         h1 {
@@ -212,7 +469,6 @@
         .board {
             display: grid;
             gap: 8px;
-            margin: 30px auto;
             max-width: 500px;
             position: relative;
         }
@@ -254,6 +510,33 @@
             50% { transform: scale(1.05); }
         }
 
+        /* Board Container with Axis Labels */
+        .board-container {
+            margin: 30px auto;
+            max-width: 540px;
+            display: grid;
+            gap: 8px;
+            /* Grid will be dynamically set: (size+1) columns x (size+1) rows */
+            /* First row/column are for axis labels */
+        }
+
+        /* Axis label styling */
+        .axis-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 0.85em;
+            font-weight: 600;
+            user-select: none;
+        }
+
+        /* Top-left corner (empty) */
+        .axis-corner {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
         /* Candidate Value Overlay */
         .move-value {
             position: absolute;
@@ -265,6 +548,7 @@
             font-weight: 600;
             opacity: 0.9;
             z-index: 10;
+            animation: fadeIn 0.3s ease-out;
         }
 
         .move-value.best-move {
@@ -275,6 +559,46 @@
         @keyframes glow {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
+        }
+
+        /* Fade-in animation for history items */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Slide-in animation for replay controls */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .replay-controls.active {
+            animation: slideDown 0.4s ease-out;
+        }
+
+        /* Fade-in animation for candidate overlays */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 0.9;
+                transform: scale(1);
+            }
         }
 
         /* Controls */
@@ -544,9 +868,26 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 60% 40%;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto;
+            }
+
+            .game-panel {
                 padding: 20px;
+                border-right: none;
+                border-bottom: 2px solid #e5e7eb;
+            }
+
+            .history-panel {
+                max-height: 400px;
             }
 
             h1 {
@@ -560,19 +901,29 @@
             .strategy-table {
                 font-size: 0.9em;
             }
+
+            .history-item {
+                padding: 10px;
+            }
+
+            .move-turn {
+                font-size: 0.95em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎮 Tic-Tac-Toe</h1>
-        <div class="subtitle">
-            Play against a minimax AI
-            <span class="ai-mode" id="ai-mode" data-tooltip="Click for details">
-                <span id="ai-mode-text">Optimal</span>
-                <span class="info-icon">ⓘ</span>
-            </span>
-        </div>
+        <!-- Game Panel (Left Side) -->
+        <div class="game-panel">
+            <h1>🎮 Tic-Tac-Toe</h1>
+            <div class="subtitle">
+                Play against a minimax AI
+                <span class="ai-mode" id="ai-mode" data-tooltip="Click for details">
+                    <span id="ai-mode-text">Optimal</span>
+                    <span class="info-icon">ⓘ</span>
+                </span>
+            </div>
 
         <!-- Configuration Section -->
         <div class="config-section">
@@ -605,12 +956,30 @@
         <!-- Status Display -->
         <div class="status" id="status">Click to start: You are X</div>
 
-        <!-- Game Board -->
-        <div class="board" id="board"></div>
+        <!-- Game Board with Axis Labels (single grid) -->
+        <div class="board-container" id="board-container"></div>
 
         <!-- Controls -->
         <div class="controls">
             <button class="btn-primary" onclick="resetGame()">New Game</button>
+        </div>
+
+        <!-- Replay Controls (shown after game over) -->
+        <div class="replay-controls" id="replay-controls">
+            <div class="replay-header">
+                <div class="replay-title">▶️ Replay Mode</div>
+                <button class="replay-exit" onclick="exitReplayMode()">Exit Replay</button>
+            </div>
+            <div class="replay-nav">
+                <button class="replay-btn" id="replay-prev" onclick="replayPrevious()">← Previous</button>
+                <div class="replay-info">
+                    <span id="replay-turn-info">Turn 0 / 0</span>
+                </div>
+                <button class="replay-btn" id="replay-next" onclick="replayNext()">Next →</button>
+            </div>
+            <div class="replay-indicator">
+                Use ← → arrow keys to navigate
+            </div>
         </div>
 
         <!-- Statistics Panel -->
@@ -710,10 +1079,29 @@
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class="footer">
-            <strong>Theory:</strong> Minimax search with alpha-beta pruning and dynamic programming<br>
-            3×3: Provably optimal (exact search) | 4×4+: Strong play (depth-limited heuristic search)
+            <!-- Footer -->
+            <div class="footer">
+                <strong>Theory:</strong> Minimax search with alpha-beta pruning and dynamic programming<br>
+                3×3: Provably optimal (exact search) | 4×4+: Strong play (depth-limited heuristic search)
+            </div>
+        </div>
+
+        <!-- History Panel (Right Side) -->
+        <div class="history-panel">
+            <div class="history-header">
+                <div class="history-title">
+                    <span>📜</span>
+                    <span>Move History</span>
+                </div>
+                <button class="clear-history-btn" onclick="clearHistory()">Clear 🗑️</button>
+            </div>
+
+            <div class="history-list" id="history-list">
+                <div class="history-empty">
+                    <p>No moves yet</p>
+                    <p style="margin-top: 10px; font-size: 0.9em;">Make a move to start tracking AI thinking</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -742,7 +1130,12 @@
             humanStarts: true,
             gameOver: false,
             winningLine: null,
-            showCandidates: false
+            showCandidates: false,
+            moveHistory: [],  // Track all moves with candidates and board states
+            turnNumber: 0,    // Current turn counter
+            isReplaying: false,  // Replay mode active
+            replayTurn: 0,       // Current turn in replay (0 = before first move)
+            savedBoardState: null  // Board state before entering replay
         };
 
         /**
@@ -755,11 +1148,20 @@
             gameState.currentPlayer = gameState.humanStarts ? 1 : -1;
             gameState.gameOver = false;
             gameState.winningLine = null;
+            gameState.moveHistory = [];
+            gameState.turnNumber = 0;
+            gameState.isReplaying = false;
+            gameState.replayTurn = 0;
+            gameState.savedBoardState = null;
+
+            // Hide replay controls
+            document.getElementById('replay-controls').classList.remove('active');
 
             renderBoard();
             updateStatus();
             updateAIMode();
             clearCandidateValues();
+            renderHistoryPanel();
 
             // If AI starts, make first move
             if (!gameState.humanStarts) {
@@ -769,41 +1171,74 @@
 
         /**
          * Render the board dynamically based on board size.
-         * Creates grid cells and adds event listeners.
+         * Creates a unified grid with axis labels and game cells.
          */
         function renderBoard() {
-            const boardDiv = document.getElementById('board');
+            const container = document.getElementById('board-container');
             const size = gameState.boardSize;
 
-            // Update grid layout
-            boardDiv.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+            // Set up grid: (size+1) columns x (size+1) rows
+            // First row/column are for axis labels
+            container.style.gridTemplateColumns = `auto repeat(${size}, 1fr)`;
+            container.style.gridTemplateRows = `auto repeat(${size}, 1fr)`;
 
             // Calculate cell font size based on board size
             const fontSize = size === 3 ? '3em' : size === 4 ? '2.5em' : '2em';
 
-            // Clear and create cells
-            boardDiv.innerHTML = '';
-            for (let i = 0; i < size * size; i++) {
-                const cell = document.createElement('div');
-                cell.className = 'cell';
-                cell.dataset.index = i;
-                cell.style.fontSize = fontSize;
+            // Clear container
+            container.innerHTML = '';
 
-                const value = gameState.board[i];
-                cell.textContent = value === 1 ? 'X' : value === -1 ? 'O' : '';
+            // Add top-left corner (empty cell)
+            const corner = document.createElement('div');
+            corner.className = 'axis-corner';
+            container.appendChild(corner);
 
-                if (value !== 0) {
-                    cell.classList.add('filled');
-                    cell.classList.add(value === 1 ? 'x' : 'o');
+            // Add column labels (a, b, c...) in first row
+            for (let col = 0; col < size; col++) {
+                const label = document.createElement('div');
+                label.className = 'axis-label';
+                label.textContent = String.fromCharCode(97 + col); // a, b, c...
+                label.style.gridColumn = col + 2;
+                label.style.gridRow = 1;
+                container.appendChild(label);
+            }
+
+            // Add row labels and board cells
+            for (let row = 0; row < size; row++) {
+                // Row label (1, 2, 3...)
+                const label = document.createElement('div');
+                label.className = 'axis-label';
+                label.textContent = row + 1;
+                label.style.gridColumn = 1;
+                label.style.gridRow = row + 2;
+                container.appendChild(label);
+
+                // Board cells for this row
+                for (let col = 0; col < size; col++) {
+                    const index = row * size + col;
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.dataset.index = index;
+                    cell.style.fontSize = fontSize;
+                    cell.style.gridColumn = col + 2;
+                    cell.style.gridRow = row + 2;
+
+                    const value = gameState.board[index];
+                    cell.textContent = value === 1 ? 'X' : value === -1 ? 'O' : '';
+
+                    if (value !== 0) {
+                        cell.classList.add('filled');
+                        cell.classList.add(value === 1 ? 'x' : 'o');
+                    }
+
+                    // Highlight winning line
+                    if (gameState.winningLine && gameState.winningLine.includes(index)) {
+                        cell.classList.add('winning');
+                    }
+
+                    cell.addEventListener('click', handleCellClick);
+                    container.appendChild(cell);
                 }
-
-                // Highlight winning line
-                if (gameState.winningLine && gameState.winningLine.includes(i)) {
-                    cell.classList.add('winning');
-                }
-
-                cell.addEventListener('click', handleCellClick);
-                boardDiv.appendChild(cell);
             }
         }
 
@@ -812,6 +1247,13 @@
          */
         function updateStatus() {
             const statusDiv = document.getElementById('status');
+
+            // Show replay mode indicator if replaying
+            if (gameState.isReplaying) {
+                statusDiv.className = 'status';
+                statusDiv.textContent = '▶️ Replay Mode - Use ← → to navigate';
+                return;
+            }
 
             if (gameState.gameOver) {
                 const winner = checkWinner();
@@ -859,7 +1301,7 @@
          * Handle human player clicking a cell.
          */
         async function handleCellClick(event) {
-            if (gameState.gameOver || gameState.currentPlayer !== 1) return;
+            if (gameState.gameOver || gameState.currentPlayer !== 1 || gameState.isReplaying) return;
 
             const cell = event.target;
             const index = parseInt(cell.dataset.index);
@@ -871,10 +1313,15 @@
             gameState.currentPlayer = -1;
             renderBoard();
 
+            // Add to history
+            addMoveToHistory('Human', index);
+
             // Check game over
             if (checkGameOver()) {
                 gameState.gameOver = true;
                 updateStatus();
+                // Automatically enter replay mode after game over
+                setTimeout(() => enterReplayMode(), 500);
                 return;
             }
 
@@ -886,14 +1333,49 @@
 
         /**
          * Make AI move with optional thinking visualization.
+         * Always fetches candidate evaluations for history tracking.
          */
         async function makeAIMove() {
             const startTime = performance.now();
 
             try {
-                // If showing candidates, get all evaluations first
-                if (gameState.showCandidates) {
-                    await showCandidateEvaluations();
+                // Always get candidate evaluations for history
+                const candidatesResponse = await fetch('/tictactoe/candidates', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        board: gameState.board,
+                        board_size: gameState.boardSize,
+                        win_length: gameState.winLength
+                    })
+                });
+
+                const candidatesData = await candidatesResponse.json();
+
+                // Show candidates on board if toggle is on
+                if (gameState.showCandidates && !candidatesData.error) {
+                    clearCandidateValues();
+                    for (const [moveIdx, evalData] of Object.entries(candidatesData.candidates)) {
+                        const cell = document.querySelector(`[data-index="${moveIdx}"]`);
+                        if (!cell || cell.classList.contains('filled')) continue;
+
+                        const valueLabel = document.createElement('div');
+                        valueLabel.className = 'move-value';
+                        valueLabel.textContent = evalData.value.toFixed(2);
+                        valueLabel.title = evalData.reasoning;
+
+                        const hue = (evalData.value + 1) * 60;
+                        valueLabel.style.backgroundColor = `hsl(${hue}, 70%, 85%)`;
+                        valueLabel.style.color = `hsl(${hue}, 70%, 25%)`;
+
+                        if (evalData.is_best) {
+                            valueLabel.classList.add('best-move');
+                        }
+
+                        cell.appendChild(valueLabel);
+                    }
                 }
 
                 // Get AI move
@@ -933,9 +1415,22 @@
                 document.getElementById('compute-time').textContent =
                     (endTime - startTime).toFixed(0) + ' ms';
 
+                // Add stats with compute time
+                const statsWithTime = {
+                    ...data.stats,
+                    compute_time_ms: endTime - startTime
+                };
+
+                // Add to history with candidates
+                addMoveToHistory('AI', data.move, candidatesData.candidates, statsWithTime);
+
                 // Check game over
                 if (checkGameOver()) {
                     gameState.gameOver = true;
+                    updateStatus();
+                    // Automatically enter replay mode after game over
+                    setTimeout(() => enterReplayMode(), 500);
+                    return;
                 }
 
                 updateStatus();
@@ -1007,6 +1502,56 @@
          */
         function clearCandidateValues() {
             document.querySelectorAll('.move-value').forEach(el => el.remove());
+        }
+
+        /**
+         * Get human-readable position name for a board index using algebraic notation.
+         * Uses chess-like coordinate system: columns as letters (a-z), rows as numbers (1, 2, 3...).
+         *
+         * @param {number} index - Board position index (0-based)
+         * @param {number} boardSize - Size of the board (3, 4, or 5)
+         * @returns {string} Position name in algebraic notation like "a1", "b2", "c3"
+         *
+         * @example
+         * 3×3 board:
+         *   a1  b1  c1
+         *   a2  b2  c2
+         *   a3  b3  c3
+         *
+         * 4×4 board:
+         *   a1  b1  c1  d1
+         *   a2  b2  c2  d2
+         *   a3  b3  c3  d3
+         *   a4  b4  c4  d4
+         */
+        function getPositionName(index, boardSize) {
+            const row = Math.floor(index / boardSize);
+            const col = index % boardSize;
+
+            // Column letter (a, b, c, ...)
+            const colLetter = String.fromCharCode(97 + col); // 97 = 'a'
+
+            // Row number (1, 2, 3, ... from top to bottom)
+            const rowNumber = row + 1;
+
+            return `${colLetter}${rowNumber}`;
+        }
+
+        /**
+         * Format a minimax value as a human-readable outcome with emoji.
+         * @param {number} value - Minimax value (-1 to +1)
+         * @param {string} perspective - 'ai' or 'human' (default: 'ai')
+         * @returns {string} Formatted outcome like "⚖️ Draw", "✓ AI wins", "❌ Human wins"
+         */
+        function formatOutcome(value, perspective = 'ai') {
+            // Flip value if showing from human perspective
+            const v = perspective === 'human' ? -value : value;
+
+            if (v >= 0.9) return '✓ AI wins';
+            if (v >= 0.3) return '🟢 AI advantage';
+            if (v > -0.3) return '⚖️ Draw';
+            if (v > -0.9) return '🔴 Human advantage';
+            return '❌ Human wins';
         }
 
         /**
@@ -1149,6 +1694,335 @@
                 icon.classList.remove('expanded');
             }
         }
+
+        /**
+         * Add a move to the history panel with full details.
+         *
+         * @param {string} player - 'Human' or 'AI'
+         * @param {number} move - Move index
+         * @param {object} candidates - Candidate evaluations (optional, AI only)
+         * @param {object} stats - Search statistics (optional, AI only)
+         */
+        function addMoveToHistory(player, move, candidates = null, stats = null) {
+            gameState.turnNumber++;
+
+            // Create board state snapshot (deep copy)
+            const boardSnapshot = [...gameState.board];
+
+            // Create history entry
+            const historyEntry = {
+                turn: gameState.turnNumber,
+                player: player,
+                move: move,
+                candidates: candidates,
+                stats: stats,
+                boardState: boardSnapshot,
+                timestamp: Date.now()
+            };
+
+            gameState.moveHistory.push(historyEntry);
+            renderHistoryPanel();
+        }
+
+        /**
+         * Render the entire history panel with all moves.
+         */
+        function renderHistoryPanel() {
+            const historyList = document.getElementById('history-list');
+
+            // Clear empty state if present
+            historyList.innerHTML = '';
+
+            if (gameState.moveHistory.length === 0) {
+                historyList.innerHTML = `
+                    <div class="history-empty">
+                        <p>No moves yet</p>
+                        <p style="margin-top: 10px; font-size: 0.9em;">Make a move to start tracking AI thinking</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Render each history item
+            gameState.moveHistory.forEach((entry, index) => {
+                const historyItem = createHistoryItem(entry, index);
+                historyList.appendChild(historyItem);
+            });
+
+            // Auto-scroll to bottom
+            historyList.scrollTop = historyList.scrollHeight;
+        }
+
+        /**
+         * Create a single history item DOM element.
+         */
+        function createHistoryItem(entry, index) {
+            const item = document.createElement('div');
+            item.className = 'history-item';
+            item.dataset.index = index;
+
+            const playerIcon = entry.player === 'Human' ? '👤' : '🤖';
+            const playerSymbol = entry.player === 'Human' ?
+                (gameState.humanStarts ? 'X' : 'O') :
+                (gameState.humanStarts ? 'O' : 'X');
+
+            // Get position name for the move
+            const positionName = getPositionName(entry.move, gameState.boardSize);
+
+            let content = `
+                <div class="move-header">
+                    <div class="move-turn">
+                        <span>${playerIcon}</span>
+                        <span>Turn ${entry.turn}: ${entry.player} → ${positionName} (${entry.move})</span>
+                    </div>
+                </div>
+            `;
+
+            // Add AI-specific details
+            if (entry.player === 'AI' && entry.candidates) {
+                const bestCandidate = Object.entries(entry.candidates).find(([_, data]) => data.is_best);
+                const bestMove = bestCandidate ? bestCandidate[0] : entry.move;
+                const bestValue = bestCandidate ? bestCandidate[1].value : 0;
+                const bestReasoning = bestCandidate ? bestCandidate[1].reasoning : '';
+
+                // Format the outcome with emoji
+                const outcomeText = formatOutcome(bestValue, 'ai');
+
+                content += `
+                    <div class="move-details">
+                        ${outcomeText} - ${bestReasoning}
+                    </div>
+                `;
+
+                // Add stats if available
+                if (entry.stats) {
+                    content += `
+                        <div class="move-details" style="font-size: 0.85em;">
+                            ${entry.stats.nodes_explored.toLocaleString()} nodes,
+                            ${entry.stats.compute_time_ms.toFixed(0)}ms
+                        </div>
+                    `;
+                }
+
+                // Add expandable candidates
+                const candidateCount = Object.keys(entry.candidates).length;
+                content += `
+                    <div class="candidates-summary" onclick="toggleCandidateDetails(${index})">
+                        <span class="expand-arrow" id="expand-arrow-${index}">▸</span>
+                        <span>View ${candidateCount} candidates</span>
+                    </div>
+                    <div class="candidates-details" id="candidates-${index}">
+                `;
+
+                // Sort candidates by value
+                const sortedCandidates = Object.entries(entry.candidates).sort((a, b) => b[1].value - a[1].value);
+
+                sortedCandidates.forEach(([moveIdx, data]) => {
+                    const isBest = data.is_best ? ' candidate-best' : '';
+                    const bestMarker = data.is_best ? ' ⭐' : '';
+                    const candidatePositionName = getPositionName(parseInt(moveIdx), gameState.boardSize);
+                    const candidateOutcome = formatOutcome(data.value, 'ai');
+                    content += `
+                        <div class="candidate-item${isBest}">
+                            ${candidatePositionName} (${moveIdx}): ${candidateOutcome} - ${data.reasoning}${bestMarker}
+                        </div>
+                    `;
+                });
+
+                content += `
+                    </div>
+                `;
+            }
+
+            item.innerHTML = content;
+            return item;
+        }
+
+        /**
+         * Toggle candidate details expansion for a history item.
+         */
+        function toggleCandidateDetails(index) {
+            const details = document.getElementById(`candidates-${index}`);
+            const arrow = document.getElementById(`expand-arrow-${index}`);
+
+            if (details.classList.contains('show')) {
+                details.classList.remove('show');
+                arrow.classList.remove('expanded');
+            } else {
+                details.classList.add('show');
+                arrow.classList.add('expanded');
+            }
+        }
+
+        /**
+         * Clear all move history.
+         */
+        function clearHistory() {
+            gameState.moveHistory = [];
+            gameState.turnNumber = 0;
+            renderHistoryPanel();
+        }
+
+        /**
+         * Enter replay mode - allows stepping through game history.
+         * Saves current board state and enables replay navigation.
+         */
+        function enterReplayMode() {
+            if (gameState.moveHistory.length === 0) {
+                return; // No moves to replay
+            }
+
+            // Save current board state
+            gameState.savedBoardState = [...gameState.board];
+            gameState.isReplaying = true;
+            gameState.replayTurn = gameState.moveHistory.length; // Start at final position
+
+            // Show replay controls
+            document.getElementById('replay-controls').classList.add('active');
+
+            // Go to final turn
+            goToTurn(gameState.moveHistory.length);
+        }
+
+        /**
+         * Exit replay mode - restore final board state.
+         */
+        function exitReplayMode() {
+            gameState.isReplaying = false;
+
+            // Restore saved board state
+            if (gameState.savedBoardState) {
+                gameState.board = [...gameState.savedBoardState];
+                gameState.savedBoardState = null;
+            }
+
+            // Hide replay controls
+            document.getElementById('replay-controls').classList.remove('active');
+
+            // Clear replay highlighting
+            document.querySelectorAll('.history-item').forEach(item => {
+                item.classList.remove('replay-current');
+            });
+
+            // Re-render board
+            renderBoard();
+            updateStatus();
+        }
+
+        /**
+         * Navigate to specific turn in replay.
+         * @param {number} turnIndex - Turn index (0 = before first move, 1 = after first move, etc.)
+         */
+        function goToTurn(turnIndex) {
+            // Clamp turnIndex
+            turnIndex = Math.max(0, Math.min(turnIndex, gameState.moveHistory.length));
+            gameState.replayTurn = turnIndex;
+
+            // Restore board to this turn
+            if (turnIndex === 0) {
+                // Empty board
+                gameState.board = new Array(gameState.boardSize * gameState.boardSize).fill(0);
+                gameState.winningLine = null;
+            } else {
+                // Restore board from history
+                const historyEntry = gameState.moveHistory[turnIndex - 1];
+                gameState.board = [...historyEntry.boardState];
+
+                // Clear any candidate overlays first
+                clearCandidateValues();
+
+                // Show candidates for this turn if it was an AI move
+                if (historyEntry.player === 'AI' && historyEntry.candidates) {
+                    for (const [moveIdx, evalData] of Object.entries(historyEntry.candidates)) {
+                        const cell = document.querySelector(`[data-index="${moveIdx}"]`);
+                        if (!cell || gameState.board[moveIdx] !== 0) continue;
+
+                        const valueLabel = document.createElement('div');
+                        valueLabel.className = 'move-value';
+                        valueLabel.textContent = evalData.value.toFixed(2);
+                        valueLabel.title = evalData.reasoning;
+
+                        const hue = (evalData.value + 1) * 60;
+                        valueLabel.style.backgroundColor = `hsl(${hue}, 70%, 85%)`;
+                        valueLabel.style.color = `hsl(${hue}, 70%, 25%)`;
+
+                        if (evalData.is_best) {
+                            valueLabel.classList.add('best-move');
+                        }
+
+                        cell.appendChild(valueLabel);
+                    }
+                }
+            }
+
+            // Re-render board
+            renderBoard();
+
+            // Update replay UI
+            updateReplayUI();
+
+            // Highlight current turn in history
+            document.querySelectorAll('.history-item').forEach((item, index) => {
+                if (index === turnIndex - 1) {
+                    item.classList.add('replay-current');
+                    item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    item.classList.remove('replay-current');
+                }
+            });
+        }
+
+        /**
+         * Navigate to previous turn in replay.
+         */
+        function replayPrevious() {
+            if (gameState.replayTurn > 0) {
+                goToTurn(gameState.replayTurn - 1);
+            }
+        }
+
+        /**
+         * Navigate to next turn in replay.
+         */
+        function replayNext() {
+            if (gameState.replayTurn < gameState.moveHistory.length) {
+                goToTurn(gameState.replayTurn + 1);
+            }
+        }
+
+        /**
+         * Update replay UI controls (button states, turn counter).
+         */
+        function updateReplayUI() {
+            const prevBtn = document.getElementById('replay-prev');
+            const nextBtn = document.getElementById('replay-next');
+            const turnInfo = document.getElementById('replay-turn-info');
+
+            // Update button states
+            prevBtn.disabled = gameState.replayTurn === 0;
+            nextBtn.disabled = gameState.replayTurn === gameState.moveHistory.length;
+
+            // Update turn counter
+            turnInfo.textContent = `Turn ${gameState.replayTurn} / ${gameState.moveHistory.length}`;
+        }
+
+        /**
+         * Keyboard shortcuts for replay navigation.
+         */
+        document.addEventListener('keydown', (event) => {
+            if (!gameState.isReplaying) return;
+
+            if (event.key === 'ArrowLeft') {
+                event.preventDefault();
+                replayPrevious();
+            } else if (event.key === 'ArrowRight') {
+                event.preventDefault();
+                replayNext();
+            } else if (event.key === 'Escape') {
+                event.preventDefault();
+                exitReplayMode();
+            }
+        });
 
         // Initialize game on load
         initGame();

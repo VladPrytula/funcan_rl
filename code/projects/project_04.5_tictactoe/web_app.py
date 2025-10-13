@@ -9,7 +9,6 @@ Usage:
     python web_app.py --port 8080        # Custom port
     python web_app.py --host 0.0.0.0     # Expose to network
 
-Author: Dr. Max Rubin
 """
 
 import sys

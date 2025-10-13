@@ -1,7 +1,6 @@
 # RL Toolkit: Reinforcement Learning from Theory to Practice
 
 **Companion code for the textbook**: *From Measure Theory to Deep Reinforcement Learning*
-**Authors**: Professor Jean-Pierre Dubois & Dr. Max Rubin
 
 ---
 
@@ -202,7 +201,7 @@ If you use this code in your research or teaching, please cite:
 ```bibtex
 @book{dubois2026measure,
   title={From Measure Theory to Deep Reinforcement Learning},
-  author={Dubois, Jean-Pierre and Rubin, Max},
+  author={},
   publisher={Springer},
   year={2026}
 }
@@ -233,4 +232,3 @@ Inspired by:
 
 **Questions?** See the `Code_Organization_Guide.md` or open an issue on GitHub.
 
-— Professor Dubois & Dr. Rubin

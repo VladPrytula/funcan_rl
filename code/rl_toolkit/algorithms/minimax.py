@@ -15,12 +15,42 @@ References:
 - Knuth & Moore (1975): Analysis of alpha-beta pruning
 - Russell & Norvig (2020): Artificial Intelligence: A Modern Approach, Ch 5
 
-Author: Dr. Max Rubin
 """
 
-import numpy as np
 import time
-from typing import Optional, Tuple, Dict, Any, Callable
+from typing import Optional, Tuple, Dict, Any, Callable, List
+from dataclasses import dataclass
+from rl_toolkit.envs.base_game import BaseGameEnv
+
+
+@dataclass
+class MoveEvaluation:
+    """
+    Statistics and information about a single root move evaluation.
+
+    Used for tree visualization to show how minimax evaluates each candidate move.
+
+    Attributes
+    ----------
+    move : int
+        The move (action index) being evaluated
+    value : float
+        Minimax value for this move
+    nodes_explored : int
+        Number of nodes explored during evaluation of this move
+    time_elapsed : float
+        Time in seconds spent evaluating this move
+    is_pruned : bool
+        Whether this move was pruned early by alpha-beta
+    pv : List[int]
+        Principal variation (best line of play) starting from this move
+    """
+    move: int
+    value: float
+    nodes_explored: int
+    time_elapsed: float
+    is_pruned: bool
+    pv: List[int]
 
 
 class MinimaxSolver:
@@ -67,8 +97,8 @@ class MinimaxSolver:
 
     Attributes
     ----------
-    memo : Dict[str, Tuple[float, int]]
-        Memoization cache: state_hash -> (value, best_action)
+    memo : Dict[str, Tuple[float, Optional[int], List[int]]]
+        Memoization cache: state_hash -> (value, best_action, pv)
     nodes_explored : int
         Number of nodes explored in search tree (for profiling)
     cache_hits : int
@@ -77,6 +107,10 @@ class MinimaxSolver:
         Number of heuristic evaluations performed (for depth-limited search)
     progress_callback : callable or None
         Optional callback for progress updates during search
+    move_evaluations : Dict[int, MoveEvaluation]
+        Per-move evaluation statistics (for tree visualization)
+    temp_pv : List[int]
+        Temporary PV storage (side-effect communication between recursive calls)
     """
 
     def __init__(
@@ -120,7 +154,7 @@ class MinimaxSolver:
         self.use_memoization = use_memoization
         self.max_depth = max_depth
         self.progress_callback = progress_callback
-        self.memo: Dict[str, Tuple[float, Optional[int]]] = {}
+        self.memo: Dict[str, Tuple[float, Optional[int], List[int]]] = {}  # Now caches PV too
         self.nodes_explored = 0
         self.cache_hits = 0
         self.heuristic_evals = 0
@@ -130,21 +164,27 @@ class MinimaxSolver:
         self.last_callback_time = 0.0
         self.callback_interval = 0.1  # Call callback every 100ms
 
+        # Tree visualization support (Phase 1)
+        self.move_evaluations: Dict[int, MoveEvaluation] = {}
+        self.temp_pv: List[int] = []  # Side-effect communication for PV
+
     def reset_stats(self) -> None:
         """Reset search statistics and clear memoization cache."""
         self.memo.clear()
         self.nodes_explored = 0
         self.cache_hits = 0
         self.heuristic_evals = 0
+        self.move_evaluations.clear()
+        self.temp_pv.clear()
 
-    def get_best_move(self, env: Any, maximize: bool = True) -> int:
+    def get_best_move(self, env: BaseGameEnv, maximize: bool = True) -> int:
         """
         Get the optimal move for the current player.
 
         Parameters
         ----------
-        env : game environment
-            Game environment with methods: get_legal_moves(), step(), is_terminal(), copy()
+        env : BaseGameEnv
+            Game environment implementing BaseGameEnv interface
         maximize : bool, optional
             Whether current player is maximizing (True) or minimizing (False)
 
@@ -177,7 +217,12 @@ class MinimaxSolver:
         best_action = None
         best_value = float('-inf') if maximize else float('inf')
 
+        # Track per-move statistics for tree visualization
         for action in legal_moves:
+            # Track stats before this move
+            nodes_before = self.nodes_explored
+            time_before = time.time()
+
             # Simulate the move
             env_copy = env.copy()
             _, reward, done, _ = env_copy.step(action)
@@ -185,6 +230,7 @@ class MinimaxSolver:
             if done:
                 # Terminal state after this move
                 value = reward if maximize else -reward
+                move_pv = [action]  # Terminal move has PV of just itself
             else:
                 # Recurse with minimax
                 value, _ = self._minimax(
@@ -194,6 +240,22 @@ class MinimaxSolver:
                     alpha=float('-inf'),
                     beta=float('inf')
                 )
+                # PV is this move followed by child's PV (read from side-effect)
+                move_pv = [action] + self.temp_pv
+
+            # Collect statistics for this move
+            nodes_used = self.nodes_explored - nodes_before
+            time_used = time.time() - time_before
+
+            # Store move evaluation with the PV for this specific move
+            self.move_evaluations[action] = MoveEvaluation(
+                move=action,
+                value=float(value),
+                nodes_explored=nodes_used,
+                time_elapsed=time_used,
+                is_pruned=False,  # Will be determined in visualization phase
+                pv=move_pv
+            )
 
             # Update best move
             if maximize:
@@ -209,7 +271,7 @@ class MinimaxSolver:
 
     def _minimax(
         self,
-        env: Any,
+        env: BaseGameEnv,
         depth: int,
         maximize: bool,
         alpha: float,
@@ -220,7 +282,7 @@ class MinimaxSolver:
 
         Parameters
         ----------
-        env : game environment
+        env : BaseGameEnv
             Current game state
         depth : int
             Current depth in search tree
@@ -276,27 +338,33 @@ class MinimaxSolver:
             state_hash = env.get_state_hash()
             if state_hash in self.memo:
                 self.cache_hits += 1
-                return self.memo[state_hash]
+                value, best_action, cached_pv = self.memo[state_hash]
+                self.temp_pv = cached_pv  # Restore PV from cache
+                return value, best_action
 
         # Terminal state check
         if env.is_terminal():
             result = env.get_result(player=1 if maximize else -1)
             if result is None:
                 result = 0.0  # Draw
+            self.temp_pv = []  # No moves after terminal
             return result, None
 
         # Depth limit check (for larger boards)
         if self.max_depth is not None and depth >= self.max_depth:
             self.heuristic_evals += 1
             value = env.evaluate_heuristic(player=1 if maximize else -1)
+            self.temp_pv = []  # No continuation after depth limit
             return value, None
 
         # Get legal moves
         legal_moves = env.get_legal_moves()
         if len(legal_moves) == 0:
+            self.temp_pv = []  # No moves available
             return 0.0, None  # Draw (no moves available)
 
         best_action = None
+        best_pv = []  # Track PV for best move
 
         if maximize:
             # Maximizing player
@@ -309,13 +377,16 @@ class MinimaxSolver:
                 if done:
                     # Terminal after this move
                     value = reward
+                    child_pv = []
                 else:
                     # Recurse
                     value, _ = self._minimax(env_copy, depth + 1, False, alpha, beta)
+                    child_pv = self.temp_pv  # Read child's PV from side-effect
 
                 if value > max_value:
                     max_value = value
                     best_action = action
+                    best_pv = [action] + child_pv  # Update best PV
 
                 # Alpha-beta pruning
                 alpha = max(alpha, value)
@@ -323,6 +394,7 @@ class MinimaxSolver:
                     break  # Beta cutoff
 
             result = (max_value, best_action)
+            self.temp_pv = best_pv  # Set our PV as side-effect
 
         else:
             # Minimizing player
@@ -335,13 +407,16 @@ class MinimaxSolver:
                 if done:
                     # Terminal after this move (from opponent's perspective)
                     value = -reward
+                    child_pv = []
                 else:
                     # Recurse
                     value, _ = self._minimax(env_copy, depth + 1, True, alpha, beta)
+                    child_pv = self.temp_pv  # Read child's PV from side-effect
 
                 if value < min_value:
                     min_value = value
                     best_action = action
+                    best_pv = [action] + child_pv  # Update best PV
 
                 # Alpha-beta pruning
                 beta = min(beta, value)
@@ -349,10 +424,11 @@ class MinimaxSolver:
                     break  # Alpha cutoff
 
             result = (min_value, best_action)
+            self.temp_pv = best_pv  # Set our PV as side-effect
 
-        # Store in memoization cache
+        # Store in memoization cache (including PV)
         if self.use_memoization:
-            self.memo[state_hash] = result
+            self.memo[state_hash] = (result[0], result[1], best_pv)
 
         return result
 
@@ -374,7 +450,7 @@ class MinimaxSolver:
 
     def get_candidate_evaluations(
         self,
-        env: Any,
+        env: BaseGameEnv,
         maximize: bool = True
     ) -> Dict[int, Dict[str, Any]]:
         """
@@ -387,7 +463,7 @@ class MinimaxSolver:
 
         Parameters
         ----------
-        env : game environment
+        env : BaseGameEnv
             Current game state
         maximize : bool, optional
             Whether current player is maximizing (True) or minimizing (False)
@@ -457,6 +533,7 @@ class MinimaxSolver:
                 value = reward if maximize else -reward
                 reasoning = self._generate_terminal_reasoning(reward, maximize)
                 is_terminal = True
+                move_pv = [action]  # Terminal PV
             else:
                 # Recurse with minimax
                 value, _ = self._minimax(
@@ -468,6 +545,8 @@ class MinimaxSolver:
                 )
                 reasoning = self._generate_reasoning(value, maximize)
                 is_terminal = False
+                # PV already set by _minimax, prepend this move
+                move_pv = [action] + self.temp_pv
 
             # Track best move
             if maximize:
@@ -484,7 +563,8 @@ class MinimaxSolver:
                 'reasoning': reasoning,
                 'depth_used': self.max_depth,
                 'is_best': False,  # Will update after loop
-                'is_terminal': is_terminal
+                'is_terminal': is_terminal,
+                'pv': move_pv  # Add PV for this move
             }
 
         # Mark the best move
@@ -520,28 +600,32 @@ class MinimaxSolver:
         """
         if maximize:
             # For maximizing player, positive is good
-            if value > 0.5:
-                return "Creates strong threats"
+            if value > 0.9:
+                return "AI wins from here"
+            elif value > 0.5:
+                return "Strong advantage for AI"
             elif value > 0.2:
-                return "Good strategic position"
+                return "Slight edge for AI"
             elif value > -0.2:
-                return "Balanced position"
-            elif value > -0.5:
-                return "Slightly defensive"
+                return "Balanced, forces draw"
+            elif value > -0.9:
+                return "Loses! Human gets winning line"
             else:
-                return "Defensive necessity"
+                return "Loses! Human wins next turn"
         else:
             # For minimizing player, negative is good (flip thresholds)
-            if value < -0.5:
-                return "Creates strong threats"
+            if value < -0.9:
+                return "AI wins from here"
+            elif value < -0.5:
+                return "Strong advantage for AI"
             elif value < -0.2:
-                return "Good strategic position"
+                return "Slight edge for AI"
             elif value < 0.2:
-                return "Balanced position"
-            elif value < 0.5:
-                return "Slightly defensive"
+                return "Balanced, forces draw"
+            elif value < 0.9:
+                return "Loses! Human gets winning line"
             else:
-                return "Defensive necessity"
+                return "Loses! Human wins next turn"
 
     def _generate_terminal_reasoning(self, reward: float, maximize: bool) -> str:
         """
@@ -575,13 +659,13 @@ class MinimaxSolver:
                 return "Forces draw"
 
 
-def get_optimal_move(env: Any, player: int = 1) -> int:
+def get_optimal_move(env: BaseGameEnv, player: int = 1) -> int:
     """
     Convenience function to get optimal move for a game state.
 
     Parameters
     ----------
-    env : game environment
+    env : BaseGameEnv
         Current game state
     player : int, optional
         Current player (1 for maximizing, -1 for minimizing)

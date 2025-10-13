@@ -6,7 +6,6 @@ Tests cover:
 - Minimax correctness (optimal play never loses)
 - Edge cases (full board, invalid moves)
 
-Author: Dr. Max Rubin
 """
 
 import pytest

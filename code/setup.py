@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="rl-toolkit",
     version="0.1.0",
-    author="Jean-Pierre Dubois, Max Rubin",
+    author="",
     author_email="noreply@example.com",
     description="Reinforcement Learning from Theory to Practice: Companion Code",
     long_description=long_description,

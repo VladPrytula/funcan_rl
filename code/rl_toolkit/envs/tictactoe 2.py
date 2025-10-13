@@ -15,7 +15,6 @@ References:
 - Bertsekas Vol I Ch 1: Dynamic programming and optimal control
 - von Neumann (1928): Minimax theorem for zero-sum games
 
-Author: Dr. Max Rubin
 """
 
 import numpy as np
