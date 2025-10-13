@@ -420,7 +420,7 @@ Every Friday: computational experiments verifying theory
 
 - [x] Week 1: σ-algebras, measures, Carathéodory extension
 - [x] Week 1: Integration theory, convergence theorems
-- [ ] Week 2: $L^p$ spaces, completeness, duality
+- [x] Week 2: $L^p$ spaces, completeness, duality
 - [ ] Week 3: Product measures, Fubini, Tonelli
 - [ ] Week 4: Signed measures, Radon-Nikodym, conditional expectation
 - [ ] ...
@@ -533,6 +533,6 @@ Edit `Syllabus.md` with your topics, timeline, and reading assignments.
 
 ---
 
-**Status:** Week 1 in progress | Next milestone: Week 6 (Measure Theory complete)
+**Status:** Week 2 completed | Next milestone: Week 6 (Measure Theory complete)
 
 *Last updated: 2025-01-08*
