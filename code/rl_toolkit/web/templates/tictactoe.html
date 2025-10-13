@@ -1334,12 +1334,20 @@
         /**
          * Make AI move with optional thinking visualization.
          * Always fetches candidate evaluations for history tracking.
+         *
+         * Flow:
+         * 1. Fetch candidate evaluations FIRST (before board changes)
+         * 2. Display candidates on current empty cells (if toggle is on)
+         * 3. Wait briefly so user can see AI thinking
+         * 4. Make the AI move (update board)
+         * 5. Clear candidate overlays
          */
         async function makeAIMove() {
             const startTime = performance.now();
 
             try {
-                // Always get candidate evaluations for history
+                // STEP 1: Get candidate evaluations BEFORE making any move
+                // This evaluates the CURRENT board state (before AI move)
                 const candidatesResponse = await fetch('/tictactoe/candidates', {
                     method: 'POST',
                     headers: {
@@ -1354,8 +1362,14 @@
 
                 const candidatesData = await candidatesResponse.json();
 
-                // Show candidates on board if toggle is on
-                if (gameState.showCandidates && !candidatesData.error) {
+                if (candidatesData.error) {
+                    alert('Error: ' + candidatesData.error);
+                    return;
+                }
+
+                // STEP 2: Display candidates on board if toggle is on
+                // (board is still in pre-move state, so cells are empty)
+                if (gameState.showCandidates) {
                     clearCandidateValues();
                     for (const [moveIdx, evalData] of Object.entries(candidatesData.candidates)) {
                         const cell = document.querySelector(`[data-index="${moveIdx}"]`);
@@ -1376,9 +1390,18 @@
 
                         cell.appendChild(valueLabel);
                     }
+
+                    // STEP 3: Wait briefly so user can see the candidates
+                    // (pedagogical: show AI "thinking" before committing to move)
+                    await new Promise(resolve => setTimeout(resolve, 800));
                 }
 
-                // Get AI move
+                // STEP 4: Get AI move (reuse candidates data for best move)
+                const bestMove = candidatesData.best_move;
+                const endTime = performance.now();
+
+                // Get full stats by making actual move request
+                // (This is fast since the solver already has memoization cache populated)
                 const response = await fetch('/tictactoe/move', {
                     method: 'POST',
                     headers: {
@@ -1392,16 +1415,19 @@
                 });
 
                 const data = await response.json();
-                const endTime = performance.now();
 
                 if (data.error) {
                     alert('Error: ' + data.error);
                     return;
                 }
 
-                // AI makes move
+                // STEP 5: AI makes move (update board)
                 gameState.board[data.move] = -1;
                 gameState.currentPlayer = 1;
+
+                // Clear candidate overlays before rendering new board state
+                clearCandidateValues();
+
                 renderBoard();
 
                 // Update stats
@@ -1912,30 +1938,57 @@
         /**
          * Navigate to specific turn in replay.
          * @param {number} turnIndex - Turn index (0 = before first move, 1 = after first move, etc.)
+         *
+         * Key insight for candidate display:
+         * - Candidates were evaluated on the board state BEFORE the move
+         * - So we need to show the board state from the PREVIOUS turn
+         * - Then overlay the candidates that were considered
+         * - This shows "what was the AI thinking when it made this move?"
          */
         function goToTurn(turnIndex) {
             // Clamp turnIndex
             turnIndex = Math.max(0, Math.min(turnIndex, gameState.moveHistory.length));
             gameState.replayTurn = turnIndex;
 
+            // Clear any candidate overlays first
+            clearCandidateValues();
+
             // Restore board to this turn
             if (turnIndex === 0) {
-                // Empty board
+                // Empty board (before any moves)
                 gameState.board = new Array(gameState.boardSize * gameState.boardSize).fill(0);
                 gameState.winningLine = null;
             } else {
-                // Restore board from history
+                // Get the current history entry
                 const historyEntry = gameState.moveHistory[turnIndex - 1];
-                gameState.board = [...historyEntry.boardState];
 
-                // Clear any candidate overlays first
-                clearCandidateValues();
-
-                // Show candidates for this turn if it was an AI move
+                // For AI moves with candidates, we want to show the board state
+                // BEFORE the AI move, with candidate overlays
                 if (historyEntry.player === 'AI' && historyEntry.candidates) {
+                    // Restore board to state BEFORE this AI move
+                    // (i.e., after the previous turn)
+                    if (turnIndex === 1) {
+                        // First move: empty board (or first human move)
+                        gameState.board = new Array(gameState.boardSize * gameState.boardSize).fill(0);
+                        // If first move was human, apply it
+                        const firstEntry = gameState.moveHistory[0];
+                        if (firstEntry.player === 'Human') {
+                            gameState.board[firstEntry.move] = gameState.humanStarts ? 1 : -1;
+                        }
+                    } else {
+                        // Restore from previous history entry
+                        const prevEntry = gameState.moveHistory[turnIndex - 2];
+                        gameState.board = [...prevEntry.boardState];
+                    }
+
+                    // Now render the board (before AI move)
+                    renderBoard();
+
+                    // Display candidates on the pre-move board state
                     for (const [moveIdx, evalData] of Object.entries(historyEntry.candidates)) {
                         const cell = document.querySelector(`[data-index="${moveIdx}"]`);
-                        if (!cell || gameState.board[moveIdx] !== 0) continue;
+                        // Check if cell is empty in the PRE-move board state
+                        if (!cell || gameState.board[parseInt(moveIdx)] !== 0) continue;
 
                         const valueLabel = document.createElement('div');
                         valueLabel.className = 'move-value';
@@ -1952,11 +2005,19 @@
 
                         cell.appendChild(valueLabel);
                     }
+
+                    // Don't update winningLine yet (we're showing pre-move state)
+                    gameState.winningLine = null;
+                } else {
+                    // For human moves or AI moves without candidates,
+                    // just show the post-move state
+                    gameState.board = [...historyEntry.boardState];
+                    gameState.winningLine = null;
+
+                    // Re-render board
+                    renderBoard();
                 }
             }
-
-            // Re-render board
-            renderBoard();
 
             // Update replay UI
             updateReplayUI();

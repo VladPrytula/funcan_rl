@@ -199,10 +199,10 @@ pytest tests/ -v
 If you use this code in your research or teaching, please cite:
 
 ```bibtex
-@book{dubois2026measure,
+@book{2026measure,
   title={From Measure Theory to Deep Reinforcement Learning},
   author={},
-  publisher={Springer},
+  publisher={},
   year={2026}
 }
 ```
@@ -228,7 +228,4 @@ Inspired by:
 - OpenAI Spinning Up
 - DeepMind's AlphaZero paper
 
----
-
-**Questions?** See the `Code_Organization_Guide.md` or open an issue on GitHub.
 

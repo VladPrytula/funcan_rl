@@ -124,7 +124,7 @@ A **textbook in the making**, written in real-time as daily study notes transfor
 
 ## ✨ **What Makes This Different**
 
-Unlike traditional RL courses that separate theory from practice, this journey features **four innovations** that bridge the gap:
+Unlike traditional RL courses that separate theory from practice, this journey features **four features** that bridge the gap:
 
 ### 1. 🔍 **See Algorithms Think in Real-Time**
 

@@ -217,8 +217,19 @@ def get_candidate_evaluations():
                 best_move = move_idx
                 break
 
-        # Convert keys to strings for JSON (JavaScript requires string keys)
-        candidates_json = {str(k): v for k, v in evaluations.items()}
+        # Convert keys to strings and values to JSON-serializable types
+        # (NumPy types need conversion to native Python types)
+        candidates_json = {}
+        for k, v in evaluations.items():
+            # Convert the evaluation dict values to native Python types
+            candidates_json[str(k)] = {
+                'value': float(v['value']),
+                'reasoning': str(v['reasoning']),
+                'depth_used': int(v['depth_used']) if v['depth_used'] is not None else None,
+                'is_best': bool(v['is_best']),
+                'is_terminal': bool(v['is_terminal']),
+                'pv': [int(move) for move in v.get('pv', [])]  # Convert PV list
+            }
 
         return jsonify({
             'candidates': candidates_json,
