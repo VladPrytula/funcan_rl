@@ -9,7 +9,7 @@
 
 ## 🔄 Adjustment Note (Version 2.0)
 
-**Context**: After completing Week 1, coverage analysis revealed significant acceleration beyond the original plan. Week 1 covered not only all planned σ-algebra/measure content but also the complete integration theory (Lebesgue integral, MCT, Fatou, DCT) originally allocated to Week 2.
+**Context**: After completing Week 1, it turned out that we are beyond the original plan. Week 1 covered not only all planned σ-algebra/measure content but also the complete integration theory (Lebesgue integral, MCT, Fatou, DCT) originally allocated to Week 2.
 
 **Key Changes from v1.0**:
 - **Phase I** compressed from 6 weeks → 4 weeks (Weeks 1-4)
