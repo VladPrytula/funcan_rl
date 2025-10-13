@@ -80,7 +80,12 @@
 | DEF-1.1.8 | Measure Agreement | ν agrees with μ on F if ν(A) = μ(A) for all A ∈ F | Week_1/final/day_1/Day_1_FINAL.md:230 | THM-1.1.1 | @folland:real_analysis:1999 §1.4 | [Standard] Used in extension theorems |
 | DEF-1.1.9 | Lebesgue σ-Algebra | Completion of Borel σ-algebra with respect to λ, denoted L(ℝ) | Week_1/final/day_1/Day_1_FINAL.md:252 | THM-1.1.1 | @folland:real_analysis:1999 §1.4 | [Standard] Standard space for analysis |
 | DEF-1.1.10 | Measurable Function | f⁻¹(B) ∈ F for all B ∈ G | Week_1/final/day_1/Day_1_FINAL.md:264 | PROP-1.1.3, PROP-1.1.4, PROP-1.1.5 | @folland:real_analysis:1999 §2.1 | [Standard] Foundation for integration |
-| DEF-1.2.1 | Measure | $\sigma$-additive set function $\mu: \mathcal{A} \to [0, \infty]$ | Week_1/final/day_1/Day_1_FINAL.md:119 | DEF-1.1.3, DEF-1.1.4, DEF-1.1.5, DEF-1.2.2, THM-1.3.1, PROP-1.2.1 | @folland:real_analysis:1999 §1.2 | [Standard] |
+| DEF-1.2.1 | Measure | $\sigma$-additive set function $\mu: \mathcal{A} \to [0, \infty]$ | Week_1/final/day_1/Day_1_FINAL.md:119 | DEF-1.1.3, DEF-1.1.4, DEF-1.1.5, DEF-1.2.2, THM-1.3.1, PROP-1.2.1, PROP-1.2.3 | @folland:real_analysis:1999 §1.2 | [Standard] |
+| DEF-1.2.2 | Simple Function | Function φ: X → ℝ taking finitely many values, measurable, canonical form φ = Σ aᵢ𝟙_{Aᵢ} | Week_1/drafts/day_2/Day_2_references_revised.md:82 | PROP-1.2.3, DEF-1.2.3, DEF-1.2.4 | @folland:real_analysis:1999 §2.1 | [Standard] Foundation for Lebesgue integration |
+| DEF-1.2.3 | Integral of Simple Functions | ∫φ dμ = Σ aᵢ μ(Aᵢ) for non-negative simple φ, convention 0·∞ = 0 | Week_1/drafts/day_2/Day_2_references_revised.md:90 | PROP-1.2.3, DEF-1.2.4 | @folland:real_analysis:1999 §2.1 | [Standard] Discrete scaffolding for integration |
+| DEF-1.2.4 | Integral of Non-Negative Functions | ∫f dμ = sup{∫φ dμ : 0 ≤ φ ≤ f, φ simple} | Week_1/drafts/day_2/Day_2_references_revised.md:137 | PROP-1.2.4, THM-1.2.1, DEF-1.2.6 | @folland:real_analysis:1999 §2.2 | [Standard] Extension by supremum |
+| DEF-1.2.5 | Positive and Negative Parts | f⁺ = max{f, 0}, f⁻ = max{-f, 0}; decomposition f = f⁺ - f⁻ | Week_1/drafts/day_2/Day_2_references_revised.md:173 | DEF-1.2.6 | @folland:real_analysis:1999 §2.2 | [Standard] Decomposition for general functions |
+| DEF-1.2.6 | Lebesgue Integrable | f integrable if ∫|f| dμ < ∞; ∫f dμ = ∫f⁺ dμ - ∫f⁻ dμ; notation f ∈ L¹(μ) | Week_1/drafts/day_2/Day_2_references_revised.md:181 | DEF-1.2.4, DEF-1.2.5 | @folland:real_analysis:1999 §2.2 | [Standard] Final stage: general measurable functions |
 | DEF-2.2.A1 | $\Pi$-System | Collection $\mathcal{P}$ closed under finite intersections | Week_2/final/day_2/Appendix_A2.1_Generator_Based_Sigma_Algebras.md:41 | DEF-2.2.A2, THM-2.2.A1, THM-2.2.A3 | @folland:real_analysis:1999 §1.2 | [Standard] Foundation for $\Pi$-$\lambda$ theorem |
 | DEF-2.2.A2 | $\lambda$-System (Dynkin System) | Collection closed under complements, countable disjoint unions, containing $X$ | Week_2/final/day_2/Appendix_A2.1_Generator_Based_Sigma_Algebras.md:57 | THM-2.2.A1 | @folland:real_analysis:1999 §1.2 | [Standard] Also called d-system |
 | DEF-2.2.A3 | Monotone Class | Collection closed under monotone limits (increasing/decreasing sequences) | Week_2/final/day_2/Appendix_A2.1_Generator_Based_Sigma_Algebras.md:185 | THM-2.2.A2 | @folland:real_analysis:1999 §1.3 | [Standard] Used for functional limit arguments |
@@ -92,6 +97,8 @@
 | ID | Name | Statement (brief) | Location | Status | Dependencies | References | Notes |
 |----|------|-------------------|----------|--------|--------------|------------|-------|
 | THM-1.1.1 | Completion of Measure Space | Every measure space has unique complete extension: F̄ = {A ∪ Z : A ∈ F, Z ⊆ N null} | Week_1/final/day_1/Day_1_FINAL.md:232 | Proved | DEF-1.1.1, DEF-1.1.7, DEF-1.1.8 | @folland:real_analysis:1999 §1.4, Thm 1.9 | [Standard] Full constructive proof in 4 steps |
+| THM-1.2.1 | Monotone Convergence Theorem (Beppo Levi) | If fₙ ≥ 0, f₁ ≤ f₂ ≤ ⋯, fₙ → f pointwise, then lim ∫fₙ dμ = ∫f dμ | Week_1/drafts/day_2/Day_2_references_revised.md:197 | Proved | DEF-1.2.4, PROP-1.2.4, PROP-1.2.1 | @folland:real_analysis:1999 Thm 2.14 | [Standard] Full proof with α-trick. Cornerstone of integration theory. Essential for RL value iteration |
+| THM-1.2.2 | Monotonicity of Value Iteration | For non-negative rewards R ≥ 0, γ ∈ [0,1), V₀ = 0: Vₙ monotone increasing, Vₙ(s) → V*(s) pointwise, T* is γ-contraction | Week_1/drafts/day_2/Day_2_references_revised.md:465 | Proved | THM-1.2.1 | [Original] | RL application of MCT. Justifies finite-time value iteration approximation |
 | THM-1.3.1 | Carathéodory Extension | Premeasure on algebra extends uniquely to $\sigma$-algebra | Week_1/Day_3_FINAL.md:89 | Proved | DEF-1.1.1, DEF-1.2.1, LEM-1.3.1 | @folland:real_analysis:1999 Thm 1.14 | [Standard] Full proof given |
 | THM-1.4.2 | Monotone Convergence | If $f_n \uparrow f$ a.e., then $\int f_n \to \int f$ | Week_1/Day_4_FINAL.md:45 | Proved | DEF-1.3.2, LEM-1.4.1 | @folland:real_analysis:1999 Thm 2.14 | [Standard] Full proof |
 | THM-2.2.1 | Dominated Convergence | If $\|f_n\| \leq g \in L^1$, then $\int f_n \to \int f$ | Week_2/Day_2_FINAL_v2.md:34 | Proved | THM-1.4.2, LEM-2.1.1 | @folland:real_analysis:1999 Thm 2.24 | [Standard] Updated in v2 with RL connection |
@@ -118,8 +125,10 @@
 | PROP-1.1.3 | Closure under Arithmetic | f + g, f · g measurable if f, g measurable | Week_1/final/day_1/Day_1_FINAL.md:276 | Sketch | DEF-1.1.10 | @folland:real_analysis:1999 §2.1 | [Standard] Full proof in Day_1_exercises_FINAL.md |
 | PROP-1.1.4 | Closure under Composition | f ∘ g measurable if g measurable, f continuous | Week_1/final/day_1/Day_1_FINAL.md:280 | Sketch | DEF-1.1.10 | @folland:real_analysis:1999 §2.1 | [Standard] Full proof in Day_1_exercises_FINAL.md, essential for NN value functions |
 | PROP-1.1.5 | Measurability of a.e. Equal Functions | If f measurable, f = g a.e., then g measurable (in complete space) | Week_1/final/day_1/Day_1_FINAL.md:286 | Proved | DEF-1.1.7, DEF-1.1.10 | @folland:real_analysis:1999 §2.1 | [Standard] Requires completeness, key for RL convergence |
-| PROP-1.2.1 | Measure Continuity from Below | $\mu(\bigcup A_n) = \lim \mu(A_n)$ for increasing sets | Week_1/Day_2_FINAL.md:45 | Proved | DEF-1.2.1 | Exercise from @folland:real_analysis:1999 §1.2 | [Original] Formalized exercise |
+| PROP-1.2.1 | Measure Continuity from Below | $\mu(\bigcup A_n) = \lim \mu(A_n)$ for increasing sets | Week_1/Day_2_FINAL.md:45 | Proved | DEF-1.2.1 | Exercise from @folland:real_analysis:1999 §1.2 | [Original] Formalized exercise. Used in MCT proof (α-trick) |
 | PROP-1.2.2 | Measure Continuity from Above | $\mu(\bigcap A_n) = \lim \mu(A_n)$ for decreasing sets, $\mu(A_1) < \infty$ | Week_1/Day_2_FINAL.md:67 | Proved | PROP-1.2.1 | Exercise from @folland:real_analysis:1999 §1.2 | [Original] Formalized exercise |
+| PROP-1.2.3 | Properties of Integral on Simple Functions | Linearity, monotonicity, countable additivity on domain for simple functions | Week_1/drafts/day_2/Day_2_references_revised.md:100 | Proved | DEF-1.2.2, DEF-1.2.3, DEF-1.2.1 | @folland:real_analysis:1999 §2.1 | [Standard] Foundation properties |
+| PROP-1.2.4 | Extension of Properties to Non-Negative Functions | Linearity, monotonicity, countable additivity extend to non-negative measurable functions | Week_1/drafts/day_2/Day_2_references_revised.md:146 | Proved | PROP-1.2.3, DEF-1.2.4, THM-1.2.1 | @folland:real_analysis:1999 §2.2 | [Standard] Note: Circular dependency with MCT (see Remark 1.7A in file) |
 
 ---
 
@@ -127,6 +136,7 @@
 
 | ID | Name | Statement (brief) | Location | Status | Dependencies | References | Notes |
 |----|------|-------------------|----------|--------|--------------|------------|-------|
+| COR-1.2.1 | Countable Additivity of Integral | ∫(Σ_{n=1}^∞ gₙ) dμ = Σ_{n=1}^∞ ∫gₙ dμ for non-negative {gₙ} | Week_1/drafts/day_2/Day_2_references_revised.md:243 | Proved | THM-1.2.1 | @folland:real_analysis:1999 Cor 2.15 | [Standard] Apply MCT to partial sums |
 | COR-1.4.1 | Bounded Convergence | $\int f_n \to \int f$ for uniformly bounded $f_n \to f$ on finite measure space | Week_1/Day_4_FINAL.md:89 | Proved | THM-2.2.1 | @folland:real_analysis:1999 Cor 2.25 | [Standard] Special case of DCT |
 
 ---
@@ -137,6 +147,7 @@
 |----|------|-------------|----------|---------|------------|-------|
 | EX-1.1.2 | Lebesgue Measure | Canonical measure on (ℝ, B(ℝ)), λ((a,b)) = b - a | Week_1/final/day_1/Day_1_FINAL.md:130 | Canonical measure | @folland:real_analysis:1999 §1.4 | [Standard] Construction via Carathéodory (Day 4) |
 | EX-1.2.1 | Counting Measure | $\mu(A) = \|A\|$ on $2^X$ for countable $X$ | Week_1/Day_2_FINAL.md:34 | Canonical discrete measure | @folland:real_analysis:1999 §1.2 | [Standard] |
+| EX-1.2.2 | Monotonically Converging Sequence | fₙ(x) = x(1 - e^{-nx}) ↑ x on [0,1], numerical verification of MCT | Week_1/drafts/day_2/Day_2_references_revised.md:256 | Instructive | THM-1.2.1 | [Original] Continuous example for numerical clarity, includes Python implementation |
 | EX-1.4.1 | MCT Failure without Monotonicity | $f_n = \chi_{[n, n+1]}$ on $\mathbb{R}$, $f_n \to 0$ but $\int f_n = 1$ | Week_1/Day_4_FINAL.md:67 | Show monotonicity necessary | [Original] | Counterexample |
 
 ---
@@ -165,26 +176,27 @@
 **Last Updated:** 2025-10-13
 
 ### By Type
-- **Definitions**: 14
-- **Theorems**: 7
+- **Definitions**: 19
+- **Theorems**: 9
 - **Lemmas**: 1
-- **Propositions**: 7
-- **Corollaries**: 1
-- **Examples**: 3
-- **Total Formal Results**: 33
+- **Propositions**: 9
+- **Corollaries**: 2
+- **Examples**: 4
+- **Total Formal Results**: 44
 - **Postponed**: 1
 
 ### By Status
-- **Proved**: 29
+- **Proved**: 40
 - **Sketch**: 2
 - **Stated**: 0
 - **Postponed**: 1
 - **Exercise**: 0
 
 ### By Week (Progress Tracker)
-- **Week 1**: 24 results (11 DEF, 3 THM, 7 PROP, 1 COR, 3 EX)
-  - Day 1: 15 results (8 DEF, 1 THM, 5 PROP, 1 EX)
-  - Days 2-5: 9 results (3 DEF, 2 THM, 2 PROP, 1 COR, 2 EX)
+- **Week 1**: 35 results (16 DEF, 5 THM, 9 PROP, 2 COR, 4 EX)
+  - Day 1: 18 results (11 DEF, 1 THM, 5 PROP, 1 EX)
+  - Day 2: 14 results (5 DEF, 2 THM, 4 PROP, 1 COR, 2 EX)
+  - Days 3-5: 3 results (1 THM on Day 3, 1 THM + 1 COR + 1 EX on Day 4)
 - **Week 2**: 9 results (3 DEF, 4 THM, 1 LEM) - includes Appendix A2.1
 - **Week 3**: 0 results
 - ...
@@ -197,10 +209,11 @@
 ### Measure Theory (Weeks 1-6)
 - **$\sigma$-algebras**: DEF-1.1.1, DEF-1.1.2, DEF-2.2.A1 ($\Pi$-system), DEF-2.2.A2 ($\lambda$-system), DEF-2.2.A3 (monotone class)
 - **$\sigma$-algebra generation**: THM-2.2.A1 ($\Pi$-$\lambda$ theorem), THM-2.2.A2 (monotone class thm), THM-2.2.A3 (Borel generators)
-- **Measures**: DEF-1.2.1, DEF-1.1.3 (probability), DEF-1.1.4 (σ-finite), DEF-1.1.5 (semifinite), PROP-1.1.1, PROP-1.2.1, PROP-1.2.2, EX-1.1.2 (Lebesgue)
+- **Measures**: DEF-1.2.1, DEF-1.1.3 (probability), DEF-1.1.4 (σ-finite), DEF-1.1.5 (semifinite), PROP-1.1.1, PROP-1.2.1, PROP-1.2.2, EX-1.1.2 (Lebesgue), EX-1.2.1 (counting)
 - **Completeness**: DEF-1.1.6 (closed sets), DEF-1.1.7 (null sets), PROP-1.1.2 (Borel incompleteness), DEF-1.1.8 (measure agreement), THM-1.1.1 (completion), DEF-1.1.9 (Lebesgue σ-algebra)
 - **Measurable functions**: DEF-1.1.10, PROP-1.1.3 (arithmetic), PROP-1.1.4 (composition), PROP-1.1.5 (a.e. equal)
-- **Integration**: THM-1.4.2 (MCT), LEM-2.1.1 (Fatou), THM-2.2.1 (DCT)
+- **Integration foundations**: DEF-1.2.2 (simple functions), DEF-1.2.3 (integral of simple functions), DEF-1.2.4 (integral of non-negative functions), DEF-1.2.5 (positive/negative parts), DEF-1.2.6 (Lebesgue integrable), PROP-1.2.3 (simple function properties), PROP-1.2.4 (extension to non-negative functions)
+- **Integration theorems**: THM-1.2.1 (MCT), COR-1.2.1 (countable additivity), THM-1.2.2 (value iteration monotonicity), THM-1.4.2 (MCT duplicate), LEM-2.1.1 (Fatou), THM-2.2.1 (DCT), EX-1.2.2 (MCT numerical example)
 - **Lᵖ Spaces**: (to be added Weeks 3-6)
 
 ### Probability Theory (Weeks 7-12)

@@ -1,4 +1,4 @@
-[[Day_2 (old)]]
+[[Day_2_FINAL]]
 
 # Appendix A: Numerical Integration of Pathological Measurable Functions
 
@@ -44,7 +44,14 @@ $$
 U(g, P) = \sum_{i=1}^{n} \sup_{x \in [x_{i-1}, x_i]} g(x) \cdot (x_i - x_{i-1})
 $$
 
-The fat Cantor set $C$ is **nowhere dense** (its closure has empty interior), yet has positive measure $\lambda(C) = 1/2$. Crucially, $C$ is closed and uncountable, so every interval $[x_{i-1}, x_i]$ of positive length must intersect $C$ (since $\lambda(C) > 0$ implies $C$ cannot be avoided by any finite partition). Therefore:
+The fat Cantor set $C$ is closed, nowhere dense (its closure has empty interior), and has positive measure $\lambda(C) = 1/2$. At each construction stage $n$, we have $2^n$ closed intervals, and $C = \bigcap_{n=1}^\infty C_n$ where each $C_n$ consists of these intervals.
+
+**Key fact:** The construction of the fat Cantor set ensures that for any interval $[x_{i-1}, x_i]$ of positive length, the accumulation structure of $C$ guarantees that the interval contains points of $C$. This follows from the specific iterative construction:
+1. At each stage, we remove **middle** portions of intervals
+2. The endpoints and accumulation points of the remaining intervals are dense in certain regions
+3. The closure of the set of accumulation points intersects every subinterval of $[0,1]$
+
+Therefore:
 $$
 \sup_{x \in [x_{i-1}, x_i]} g(x) = 1 \quad \text{for every subinterval}
 $$
@@ -59,7 +66,7 @@ $$
 L(g, P) = \sum_{i=1}^{n} \inf_{x \in [x_{i-1}, x_i]} g(x) \cdot (x_i - x_{i-1})
 $$
 
-The complement $[0,1] \setminus C$ is **open and dense** (the removed intervals form a dense open set). Therefore, every subinterval $[x_{i-1}, x_i]$ contains points outside $C$, so:
+The complement $[0,1] \setminus C$ is open (as complement of a closed set) and dense (since $C$ has empty interior). Therefore, every subinterval $[x_{i-1}, x_i]$ contains points outside $C$, so:
 $$
 \inf_{x \in [x_{i-1}, x_i]} g(x) = 0
 $$
@@ -82,54 +89,6 @@ $$
 \int g \, d\lambda = \int \mathbf{1}_C \, d\lambda = \lambda(C) = \frac{1}{2}
 $$
 $\square$
-
----
-
-### **III. Computational Strategy: Lebesgue Integration via Simple Functions**
-
-To numerically compute $\int g \, d\lambda$, we approximate $g$ from below by a sequence of simple functions, following the construction in Exercise 1 of Day 2.
-
-**Algorithm (Lebesgue Approximation):**
-
-For precision level $n$, construct the simple function:
-$$
-\varphi_n(x) = \sum_{k=0}^{n \cdot 2^n - 1} \frac{k}{2^n} \mathbf{1}_{A_{n,k}}(x) + n \cdot \mathbf{1}_{B_n}(x)
-$$
-where:
-$$
-A_{n,k} = \{x : k/2^n \leq g(x) < (k+1)/2^n\}, \qquad B_n = \{x : g(x) \geq n\}
-$$
-
-For our function $g = \mathbf{1}_C$, we have only two relevant sets:
-- $A_{n,0} = [0,1] \setminus C$ (where $g=0$)
-- $A_{n,1} = C$ (where $g=1$, assuming $n \geq 1$ and $2^n \geq 1$)
-
-Thus, for $n \geq 1$:
-$$
-\varphi_n(x) = 0 \cdot \mathbf{1}_{[0,1]\setminus C}(x) + \frac{1}{2^n} \lfloor 2^n \cdot 1 \rfloor \mathbf{1}_C(x) = \mathbf{1}_C(x)
-$$
-
-Wait, this analysis shows that for the indicator function, the simple function approximation immediately equals the function itself for $n \geq 1$. This is correct but not pedagogically interesting for demonstrating convergence.
-
-Let me reconsider. A better approach is to construct $g$ differently, or to demonstrate the approximation via a different measurable function. Let me use a function that actually requires non-trivial approximation.
-
-**Better Example: Cantor Function Derivative (in a generalized sense)**
-
-Actually, let's use a more interesting pathological function for computational purposes. Consider a measurable function that's constructed via a limiting process.
-
-**Definition (Oscillating Indicator Function).**
-For each dyadic rational $q = k/2^n$ with $k$ odd, define an interval $I_q = (q - 1/2^{n+3}, q + 1/2^{n+3})$. Let:
-$$
-D = \bigcup_{q \in \mathbb{Q} \cap [0,1], \, q = k/2^n, k \text{ odd}} I_q
-$$
-
-Define $h(x) = \mathbf{1}_D(x)$.
-
-This function equals 1 on a dense open set $D$ and 0 on its complement. The set $D$ has positive measure (it's an open set), but its complement also has positive measure.
-
-Actually, for computational clarity, let me use the **fat Cantor set** directly and show how to compute its measure and the integral of its indicator function.
-
-Let me restructure this section to be more computationally focused.
 
 ---
 
@@ -157,7 +116,14 @@ $$
 
 This is a **monotone decreasing** sequence of indicator functions (since $C_0 \supseteq C_1 \supseteq C_2 \supseteq \cdots$, we have $\mathbf{1}_{C_0} \geq \mathbf{1}_{C_1} \geq \mathbf{1}_{C_2} \geq \cdots$), converging to a highly discontinuous limit.
 
-**Note on convergence theorems:** The Monotone Convergence Theorem applies to *increasing* sequences. For this decreasing sequence, we observe that $1 - \mathbf{1}_{C_n}$ is increasing, and we could apply MCT to that. Alternatively, we can use the **Dominated Convergence Theorem** (Day 3) with dominating function $\mathbf{1}_{[0,1]}$, which directly handles this case.
+**Note on convergence theorems:** The Monotone Convergence Theorem applies to *increasing* sequences. For this decreasing sequence, we can apply the **Dominated Convergence Theorem** (Day 3) with dominating function $\mathbf{1}_{[0,1]}$.
+
+**Verification of DCT hypotheses:**
+- $\mathbf{1}_{C_n} \to \mathbf{1}_C$ pointwise (established by construction)
+- $|\mathbf{1}_{C_n}(x)| \leq \mathbf{1}_{[0,1]}(x)$ for all $x$ and all $n$
+- $\int \mathbf{1}_{[0,1]} d\lambda = 1 < \infty$ (integrable dominating function)
+
+Therefore, DCT applies: $\lim_{n \to \infty} \int \mathbf{1}_{C_n} d\lambda = \int \mathbf{1}_C d\lambda$, giving $\lim_n \lambda(C_n) = \lambda(C)$. $\square$
 
 #### **B. Numerical Integration via Finite Approximation**
 
@@ -171,15 +137,15 @@ from typing import List, Tuple
 class FatCantorSet:
     """
     Construct the fat Cantor set via iterative removal of middle intervals.
-    At stage n, we have 2^n intervals, and we remove middle portions of 
+    At stage n, we have 2^n intervals, and we remove middle portions of
     total length (1/4) * (1/2)^(n-1).
     """
-    
+
     def __init__(self, max_depth: int = 10):
         self.max_depth = max_depth
         self.intervals_by_stage = []
         self._construct()
-    
+
     def _construct(self):
         """Build the interval decomposition at each stage.
 
@@ -195,33 +161,33 @@ class FatCantorSet:
             # At stage n: remove (1/4) * (1/2)^(n-1) total length
             # Split equally among current intervals
             removal_length_per_interval = (1/4) * (1/2)**(stage-1) / len(current_intervals)
-            
+
             for (a, b) in current_intervals:
                 interval_length = b - a
                 middle_removal = removal_length_per_interval
-                
+
                 # Remove middle portion
                 left_length = (interval_length - middle_removal) / 2
                 right_start = a + left_length + middle_removal
-                
+
                 next_intervals.append((a, a + left_length))
                 next_intervals.append((right_start, b))
-            
+
             current_intervals = next_intervals
             self.intervals_by_stage.append(current_intervals.copy())
-    
+
     def measure_at_stage(self, stage: int) -> float:
         """Compute λ(C_n) by summing interval lengths."""
         if stage > self.max_depth:
             stage = self.max_depth
-        
+
         intervals = self.intervals_by_stage[stage]
         return sum(b - a for a, b in intervals)
-    
+
     def indicator_at_stage(self, stage: int) -> callable:
         """Return indicator function 1_{C_n} at given stage."""
         intervals = self.intervals_by_stage[stage]
-        
+
         def indicator(x):
             """Check if x is in C_n."""
             if isinstance(x, np.ndarray):
@@ -231,33 +197,33 @@ class FatCantorSet:
                 return result
             else:
                 return 1.0 if any(a <= x <= b for a, b in intervals) else 0.0
-        
+
         return indicator
-    
+
     def visualize_construction(self, stages: List[int] = [0, 2, 4, 6]):
         """Visualize the intervals at different construction stages."""
         fig, axes = plt.subplots(len(stages), 1, figsize=(12, 2*len(stages)))
         if len(stages) == 1:
             axes = [axes]
-        
+
         for idx, stage in enumerate(stages):
             ax = axes[idx]
             intervals = self.intervals_by_stage[stage]
-            
+
             # Draw intervals
             for (a, b) in intervals:
                 ax.plot([a, b], [0, 0], 'b-', linewidth=8)
                 ax.fill_between([a, b], -0.1, 0.1, alpha=0.3, color='blue')
-            
+
             measure = self.measure_at_stage(stage)
             ax.set_xlim(-0.05, 1.05)
             ax.set_ylim(-0.3, 0.3)
-            ax.set_title(f'Stage {stage}: $C_{{{stage}}}$ with $\\lambda(C_{{{stage}}}) = {measure:.4f}$', 
+            ax.set_title(f'Stage {stage}: $C_{{{stage}}}$ with $\\lambda(C_{{{stage}}}) = {measure:.4f}$',
                         fontsize=11)
             ax.set_yticks([])
             ax.set_xlabel('$x$')
             ax.grid(True, alpha=0.3)
-        
+
         plt.tight_layout()
         return fig
 
@@ -298,17 +264,15 @@ $$
 $$
 and verify convergence to $\lambda(C) = 1/2$.
 
-**Remark on convergence:** Since $\{\mathbf{1}_{C_n}\}$ is decreasing (not increasing), MCT does not directly apply. However, convergence follows from elementary measure theory: $\lambda(C_n) \to \lambda(C)$ by construction (finite sum of removed intervals). Alternatively, we could apply MCT to $\mathbf{1}_{[0,1]} - \mathbf{1}_{C_n} = \mathbf{1}_{[0,1] \setminus C_n}$, which is increasing, or invoke the Dominated Convergence Theorem (Day 3).
-
 ```python
 # Part 2: Integrate indicator function 1_C via Lebesgue approximation
 
-def integrate_lebesgue_indicator(fat_cantor: FatCantorSet, stage: int, 
+def integrate_lebesgue_indicator(fat_cantor: FatCantorSet, stage: int,
                                   num_sample_points: int = 100000) -> float:
     """
     Compute integral of 1_{C_n} via Monte Carlo sampling.
     This is equivalent to computing the measure of C_n.
-    
+
     For a measurable set A, we have:
     λ(A) = ∫ 1_A dλ = E[1_A(X)] where X ~ Uniform[0,1]
 
@@ -321,13 +285,13 @@ def integrate_lebesgue_indicator(fat_cantor: FatCantorSet, stage: int,
     indicator = fat_cantor.indicator_at_stage(stage)
     x_samples = np.random.uniform(0, 1, num_sample_points)
     indicator_values = indicator(x_samples)
-    
+
     # Monte Carlo estimate
     integral_estimate = np.mean(indicator_values)
-    
+
     # Standard error (for confidence)
     std_error = np.std(indicator_values) / np.sqrt(num_sample_points)
-    
+
     return integral_estimate, std_error
 
 # Compute integrals via Monte Carlo (Lebesgue integration in practice)
@@ -394,19 +358,19 @@ def integrate_simple_function(n: int, num_points: int = 10000) -> float:
     ∫ f_n dλ = Σ_{k=0}^{2^n-1} (k/2^n) · λ(I_{n,k})     (linearity of integral)
              = Σ_{k=0}^{2^n-1} (k/2^n) · (1/2^n)          (each I_{n,k} has length 1/2^n)
              = (1/2^{2n}) Σ_{k=0}^{2^n-1} k               (factor out constants)
-             = (1/2^{2n}) · [(2^n-1)(2^n)/2]              (sum formula: Σ_{k=0}^{m-1} k = m(m-1)/2)
+             = (1/2^{2n}) · [(2^n-1)(2^n)/2]              (sum formula: Σ_{k=0}^{m-1} k = (m-1)m/2)
              = (2^n - 1) / (2^{n+1})                      (simplify)
 
     As n → ∞, this converges to 1/2, verifying MCT.
     """
     # Analytical formula
     analytical = (2**n - 1) / (2**(n+1))
-    
+
     # Numerical verification via Monte Carlo
     x_samples = np.random.uniform(0, 1, num_points)
     f_n_values = dyadic_staircase(x_samples, n)
     numerical = np.mean(f_n_values)
-    
+
     return analytical, numerical
 
 print("\n" + "=" * 70)
@@ -447,7 +411,7 @@ axes[0].legend(fontsize=10)
 axes[0].grid(True, alpha=0.3)
 
 # Right: Integral convergence
-axes[1].plot(n_values, integrals_analytical, 'b.-', markersize=8, linewidth=2, 
+axes[1].plot(n_values, integrals_analytical, 'b.-', markersize=8, linewidth=2,
             label='$\\int f_n \\, d\\lambda$')
 axes[1].axhline(0.5, color='r', linestyle='--', linewidth=2, label='$\\int f \\, d\\lambda = 1/2$')
 axes[1].set_xlabel('$n$ (refinement level)', fontsize=12)
@@ -474,44 +438,53 @@ To complete our analysis, we demonstrate **why Riemann sums fail** for the fat C
 def riemann_sum_lower(fat_cantor: FatCantorSet, stage: int, num_intervals: int) -> float:
     """
     Compute lower Riemann sum for 1_{C_n}.
-    
+
     L(f, P) = Σ inf_{x ∈ [xᵢ, xᵢ₊₁]} f(x) · Δx
-    
-    For 1_C, this is always 0 because C has empty interior 
+
+    For 1_C, this is always 0 because C has empty interior
     (every interval contains points outside C).
+
+    Note: Analytical Riemann sums require computing the exact infimum over each
+    subinterval. Here we approximate via dense sampling (100 points per interval),
+    which suffices for computational demonstration of non-Riemann-integrability
+    but is not a rigorous proof of the analytical claim.
     """
     indicator = fat_cantor.indicator_at_stage(stage)
     partition = np.linspace(0, 1, num_intervals + 1)
     delta_x = 1.0 / num_intervals
-    
+
     lower_sum = 0.0
     for i in range(num_intervals):
         # Sample many points in each subinterval to estimate infimum
         x_samples = np.linspace(partition[i], partition[i+1], 100)
         inf_value = np.min(indicator(x_samples))
         lower_sum += inf_value * delta_x
-    
+
     return lower_sum
 
 def riemann_sum_upper(fat_cantor: FatCantorSet, stage: int, num_intervals: int) -> float:
     """
     Compute upper Riemann sum for 1_{C_n}.
-    
+
     U(f, P) = Σ sup_{x ∈ [xᵢ, xᵢ₊₁]} f(x) · Δx
-    
-    For 1_C, this approaches 1 because C is dense in certain regions.
+
+    For 1_C, this approaches 1 because C accumulates densely in certain regions.
+
+    Note: Analytical Riemann sums require computing the exact supremum over each
+    subinterval. Here we approximate via dense sampling (100 points per interval),
+    which suffices for computational demonstration but is not a rigorous proof.
     """
     indicator = fat_cantor.indicator_at_stage(stage)
     partition = np.linspace(0, 1, num_intervals + 1)
     delta_x = 1.0 / num_intervals
-    
+
     upper_sum = 0.0
     for i in range(num_intervals):
         # Sample many points in each subinterval to estimate supremum
         x_samples = np.linspace(partition[i], partition[i+1], 100)
         sup_value = np.max(indicator(x_samples))
         upper_sum += sup_value * delta_x
-    
+
     return upper_sum
 
 print("\n" + "=" * 70)
@@ -613,6 +586,7 @@ Tomorrow (Day 3), we will prove **Fatou's Lemma** and the **Dominated Convergenc
 **End of Appendix A**
 
 ---
+
 Fat Cantor Set Convergence:
 - Stage 10: λ(C₁₀) = 0.5004882812, Error = 4.88e-04
 - Theoretical limit: λ(C) = 1/2
