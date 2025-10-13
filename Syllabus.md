@@ -18,13 +18,11 @@
 - **No content reduction**: All theorems, proofs, and exercises from v1.0 retained
 - **Net savings**: 2 weeks reallocated to capstone project for robust implementation
 
-**Rationale**: See `Pre_Week_2_Reflection_Syllabus_Adjustment.md` for complete analysis.
-
 ---
 
-## ✨ Pedagogical Innovations
+## ✨ Approach
 
-This course features **four major innovations** that distinguish it from traditional RL textbooks:
+This course features **four major features** that distinguish it from traditional RL textbooks:
 
 ### 1. 🔍 Interactive AI Thinking Visualization
 
@@ -119,7 +117,7 @@ Lab Session 1: [Component] (90 min)
 
 **Total:** ~8,000 lines of tutorial content across 4 game projects (Tic-Tac-Toe, Connect Four, Gomoku, Reversi)
 
-**Impact:** Students can work independently without instructor, following structured progression from theory to working code.
+**Impact:** Students can work independently, following structured progression from theory to working code.
 
 ---
 
@@ -183,7 +181,7 @@ Nine major phases with clear mathematical and RL objectives, plus extended capst
 - Carathéodory extension for general metric spaces (postponed to Week 10)
 - Full Birkhoff ergodic theorem (postponed to Week 9)
 
-**Files**: `Week_1/final/Day_1_FINAL.md` through `Day_5.md`
+**Files**: `Week_1/final/Day_1_FINAL.md` through `Day_5_FINAL.md`
 
 ---
 
