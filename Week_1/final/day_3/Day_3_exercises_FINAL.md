@@ -4,7 +4,7 @@
 
 ---
 
-## Exercise 1: Prove that if $f_n \to f$ in $L^1$, there exists a subsequence converging almost everywhere
+## Exercise 1: Prove that if $f_n \to f$ in $L^1$, there exists a subsequence converging almost everywhere {#EX-1.3.3}
 
 **Statement:** Let $(X, \mathcal{F}, \mu)$ be a measure space, and let $\{f_n\}_{n=1}^{\infty}$ be a sequence of measurable functions such that $f_n \to f$ in $L^1$, i.e.:
 $$
@@ -29,7 +29,7 @@ $$
 
 **Step 2: Apply Markov's inequality and Borel-Cantelli.**
 
-For each $k$ and each $\varepsilon > 0$, Markov's inequality (which states that for a non-negative random variable $X$ and $a > 0$, $\mathbb{P}(X \geq a) \leq \mathbb{E}[X]/a$, or in measure-theoretic form: $\mu(\{x : g(x) \geq a\}) \leq \frac{1}{a} \int g \, d\mu$ for $g \geq 0$) yields:
+For each $k$ and each $\varepsilon > 0$, Markov's inequality [@durrett:probability:2019, §1.6] (which states that for a non-negative random variable $X$ and $a > 0$, $\mathbb{P}(X \geq a) \leq \mathbb{E}[X]/a$, or in measure-theoretic form: $\mu(\{x : g(x) \geq a\}) \leq \frac{1}{a} \int g \, d\mu$ for $g \geq 0$) yields:
 $$
 \mu\left(\left\{x : |f_{n_k}(x) - f(x)| \geq \varepsilon\right\}\right) \leq \frac{1}{\varepsilon} \int |f_{n_k} - f| \, d\mu < \frac{1}{\varepsilon \cdot 2^k}
 $$
@@ -48,7 +48,7 @@ $$
 
 **Step 3: Apply the Borel-Cantelli Lemma.**
 
-By the first Borel-Cantelli lemma (which states: if $\{E_k\}$ is a sequence of measurable sets with $\sum_{k=1}^{\infty} \mu(E_k) < \infty$, then $\mu(\limsup_{k \to \infty} E_k) = 0$), we have:
+By the first Borel-Cantelli lemma [@durrett:probability:2019, §2.3] (which states: if $\{E_k\}$ is a sequence of measurable sets with $\sum_{k=1}^{\infty} \mu(E_k) < \infty$, then $\mu(\limsup_{k \to \infty} E_k) = 0$), we have:
 $$
 \mu\left(\limsup_{k \to \infty} E_k\right) = 0
 $$
@@ -74,11 +74,11 @@ Thus $f_{n_k} \to f$ pointwise on $\left(\limsup E_k\right)^c$, a set of full me
 
 ---
 
-**Remark (RL Relevance):** This result is fundamental in stochastic approximation theory. When we prove convergence of TD learning or Q-learning in $L^1$ (i.e., convergence of expected values), we can always extract an almost-surely convergent subsequence. This is often sufficient for algorithmic purposes, as almost-sure convergence implies convergence in probability, which is the relevant mode for sample-based algorithms.
+**Remark (RL Relevance):** This result is fundamental in stochastic approximation theory. When we prove convergence of TD learning or Q-learning in $L^1$ (i.e., convergence of expected values $\mathbb{E}[\|\theta_n - \theta^*\|] \to 0$), we can always extract an almost-surely convergent subsequence. Almost-sure convergence implies convergence in probability, which is the relevant mode for sample-based algorithms. Thus, proving $L^1$ convergence is often sufficient for algorithmic purposes—a weaker result that is often easier to establish than full almost-sure convergence of the entire sequence.
 
 ---
 
-## Exercise 2: Construct explicit counterexamples showing necessity of each hypothesis in MCT and DCT
+## Exercise 2: Construct explicit counterexamples showing necessity of each hypothesis in MCT and DCT {#EX-1.3.4}
 
 We construct three counterexamples demonstrating that:
 1. MCT fails without monotonicity
@@ -184,7 +184,7 @@ In RL theory, these counterexamples inform our proof strategy:
 
 ---
 
-## Exercise 3: Prove the Monotone Class Theorem for Functions (π-λ for Functions)
+## Exercise 3: Prove the Monotone Class Theorem for Functions (π-λ for Functions) {#THM-1.3.3}
 
 **Motivation:** In §1.6 (conditional expectation) and Week 25 (Bellman operators on general state spaces), we will need to verify properties for all bounded measurable functions. Checking every such function is impossible; the Monotone Class Theorem reduces this to verifying the property on indicators of a generating algebra. This is the functional analyst's version of Dynkin's π-λ system—a tool for extending results from simple sets to all measurable sets via function approximation.
 
@@ -240,7 +240,7 @@ We have shown that $\mathcal{M}$ is a monotone class (closed under increasing an
 
 **Step 3:** Extend to all bounded $\sigma(\mathcal{A})$-measurable functions.
 
-Let $f: X \to \mathbb{R}$ be bounded and $\sigma(\mathcal{A})$-measurable, say $|f| \leq M$ for some $M > 0$. By the standard approximation theorem for measurable functions (Folland, Theorem 2.10; or see Day 2 notes for the dyadic approximation construction), there exists a sequence of simple functions $\varphi_n$ such that $\varphi_n \to f$ pointwise. We can construct this sequence to be increasing and bounded:
+Let $f: X \to \mathbb{R}$ be bounded and $\sigma(\mathcal{A})$-measurable, say $|f| \leq M$ for some $M > 0$. By the standard approximation theorem for measurable functions [@folland:real_analysis:1999, Thm 2.10]; or see Day 2 notes for the dyadic approximation construction), there exists a sequence of simple functions $\varphi_n$ such that $\varphi_n \to f$ pointwise. We can construct this sequence to be increasing and bounded:
 
 For each $n \in \mathbb{N}$, partition the range $[-M, M]$ into dyadic intervals of length $2M/2^n$:
 $$
@@ -265,7 +265,15 @@ The Monotone Class Theorem for Functions is the workhorse for proving that integ
 2. Check that the collection of functions for which it holds satisfies the three hypotheses.
 3. Conclude it holds for all bounded $\sigma(\mathcal{A})$-measurable functions.
 
-In Week 6, we will use this theorem to prove uniqueness of conditional expectation. In Week 25, it will reappear in proving properties of the Bellman operator on general measurable state spaces. This is the bridge from finite/discrete MDPs to continuous state spaces—a central tool in the theoretical foundations of RL.
+In Week 6, we will use this theorem to prove uniqueness of conditional expectation. In Week 25, it will reappear in proving properties of the Bellman operator on general measurable state spaces. This is the bridge from finite/discrete MDPs (where $\mathcal{S}$ is countable and every function is measurable) to continuous state spaces (where $\mathcal{S} = \mathbb{R}^n$ and measurability is non-trivial)—a central tool in the theoretical foundations of RL.
+
+**Concrete RL application:** When proving that the Bellman operator $T^\pi: \mathcal{B}(\mathcal{S}) \to \mathcal{B}(\mathcal{S})$ (mapping bounded measurable functions to bounded measurable functions) is well-defined on a continuous state space $\mathcal{S} = \mathbb{R}^n$, we:
+1. Verify $T^\pi$ is well-defined for indicators $\mathbf{1}_A$ where $A$ are Borel sets
+2. Show $T^\pi$ preserves linear combinations (linearity of expectation)
+3. Show $T^\pi$ preserves monotone limits (by Monotone Convergence Theorem applied to the expectation)
+4. Conclude by Monotone Class Theorem that $T^\pi$ is well-defined for all bounded measurable value functions $V: \mathbb{R}^n \to \mathbb{R}$
+
+This is precisely how Puterman (1994, §4.3-4.5) establishes existence and uniqueness of value functions for MDPs with uncountable state spaces.
 
 ---
 

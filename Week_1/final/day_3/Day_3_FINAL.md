@@ -3,7 +3,7 @@
 ### Agenda:
 
 ##### 📘 Day 3 – Week 1: Fatou's Lemma and Dominated Convergence
-**Total time: ~90 minutes**
+**Total time: ~2-2.5 hours**
 
 ---
 
@@ -11,7 +11,7 @@
 
 **Topic:** _Fatou's Lemma and Dominated Convergence Theorem_
 
-- Read from **Folland, "Real Analysis" §2.3** or Durrett Ch. 1.
+- Read from [@folland:real_analysis:1999, §2.3] or [@durrett:probability:2019, Ch. 1].
 - Focus on:
     - Statement of Fatou's Lemma and its relationship to MCT
     - Dominated Convergence Theorem (DCT) complete statement
@@ -76,7 +76,7 @@ But DCT does not appear from thin air. It is built upon a more primitive result,
 
 We begin with a result that, while less celebrated than DCT, is logically prior and equally fundamental.
 
-**Theorem 1.7 (Fatou's Lemma).** Let $(X, \mathcal{F}, \mu)$ be a measure space, and let $\{f_n\}_{n=1}^{\infty}$ be a sequence of non-negative measurable functions $f_n: X \to [0, \infty]$. Then:
+**Theorem 1.7 (Fatou's Lemma).** {#THM-1.3.1} Let $(X, \mathcal{F}, \mu)$ be a measure space, and let $\{f_n\}_{n=1}^{\infty}$ be a sequence of non-negative measurable functions $f_n: X \to [0, \infty]$. Then:
 $$
 \int \liminf_{n \to \infty} f_n \, d\mu \leq \liminf_{n \to \infty} \int f_n \, d\mu \tag{1.4}
 $$
@@ -100,7 +100,7 @@ By the definition of infimum over a tail of the sequence, we have:
 $$
 g_1(x) \leq g_2(x) \leq g_3(x) \leq \cdots
 $$
-That is, $\{g_n\}$ is an increasing sequence of functions. Moreover, each $g_n$ is measurable. This follows because $g_n(x) = \inf_{k \geq n} f_k(x) = \inf_{k \in \mathbb{N}} f_{n+k-1}(x)$, and the infimum of a countable collection of measurable functions is measurable (§1.1, Proposition 1.2, which states: if $\{h_i\}_{i \in I}$ is a countable collection of measurable functions, then $\inf_{i \in I} h_i$ and $\sup_{i \in I} h_i$ are measurable).
+That is, $\{g_n\}$ is an increasing sequence of functions. Moreover, each $g_n$ is measurable. This follows because $g_n(x) = \inf_{k \geq n} f_k(x) = \inf_{k \in \mathbb{N}} f_{n+k-1}(x)$, and the infimum of a countable collection of measurable functions is measurable [@folland:real_analysis:1999, §2.1] (§1.1, Proposition 1.2, which states: if $\{h_i\}_{i \in I}$ is a countable collection of measurable functions, then $\inf_{i \in I} h_i$ and $\sup_{i \in I} h_i$ are measurable).
 
 **Step 2: Identify the limit of $\{g_n\}$.**
 By the definition of $\liminf$:
@@ -148,7 +148,7 @@ as claimed. □
 
 Fatou's Lemma handles non-negative functions but yields only a one-sided inequality. To obtain full limit interchange for signed functions, we require an additional hypothesis—domination—which we now introduce. We arrive at the central result of Lebesgue integration theory, the theorem that makes the Lebesgue integral indispensable in modern analysis and probability.
 
-**Theorem 1.8 (Dominated Convergence Theorem, DCT).** Let $(X, \mathcal{F}, \mu)$ be a measure space, and let $\{f_n\}_{n=1}^{\infty}$ be a sequence of measurable functions $f_n: X \to \mathbb{R}$ such that:
+**Theorem 1.8 (Dominated Convergence Theorem, DCT).** {#THM-1.3.2} Let $(X, \mathcal{F}, \mu)$ be a measure space, and let $\{f_n\}_{n=1}^{\infty}$ be a sequence of measurable functions $f_n: X \to \mathbb{R}$ such that:
 1. **Pointwise convergence:** $f_n(x) \to f(x)$ for $\mu$-almost every $x \in X$, where $f: X \to \mathbb{R}$ is measurable.
 2. **Domination:** There exists an integrable function $g: X \to [0, \infty)$ with $\int g \, d\mu < \infty$ such that:
    $$
@@ -162,7 +162,7 @@ $$
 
 **Remark 1.10 (Why "Dominated"?).** The name derives from the hypothesis that $|f_n|$ is bounded above by an integrable function $g$. This dominating function $g$ prevents the mass of $f_n$ from "escaping to infinity." Without such control, the integrals $\int f_n$ could diverge even when $f_n \to f$ pointwise. The dominating function is the price we pay for generality—it replaces monotonicity with boundedness.
 
-**Remark 1.11 (Sharpness of Hypotheses).** Both hypotheses are necessary. We will demonstrate this with precise counterexamples in §III below:
+**Remark 1.11 (Sharpness of Hypotheses).** Both hypotheses are necessary. We demonstrate this with precise counterexamples in §III below (Examples 1.3-1.4) and systematically in Exercise 2 (Day_3_exercises.md), where we construct counterexamples for MCT without monotonicity, DCT without pointwise convergence, and DCT without domination:
 - **Pointwise convergence alone is insufficient.** Even when $f_n \to f$ pointwise, without domination the integrals may fail to converge to $\int f$.
 - **Domination alone is insufficient.** We also need pointwise convergence; bounded sequences without pointwise limits cannot satisfy the DCT conclusion.
 
@@ -235,7 +235,7 @@ which implies that $\lim_{n \to \infty} \int f_n \, d\mu$ exists and equals $\in
 
 To appreciate DCT fully, we must see where it fails. The following examples, presented immediately after the theorem, illustrate the necessity of each hypothesis.
 
-**Example 1.3 (Failure Without Domination: Escaping Mass).**
+**Example 1.3 (Failure Without Domination: Escaping Mass).** {#EX-1.3.1}
 Let $(X, \mathcal{F}, \mu) = (\mathbb{R}, \mathcal{B}(\mathbb{R}), \lambda)$ be the real line with Lebesgue measure. Define:
 $$
 f_n(x) = \frac{1}{n} \mathbf{1}_{[0, n]}(x)
@@ -259,7 +259,7 @@ Then:
   $$
   Thus $g$ is not integrable. The "mass" of $f_n$ escapes to infinity—the support $[0, n]$ grows unboundedly, preventing domination by any integrable function.
 
-**Example 1.4 (Failure Without Pointwise Convergence: The Typewriter Sequence).**
+**Example 1.4 (Failure Without Pointwise Convergence: The Typewriter Sequence).** {#EX-1.3.2}
 On $([0, 1], \mathcal{B}([0,1]), \lambda)$, enumerate all dyadic intervals. Specifically, list them by level, then left-to-right within each level: $I_1 = [0, 1]$, $I_2 = [0, 1/2]$, $I_3 = [1/2, 1]$, $I_4 = [0, 1/4]$, $I_5 = [1/4, 1/2]$, $I_6 = [1/2, 3/4]$, $I_7 = [3/4, 1]$, and so on. At level $k$, we have $2^k$ intervals of length $1/2^k$. Define $f_n = \mathbf{1}_{I_n}$. Then:
 
 - **Domination:** $|f_n| \leq 1$ for all $n$, so the sequence is dominated by the constant function $g(x) \equiv 1$, which satisfies $\int_{[0,1]} g \, d\lambda = 1 < \infty$.
@@ -288,7 +288,14 @@ In RL theory, these counterexamples inform our proof strategy:
 $$
 \lim_{n \to \infty} \mathbb{E}[X_n] = \mathbb{E}\left[\lim_{n \to \infty} X_n\right]
 $$
-provided $X_n \to X$ almost surely and $|X_n| \leq Y$ for some integrable random variable $Y$. This is invoked constantly in RL theory. We now examine three essential applications in detail.
+provided $X_n \to X$ almost surely and $|X_n| \leq Y$ for some integrable random variable $Y$. This appears throughout RL theory—far beyond the three applications detailed below. DCT underlies:
+- **Convergence of policy iteration** (showing $V^{\pi_k} \to V^*$ when policies improve, Week 25)
+- **Q-learning convergence** (Watkins & Dayan 1992, using stochastic approximation, Week 36)
+- **Actor-critic methods** (showing critic and actor iterates converge simultaneously, Konda & Tsitsiklis 2000, Week 37)
+- **Finite-sample analysis** (bounding $|\mathbb{E}[\hat{V}] - V^*|$ when $\hat{V}$ is an empirical estimate)
+- **Function approximation error propagation** (Munos 2003, 2007, Week 35)
+
+In a typical RL theory paper, DCT or its corollaries (bounded convergence, uniform integrability) appear 5-10 times—often implicitly. We now examine three essential applications in detail.
 
 **Application 1: Policy Evaluation and the Bellman Operator**
 
@@ -308,7 +315,15 @@ $$
 $$
 and solving $V_{\max} = R_{\max} + \gamma V_{\max}$ gives $V_{\max} = R_{\max}/(1-\gamma)$.
 
-Moreover, under the contraction property of the Bellman operator (Week 18, Banach Fixed Point Theorem), $V_n \to V^\pi$ pointwise. Intuitively, the discounting factor $\gamma < 1$ causes errors to shrink geometrically under iteration—formalized in Week 18 as a contraction in $L^\infty$ norm.
+Moreover, the Bellman policy evaluation operator $T^\pi V = r^\pi + \gamma P^\pi V$ is a $\gamma$-contraction in the $L^\infty$ (sup) norm (Week 18, Banach Fixed Point Theorem). That is:
+$$
+\|T^\pi V - T^\pi W\|_\infty \leq \gamma \|V - W\|_\infty
+$$
+By the Banach Fixed Point Theorem, iterative application $V_{n+1} = T^\pi V_n$ converges to the unique fixed point $V^\pi$ in $L^\infty$ norm:
+$$
+\|V_n - V^\pi\|_\infty \leq \gamma^n \|V_0 - V^\pi\|_\infty \to 0
+$$
+Convergence in $L^\infty$ implies uniform convergence, hence pointwise convergence: $V_n(s) \to V^\pi(s)$ for all $s \in \mathcal{S}$.
 
 To prove that the expected value converges, i.e., $\mathbb{E}_\mu[V_n] \to \mathbb{E}_\mu[V^\pi]$ for some initial state distribution $\mu$, we invoke DCT:
 - **Pointwise convergence:** $V_n(s) \to V^\pi(s)$ for all $s$ (from contraction mapping).
@@ -326,7 +341,7 @@ In TD(0), the value function update is:
 $$
 V_{t+1}(S_t) = V_t(S_t) + \alpha_t \left[R_t + \gamma V_t(S_{t+1}) - V_t(S_t)\right]
 $$
-The sequence $\{V_t\}$ is a stochastic approximation. Under standard regularity conditions—Robbins-Monro step sizes ($\sum \alpha_t = \infty$, $\sum \alpha_t^2 < \infty$), boundedness of rewards, Lipschitz continuity of the TD error, and stability (bounded iterates or projection onto a compact set)—one can prove $V_t \to V^\pi$ almost surely. This convergence is non-trivial; the proof via the ODE method is deferred to Week 36 (Borkar, Chapter 2).
+The sequence $\{V_t\}$ is a stochastic approximation. Under standard regularity conditions—Robbins-Monro step sizes ($\sum \alpha_t = \infty$, $\sum \alpha_t^2 < \infty$), boundedness of rewards, Lipschitz continuity of the TD error, stability (bounded iterates or projection onto a compact set), and **ergodicity** of the Markov chain under $\pi$ (ensuring the stationary distribution $d^\pi$ exists and all states have positive probability under $d^\pi$)—one can prove $V_t \to V^\pi$ almost surely. In the function approximation case (Week 41), we additionally require positive definiteness of the feature covariance matrix. This convergence is non-trivial; the proof via the **ODE method** (Week 36, Borkar §2.2) shows that the discrete-time trajectory $\theta_n$ tracks the flow of the continuous ODE $\dot{\theta} = h(\theta)$ where $h(\theta) = \mathbb{E}[\text{TD error} | \theta]$. DCT is used in the key interpolation step: showing that $\theta_{\lfloor t/\alpha \rfloor}$ converges to the ODE solution $\theta(t)$ as the step size $\alpha \to 0$. The dominating function ensures that the interpolated trajectories remain in a compact set, allowing passage to the limit.
 
 To conclude that $\mathbb{E}[V_t(s)] \to V^\pi(s)$, we need DCT. The dominating function is $g(s) = V_{\max}$, derived from reward boundedness as in Application 1. In deep RL with unbounded state spaces, domination is enforced via reward clipping or value function normalization (see Week 41, Deep RL Theory). The pointwise convergence $V_t(s) \to V^\pi(s)$ follows from stochastic approximation theory (Week 34-36).
 
@@ -346,13 +361,26 @@ $$
 \end{align}
 $$
 
-The interchange in the second step requires DCT applied to the difference quotient:
-$$
-\frac{J(\theta + h) - J(\theta)}{|h|} = \int \frac{\pi_{\theta+h}(\tau) - \pi_\theta(\tau)}{|h|} G(\tau) \, d\tau
-$$
-By the mean value theorem, $\frac{\pi_{\theta+h}(\tau) - \pi_\theta(\tau)}{|h|} = \nabla_\theta \pi_{\theta + \xi h}(\tau)$ for some $\xi \in [0, 1]$. If $\nabla_\theta \pi_\theta(\tau)$ is Lipschitz continuous in $\theta$ and $G(\tau)$ is bounded (or more generally, if $|\nabla_\theta \log \pi_\theta(\tau) \cdot G(\tau)| \leq h(\tau)$ for some integrable $h$), then the sequence of difference quotients is dominated by an integrable function. DCT then justifies taking the limit inside the integral.
+The interchange in the second step requires the Leibniz integral rule for differentiation under the integral sign, which is justified by DCT under appropriate regularity conditions:
 
-Without DCT, we cannot rigorously justify the policy gradient estimator. The dominating function corresponds to regularity assumptions (Lipschitz policy, bounded returns) that are standard in RL theory precisely because DCT requires them.
+**Bounded returns case** (simplest): If $|G(\tau)| \leq G_{\max}$ for all trajectories, and $\pi_\theta(\tau)$ is continuously differentiable in $\theta$ with Lipschitz continuous gradient ($\|\nabla_\theta \pi_\theta(\tau)\| \leq L$ uniformly in $\theta$ and $\tau$), then the difference quotient
+$$
+\left|\frac{\pi_{\theta+h}(\tau) - \pi_\theta(\tau)}{|h|} G(\tau)\right| \leq L \cdot G_{\max}
+$$
+is uniformly bounded, and DCT applies with constant dominating function $g(\tau) = L \cdot G_{\max}$.
+
+**Unbounded returns case**: If rewards are unbounded, we require stronger moment conditions. Sufficient conditions include:
+1. $\mathbb{E}_{\tau \sim \pi_\theta}[G(\tau)^2] < \infty$ uniformly in $\theta$ (bounded variance), AND
+2. $\sup_{\theta' \in B_\epsilon(\theta)} \|\nabla_{\theta'} \log \pi_{\theta'}(\tau)\|^2$ is integrable under $\pi_\theta$ for some $\epsilon > 0$
+
+Then by Cauchy-Schwarz, the expectation of the difference quotient is well-defined and DCT applies.
+
+**Practical note**: Most deep RL implementations avoid this issue via:
+- **Reward clipping** (ensures bounded returns)
+- **Baseline subtraction** (reduces variance, often makes $G(\tau) - b(s)$ effectively bounded)
+- **Truncated importance sampling** (for off-policy policy gradients)
+
+The rigorous conditions are often stronger than what's needed in practice, but this is the theory-practice gap we must acknowledge. Without DCT, we cannot rigorously justify the policy gradient estimator. The dominating function corresponds to regularity assumptions (Lipschitz policy, bounded returns) that are standard in RL theory precisely because DCT requires them.
 
 **Summary:** DCT is the unsung hero of reinforcement learning theory. It appears in every convergence proof, every interchange of limit and expectation, every gradient computation. When we write $\lim \mathbb{E} = \mathbb{E} \lim$ in an RL paper, we are implicitly invoking Theorem 1.8. The dominating function corresponds to boundedness assumptions on rewards, value functions, or policy gradients—conditions that are standard in RL theory precisely because DCT requires them.
 

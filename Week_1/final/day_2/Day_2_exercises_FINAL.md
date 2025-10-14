@@ -1,4 +1,3 @@
-
 [[Day 2]]
 
 # The Lebesgue Integral and Monotone Convergence Theorem
@@ -37,7 +36,7 @@ Since $\{f_n(x)\}$ is a monotone increasing sequence, we have for each $x \in X$
 $$
 f(x) = \lim_{n \to \infty} f_n(x) = \sup_{n \geq 1} f_n(x)
 $$
-This equality holds because any monotone increasing sequence that is bounded above by $\sup_n f_n(x)$ converges to that supremum (by elementary real analysis: the limit of an increasing sequence equals its supremum when the limit exists).
+This equality holds because by elementary real analysis (completeness of $\mathbb{R}$), any monotone increasing sequence of real numbers that is bounded above converges, and its limit equals its supremum.
 
 For any $a \in \mathbb{R}$, consider the set:
 $$
@@ -66,7 +65,7 @@ $\blacksquare$ (Step 1)
 
 **Proof of Step 2:**
 
-By the monotonicity of the functions, we have $f_n \leq f_{n+1}$ for all $n$. The monotonicity property of the integral (which we established for non-negative measurable functions in Proposition 1.7) gives:
+By the monotonicity of the functions, we have $f_n \leq f_{n+1}$ for all $n$. The monotonicity property of the integral (which we established for non-negative measurable functions in [PROP-1.2.2]) gives:
 $$
 \int f_n \, d\mu \leq \int f_{n+1} \, d\mu
 $$
@@ -94,15 +93,10 @@ This is the crux of the theorem. We must prove that the integral of the limit is
 
 **Proof of Step 3:**
 
-Let $\varphi$ be an arbitrary non-negative simple function with $0 \leq \varphi \leq f$. By the definition of the integral for non-negative functions as a supremum over simple functions, it suffices to prove:
-$$
-\int \varphi \, d\mu \leq \lim_{n\to\infty} \int f_n \, d\mu
-$$
-
-Once we establish this for all such $\varphi$, taking the supremum over all simple functions $\varphi \leq f$ will give us:
-$$
-\int f \, d\mu = \sup_{0 \leq \varphi \leq f, \, \varphi \text{ simple}} \int \varphi \, d\mu \leq \lim_{n \to \infty} \int f_n \, d\mu
-$$
+Let $\varphi$ be an arbitrary non-negative simple function with $0 \leq \varphi \leq f$. Since the integral of a non-negative measurable function $f$ is defined as
+$$\int f \, d\mu = \sup\left\{\int \varphi \, d\mu : 0 \leq \varphi \leq f, \, \varphi \text{ simple}\right\}$$
+proving $\int \varphi \, d\mu \leq \lim_{n\to\infty} \int f_n \, d\mu$ for every such simple function $\varphi$ and then taking the supremum over all $\varphi$ yields
+$$\int f \, d\mu = \sup_\varphi \int \varphi \, d\mu \leq \lim_{n \to \infty} \int f_n \, d\mu$$
 
 **The α-Trick:**
 
@@ -118,13 +112,13 @@ $$
 2.  **Monotonicity:** If $x \in E_n$, then $f_n(x) \geq \alpha\varphi(x)$. Since $f_{n+1}(x) \geq f_n(x)$, we have $f_{n+1}(x) \geq \alpha\varphi(x)$, so $x \in E_{n+1}$. Thus, $E_1 \subseteq E_2 \subseteq E_3 \subseteq \cdots$.
 
 3.  **Exhaustion:** We claim that $\bigcup_{n=1}^{\infty} E_n = X$.
-    
+
     *Proof:* Take any $x \in X$. We have two cases:
-    
-    *   If $\varphi(x) = 0$, then $\alpha\varphi(x) = 0$, so $f_n(x) \geq 0 = \alpha\varphi(x)$ for all $n \geq 1$. Thus, $x \in E_1 \subseteq \bigcup E_n$.
+
+    *   If $\varphi(x) = 0$, then $\alpha\varphi(x) = 0$ for any $\alpha > 0$. Since $f_n(x) \geq 0$ for all $n$ (by hypothesis), we have $f_n(x) \geq 0 = \alpha\varphi(x)$ for all $n \geq 1$, so $x \in E_1$. In particular, $x \in \bigcup E_n$.
     *   If $\varphi(x) > 0$, then since $f_n(x) \to f(x)$ and $f(x) \geq \varphi(x) > \alpha\varphi(x)$ (because $\alpha < 1$), there must exist some index $N$ such that $f_N(x) \geq \alpha\varphi(x)$. Therefore, $x \in E_N \subseteq \bigcup E_n$.
-    
-    In both cases, $x \in \bigcup E_n$. Hence, $\bigcup_{n=1}^{\infty} E_n = X$.
+
+    In both cases, $x \in \bigcup E_n$. We have shown $X \subseteq \bigcup_{n=1}^\infty E_n$ by verifying every $x \in X$ belongs to some $E_n$. The reverse inclusion $\bigcup_{n=1}^\infty E_n \subseteq X$ is immediate since $E_n \subseteq X$ by definition for each $n$. Therefore $\bigcup_{n=1}^\infty E_n = X$. $\blacksquare$ (Exhaustion claim)
 
 **Using the sets $E_n$:**
 
@@ -151,7 +145,7 @@ $$
 $$
 \mu(E) = \sum_{n=1}^{\infty} \mu(F_n) = \lim_{N \to \infty} \sum_{n=1}^{N} \mu(F_n) = \lim_{N \to \infty} \mu(E_N)
 $$
-where the last equality follows from $E_N = \bigcup_{n=1}^{N} F_n$. $\square$ 
+where the last equality follows from $E_N = \bigcup_{n=1}^{N} F_n$. $\square$
 
 For a simple function $\varphi = \sum_{i=1}^{k} a_i \mathbf{1}_{A_i}$ with $a_i \geq 0$:
 $$
@@ -298,14 +292,19 @@ $$
 2. **Measurability of the sets:** Since $f$ is measurable, $A_{n,k} = f^{-1}([k/2^n, (k+1)/2^n))$ and $B_n = f^{-1}([n, \infty])$ are measurable.
 
 3. **Monotonicity:** If $f(x) < n$, then $\varphi_n(x) = \lfloor 2^n f(x) \rfloor / 2^n$ and $\varphi_{n+1}(x) = \lfloor 2^{n+1} f(x) \rfloor / 2^{n+1}$. Since the partition for $n+1$ is finer, $\varphi_{n+1}(x) \geq \varphi_n(x)$.
-   If $f(x) \geq n$, then $\varphi_n(x) = n \leq n+1 \leq \varphi_{n+1}(x)$.
+
+   If $f(x) \geq n$, then either:
+   - Case 1: $f(x) \geq n+1$, giving $\varphi_{n+1}(x) = n+1 \geq n = \varphi_n(x)$
+   - Case 2: $n \leq f(x) < n+1$, giving $\varphi_{n+1}(x) = \lfloor 2^{n+1} f(x) \rfloor / 2^{n+1}$. Since $f(x) \geq n$, we have $2^{n+1} f(x) \geq n \cdot 2^{n+1}$, thus $\lfloor 2^{n+1} f(x) \rfloor \geq n \cdot 2^{n+1}$, so $\varphi_{n+1}(x) \geq n = \varphi_n(x)$.
+
+   Thus monotonicity holds in all cases.
 
 4. **Convergence:** For $x$ with $f(x) < \infty$, choose $N$ such that $f(x) < N$. For $n \geq N$, if $f(x) \in [k/2^n, (k+1)/2^n)$ for some $k < n \cdot 2^n$, then $\varphi_n(x) = k/2^n$, which satisfies:
    $$
    f(x) - \frac{1}{2^n} < \varphi_n(x) = \frac{k}{2^n} \leq f(x)
    $$
    More precisely, $\varphi_n(x) = \lfloor 2^n f(x) \rfloor / 2^n \in [f(x) - 2^{-n}, f(x)]$, so $|\varphi_n(x) - f(x)| < 2^{-n} \to 0$ as $n \to \infty$.
-   
+
    If $f(x) = \infty$, then $\varphi_n(x) = n \to \infty = f(x)$.
 
 Thus, $\{\varphi_n\}$ satisfies all required properties. $\square$
@@ -347,9 +346,9 @@ $$
 \int g_n \, d\mu \leq \int f_n \, d\mu
 $$
 
-**Step 6:** Since $\{\int g_n\}$ is an increasing sequence (by MCT applied to $g_n$), we have:
+**Step 6:** Since $\{g_n\}$ is an increasing sequence, the sequence $\{\int g_n\}$ is also increasing. Therefore:
 $$
-\lim_{n \to \infty} \int g_n \, d\mu = \liminf_{n \to \infty} \int g_n \, d\mu \leq \liminf_{n \to \infty} \int f_n \, d\mu
+\lim_{n \to \infty} \int g_n \, d\mu = \sup_{n \geq 1} \int g_n \, d\mu = \liminf_{n \to \infty} \int g_n \, d\mu \leq \liminf_{n \to \infty} \int f_n \, d\mu
 $$
 
 **Conclusion:** Combining the steps:
@@ -357,7 +356,7 @@ $$
 \int \left(\liminf_{n \to \infty} f_n\right) d\mu = \lim_{n \to \infty} \int g_n \, d\mu \leq \liminf_{n \to \infty} \int f_n \, d\mu
 $$
 
-This is **Fatou's Lemma**, which we will study in detail on Day 3. $\square$
+This is **Fatou's Lemma**, which we will study in detail on Day 3. This derivation illustrates that Fatou's Lemma is a direct consequence of MCT applied to the "liminf sequence" $g_n = \inf_{k\geq n} f_k$. The full Fatou's Lemma (Day 3) will not require additional proof beyond MCT—the insight is recognizing that liminf can be expressed as a monotone limit. $\square$
 
 ---
 
@@ -371,11 +370,19 @@ The non-negativity assumption in MCT serves a fundamental purpose: it ensures th
 
 **Why Non-Negativity Matters:**
 
+**Definition (Positive and Negative Parts).** For any measurable function $f: X \to \mathbb{R}$, we define:
+- **Positive part**: $f^+(x) := \max(f(x), 0) = \frac{|f(x)| + f(x)}{2}$
+- **Negative part**: $f^-(x) := \max(-f(x), 0) = \frac{|f(x)| - f(x)}{2}$
+
+Both $f^+$ and $f^-$ are non-negative measurable functions satisfying:
+- $f(x) = f^+(x) - f^-(x)$ for all $x$
+- $|f(x)| = f^+(x) + f^-(x)$ for all $x$
+
 For a measurable function $f: X \to \mathbb{R}$, the Lebesgue integral is defined via the Jordan decomposition:
 $$
 \int f \, d\mu = \int f^+ \, d\mu - \int f^- \, d\mu
 $$
-where $f^+(x) = \max(f(x), 0)$ and $f^-(x) = \max(-f(x), 0)$.
+provided at least one of the integrals on the right is finite (avoiding the indeterminate form $\infty - \infty$).
 
 This integral is **well-defined** only when at least one of $\int f^+$ or $\int f^-$ is finite, avoiding the indeterminate form $\infty - \infty$.
 
@@ -398,6 +405,10 @@ Here MCT's conclusion happens to hold, but this is a degenerate case where every
 **The Real Problem:**
 
 The issue arises when monotone sequences of signed functions yield $\int f_n = -\infty$ for all $n$, or when partial integrals $\int f_n^+$ and $\int f_n^-$ both diverge to infinity. In such cases, the equation "$\lim \int f_n = \int f$" involves manipulating infinite quantities where standard arithmetic breaks down.
+
+**Counterexample (when non-negativity fails):** Consider on $([0,1]$, Borel, Lebesgue):
+$$f_n(x) = \begin{cases} n^2 x & \text{if } x \in [0, 1/n] \\ -n^2(x - 2/n) & \text{if } x \in (1/n, 2/n] \\ 0 & \text{if } x > 2/n \end{cases}$$
+Each $f_n$ has $\int f_n dx = 0$ (the positive and negative parts cancel). The sequence is not monotone, and $f_n(x) \to 0$ for all $x > 0$ (pointwise). Here $\int f_n = 0 \to 0 = \int f$, so MCT's conclusion holds, but *not due to MCT's hypotheses*—this is a different mechanism (DCT with domination).
 
 **The Solution: Dominated Convergence Theorem**
 
@@ -446,7 +457,7 @@ The right-hand side is:
 $$
 \lim_{N \to \infty} \int \left(\sum_{n=1}^{N} g_n\right) d\mu = \lim_{N \to \infty} \sum_{n=1}^{N} \int g_n \, d\mu = \sum_{n=1}^{\infty} \int g_n \, d\mu
 $$
-where we used linearity of the integral for finite sums. $\square$
+where we used linearity of the integral for finite sums (Linearity for finite sums of non-negative measurable functions follows immediately from the definition via simple functions: if $f, g \geq 0$ are measurable, then $\int (f+g) = \int f + \int g$, which extends by induction to finite sums. See Day 2 main text, [PROP-1.2.2] for details.) $\square$
 
 **Corollary (Tonelli for Counting Measure):** This result is the discrete version of Tonelli's theorem, which we will study in Week 3.
 
