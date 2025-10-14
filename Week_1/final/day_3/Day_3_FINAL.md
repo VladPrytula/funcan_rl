@@ -3,7 +3,7 @@
 ### Agenda:
 
 ##### 📘 Day 3 – Week 1: Fatou's Lemma and Dominated Convergence
-**Total time: ~90 minutes**
+**Total time: ~2-2.5 hours**
 
 ---
 
