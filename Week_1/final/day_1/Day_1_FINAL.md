@@ -69,6 +69,8 @@ This is a perfectly well-defined function set-theoretically. But suppose the ini
 
 Crucially, this is not merely a mathematical curiosity. A physical computing device—whether a digital controller or a neural network—can only represent functions that are **computable**, which necessarily implies Borel measurability. The Vitali set is not computable; no algorithm can decide membership in $V$. Thus measurability is not an abstract constraint—it is the mathematical formalization of **computability** in continuous spaces.
 
+**Remark (On Computability and Measurability).** The identification of measurability with physical computability is a crucial intuition. To be fully precise, the relationship is that any function computable by an idealized device (e.g., a Turing machine operating on real numbers) must indeed be Borel measurable. The converse, however, does not hold. The class of all Borel measurable functions has the cardinality of the continuum, whereas the class of all computable functions is only countable. There are thus "many more" Borel functions than computable ones. The key insight for our purposes remains perfectly valid: a function that is *not* measurable, such as one defined on a Vitali set, lies definitively outside the realm of what is computable or physically realizable, justifying our restriction to the measurable world.
+
 More deeply, for a device to implement $\pi^*$, it must determine whether $s \in V$. A physical sensor can only perform finite measurements—checking if $s$ lies in intervals, or countable combinations thereof. It can at best determine membership in **Borel sets**. The question "is $s \in V$?" requires access to information about the real line that is physically unobtainable.
 
 ---
