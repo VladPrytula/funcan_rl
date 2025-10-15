@@ -44,7 +44,7 @@ Understand the proof of Fatou's Lemma and its role in proving DCT. Work through 
 - Essential for proving correctness of TD($\lambda$), Q-learning, and policy gradient methods
 
 **Open question for tomorrow:**
-How does the requirement of a dominating function translate to boundedness assumptions in MDP theory? Where in the Carathéodory extension does countable additivity of the outer measure get promoted to countable additivity of the extended measure? Identify the exact proof step that requires the σ-algebra structure.
+How does the requirement of a dominating function translate to boundedness assumptions in MDP theory? Where in the Carathéodory extension does countable additivity of the outer measure get promoted to countable additivity of the extended measure? Identify the exact proof step that requires the $\sigma$-algebra structure.
 
 ---
 
@@ -395,7 +395,7 @@ We have now completed the convergence hierarchy:
 
 This progression—from the restrictive but powerful MCT, through the one-sided Fatou, to the general DCT—mirrors the historical development of integration theory. Each theorem is proved using the previous one as a tool.
 
-**Open Question for Day 4:** In the proof of the Carathéodory extension theorem (tomorrow's extended proof), we will construct Lebesgue measure on $\mathbb{R}^n$ from outer measure. Where in that construction do we use countable additivity? How does the σ-algebra structure ensure that Lebesgue measure is well-defined? Identify the exact proof step that requires the σ-algebra structure.
+**Open Question for Day 4:** In the proof of the Carathéodory extension theorem (tomorrow's extended proof), we will construct Lebesgue measure on $\mathbb{R}^n$ from outer measure. Where in that construction do we use countable additivity? How does the $\sigma$-algebra structure ensure that Lebesgue measure is well-defined? Identify the exact proof step that requires the $\sigma$-algebra structure.
 
 **Looking Ahead:**
 - **Week 2, Day 1:** We will apply DCT to prove that $L^1$ convergence implies almost-everywhere convergence of a subsequence, a result essential for stochastic approximation (Week 34).
