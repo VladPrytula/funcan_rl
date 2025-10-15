@@ -179,6 +179,8 @@ $$
 we conclude $f \cdot g$ is measurable as a linear combination of measurable functions.
 $\square$
 
+*Remark (Extension to $\mathbb{R}^n$).* The proof above applies **verbatim** to functions $f, g: (X, \mathcal{F}) \to (\mathbb{R}^n, \mathcal{B}(\mathbb{R}^n))$ by working component-wise: if $f = (f_1, \ldots, f_n)$ and $g = (g_1, \ldots, g_n)$ are measurable, then $f + g = (f_1 + g_1, \ldots, f_n + g_n)$ is measurable since each component $f_i + g_i$ is measurable by the scalar case. This is crucial for feature maps $\phi: \mathcal{S} \to \mathbb{R}^d$ in deep RL (Week 36-37).
+
 ### Part B: Closure under Composition with Continuous Functions
 
 **Proposition 3.2.** Let $(X, \mathcal{F})$ be a measurable space. Let $g: X \to \mathbb{R}$ be measurable (with respect to $\mathcal{B}(\mathbb{R})$), and let $f: \mathbb{R} \to \mathbb{R}$ be continuous. Then the composition $h = f \circ g: X \to \mathbb{R}$ is measurable.
