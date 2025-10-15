@@ -19,12 +19,41 @@ In reinforcement learning, we constantly reason about asymptotic behavior: Does 
 
 **Concrete RL application (Week 8 preview):**
 
-Consider a finite-state Markov chain with states $\{s_1, s_2, s_3\}$. Define:
-- $E_n = \{X_n = s_1\}$ (event: visit state $s_1$ at time $n$)
-- $\limsup E_n = \{\text{visit } s_1 \text{ infinitely often}\}$
-- $\liminf E_n = \{\text{eventually stay in } s_1 \text{ forever}\}$
+Consider a finite-state Markov chain with states $\{s_1, s_2, s_3\}$. For each time $n$, define the event:
+$$E_n = \{X_n = s_1\} \quad \text{(the chain visits state } s_1 \text{ at time } n\text{)}$$
 
-In RL, we care whether a policy $\pi$ ensures $\limsup_n \{S_n = s\}$ has probability 1 for all states $s$ (full exploration). Characterizing this requires the lim sup/lim inf machinery.
+The $\limsup$ and $\liminf$ of this sequence characterize asymptotic behavior:
+
+$$
+\limsup_{n \to \infty} E_n = \{\text{visit } s_1 \text{ infinitely often}\}
+$$
+$$
+\liminf_{n \to \infty} E_n = \{\text{visit } s_1 \text{ for all but finitely many } n\}
+$$
+
+**Key relationship:** $\liminf E_n \subseteq \limsup E_n$ always holds. The $\liminf$ is the **smaller** set (stronger condition):
+- **Trajectories in $\liminf E_n$:** Eventually, the chain **never leaves** $s_1$ (it stays there forever after some finite time $N$)
+- **Trajectories in $\limsup E_n$:** The chain **returns** to $s_1$ infinitely often, but may also leave it infinitely often
+
+**Example distinguishing the two:**
+- Trajectory $\omega_1$: $s_1, s_2, s_1, s_3, s_1, s_1, s_1, s_1, \ldots$ (stays in $s_1$ after time 4)
+  → $\omega_1 \in \liminf E_n$ (hence also in $\limsup E_n$)
+
+- Trajectory $\omega_2$: $s_1, s_2, s_1, s_2, s_1, s_2, \ldots$ (alternates forever)
+  → $\omega_2 \in \limsup E_n$ but $\omega_2 \notin \liminf E_n$
+
+**Full exploration in RL:**
+
+In RL, we care whether a policy $\pi$ ensures **full exploration** of the state space. For **finite or countable state spaces** (our focus in Weeks 7-12), this means visiting every state infinitely often:
+
+For each state $s \in \mathcal{S}$, define $E_n(s) = \{S_n = s\}$. Full exploration requires:
+$$\mathbb{P}_\pi\left(\text{visit every } s \in \mathcal{S} \text{ infinitely often}\right) = \mathbb{P}_\pi\left(\bigcap_{s \in \mathcal{S}} \limsup_{n \to \infty} E_n(s)\right) = 1$$
+
+**Key observation:** The intersection $\bigcap_{s \in \mathcal{S}}$ means we want a **single trajectory** that visits **all** states infinitely often. For finite $\mathcal{S}$, this is achievable (e.g., via $\varepsilon$-greedy exploration with $\varepsilon > 0$).
+
+> **Note on continuous state spaces:** For **uncountable** $\mathcal{S}$ (e.g., $\mathbb{R}^n$ in continuous control), visiting every individual state is impossible—the trajectory is countable while $\mathbb{R}^n$ is uncountable. We instead require **recurrence** on regions or **ergodicity** (Weeks 11-12, 19-24). This distinction is subtle but crucial, and we develop the proper framework for continuous spaces when we study ergodic theory (Week 11-12). For now, focus on finite/countable spaces where the $\limsup$ characterization is exact.
+
+**Why this matters:** Q-learning convergence (Week 36) requires visiting every state-action pair $(s,a)$ infinitely often. Characterizing this event precisely is where the $\limsup$ machinery becomes essential [@tsitsiklis:q_learning:1994].
 
 **Additional applications** (to be developed later):
 - Q-learning convergence (Week 36): requires visiting all $(s,a)$ infinitely often
@@ -157,6 +186,8 @@ We must ensure these operations preserve measurability, so that expectations rem
 
 **(i) Sum is measurable:**
 We show $\{x \mid f(x)+g(x) < a\} \in \mathcal{F}$ for any $a \in \mathbb{R}$.
+
+**Why this suffices:** The collection $\{(-\infty, a) : a \in \mathbb{R}\}$ of half-open intervals generates the Borel $\sigma$-algebra $\mathcal{B}(\mathbb{R})$ (as noted in Day 1 §I.A, Remark on Generating Classes). By the **generating class criterion** (Lemma 3.1 below), checking preimages for this generating class suffices to prove measurability. We formalize this principle rigorously in Part B.
 
 The key insight: $f(x) + g(x) < a$ if and only if there exists $q \in \mathbb{Q}$ with $f(x) < q$ and $g(x) < a-q$. Thus:
 $$
