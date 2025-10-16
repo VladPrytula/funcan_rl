@@ -222,7 +222,7 @@ To prove $h$ is measurable, we must show $h^{-1}(B) \in \mathcal{F}$ for all $B 
 
 **Lemma 3.1 (Measurability Criterion via Generators).** Let $(X, \mathcal{F})$ and $(Y, \mathcal{G})$ be measurable spaces. Suppose $\mathcal{C} \subseteq 2^Y$ generates $\mathcal{G}$ (i.e., $\sigma(\mathcal{C}) = \mathcal{G}$). Then a function $\phi: X \to Y$ is measurable if and only if $\phi^{-1}(C) \in \mathcal{F}$ for every $C \in \mathcal{C}$.
 
-**Remark.** This lemma is a direct application of the **good sets principle** (also called the **Dynkin class method**), which is formalized rigorously in **Appendix A2.1** (Week 2, Day 2) via the $\pi-\lambda$ theorem ([THM-2.2.A1]) and $\lambda$-systems ([DEF-2.2.A2]). The key insight: to prove a property holds for all sets in a generated $\sigma$-algebra $\sigma(\mathcal{C})$, it suffices to verify it for the generating class $\mathcal{C}$ and show that the collection of sets with the property forms a σ-algebra (or $\lambda$-system).
+**Remark.** This lemma is a direct application of the **good sets principle** (also called the **Dynkin class method**), which is formalized rigorously in **Appendix A2.1** (Week 2, Day 2) via the $\pi-\lambda$ theorem ([THM-2.2.A1]) and $\lambda$-systems ([DEF-2.2.A2]). The key insight: to prove a property holds for all sets in a generated $\sigma$-algebra $\sigma(\mathcal{C})$, it suffices to verify it for the generating class $\mathcal{C}$ and show that the collection of sets with the property forms a $\sigma$-algebra (or $\lambda$-system).
 
 *Proof of Lemma.* The "only if" direction is immediate: if $\phi$ is measurable and $\mathcal{C} \subseteq \mathcal{G}$, then $\phi^{-1}(C) \in \mathcal{F}$ for all $C \in \mathcal{C}$.
 
