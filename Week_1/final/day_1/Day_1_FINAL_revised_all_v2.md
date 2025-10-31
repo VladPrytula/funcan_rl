@@ -71,7 +71,7 @@ Crucially, this is not merely a mathematical curiosity. A physical computing dev
 
 **Remark (On Computability and Measurability).** The identification of measurability with physical computability is a crucial intuition. To be fully precise, the relationship is that any function computable by an idealized device (e.g., a Turing machine operating on real numbers) must indeed be Borel measurable. The converse, however, does not hold. The class of all Borel measurable functions has the cardinality of the continuum, whereas the class of all computable functions is only countable. There are thus "many more" Borel functions than computable ones. The key insight for our purposes remains perfectly valid: a function that is *not* measurable, such as one defined on a Vitali set, lies definitively outside the realm of what is computable or physically realizable, justifying our restriction to the measurable world.
 
-More deeply, for a device to implement $\pi^*$, it must determine whether $s \in V$. A physical sensor can only perform finite measurements—checking if $s$ lies in intervals, or countable combinations thereof. It can at best determine membership in **Borel sets**. The question "is $s \in V$?" requires access to information about the real line that is physically unobtainable.
+More deeply, for a device to implement $\pi^*$, it must determine whether $s \in V$. Any physically realizable test is built from countably many operations on open/closed sets; in standard models this lands inside the **Borel** (often even **analytic**) $\sigma$-algebra. Non-measurable sets like Vitali sets are far outside this regime. The question "is $s \in V$?" requires access to information about the real line that is physically unobtainable.
 
 ---
 **The central insight:** The $\sigma$-algebra $\mathcal{F}_{\mathcal{S}}$ represents the set of all questions about the state that a physical observer can answer. A policy $\pi$ is measurable if and only if the decision it makes can be determined by asking a countable sequence of physically answerable questions. A non-measurable policy is not merely complex—it is a fiction, requiring information that cannot exist.
@@ -103,19 +103,21 @@ The pair $(X, \mathcal{F})$ is called a **measurable space**. The elements of $\
 
 (ii) **Closure under countable intersections.** This property is deduced from the axioms via **De Morgan's laws**. For a collection of sets $\{A_n\}_{n=1}^{\infty}$, these laws state: $\left(\bigcup A_n\right)^c = \bigcap A_n^c$. To prove closure, let $\{A_n\}_{n=1}^{\infty}$ be a sequence of sets in $\mathcal{F}$. By Axiom 2, each complement $A_n^c$ is in $\mathcal{F}$. By Axiom 3, their countable union $\bigcup A_n^c$ is in $\mathcal{F}$. By Axiom 2 again, the complement of this union, $\left(\bigcup A_n^c\right)^c$, is in $\mathcal{F}$. Applying De Morgan's law, this final set is precisely the countable intersection $\bigcap A_n$.
 
-**Example 1.1 (The Borel $\sigma$-Algebra).** {#DEF-1.1.2} For our purposes, the most important measurable space is $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. The **Borel $\sigma$-algebra**, $\mathcal{B}(\mathbb{R})$, is defined as the *smallest* $\sigma$-algebra on $\mathbb{R}$ that contains all open sets [@folland:real_analysis:1999, §1.1].
+**Example 1.1 (The Borel $\sigma$-Algebra).** {#EX-1.1.1} For our purposes, the most important measurable space is $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. The **Borel $\sigma$-algebra**, $\mathcal{B}(\mathbb{R})$, is defined as the *smallest* $\sigma$-algebra on $\mathbb{R}$ that contains all open sets [@folland:real_analysis:1999, §1.1].
 
 **Remark on the Borel $\sigma$-algebra construction.** The rigorous construction of $\mathcal{B}(\mathbb{R})$ from the generating class of open intervals $(a,b)$ requires the **π-λ theorem** ([THM-2.2.A1], Dynkin's theorem) and is covered in **Appendix A2.1** (Week 2, Day 2 supplementary), where we develop the general theory of generator-based σ-algebra construction ([DEF-2.2.A1], [DEF-2.2.A2], [THM-2.2.A1], [THM-2.2.A3]). Readers seeking immediate depth may also consult [@folland:real_analysis:1999, §1.2]. For now, accept that:
 - $\mathcal{B}(\mathbb{R})$ exists and is uniquely determined as $\sigma(\{(a,b) : a < b\})$ ([THM-2.2.A3])
 - It contains all open sets, closed sets, intervals, and countable combinations thereof
 - It serves as the standard $\sigma$-algebra for continuous state spaces in RL (e.g., $\mathcal{S} \subseteq \mathbb{R}^n$ with $\mathcal{B}(\mathcal{S})$)
 
+In later weeks, we will primarily work on **standard Borel spaces**—Polish spaces equipped with their Borel $\sigma$-algebra. This setting guarantees crucial properties: transition kernels admit regular conditional distributions, measurable selection theorems hold, and the machinery of descriptive set theory becomes available. These regularity properties are essential for the rigorous treatment of continuous-state MDPs (Week 10, Week 23-24).
+
 **Pedagogical note:** When presenting foundational examples of complex objects (like the Borel $\sigma$-algebra), we face a trade-off: give full construction immediately (interrupting conceptual flow) versus state the definition and defer details (requiring reader trust). Here, we opt for the latter—defining $\mathcal{B}(\mathbb{R})$ as a well-known structure and deferring the construction.
 
 **Remark (Generating Classes and Equivalent Characterizations).** The Borel $\sigma$-algebra $\mathcal{B}(\mathbb{R})$ admits several equivalent generating representations. It is the $\sigma$-algebra generated by any of the following collections:
 - Open intervals $(a, b)$ where $a < b$
-- Half-open intervals $(-\infty, a)$ for $a \in \mathbb{R}$
-- Half-open intervals $(a, \infty)$ for $a \in \mathbb{R}$
+- Open rays $(-\infty, a)$ for $a \in \mathbb{R}$
+- Open rays $(a, \infty)$ for $a \in \mathbb{R}$
 - Closed intervals $[a, b]$ where $a \le b$
 - All open sets in $\mathbb{R}$
 
@@ -140,9 +142,9 @@ With a structure of events $\mathcal{F}$ in place, we can now assign a notion of
 
 The triple $(X, \mathcal{F}, \mu)$ is called a **measure space**.
 
-**Definition 1.3 (Probability Space).** {#DEF-1.1.3} A measure space $(X, \mathcal{F}, \mu)$ is a **probability space** if $\mu(X) = 1$. The measure $\mu$ is then denoted by $P$ and called a probability measure.
+**Definition 1.3 (Probability Space).** {#DEF-1.2.2} A measure space $(X, \mathcal{F}, \mu)$ is a **probability space** if $\mu(X) = 1$. The measure $\mu$ is then denoted by $P$ and called a probability measure.
 
-**Example 1.2 (Lebesgue Measure).** {#EX-1.1.2} The canonical measure on $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is the Lebesgue measure $\lambda$, which generalizes the notion of length. For any interval $(a,b)$, $\lambda((a,b)) = b-a$.
+**Example 1.2 (Lebesgue Measure).** {#EX-1.2.1} The canonical measure on $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is the Lebesgue measure $\lambda$, which generalizes the notion of length. For any interval $(a,b)$, $\lambda((a,b)) = b-a$.
 
 **Remark on Lebesgue measure construction.** The rigorous construction of Lebesgue measure is achieved via the **Carathéodory extension theorem**, which we prove in **Week 1, Day 4** ([THM-1.4.2] Carathéodory Extension). The construction proceeds in five steps:
 1. Define outer measure $\lambda^*(E) = \inf\{\sum \ell(I_n) : E \subseteq \bigcup I_n\}$ where $I_n$ are intervals [@folland:real_analysis:1999, §1.4]
@@ -165,13 +167,13 @@ The applicability of powerful theorems often depends on certain regularity condi
 
 These properties relate to whether an infinite space can be understood in terms of finite pieces.
 
-**Definition 1.4 ($\sigma$-Finite Measure).** {#DEF-1.1.4} A measure $\mu$ on $(X, \mathcal{F})$ is **$\sigma$-finite** if there exists a countable collection of sets $\{E_n\}_{n=1}^{\infty} \subseteq \mathcal{F}$ such that $X = \bigcup_{n=1}^{\infty} E_n$ and $\mu(E_n) < \infty$ for all $n \in \mathbb{N}$.
+**Definition 1.4 ($\sigma$-Finite Measure).** {#DEF-1.3.1} A measure $\mu$ on $(X, \mathcal{F})$ is **$\sigma$-finite** if there exists a countable collection of sets $\{E_n\}_{n=1}^{\infty} \subseteq \mathcal{F}$ such that $X = \bigcup_{n=1}^{\infty} E_n$ and $\mu(E_n) < \infty$ for all $n \in \mathbb{N}$.
 
 The Lebesgue measure is $\sigma$-finite, as $\mathbb{R} = \bigcup_{n \in \mathbb{Z}} [n, n+1]$.
 
-**Definition 1.5 (Semifinite Measure).** {#DEF-1.1.5} A measure $\mu$ is **semifinite** if for every set $A \in \mathcal{F}$ with $\mu(A) = \infty$, there exists a subset $B \in \mathcal{F}$ such that $B \subseteq A$ and $0 < \mu(B) < \infty$.
+**Definition 1.5 (Semifinite Measure).** {#DEF-1.3.2} A measure $\mu$ is **semifinite** if for every set $A \in \mathcal{F}$ with $\mu(A) = \infty$, there exists a subset $B \in \mathcal{F}$ such that $B \subseteq A$ and $0 < \mu(B) < \infty$.
 
-**Proposition 1.1.** {#PROP-1.1.1} Every $\sigma$-finite measure is semifinite. The converse is not true.
+**Proposition 1.1.** {#PROP-1.3.1} Every $\sigma$-finite measure is semifinite. The converse is not true.
 
 *Proof.*
 
@@ -181,18 +183,9 @@ The Lebesgue measure is $\sigma$-finite, as $\mathbb{R} = \bigcup_{n \in \mathbb
 
 **Step 2 (Decomposition):** Observe $A = \bigcup_{n=1}^{\infty} (A \cap E_n)$ (since $X = \bigcup E_n$).
 
-**Step 3 (Applying subadditivity):** By countable subadditivity of measures,
-$$ \mu(A) \le \sum_{n=1}^{\infty} \mu(A \cap E_n) $$
-Since $\mu(A) = \infty$, the right-hand side must equal $\infty$.
+**Step 3 (Extracting finite piece via contradiction):** If $\mu(A) = \infty$ and $A = \bigcup_{n=1}^{\infty} (A \cap E_n)$ with each $\mu(E_n) < \infty$, then if all terms $\mu(A \cap E_n) = 0$ we would have $\mu(A) \le \sum_{n=1}^{\infty} \mu(A \cap E_n) = \sum 0 = 0$ by countable subadditivity, a contradiction. Hence there exists $n_0 \in \mathbb{N}$ such that $\mu(A \cap E_{n_0}) > 0$, and automatically $\mu(A \cap E_{n_0}) \le \mu(E_{n_0}) < \infty$ by monotonicity.
 
-**Step 4 (Extracting finite piece):** For a series of non-negative terms to sum to $\infty$, at least one term must be positive. Thus there exists $n_0 \in \mathbb{N}$ such that $\mu(A \cap E_{n_0}) > 0$.
-
-**Step 5 (Conclusion):** Let $B = A \cap E_{n_0}$. Then:
-- $B \subseteq A$ (by construction)
-- $B \in \mathcal{F}$ (intersection of measurable sets)
-- $0 < \mu(B) \le \mu(E_{n_0}) < \infty$ (by monotonicity and finiteness of $E_{n_0}$)
-
-This satisfies the definition of semifiniteness. $\square$
+Thus $B = A \cap E_{n_0}$ satisfies $B \subseteq A$, $B \in \mathcal{F}$, and $0 < \mu(B) < \infty$, establishing semifiniteness. $\square$
 
 (ii) **A counterexample to the converse.**
 Let $X = \mathbb{R}$ (an uncountable set) and $\mathcal{F} = 2^{\mathbb{R}}$. Define the counting measure $\mu_c(A) = |A|$ if $A$ is finite, and $\mu_c(A)=\infty$ otherwise.
@@ -204,24 +197,19 @@ $\square$
 
 This property refines the $\sigma$-algebra to include all subsets of negligible sets.
 
-**Definition 1.6 (Closed Set in ℝ).** {#DEF-1.1.6} A set $A \subseteq \mathbb{R}$ is **closed** if its complement $\mathbb{R} \setminus A$ is open (i.e., a union of open intervals). Equivalently, $A$ is closed if it contains all its limit points: for every convergent sequence $(x_n)_{n=1}^{\infty} \subseteq A$ with $x_n \to x$, we have $x \in A$.
-
-**Remark.** It is a standard result of topology that finite unions and arbitrary intersections of closed sets are closed. In particular:
-- Closed intervals $[a,b]$ are closed sets
-- Countable intersections of closed sets are closed (e.g., the Cantor set)
-- Closed sets in ℝ are Borel measurable: $\mathcal{B}(\mathbb{R})$ contains all closed sets
+**We recall:** A set $A \subseteq \mathbb{R}$ is **closed** if its complement $\mathbb{R} \setminus A$ is open (i.e., a union of open intervals). Equivalently, $A$ is closed if it contains all its limit points: for every convergent sequence $(x_n)_{n=1}^{\infty} \subseteq A$ with $x_n \to x$, we have $x \in A$. It is a standard result of topology that finite unions and arbitrary intersections of closed sets are closed. In particular, closed intervals $[a,b]$ are closed sets, countable intersections of closed sets are closed (e.g., the Cantor set), and closed sets in ℝ are Borel measurable: $\mathcal{B}(\mathbb{R})$ contains all closed sets.
 
 **Motivation for completeness:** Consider the space $(\mathbb{R}, \mathcal{B}(\mathbb{R}), \lambda)$. One can construct the **Cantor set** $C$ [@folland:real_analysis:1999, §1.1], which is a Borel set with $\lambda(C) = 0$. However, $C$ contains subsets, say $Z \subset C$, which are provably *not* in the Borel $\sigma$-algebra $\mathcal{B}(\mathbb{R})$. This presents a logical deficiency: we have a set $Z$ contained within a set of measure zero, yet we cannot even assign $Z$ a measure. A complete measure space rectifies this.
 
 **RL relevance:** Completeness ensures that value functions differing only on null sets are identified—a crucial equivalence for "almost everywhere" results in stochastic approximation. In TD learning (Week 32), we prove convergence of $V_n \to V^*$ **almost surely** with respect to the state distribution $\rho$. This means $V_n$ may fail to converge on a set $N$ with $\rho(N) = 0$. Completeness guarantees that $N$ and all its subsets are measurable, so we can rigorously state "convergence except on a null set" without encountering unmeasurable exceptional sets.
 
-**Definition 1.7 (Null Set and Completeness).** {#DEF-1.1.7} Let $(X, \mathcal{F}, \mu)$ be a measure space.
+**Definition 1.6 (Null Set and Completeness).** {#DEF-1.3.3} Let $(X, \mathcal{F}, \mu)$ be a measure space.
 1.  A set $N \in \mathcal{F}$ is a **null set** if $\mu(N) = 0$.
 2.  The measure space is **complete** if for every null set $N \in \mathcal{F}$, every subset $Z \subseteq N$ is also in $\mathcal{F}$.
 
 The Borel measure space $(\mathbb{R}, \mathcal{B}(\mathbb{R}), \lambda)$ is famously *not* complete. However, any measure space can be extended to its completion.
 
-**Proposition 1.2 (The Incompleteness of the Borel-Lebesgue Space).** {#PROP-1.1.2} The measure space $(\mathbb{R}, \mathcal{B}(\mathbb{R}), \lambda)$, consisting of the Borel $\sigma$-algebra and the Lebesgue measure, is not complete.
+**Proposition 1.2 (The Incompleteness of the Borel-Lebesgue Space).** {#PROP-1.3.2} The measure space $(\mathbb{R}, \mathcal{B}(\mathbb{R}), \lambda)$, consisting of the Borel $\sigma$-algebra and the Lebesgue measure, is not complete.
 
 *Proof.* To prove this, we must construct a specific counterexample. We must exhibit a set $N \in \mathcal{B}(\mathbb{R})$ with $\lambda(N)=0$, and a subset $Z \subseteq N$ such that $Z \notin \mathcal{B}(\mathbb{R})$.
 
@@ -234,7 +222,7 @@ Each $C_k$ in the Cantor set construction is a finite union of closed intervals,
     *   It is also a standard result that the Cantor set $C$, despite having measure zero, is uncountable and has the cardinality of the continuum, $|C| = \mathfrak{c}$. This can be seen by constructing a bijection between points in $C$ (represented by their ternary expansions using only digits 0 and 2) and points in $[0,1]$ (represented by their binary expansions).
     *   Consider the power set of $C$, denoted $2^C$, which is the collection of *all* subsets of $C$. By **Cantor's theorem** (the power set of any set has strictly greater cardinality than the set itself), we have $|2^C| = 2^{|C|} = 2^{\mathfrak{c}} > \mathfrak{c}$.
 
-3.  **Conclusion.** The collection of all subsets of the Cantor set has cardinality $2^{\mathfrak{c}}$. The collection of all Borel sets has cardinality $\mathfrak{c}$. Since there are strictly more subsets of $C$ than there are Borel sets in total, it is a logical necessity that there must exist subsets of $C$ that are not Borel sets. Let $Z$ be one such subset.
+3.  **Conclusion.** The collection of all subsets of the Cantor set has cardinality $2^{\mathfrak{c}}$. The collection of all Borel sets has cardinality $\mathfrak{c}$. Since there are strictly more subsets of $C$ than there are Borel sets in total, it is a logical necessity that there must exist subsets of $C$ that are not Borel sets. Let $Z$ be one such subset. Thus **some subset of a null set is non-Borel**, which is precisely what incompleteness allows.
     We have successfully identified a set $C \in \mathcal{B}(\mathbb{R})$ with $\lambda(C)=0$, and a subset $Z \subseteq C$ for which $Z \notin \mathcal{B}(\mathbb{R})$. This violates the definition of a complete measure space.
 $\square$
 
@@ -242,9 +230,9 @@ $\square$
 
 This flaw is not fatal. The fact that our foundational measure space is incomplete simply means it is not yet the correct analytical object for our purposes. As we shall now prove, any measure space can be uniquely extended to its completion, thereby absorbing these pathological subsets of null sets into the framework in a consistent manner.
 
-**Definition 1.8 (Measure Agreement).** {#DEF-1.1.8} Let $(X, \mathcal{F})$ be a measurable space with $\mathcal{F} \subseteq \mathcal{G}$ (i.e., $\mathcal{G}$ is a $\sigma$-algebra containing $\mathcal{F}$). Let $\mu: \mathcal{F} \to [0, \infty]$ and $\nu: \mathcal{G} \to [0, \infty]$ be measures. We say that $\nu$ **agrees with** $\mu$ on $\mathcal{F}$ if $\nu(A) = \mu(A)$ for every $A \in \mathcal{F}$.
+**Definition 1.7 (Measure Agreement).** {#DEF-1.3.4} Let $(X, \mathcal{F})$ be a measurable space with $\mathcal{F} \subseteq \mathcal{G}$ (i.e., $\mathcal{G}$ is a $\sigma$-algebra containing $\mathcal{F}$). Let $\mu: \mathcal{F} \to [0, \infty]$ and $\nu: \mathcal{G} \to [0, \infty]$ be measures. We say that $\nu$ **agrees with** $\mu$ on $\mathcal{F}$ if $\nu(A) = \mu(A)$ for every $A \in \mathcal{F}$.
 
-**Theorem 1.1 (The Completion of a Measure Space).** {#THM-1.1.1} For any measure space $(X, \mathcal{F}, \mu)$, there exists a complete measure space $(X, \overline{\mathcal{F}}, \overline{\mu})$ such that $\mathcal{F} \subseteq \overline{\mathcal{F}}$ and $\overline{\mu}$ agrees with $\mu$ on $\mathcal{F}$. The $\sigma$-algebra $\overline{\mathcal{F}}$ consists of all sets of the form $A \cup Z$, where $A \in \mathcal{F}$ and $Z$ is a subset of some null set in $\mathcal{F}$ [@folland:real_analysis:1999, §1.4].
+**Theorem 1.1 (The Completion of a Measure Space).** {#THM-1.3.1} For any measure space $(X, \mathcal{F}, \mu)$, there exists a complete measure space $(X, \overline{\mathcal{F}}, \overline{\mu})$ such that $\mathcal{F} \subseteq \overline{\mathcal{F}}$ and $\overline{\mu}$ agrees with $\mu$ on $\mathcal{F}$. The $\sigma$-algebra $\overline{\mathcal{F}}$ consists of all sets of the form $A \cup Z$, where $A \in \mathcal{F}$ and $Z$ is a subset of some null set in $\mathcal{F}$ [@folland:real_analysis:1999, §1.4].
 
 *Proof (Constructive).* The proof proceeds in four steps: we show (i) that $\overline{\mu}$ is well-defined, (ii) that $\overline{\mathcal{F}}$ is a $\sigma$-algebra, (iii) that $\overline{\mu}$ is a measure, and finally (iv) that the resulting space is complete.
 
@@ -257,14 +245,30 @@ This flaw is not fatal. The fact that our foundational measure space is incomple
 2.  (Closure under complementation) Let $E = A \cup Z \in \overline{\mathcal{F}}$, with $A \in \mathcal{F}$ and $Z \subseteq N \in \mathcal{N}$. Its complement is $E^c = (A \cup Z)^c = A^c \cap Z^c$. This form is not immediately useful. The key insight is to write $E^c$ as $(A \cup N)^c \cup (N \setminus Z)$. The set $A' = (A \cup N)^c$ is in $\mathcal{F}$ because $A, N \in \mathcal{F}$. The set $Z' = N \setminus Z$ is a subset of the null set $N$. Thus $E^c = A' \cup Z'$ is of the required form to be in $\overline{\mathcal{F}}$.
 3.  (Closure under countable unions) Let $\{E_n\}_{n=1}^{\infty}$ be a sequence in $\overline{\mathcal{F}}$. For each $n$, $E_n = A_n \cup Z_n$ where $A_n \in \mathcal{F}$ and $Z_n \subseteq N_n$ for some $N_n \in \mathcal{N}$. Their union is $\bigcup_{n=1}^\infty E_n = (\bigcup_{n=1}^\infty A_n) \cup (\bigcup_{n=1}^\infty Z_n)$. Let $A = \bigcup A_n$ and $Z = \bigcup Z_n$. Since $\mathcal{F}$ is a $\sigma$-algebra, $A \in \mathcal{F}$. Let $N = \bigcup N_n$. As a countable union of null sets, $N$ is itself a null set in $\mathcal{F}$ (since $\mu(N) \le \sum \mu(N_n) = 0$). Since $Z \subseteq N$, the set $\bigcup E_n = A \cup Z$ is of the required form and is therefore in $\overline{\mathcal{F}}$.
 
-(iii) **$\overline{\mu}$ is a measure.** Let $\{E_n\}$ be a disjoint sequence in $\overline{\mathcal{F}}$, with $E_n = A_n \cup Z_n$. From the disjointness of $\{E_n\}$, the sets $\{A_n\}$ must also be disjoint. Then $\overline{\mu}(\bigcup E_n) = \overline{\mu}((\bigcup A_n) \cup (\bigcup Z_n)) = \mu(\bigcup A_n) = \sum \mu(A_n) = \sum \overline{\mu}(A_n \cup Z_n) = \sum \overline{\mu}(E_n)$.
+(iii) **$\overline{\mu}$ is a measure.** Let $\{E_n\}_{n=1}^{\infty}$ be a pairwise disjoint sequence in $\overline{\mathcal{F}}$, with $E_n = A_n \cup Z_n$ where $A_n \in \mathcal{F}$ and $Z_n \subseteq N_n$ for some $N_n \in \mathcal{N}$.
+
+We construct disjoint sets with the same measures. Define
+$$
+A'_1 := A_1, \qquad A'_n := A_n \setminus \bigcup_{k<n} (A_k \cup N_k) \quad \text{for } n \ge 2.
+$$
+Then each $A'_n \subseteq A_n$, the sets $\{A'_n\}$ are pairwise disjoint, and $A_n \setminus A'_n \subseteq \bigcup_{k<n} N_k$ is a null set. Hence $\mu(A'_n) = \mu(A_n)$ for all $n$.
+
+Now we have:
+$$
+\overline{\mu}\left(\bigcup_{n=1}^{\infty} E_n\right) = \overline{\mu}\left(\left(\bigcup_{n=1}^{\infty} A_n\right) \cup \left(\bigcup_{n=1}^{\infty} Z_n\right)\right) = \mu\left(\bigcup_{n=1}^{\infty} A_n\right).
+$$
+Since $\bigcup A_n$ and $\bigsqcup A'_n$ (disjoint union) differ by a null set, we have
+$$
+\mu\left(\bigcup_{n=1}^{\infty} A_n\right) = \mu\left(\bigsqcup_{n=1}^{\infty} A'_n\right) = \sum_{n=1}^{\infty} \mu(A'_n) = \sum_{n=1}^{\infty} \mu(A_n) = \sum_{n=1}^{\infty} \overline{\mu}(E_n).
+$$
+This establishes countable additivity. $\square$
 
 (iv) **The completed space is complete.** Let $E \in \overline{\mathcal{F}}$ with $\overline{\mu}(E) = 0$. Then $E = A \cup Z$ where $A \in \mathcal{F}$ and $Z \subseteq N \in \mathcal{N}$. We have $0 = \overline{\mu}(E) = \mu(A)$, so $A \in \mathcal{N}$. Let $Z' \subseteq E$ be any subset. Then $Z' \subseteq A \cup N$, where $A, N \in \mathcal{N}$. Let $N' = A \cup N \in \mathcal{F}$ (as a union of measurable sets), and note $\mu(N') \le \mu(A) + \mu(N) = 0$, so $N' \in \mathcal{N}$. Thus $Z' = \emptyset \cup Z'$ where $\emptyset \in \mathcal{F}$ and $Z' \subseteq N'$, so $Z' \in \overline{\mathcal{F}}$.
 $\square$
 
 **Remark (Uniqueness of Completion).** The completion $(\overline{\mathcal{F}}, \overline{\mu})$ constructed above is **essentially unique**: if $(\mathcal{G}, \nu)$ is another complete extension of $(X, \mathcal{F}, \mu)$ (meaning $\mathcal{F} \subseteq \mathcal{G}$, $\nu$ agrees with $\mu$ on $\mathcal{F}$, and $(X, \mathcal{G}, \nu)$ is complete), then $\mathcal{G} = \overline{\mathcal{F}}$ and $\nu = \overline{\mu}$. The proof is straightforward: any complete extension must include all subsets of $\mu$-null sets (by completeness), and the measure values are forced by agreement with $\mu$ on $\mathcal{F}$ and the well-definedness argument above. Thus, the completion is unique up to this construction. This uniqueness is crucial: it means "the completion" is a well-defined mathematical object, not merely "a completion." For the formal proof, see [@folland:real_analysis:1999, Theorem 1.9].
 
-**Definition 1.9 (The Lebesgue $\sigma$-Algebra).** {#DEF-1.1.9} The **Lebesgue $\sigma$-algebra** on $\mathbb{R}$, denoted $\mathcal{L}(\mathbb{R})$, is the completion of the Borel $\sigma$-algebra $\mathcal{B}(\mathbb{R})$ with respect to the Lebesgue measure $\lambda$ [@folland:real_analysis:1999, §1.4]. For the remainder of this text, unless specified otherwise, analysis on $\mathbb{R}^n$ will implicitly use this complete space.
+**Definition 1.8 (The Lebesgue $\sigma$-Algebra).** {#DEF-1.3.5} The **Lebesgue $\sigma$-algebra** on $\mathbb{R}$, denoted $\mathcal{L}(\mathbb{R})$, is the completion of the Borel $\sigma$-algebra $\mathcal{B}(\mathbb{R})$ with respect to the Lebesgue measure $\lambda$ [@folland:real_analysis:1999, §1.4]. For the remainder of this text, unless specified otherwise, analysis on $\mathbb{R}^n$ will implicitly use this complete space.
 
 ---
 
@@ -276,7 +280,7 @@ $\square$
 
 ### **I. Core Theory: Measurable Functions**
 
-**Definition 1.10 (Measurable Function).** {#DEF-1.1.10} Let $(X, \mathcal{F})$ and $(Y, \mathcal{G})$ be two measurable spaces. A function $f: X \to Y$ is said to be **$(\mathcal{F}, \mathcal{G})$-measurable** if the preimage of every measurable set in $Y$ is a measurable set in $X$:
+**Definition 1.9 (Measurable Function).** {#DEF-1.2.1} Let $(X, \mathcal{F})$ and $(Y, \mathcal{G})$ be two measurable spaces. A function $f: X \to Y$ is said to be **$(\mathcal{F}, \mathcal{G})$-measurable** if the preimage of every measurable set in $Y$ is a measurable set in $X$:
 $$
 \forall B \in \mathcal{G}, \quad f^{-1}(B) = \{x \in X \mid f(x) \in B\} \in \mathcal{F}.
 $$
@@ -288,19 +292,19 @@ For a real-valued function $f: X \to \mathbb{R}$, we assume the codomain is $(\m
 
 The class of measurable functions is remarkably stable under common operations. The following results are developed in detail in the companion exercise file `Day_1_exercises_FINAL.md`, with guided proofs.
 
-**Proposition 1.3 (Closure under Arithmetic Operations).** {#PROP-1.1.3} Let $f, g: (X, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ be measurable. Then the sum $f+g$ and product $f \cdot g$ are measurable.
+**Proposition 1.3 (Closure under Arithmetic Operations).** {#PROP-1.2.1} Let $f, g: (X, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ be measurable. Then the sum $f+g$ and product $f \cdot g$ are measurable.
 
 *Sketch of Proof.* For the sum, express $\{x \mid f(x) + g(x) < a\}$ as a countable union over rationals: $\bigcup_{q \in \mathbb{Q}} (\{f < q\} \cap \{g < a-q\})$. For the product, note that $f^2$ is measurable (using preimages of intervals), then apply the identity $f \cdot g = \frac{1}{2}((f+g)^2 - f^2 - g^2)$. The full proof is given in Exercise 3 of the companion file.
 
-*Remark (On Generality).* The proof uses only the density of $\mathbb{Q}$ in $\mathbb{R}$ and basic set operations. The result extends immediately to measurable functions taking values in any **second-countable topological vector space** (e.g., $\mathbb{R}^n$, $\ell^2$, $C([0,1])$), where addition and multiplication are continuous. For reinforcement learning—where state spaces are subsets of $\mathbb{R}^n$ and value functions are real-valued—the statement above is the natural form. We will revisit this generality in **Week 12** when developing Banach-valued measurable functions for operator-theoretic approaches to MDPs.
+*Remark (On Generality).* The proof uses only the density of $\mathbb{Q}$ in $\mathbb{R}$ and basic set operations. For **addition and scalar multiplication**, the result extends immediately to measurable functions taking values in any **second-countable topological vector space** (e.g., $\mathbb{R}^n$, $\ell^2$, $C([0,1])$), where these operations are continuous. For **products**, we must restrict to spaces with compatible algebraic structure: **topological algebras** where a continuous bilinear multiplication map $m: X \times X \to X$ is defined (e.g., $\mathbb{R}^n$ with componentwise product, $C(K)$ with pointwise product, $L^\infty$ with pointwise product). In a general topological vector space like $\ell^2$, pointwise multiplication need not map $\ell^2 \times \ell^2 \to \ell^2$, so the product closure does not automatically extend. For reinforcement learning—where state spaces are subsets of $\mathbb{R}^n$ and value functions are real-valued—the statement above is the natural form. We will revisit this generality in **Week 12** when developing Banach-valued measurable functions for operator-theoretic approaches to MDPs.
 
-**Proposition 1.4 (Closure under Composition).** {#PROP-1.1.4} Let $g: (X, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ be measurable and $f: (\mathbb{R}, \mathcal{B}(\mathbb{R})) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ be continuous. Then the composition $f \circ g$ is measurable.
+**Proposition 1.4 (Closure under Composition).** {#PROP-1.2.2} Let $g: (X, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ be measurable and $f: (\mathbb{R}, \mathcal{B}(\mathbb{R})) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ be continuous. Then the composition $f \circ g$ is measurable.
 
-*Sketch of Proof.* For any open set $U \subseteq \mathbb{R}$, we have $(f \circ g)^{-1}(U) = g^{-1}(f^{-1}(U))$. By continuity of $f$, the set $f^{-1}(U)$ is open, hence Borel. By measurability of $g$, the preimage $g^{-1}(f^{-1}(U))$ is in $\mathcal{F}$. Since open sets generate $\mathcal{B}(\mathbb{R})$, this suffices. The complete proof is given in Exercise 3 of the companion file.
+*Sketch of Proof.* By the generating class criterion (Exercise 3, Lemma 3.1), it suffices to check preimages of sets in a generating class for $\mathcal{B}(\mathbb{R})$. For any open set $U \subseteq \mathbb{R}$, we have $(f \circ g)^{-1}(U) = g^{-1}(f^{-1}(U))$. By continuity of $f$, the set $f^{-1}(U)$ is open, hence Borel. By measurability of $g$, the preimage $g^{-1}(f^{-1}(U))$ is in $\mathcal{F}$. Since open sets generate $\mathcal{B}(\mathbb{R})$, this suffices. The complete proof is given in Exercise 3 of the companion file.
 
 The property of completeness has a vital consequence for measurable functions.
 
-**Proposition 1.5 (Measurability of "Almost Everywhere" Equal Functions).** {#PROP-1.1.5} Let $(X, \mathcal{F}, \mu)$ be a **complete** measure space. If $f:X \to \mathbb{R}$ is measurable and $g:X \to \mathbb{R}$ satisfies $f(x)=g(x)$ for all $x$ outside a null set, then $g$ is also measurable.
+**Proposition 1.5 (Measurability of "Almost Everywhere" Equal Functions).** {#PROP-1.2.3} Let $(X, \mathcal{F}, \mu)$ be a **complete** measure space. If $f:X \to \mathbb{R}$ is measurable and $g:X \to \mathbb{R}$ satisfies $f(x)=g(x)$ for all $x$ outside a null set, then $g$ is also measurable.
 
 *Proof.* Let $N \in \mathcal{F}$ be a null set such that $E = \{x \mid f(x) \neq g(x)\} \subseteq N$. As the space is complete, $E \in \mathcal{F}$ and $\mu(E)=0$. For any $a \in \mathbb{R}$:
 $$ \{x \mid g(x) < a\} = (\{x \in E^c \mid g(x) < a\}) \cup (\{x \in E \mid g(x) < a\}) $$
@@ -505,7 +509,7 @@ Crucially, this is not merely a mathematical curiosity. A physical computing dev
 
 **Remark (On Computability and Measurability).** The identification of measurability with physical computability is a crucial intuition. To be fully precise, the relationship is that any function computable by an idealized device (e.g., a Turing machine operating on real numbers) must indeed be Borel measurable. The converse, however, does not hold. The class of all Borel measurable functions has the cardinality of the continuum, whereas the class of all computable functions is only countable. There are thus "many more" Borel functions than computable ones. The key insight for our purposes remains perfectly valid: a function that is *not* measurable, such as one defined on a Vitali set, lies definitively outside the realm of what is computable or physically realizable, justifying our restriction to the measurable world.
 
-More deeply, for a device to implement $\pi^*$, it must determine whether $s \in V$. A physical sensor can only perform finite measurements—checking if $s$ lies in intervals, or countable combinations thereof. It can at best determine membership in **Borel sets**. The question "is $s \in V$?" requires access to information about the real line that is physically unobtainable.
+More deeply, for a device to implement $\pi^*$, it must determine whether $s \in V$. Any physically realizable test is built from countably many operations on open/closed sets; in standard models this lands inside the **Borel** (often even **analytic**) $\sigma$-algebra. Non-measurable sets like Vitali sets are far outside this regime. The question "is $s \in V$?" requires access to information about the real line that is physically unobtainable.
 
 ---
 **The central insight:** The $\sigma$-algebra $\mathcal{F}_{\mathcal{S}}$ represents the set of all questions about the state that a physical observer can answer. A policy $\pi$ is measurable if and only if the decision it makes can be determined by asking a countable sequence of physically answerable questions. A non-measurable policy is not merely complex—it is a fiction, requiring information that cannot exist.
@@ -537,19 +541,21 @@ The pair $(X, \mathcal{F})$ is called a **measurable space**. The elements of $\
 
 (ii) **Closure under countable intersections.** This property is deduced from the axioms via **De Morgan's laws**. For a collection of sets $\{A_n\}_{n=1}^{\infty}$, these laws state: $\left(\bigcup A_n\right)^c = \bigcap A_n^c$. To prove closure, let $\{A_n\}_{n=1}^{\infty}$ be a sequence of sets in $\mathcal{F}$. By Axiom 2, each complement $A_n^c$ is in $\mathcal{F}$. By Axiom 3, their countable union $\bigcup A_n^c$ is in $\mathcal{F}$. By Axiom 2 again, the complement of this union, $\left(\bigcup A_n^c\right)^c$, is in $\mathcal{F}$. Applying De Morgan's law, this final set is precisely the countable intersection $\bigcap A_n$.
 
-**Example 1.1 (The Borel $\sigma$-Algebra).** {#DEF-1.1.2} For our purposes, the most important measurable space is $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. The **Borel $\sigma$-algebra**, $\mathcal{B}(\mathbb{R})$, is defined as the *smallest* $\sigma$-algebra on $\mathbb{R}$ that contains all open sets [@folland:real_analysis:1999, §1.1].
+**Example 1.1 (The Borel $\sigma$-Algebra).** {#EX-1.1.1} For our purposes, the most important measurable space is $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$. The **Borel $\sigma$-algebra**, $\mathcal{B}(\mathbb{R})$, is defined as the *smallest* $\sigma$-algebra on $\mathbb{R}$ that contains all open sets [@folland:real_analysis:1999, §1.1].
 
 **Remark on the Borel $\sigma$-algebra construction.** The rigorous construction of $\mathcal{B}(\mathbb{R})$ from the generating class of open intervals $(a,b)$ requires the **π-λ theorem** ([THM-2.2.A1], Dynkin's theorem) and is covered in **Appendix A2.1** (Week 2, Day 2 supplementary), where we develop the general theory of generator-based $\sigma$-algebra construction ([DEF-2.2.A1], [DEF-2.2.A2], [THM-2.2.A1], [THM-2.2.A3]). Readers seeking immediate depth may also consult [@folland:real_analysis:1999, §1.2]. For now, accept that:
 - $\mathcal{B}(\mathbb{R})$ exists and is uniquely determined as $\sigma(\{(a,b) : a < b\})$ ([THM-2.2.A3])
 - It contains all open sets, closed sets, intervals, and countable combinations thereof
 - It serves as the standard $\sigma$-algebra for continuous state spaces in RL (e.g., $\mathcal{S} \subseteq \mathbb{R}^n$ with $\mathcal{B}(\mathcal{S})$)
 
+In later weeks, we will primarily work on **standard Borel spaces**—Polish spaces equipped with their Borel $\sigma$-algebra. This setting guarantees crucial properties: transition kernels admit regular conditional distributions, measurable selection theorems hold, and the machinery of descriptive set theory becomes available. These regularity properties are essential for the rigorous treatment of continuous-state MDPs (Week 10, Week 23-24).
+
 **Pedagogical note:** When presenting foundational examples of complex objects (like the Borel $\sigma$-algebra), we face a trade-off: give full construction immediately (interrupting conceptual flow) versus state the definition and defer details (requiring reader trust). Here, we opt for the latter—defining $\mathcal{B}(\mathbb{R})$ as a well-known structure and deferring the construction.
 
 **Remark (Generating Classes and Equivalent Characterizations).** The Borel $\sigma$-algebra $\mathcal{B}(\mathbb{R})$ admits several equivalent generating representations. It is the $\sigma$-algebra generated by any of the following collections:
 - Open intervals $(a, b)$ where $a < b$
-- Half-open intervals $(-\infty, a)$ for $a \in \mathbb{R}$
-- Half-open intervals $(a, \infty)$ for $a \in \mathbb{R}$
+- Open rays $(-\infty, a)$ for $a \in \mathbb{R}$
+- Open rays $(a, \infty)$ for $a \in \mathbb{R}$
 - Closed intervals $[a, b]$ where $a \le b$
 - All open sets in $\mathbb{R}$
 
@@ -574,9 +580,9 @@ With a structure of events $\mathcal{F}$ in place, we can now assign a notion of
 
 The triple $(X, \mathcal{F}, \mu)$ is called a **measure space**.
 
-**Definition 1.3 (Probability Space).** {#DEF-1.1.3} A measure space $(X, \mathcal{F}, \mu)$ is a **probability space** if $\mu(X) = 1$. The measure $\mu$ is then denoted by $P$ and called a probability measure.
+**Definition 1.3 (Probability Space).** {#DEF-1.2.2} A measure space $(X, \mathcal{F}, \mu)$ is a **probability space** if $\mu(X) = 1$. The measure $\mu$ is then denoted by $P$ and called a probability measure.
 
-**Example 1.2 (Lebesgue Measure).** {#EX-1.1.2} The canonical measure on $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is the Lebesgue measure $\lambda$, which generalizes the notion of length. For any interval $(a,b)$, $\lambda((a,b)) = b-a$.
+**Example 1.2 (Lebesgue Measure).** {#EX-1.2.1} The canonical measure on $(\mathbb{R}, \mathcal{B}(\mathbb{R}))$ is the Lebesgue measure $\lambda$, which generalizes the notion of length. For any interval $(a,b)$, $\lambda((a,b)) = b-a$.
 
 **Remark on Lebesgue measure construction.** The rigorous construction of Lebesgue measure is achieved via the **Carathéodory extension theorem**, which we prove in **Week 1, Day 4** ([THM-1.4.2] Carathéodory Extension). The construction proceeds in five steps:
 1. Define outer measure $\lambda^*(E) = \inf\{\sum \ell(I_n) : E \subseteq \bigcup I_n\}$ where $I_n$ are intervals [@folland:real_analysis:1999, §1.4]
@@ -599,13 +605,13 @@ The applicability of powerful theorems often depends on certain regularity condi
 
 These properties relate to whether an infinite space can be understood in terms of finite pieces.
 
-**Definition 1.4 ($\sigma$-Finite Measure).** {#DEF-1.1.4} A measure $\mu$ on $(X, \mathcal{F})$ is **$\sigma$-finite** if there exists a countable collection of sets $\{E_n\}_{n=1}^{\infty} \subseteq \mathcal{F}$ such that $X = \bigcup_{n=1}^{\infty} E_n$ and $\mu(E_n) < \infty$ for all $n \in \mathbb{N}$.
+**Definition 1.4 ($\sigma$-Finite Measure).** {#DEF-1.3.1} A measure $\mu$ on $(X, \mathcal{F})$ is **$\sigma$-finite** if there exists a countable collection of sets $\{E_n\}_{n=1}^{\infty} \subseteq \mathcal{F}$ such that $X = \bigcup_{n=1}^{\infty} E_n$ and $\mu(E_n) < \infty$ for all $n \in \mathbb{N}$.
 
 The Lebesgue measure is $\sigma$-finite, as $\mathbb{R} = \bigcup_{n \in \mathbb{Z}} [n, n+1]$.
 
-**Definition 1.5 (Semifinite Measure).** {#DEF-1.1.5} A measure $\mu$ is **semifinite** if for every set $A \in \mathcal{F}$ with $\mu(A) = \infty$, there exists a subset $B \in \mathcal{F}$ such that $B \subseteq A$ and $0 < \mu(B) < \infty$.
+**Definition 1.5 (Semifinite Measure).** {#DEF-1.3.2} A measure $\mu$ is **semifinite** if for every set $A \in \mathcal{F}$ with $\mu(A) = \infty$, there exists a subset $B \in \mathcal{F}$ such that $B \subseteq A$ and $0 < \mu(B) < \infty$.
 
-**Proposition 1.1.** {#PROP-1.1.1} Every $\sigma$-finite measure is semifinite. The converse is not true.
+**Proposition 1.1.** {#PROP-1.3.1} Every $\sigma$-finite measure is semifinite. The converse is not true.
 
 *Proof.*
 
@@ -615,18 +621,9 @@ The Lebesgue measure is $\sigma$-finite, as $\mathbb{R} = \bigcup_{n \in \mathbb
 
 **Step 2 (Decomposition):** Observe $A = \bigcup_{n=1}^{\infty} (A \cap E_n)$ (since $X = \bigcup E_n$).
 
-**Step 3 (Applying subadditivity):** By countable subadditivity of measures,
-$$ \mu(A) \le \sum_{n=1}^{\infty} \mu(A \cap E_n) $$
-Since $\mu(A) = \infty$, the right-hand side must equal $\infty$.
+**Step 3 (Extracting finite piece via contradiction):** If $\mu(A) = \infty$ and $A = \bigcup_{n=1}^{\infty} (A \cap E_n)$ with each $\mu(E_n) < \infty$, then if all terms $\mu(A \cap E_n) = 0$ we would have $\mu(A) \le \sum_{n=1}^{\infty} \mu(A \cap E_n) = \sum 0 = 0$ by countable subadditivity, a contradiction. Hence there exists $n_0 \in \mathbb{N}$ such that $\mu(A \cap E_{n_0}) > 0$, and automatically $\mu(A \cap E_{n_0}) \le \mu(E_{n_0}) < \infty$ by monotonicity.
 
-**Step 4 (Extracting finite piece):** For a series of non-negative terms to sum to $\infty$, at least one term must be positive. Thus there exists $n_0 \in \mathbb{N}$ such that $\mu(A \cap E_{n_0}) > 0$.
-
-**Step 5 (Conclusion):** Let $B = A \cap E_{n_0}$. Then:
-- $B \subseteq A$ (by construction)
-- $B \in \mathcal{F}$ (intersection of measurable sets)
-- $0 < \mu(B) \le \mu(E_{n_0}) < \infty$ (by monotonicity and finiteness of $E_{n_0}$)
-
-This satisfies the definition of semifiniteness. $\square$
+Thus $B = A \cap E_{n_0}$ satisfies $B \subseteq A$, $B \in \mathcal{F}$, and $0 < \mu(B) < \infty$, establishing semifiniteness. $\square$
 
 (ii) **A counterexample to the converse.**
 Let $X = \mathbb{R}$ (an uncountable set) and $\mathcal{F} = 2^{\mathbb{R}}$. Define the counting measure $\mu_c(A) = |A|$ if $A$ is finite, and $\mu_c(A)=\infty$ otherwise.
@@ -638,24 +635,19 @@ $\square$
 
 This property refines the $\sigma$-algebra to include all subsets of negligible sets.
 
-**Definition 1.6 (Closed Set in $\mathbb{R}$).** {#DEF-1.1.6} A set $A \subseteq \mathbb{R}$ is **closed** if its complement $\mathbb{R} \setminus A$ is open (i.e., a union of open intervals). Equivalently, $A$ is closed if it contains all its limit points: for every convergent sequence $(x_n)_{n=1}^{\infty} \subseteq A$ with $x_n \to x$, we have $x \in A$.
-
-**Remark.** It is a standard result of topology that finite unions and arbitrary intersections of closed sets are closed. In particular:
-- Closed intervals $[a,b]$ are closed sets
-- Countable intersections of closed sets are closed (e.g., the Cantor set)
-- Closed sets in $\mathbb{R}$ are Borel measurable: $\mathcal{B}(\mathbb{R})$ contains all closed sets
+**We recall:** A set $A \subseteq \mathbb{R}$ is **closed** if its complement $\mathbb{R} \setminus A$ is open (i.e., a union of open intervals). Equivalently, $A$ is closed if it contains all its limit points: for every convergent sequence $(x_n)_{n=1}^{\infty} \subseteq A$ with $x_n \to x$, we have $x \in A$. It is a standard result of topology that finite unions and arbitrary intersections of closed sets are closed. In particular, closed intervals $[a,b]$ are closed sets, countable intersections of closed sets are closed (e.g., the Cantor set), and closed sets in $\mathbb{R}$ are Borel measurable: $\mathcal{B}(\mathbb{R})$ contains all closed sets.
 
 **Motivation for completeness:** Consider the space $(\mathbb{R}, \mathcal{B}(\mathbb{R}), \lambda)$. One can construct the **Cantor set** $C$ [@folland:real_analysis:1999, §1.1], which is a Borel set with $\lambda(C) = 0$. However, $C$ contains subsets, say $Z \subset C$, which are provably *not* in the Borel $\sigma$-algebra $\mathcal{B}(\mathbb{R})$. This presents a logical deficiency: we have a set $Z$ contained within a set of measure zero, yet we cannot even assign $Z$ a measure. A complete measure space rectifies this.
 
 **RL relevance:** Completeness ensures that value functions differing only on null sets are identified—a crucial equivalence for "almost everywhere" results in stochastic approximation. In TD learning (Week 32), we prove convergence of $V_n \to V^*$ **almost surely** with respect to the state distribution $\rho$. This means $V_n$ may fail to converge on a set $N$ with $\rho(N) = 0$. Completeness guarantees that $N$ and all its subsets are measurable, so we can rigorously state "convergence except on a null set" without encountering unmeasurable exceptional sets.
 
-**Definition 1.7 (Null Set and Completeness).** {#DEF-1.1.7} Let $(X, \mathcal{F}, \mu)$ be a measure space.
+**Definition 1.6 (Null Set and Completeness).** {#DEF-1.3.3} Let $(X, \mathcal{F}, \mu)$ be a measure space.
 1.  A set $N \in \mathcal{F}$ is a **null set** if $\mu(N) = 0$.
 2.  The measure space is **complete** if for every null set $N \in \mathcal{F}$, every subset $Z \subseteq N$ is also in $\mathcal{F}$.
 
 The Borel measure space $(\mathbb{R}, \mathcal{B}(\mathbb{R}), \lambda)$ is famously *not* complete. However, any measure space can be extended to its completion.
 
-**Proposition 1.2 (The Incompleteness of the Borel-Lebesgue Space).** {#PROP-1.1.2} The measure space $(\mathbb{R}, \mathcal{B}(\mathbb{R}), \lambda)$, consisting of the Borel $\sigma$-algebra and the Lebesgue measure, is not complete.
+**Proposition 1.2 (The Incompleteness of the Borel-Lebesgue Space).** {#PROP-1.3.2} The measure space $(\mathbb{R}, \mathcal{B}(\mathbb{R}), \lambda)$, consisting of the Borel $\sigma$-algebra and the Lebesgue measure, is not complete.
 
 *Proof.* To prove this, we must construct a specific counterexample. We must exhibit a set $N \in \mathcal{B}(\mathbb{R})$ with $\lambda(N)=0$, and a subset $Z \subseteq N$ such that $Z \notin \mathcal{B}(\mathbb{R})$.
 
@@ -668,7 +660,7 @@ Each $C_k$ in the Cantor set construction is a finite union of closed intervals,
     *   It is also a standard result that the Cantor set $C$, despite having measure zero, is uncountable and has the cardinality of the continuum, $|C| = \mathfrak{c}$. This can be seen by constructing a bijection between points in $C$ (represented by their ternary expansions using only digits 0 and 2) and points in $[0,1]$ (represented by their binary expansions).
     *   Consider the power set of $C$, denoted $2^C$, which is the collection of *all* subsets of $C$. By **Cantor's theorem** (the power set of any set has strictly greater cardinality than the set itself), we have $|2^C| = 2^{|C|} = 2^{\mathfrak{c}} > \mathfrak{c}$.
 
-3.  **Conclusion.** The collection of all subsets of the Cantor set has cardinality $2^{\mathfrak{c}}$. The collection of all Borel sets has cardinality $\mathfrak{c}$. Since there are strictly more subsets of $C$ than there are Borel sets in total, it is a logical necessity that there must exist subsets of $C$ that are not Borel sets. Let $Z$ be one such subset.
+3.  **Conclusion.** The collection of all subsets of the Cantor set has cardinality $2^{\mathfrak{c}}$. The collection of all Borel sets has cardinality $\mathfrak{c}$. Since there are strictly more subsets of $C$ than there are Borel sets in total, it is a logical necessity that there must exist subsets of $C$ that are not Borel sets. Let $Z$ be one such subset. Thus **some subset of a null set is non-Borel**, which is precisely what incompleteness allows.
     We have successfully identified a set $C \in \mathcal{B}(\mathbb{R})$ with $\lambda(C)=0$, and a subset $Z \subseteq C$ for which $Z \notin \mathcal{B}(\mathbb{R})$. This violates the definition of a complete measure space.
 $\square$
 
@@ -676,9 +668,9 @@ $\square$
 
 This flaw is not fatal. The fact that our foundational measure space is incomplete simply means it is not yet the correct analytical object for our purposes. As we shall now prove, any measure space can be uniquely extended to its completion, thereby absorbing these pathological subsets of null sets into the framework in a consistent manner.
 
-**Definition 1.8 (Measure Agreement).** {#DEF-1.1.8} Let $(X, \mathcal{F})$ be a measurable space with $\mathcal{F} \subseteq \mathcal{G}$ (i.e., $\mathcal{G}$ is a $\sigma$-algebra containing $\mathcal{F}$). Let $\mu: \mathcal{F} \to [0, \infty]$ and $\nu: \mathcal{G} \to [0, \infty]$ be measures. We say that $\nu$ **agrees with** $\mu$ on $\mathcal{F}$ if $\nu(A) = \mu(A)$ for every $A \in \mathcal{F}$.
+**Definition 1.7 (Measure Agreement).** {#DEF-1.3.4} Let $(X, \mathcal{F})$ be a measurable space with $\mathcal{F} \subseteq \mathcal{G}$ (i.e., $\mathcal{G}$ is a $\sigma$-algebra containing $\mathcal{F}$). Let $\mu: \mathcal{F} \to [0, \infty]$ and $\nu: \mathcal{G} \to [0, \infty]$ be measures. We say that $\nu$ **agrees with** $\mu$ on $\mathcal{F}$ if $\nu(A) = \mu(A)$ for every $A \in \mathcal{F}$.
 
-**Theorem 1.1 (The Completion of a Measure Space).** {#THM-1.1.1} For any measure space $(X, \mathcal{F}, \mu)$, there exists a complete measure space $(X, \overline{\mathcal{F}}, \overline{\mu})$ such that $\mathcal{F} \subseteq \overline{\mathcal{F}}$ and $\overline{\mu}$ agrees with $\mu$ on $\mathcal{F}$. The $\sigma$-algebra $\overline{\mathcal{F}}$ consists of all sets of the form $A \cup Z$, where $A \in \mathcal{F}$ and $Z$ is a subset of some null set in $\mathcal{F}$ [@folland:real_analysis:1999, §1.4].
+**Theorem 1.1 (The Completion of a Measure Space).** {#THM-1.3.1} For any measure space $(X, \mathcal{F}, \mu)$, there exists a complete measure space $(X, \overline{\mathcal{F}}, \overline{\mu})$ such that $\mathcal{F} \subseteq \overline{\mathcal{F}}$ and $\overline{\mu}$ agrees with $\mu$ on $\mathcal{F}$. The $\sigma$-algebra $\overline{\mathcal{F}}$ consists of all sets of the form $A \cup Z$, where $A \in \mathcal{F}$ and $Z$ is a subset of some null set in $\mathcal{F}$ [@folland:real_analysis:1999, §1.4].
 
 *Proof (Constructive).* The proof proceeds in four steps: we show (i) that $\overline{\mu}$ is well-defined, (ii) that $\overline{\mathcal{F}}$ is a $\sigma$-algebra, (iii) that $\overline{\mu}$ is a measure, and finally (iv) that the resulting space is complete.
 
@@ -691,14 +683,30 @@ This flaw is not fatal. The fact that our foundational measure space is incomple
 2.  (Closure under complementation) Let $E = A \cup Z \in \overline{\mathcal{F}}$, with $A \in \mathcal{F}$ and $Z \subseteq N \in \mathcal{N}$. Its complement is $E^c = (A \cup Z)^c = A^c \cap Z^c$. This form is not immediately useful. The key insight is to write $E^c$ as $(A \cup N)^c \cup (N \setminus Z)$. The set $A' = (A \cup N)^c$ is in $\mathcal{F}$ because $A, N \in \mathcal{F}$. The set $Z' = N \setminus Z$ is a subset of the null set $N$. Thus $E^c = A' \cup Z'$ is of the required form to be in $\overline{\mathcal{F}}$.
 3.  (Closure under countable unions) Let $\{E_n\}_{n=1}^{\infty}$ be a sequence in $\overline{\mathcal{F}}$. For each $n$, $E_n = A_n \cup Z_n$ where $A_n \in \mathcal{F}$ and $Z_n \subseteq N_n$ for some $N_n \in \mathcal{N}$. Their union is $\bigcup_{n=1}^\infty E_n = (\bigcup_{n=1}^\infty A_n) \cup (\bigcup_{n=1}^\infty Z_n)$. Let $A = \bigcup A_n$ and $Z = \bigcup Z_n$. Since $\mathcal{F}$ is a $\sigma$-algebra, $A \in \mathcal{F}$. Let $N = \bigcup N_n$. As a countable union of null sets, $N$ is itself a null set in $\mathcal{F}$ (since $\mu(N) \le \sum \mu(N_n) = 0$). Since $Z \subseteq N$, the set $\bigcup E_n = A \cup Z$ is of the required form and is therefore in $\overline{\mathcal{F}}$.
 
-(iii) **$\overline{\mu}$ is a measure.** Let $\{E_n\}$ be a disjoint sequence in $\overline{\mathcal{F}}$, with $E_n = A_n \cup Z_n$. From the disjointness of $\{E_n\}$, the sets $\{A_n\}$ must also be disjoint. Then $\overline{\mu}(\bigcup E_n) = \overline{\mu}((\bigcup A_n) \cup (\bigcup Z_n)) = \mu(\bigcup A_n) = \sum \mu(A_n) = \sum \overline{\mu}(A_n \cup Z_n) = \sum \overline{\mu}(E_n)$.
+(iii) **$\overline{\mu}$ is a measure.** Let $\{E_n\}_{n=1}^{\infty}$ be a pairwise disjoint sequence in $\overline{\mathcal{F}}$, with $E_n = A_n \cup Z_n$ where $A_n \in \mathcal{F}$ and $Z_n \subseteq N_n$ for some $N_n \in \mathcal{N}$.
+
+We construct disjoint sets with the same measures. Define
+$$
+A'_1 := A_1, \qquad A'_n := A_n \setminus \bigcup_{k<n} (A_k \cup N_k) \quad \text{for } n \ge 2.
+$$
+Then each $A'_n \subseteq A_n$, the sets $\{A'_n\}$ are pairwise disjoint, and $A_n \setminus A'_n \subseteq \bigcup_{k<n} N_k$ is a null set. Hence $\mu(A'_n) = \mu(A_n)$ for all $n$.
+
+Now we have:
+$$
+\overline{\mu}\left(\bigcup_{n=1}^{\infty} E_n\right) = \overline{\mu}\left(\left(\bigcup_{n=1}^{\infty} A_n\right) \cup \left(\bigcup_{n=1}^{\infty} Z_n\right)\right) = \mu\left(\bigcup_{n=1}^{\infty} A_n\right).
+$$
+Since $\bigcup A_n$ and $\bigsqcup A'_n$ (disjoint union) differ by a null set, we have
+$$
+\mu\left(\bigcup_{n=1}^{\infty} A_n\right) = \mu\left(\bigsqcup_{n=1}^{\infty} A'_n\right) = \sum_{n=1}^{\infty} \mu(A'_n) = \sum_{n=1}^{\infty} \mu(A_n) = \sum_{n=1}^{\infty} \overline{\mu}(E_n).
+$$
+This establishes countable additivity. $\square$
 
 (iv) **The completed space is complete.** Let $E \in \overline{\mathcal{F}}$ with $\overline{\mu}(E) = 0$. Then $E = A \cup Z$ where $A \in \mathcal{F}$ and $Z \subseteq N \in \mathcal{N}$. We have $0 = \overline{\mu}(E) = \mu(A)$, so $A \in \mathcal{N}$. Let $Z' \subseteq E$ be any subset. Then $Z' \subseteq A \cup N$, where $A, N \in \mathcal{N}$. Let $N' = A \cup N \in \mathcal{F}$ (as a union of measurable sets), and note $\mu(N') \le \mu(A) + \mu(N) = 0$, so $N' \in \mathcal{N}$. Thus $Z' = \emptyset \cup Z'$ where $\emptyset \in \mathcal{F}$ and $Z' \subseteq N'$, so $Z' \in \overline{\mathcal{F}}$.
 $\square$
 
 **Remark (Uniqueness of Completion).** The completion $(\overline{\mathcal{F}}, \overline{\mu})$ constructed above is **essentially unique**: if $(\mathcal{G}, \nu)$ is another complete extension of $(X, \mathcal{F}, \mu)$ (meaning $\mathcal{F} \subseteq \mathcal{G}$, $\nu$ agrees with $\mu$ on $\mathcal{F}$, and $(X, \mathcal{G}, \nu)$ is complete), then $\mathcal{G} = \overline{\mathcal{F}}$ and $\nu = \overline{\mu}$. The proof is straightforward: any complete extension must include all subsets of $\mu$-null sets (by completeness), and the measure values are forced by agreement with $\mu$ on $\mathcal{F}$ and the well-definedness argument above. Thus, the completion is unique up to this construction. This uniqueness is crucial: it means "the completion" is a well-defined mathematical object, not merely "a completion." For the formal proof, see [@folland:real_analysis:1999, Theorem 1.9].
 
-**Definition 1.9 (The Lebesgue $\sigma$-Algebra).** {#DEF-1.1.9} The **Lebesgue $\sigma$-algebra** on $\mathbb{R}$, denoted $\mathcal{L}(\mathbb{R})$, is the completion of the Borel $\sigma$-algebra $\mathcal{B}(\mathbb{R})$ with respect to the Lebesgue measure $\lambda$ [@folland:real_analysis:1999, §1.4]. For the remainder of this text, unless specified otherwise, analysis on $\mathbb{R}^n$ will implicitly use this complete space.
+**Definition 1.8 (The Lebesgue $\sigma$-Algebra).** {#DEF-1.3.5} The **Lebesgue $\sigma$-algebra** on $\mathbb{R}$, denoted $\mathcal{L}(\mathbb{R})$, is the completion of the Borel $\sigma$-algebra $\mathcal{B}(\mathbb{R})$ with respect to the Lebesgue measure $\lambda$ [@folland:real_analysis:1999, §1.4]. For the remainder of this text, unless specified otherwise, analysis on $\mathbb{R}^n$ will implicitly use this complete space.
 
 ---
 
@@ -710,7 +718,7 @@ $\square$
 
 ### **I. Core Theory: Measurable Functions**
 
-**Definition 1.10 (Measurable Function).** {#DEF-1.1.10} Let $(X, \mathcal{F})$ and $(Y, \mathcal{G})$ be two measurable spaces. A function $f: X \to Y$ is said to be **$(\mathcal{F}, \mathcal{G})$-measurable** if the preimage of every measurable set in $Y$ is a measurable set in $X$:
+**Definition 1.9 (Measurable Function).** {#DEF-1.2.1} Let $(X, \mathcal{F})$ and $(Y, \mathcal{G})$ be two measurable spaces. A function $f: X \to Y$ is said to be **$(\mathcal{F}, \mathcal{G})$-measurable** if the preimage of every measurable set in $Y$ is a measurable set in $X$:
 $$
 \forall B \in \mathcal{G}, \quad f^{-1}(B) = \{x \in X \mid f(x) \in B\} \in \mathcal{F}.
 $$
@@ -722,19 +730,19 @@ For a real-valued function $f: X \to \mathbb{R}$, we assume the codomain is $(\m
 
 The class of measurable functions is remarkably stable under common operations. The following results are developed in detail in the companion exercise file `Day_1_exercises_FINAL.md`, with guided proofs.
 
-**Proposition 1.3 (Closure under Arithmetic Operations).** {#PROP-1.1.3} Let $f, g: (X, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ be measurable. Then the sum $f+g$ and product $f \cdot g$ are measurable.
+**Proposition 1.3 (Closure under Arithmetic Operations).** {#PROP-1.2.1} Let $f, g: (X, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ be measurable. Then the sum $f+g$ and product $f \cdot g$ are measurable.
 
 *Sketch of Proof.* For the sum, express $\{x \mid f(x) + g(x) < a\}$ as a countable union over rationals: $\bigcup_{q \in \mathbb{Q}} (\{f < q\} \cap \{g < a-q\})$. For the product, note that $f^2$ is measurable (using preimages of intervals), then apply the identity $f \cdot g = \frac{1}{2}((f+g)^2 - f^2 - g^2)$. The full proof is given in Exercise 3 of the companion file.
 
-*Remark (On Generality).* The proof uses only the density of $\mathbb{Q}$ in $\mathbb{R}$ and basic set operations. The result extends immediately to measurable functions taking values in any **second-countable topological vector space** (e.g., $\mathbb{R}^n$, $\ell^2$, $C([0,1])$), where addition and multiplication are continuous. For reinforcement learning—where state spaces are subsets of $\mathbb{R}^n$ and value functions are real-valued—the statement above is the natural form. We will revisit this generality in **Week 12** when developing Banach-valued measurable functions for operator-theoretic approaches to MDPs.
+*Remark (On Generality).* The proof uses only the density of $\mathbb{Q}$ in $\mathbb{R}$ and basic set operations. For **addition and scalar multiplication**, the result extends immediately to measurable functions taking values in any **second-countable topological vector space** (e.g., $\mathbb{R}^n$, $\ell^2$, $C([0,1])$), where these operations are continuous. For **products**, we must restrict to spaces with compatible algebraic structure: **topological algebras** where a continuous bilinear multiplication map $m: X \times X \to X$ is defined (e.g., $\mathbb{R}^n$ with componentwise product, $C(K)$ with pointwise product, $L^\infty$ with pointwise product). In a general topological vector space like $\ell^2$, pointwise multiplication need not map $\ell^2 \times \ell^2 \to \ell^2$, so the product closure does not automatically extend. For reinforcement learning—where state spaces are subsets of $\mathbb{R}^n$ and value functions are real-valued—the statement above is the natural form. We will revisit this generality in **Week 12** when developing Banach-valued measurable functions for operator-theoretic approaches to MDPs.
 
-**Proposition 1.4 (Closure under Composition).** {#PROP-1.1.4} Let $g: (X, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ be measurable and $f: (\mathbb{R}, \mathcal{B}(\mathbb{R})) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ be continuous. Then the composition $f \circ g$ is measurable.
+**Proposition 1.4 (Closure under Composition).** {#PROP-1.2.2} Let $g: (X, \mathcal{F}) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ be measurable and $f: (\mathbb{R}, \mathcal{B}(\mathbb{R})) \to (\mathbb{R}, \mathcal{B}(\mathbb{R}))$ be continuous. Then the composition $f \circ g$ is measurable.
 
-*Sketch of Proof.* For any open set $U \subseteq \mathbb{R}$, we have $(f \circ g)^{-1}(U) = g^{-1}(f^{-1}(U))$. By continuity of $f$, the set $f^{-1}(U)$ is open, hence Borel. By measurability of $g$, the preimage $g^{-1}(f^{-1}(U))$ is in $\mathcal{F}$. Since open sets generate $\mathcal{B}(\mathbb{R})$, this suffices. The complete proof is given in Exercise 3 of the companion file.
+*Sketch of Proof.* By the generating class criterion (Exercise 3, Lemma 3.1), it suffices to check preimages of sets in a generating class for $\mathcal{B}(\mathbb{R})$. For any open set $U \subseteq \mathbb{R}$, we have $(f \circ g)^{-1}(U) = g^{-1}(f^{-1}(U))$. By continuity of $f$, the set $f^{-1}(U)$ is open, hence Borel. By measurability of $g$, the preimage $g^{-1}(f^{-1}(U))$ is in $\mathcal{F}$. Since open sets generate $\mathcal{B}(\mathbb{R})$, this suffices. The complete proof is given in Exercise 3 of the companion file.
 
 The property of completeness has a vital consequence for measurable functions.
 
-**Proposition 1.5 (Measurability of "Almost Everywhere" Equal Functions).** {#PROP-1.1.5} Let $(X, \mathcal{F}, \mu)$ be a **complete** measure space. If $f:X \to \mathbb{R}$ is measurable and $g:X \to \mathbb{R}$ satisfies $f(x)=g(x)$ for all $x$ outside a null set, then $g$ is also measurable.
+**Proposition 1.5 (Measurability of "Almost Everywhere" Equal Functions).** {#PROP-1.2.3} Let $(X, \mathcal{F}, \mu)$ be a **complete** measure space. If $f:X \to \mathbb{R}$ is measurable and $g:X \to \mathbb{R}$ satisfies $f(x)=g(x)$ for all $x$ outside a null set, then $g$ is also measurable.
 
 *Proof.* Let $N \in \mathcal{F}$ be a null set such that $E = \{x \mid f(x) \neq g(x)\} \subseteq N$. As the space is complete, $E \in \mathcal{F}$ and $\mu(E)=0$. For any $a \in \mathbb{R}$:
 $$ \{x \mid g(x) < a\} = (\{x \in E^c \mid g(x) < a\}) \cup (\{x \in E \mid g(x) < a\}) $$

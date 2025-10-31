@@ -1,4 +1,4 @@
-[[Day_1_FINAL#]]
+[[Day_1_FINAL]]
 
 # Day 1 Exercises: Foundational Tools for Measure-Theoretic RL
 
@@ -53,7 +53,7 @@ $$\mathbb{P}_\pi\left(\text{visit every } s \in \mathcal{S} \text{ infinitely of
 
 > **Note on continuous state spaces:** For **uncountable** $\mathcal{S}$ (e.g., $\mathbb{R}^n$ in continuous control), visiting every individual state is impossible—the trajectory is countable while $\mathbb{R}^n$ is uncountable. We instead require **recurrence** on regions or **ergodicity** (Weeks 9-10, 17-22). This distinction is subtle but crucial, and we develop the proper framework for continuous spaces when we study ergodic theory (Week 9-10). For now, focus on finite/countable spaces where the $\limsup$ characterization is exact.
 
-**Why this matters:** Q-learning convergence (Week 34) requires visiting every state-action pair $(s,a)$ infinitely often. Characterizing this event precisely is where the $\limsup$ machinery becomes essential [@watkins:qlearning:1992; @tsitsiklis:q_learning:1994] (asynchronous updates and convergence conditions).
+**Why this matters:** Q-learning convergence (Week 34) requires visiting every state-action pair $(s,a)$ infinitely often. Characterizing this event precisely is where the $\limsup$ machinery becomes essential [@tsitsiklis:q_learning:1994].
 
 **Additional applications** (to be developed later):
 - Q-learning convergence (Week 34): requires visiting all $(s,a)$ infinitely often
@@ -156,7 +156,7 @@ Not all measures are created equal. The behavior of integrals and the validity o
    $$\mathbb{E}_{s \sim \rho, a \sim \pi(\cdot|s)}[\nabla \log \pi(a|s) Q(s,a)] = \int_{\mathcal{S}} \int_{\mathcal{A}} \nabla \log \pi(a|s) Q(s,a) \, \pi(da|s) \, \rho(ds)$$
    requires Fubini-Tonelli to interchange integration order (from $\int_{\mathcal{S}} \int_{\mathcal{A}}$ to $\int_{\mathcal{A}} \int_{\mathcal{S}}$ when needed for derivations), which demands $\sigma$-finiteness of both $\mathcal{S}$ and $\mathcal{A}$ [@folland:real_analysis:1999, §2.4]. This is essential for deriving the policy gradient theorem (Week 35).
 
-   **Note:** For **deterministic policies** $\pi: \mathcal{S} \to \mathcal{A}$, iterated integrals suffice, and $\sigma$-finiteness is not required for Fubini. The subtlety arises only for stochastic policies over joint $(s,a)$ spaces.
+   **Clarification on deterministic vs. stochastic policies:** For **deterministic policies** $\pi: \mathcal{S} \to \mathcal{A}$, we compute expectations as $\mathbb{E}_{s \sim \rho}[f(s, \pi(s))] = \int_{\mathcal{S}} f(s, \pi(s)) \, \rho(ds)$, which is a single integral over $\mathcal{S}$ only—no product measure is involved, and $\sigma$-finiteness is not required for this operation. The subtlety arises only for **stochastic policies**, where $\pi(\cdot|s)$ is a transition kernel (a family of probability measures on $\mathcal{A}$ indexed by $s$). The joint expectation over $(s,a)$ involves product measure structure, and Fubini-Tonelli's applicability depends on $\sigma$-finiteness of the underlying spaces. This distinction becomes critical when deriving policy gradient theorems for stochastic policies (Week 35).
 
 2. **Radon-Nikodym Theorem (Week 3):** Existence of probability densities—likelihood ratios for importance sampling (Week 38), policy gradient theorems [@sutton:policy_gradient:2000] (Week 35)—requires $\sigma$-finiteness [@folland:real_analysis:1999, §3.2].
 
@@ -170,7 +170,7 @@ We recall key definitions from Day 1 §II-III:
 
 **Definition 2.1 (Measure).** Let $(X, \mathcal{F})$ be a measurable space. A function $\mu: \mathcal{F} \to [0, \infty]$ is a **measure** if:
 1.  $\mu(\emptyset) = 0$.
-2.  (Countable Additivity) For any countable collection $\{A_n\}_{n=1}^{\\infty}$ of pairwise disjoint sets in $\mathcal{F}$,
+2.  (Countable Additivity) For any countable collection $\{A_n\}_{n=1}^{\infty}$ of pairwise disjoint sets in $\mathcal{F}$,
     $$ \mu\left(\bigcup_{n=1}^{\infty} A_n\right) = \sum_{n=1}^{\infty} \mu(A_n) $$
 
 **Definition 2.2 ($\sigma$-Finite Measure).** A measure $\mu$ on $(X, \mathcal{F})$ is **$\sigma$-finite** if there exists a countable collection $\{E_n\}_{n=1}^{\infty} \subseteq \mathcal{F}$ such that:
@@ -216,7 +216,7 @@ We must ensure these operations preserve measurability, so that expectations rem
 **(i) Sum is measurable:**
 We show $\{x \mid f(x)+g(x) < a\} \in \mathcal{F}$ for any $a \in \mathbb{R}$.
 
-**Why this suffices:** The collection $\{(-\infty, a) : a \in \mathbb{R}\}$ of half-open intervals generates the Borel $\sigma$-algebra $\mathcal{B}(\mathbb{R})$ (as noted in Day 1 §I.A, Remark on Generating Classes). By the **generating class criterion** (Lemma 3.1 below), checking preimages for this generating class suffices to prove measurability. We formalize this principle rigorously in Part B.
+**Why this suffices:** The collection $\{(-\infty, a) : a \in \mathbb{R}\}$ of open rays generates the Borel $\sigma$-algebra $\mathcal{B}(\mathbb{R})$ (as noted in Day 1 §I.A, Remark on Generating Classes). By the **generating class criterion** (Lemma 3.1 below), checking preimages for this generating class suffices to prove measurability. We formalize this principle rigorously in Part B.
 
 The key insight: $f(x) + g(x) < a$ if and only if there exists $q \in \mathbb{Q}$ with $f(x) < q$ and $g(x) < a-q$. Thus:
 $$
@@ -232,6 +232,8 @@ $$
 = \{x \mid f(x) < \sqrt{a}\} \cap \{x \mid f(x) > -\sqrt{a}\}
 $$
 
+For $a < 0$, the set $\{x \mid f(x)^2 < a\} = \emptyset$ (empty set) since squares are non-negative. In both cases, the preimage is measurable.
+
 Both sets are measurable, so $f^2$ is measurable. By (i), $f+g$ is measurable, so $(f+g)^2$ is measurable. Using the identity:
 $$
 f \cdot g = \frac{1}{2}((f+g)^2 - f^2 - g^2)
@@ -240,6 +242,17 @@ we conclude $f \cdot g$ is measurable as a linear combination of measurable func
 $\square$
 
 *Remark (Extension to $\mathbb{R}^n$).* The proof above applies **verbatim** to functions $f, g: (X, \mathcal{F}) \to (\mathbb{R}^n, \mathcal{B}(\mathbb{R}^n))$ by working component-wise: if $f = (f_1, \ldots, f_n)$ and $g = (g_1, \ldots, g_n)$ are measurable, then $f + g = (f_1 + g_1, \ldots, f_n + g_n)$ is measurable since each component $f_i + g_i$ is measurable by the scalar case. This is crucial for feature maps $\phi: \mathcal{S} \to \mathbb{R}^d$ in deep RL (Week 34-35).
+
+*Remark (On Generality).* The proof uses only the density of $\mathbb{Q}$ in $\mathbb{R}$ and basic set operations.
+
+**For addition and scalar multiplication**, the result extends immediately to measurable functions taking values in any **second-countable topological vector space** (e.g., $\mathbb{R}^n$, $\ell^2$, $C([0,1])$), where these operations are continuous.
+
+**For products**, we must restrict to spaces with compatible algebraic structure: **topological algebras** where a continuous bilinear multiplication map $m: X \times X \to X$ is defined. Examples include:
+- $\mathbb{R}^n$ with componentwise product
+- $C(K)$ (continuous functions on compact $K$) with pointwise product
+- $L^\infty$ with pointwise product
+
+In a general topological vector space like $\ell^2$, pointwise multiplication need not map $\ell^2 \times \ell^2 \to \ell^2$ (the product of two square-summable sequences need not be square-summable). More precisely, whenever a continuous **bilinear** map $m: X \times X \to Y$ is given, the composition $(f,g) \mapsto m(f,g)$ preserves measurability. For reinforcement learning—where state spaces are subsets of $\mathbb{R}^n$ and value functions are real-valued—the statement above is the natural form. We will revisit this generality in **Week 12** when developing Banach-valued measurable functions for operator-theoretic approaches to MDPs.
 
 ### Part B: Closure under Composition with Continuous Functions
 
@@ -269,7 +282,7 @@ This strategy is called the **good sets principle** (or **Dynkin class method**)
 
 *Proof of Proposition 3.2.*
 
-Let $\mathcal{O}(\mathbb{R})$ denote the collection of open sets in $\mathbb{R}$. It is well-known that $\sigma(\mathcal{O}(\mathbb{R})) = \mathcal{B}(\mathbb{R})$. By Lemma 3.1, it suffices to show $h^{-1}(U) \in \mathcal{F}$ for every open set $U \subseteq \mathbb{R}$.
+Let $\mathcal{O}(\mathbb{R})$ denote the collection of open sets in $\mathbb{R}$. It is well-known that $\sigma(\mathcal{O}(\mathbb{R})) = \mathcal{B}(\mathbb{R})$. By the generator criterion (Lemma 3.1), it suffices to check preimages of open sets. That is, we need only show $h^{-1}(U) \in \mathcal{F}$ for every open set $U \subseteq \mathbb{R}$.
 
 **Step 1:** Express the preimage using composition.
 
@@ -295,28 +308,36 @@ Since $h^{-1}(U) \in \mathcal{F}$ for all $U \in \mathcal{O}(\mathbb{R})$, and $
 
   **Notation.** Throughout RL theory, we use the following standard notation for neural network function approximators:
   - $\text{NN}_\theta: \mathbb{R}^d \to \mathbb{R}$ denotes a **neural network** with parameters $\theta$ (weights and biases), mapping $d$-dimensional feature vectors to scalar outputs (e.g., value function estimates)
-  - For Q-functions (state-action value functions): $\text{NN}_\theta: \mathbb{R}^d \to \mathbb{R}^{|\mathcal{A}|}$ outputs a vector of Q-values, where $\mathcal{A}$ denotes the action space and $|\mathcal{A}|$ is the number of available actions (e.g., for Atari games with 18 actions, $|\mathcal{A}| = 18$, so the network
-  outputs $\mathbb{R}^{18}$)
+  - For Q-functions (state-action value functions): $\text{NN}_\theta: \mathbb{R}^d \to \mathbb{R}^{|\mathcal{A}|}$ outputs a vector of Q-values, where $\mathcal{A}$ denotes the action space and $|\mathcal{A}|$ is the number of available actions (e.g., for Atari games with 18 actions, $|\mathcal{A}| = 18$, so the network outputs $\mathbb{R}^{18}$)
   - The subscript $\theta$ emphasizes the parametrization, distinguishing different network instantiations during training
 
-**Corollary 3.3 (Measurability of Neural Network Value Functions).** Let $(\mathcal{S}, \mathcal{F}_\mathcal{S})$ be a measurable state space. If $\phi: \mathcal{S} \to \mathbb{R}^d$ is measurable and the neural network $\text{NN}_\theta: \mathbb{R}^d \to \mathbb{R}$ is continuous **Lebesgue-almost everywhere** (i.e., continuous except on a set of Lebesgue measure zero in $\mathbb{R}^d$), then the composed value function $V_\theta = \text{NN}_\theta \circ \phi: \mathcal{S} \to \mathbb{R}$ is measurable.
+**Corollary 3.3 (Measurability of Neural Network Value Functions).** Let $(\mathcal{S}, \mathcal{F}_\mathcal{S})$ be a measurable state space. If $\phi: \mathcal{S} \to \mathbb{R}^d$ is measurable and the neural network $\text{NN}_\theta: \mathbb{R}^d \to \mathbb{R}$ is continuous, then the composed value function $V_\theta = \text{NN}_\theta \circ \phi: \mathcal{S} \to \mathbb{R}$ is measurable.
 
-**Why neural networks are measurable (addressing ReLU discontinuities):**
+**Why neural networks are measurable (addressing ReLU non-differentiability):**
 
-Modern deep RL uses neural networks with ReLU activations. A common misconception is that "ReLU is continuous except at a single point (0)." This statement applies to the **scalar function** $\text{ReLU}(x) = \max(0, x)$ on $\mathbb{R}$. However, ReLU layers apply this element-wise to vectors:
+Modern deep RL uses neural networks with ReLU activations. A common question arises: "Is ReLU continuous?" The answer is **yes**—ReLU is continuous everywhere, though it is **non-differentiable** at a single point (0).
+
+**Clarifying ReLU structure in layers:**
+
+The **scalar ReLU function** $\text{ReLU}(x) = \max(0, x)$ on $\mathbb{R}$ is continuous at every point, including $x=0$ (left and right limits both equal 0). However, ReLU layers apply this element-wise to vectors:
 $$ \text{ReLU}(\mathbf{x}) = (\max(0, x_1), \ldots, \max(0, x_d)) $$
 
-Each neuron in a ReLU network introduces discontinuities on a hyperplane $\{x \in \mathbb{R}^d : w^T x + b = 0\}$, which has Lebesgue measure zero in $\mathbb{R}^d$. A composition of ReLU layers thus has discontinuities on **countably many hyperplanes** (one per neuron across all layers), each of measure zero.
+A feedforward ReLU network is a composition:
+$$ \text{NN}_\theta = \text{Linear}_L \circ \text{ReLU}_{L-1} \circ \text{Linear}_{L-1} \circ \cdots \circ \text{ReLU}_1 \circ \text{Linear}_1 $$
 
-**Why measurability still holds:**
-- **Fact from real analysis** [@folland:real_analysis:1999, Proposition 2.8]: A function $f: \mathbb{R}^d \to \mathbb{R}$ that is continuous except on a set of Lebesgue measure zero is Borel measurable.
-- Each hyperplane of ReLU discontinuity $\{x : w^T x + b = 0\}$ has measure zero in $\mathbb{R}^d$ (it is a $(d-1)$-dimensional affine subspace).
-- A feedforward ReLU network with $N$ neurons has discontinuities on at most $N$ hyperplanes (one per neuron).
-- The countable union of measure-zero sets has measure zero.
-- Therefore, ReLU networks are continuous almost everywhere, hence Borel measurable.
-- By Proposition 3.2, their composition with measurable feature maps yields measurable value/policy functions.
+where each $\text{Linear}_k$ is an affine map (matrix multiplication + bias), which is continuous. Each ReLU layer is continuous (as the componentwise max of continuous functions).
 
-**Practical implication:** Modern deep RL uses ReLU networks with $10^4$–$10^6$ neurons (e.g., Atari DQN has ~$10^6$ parameters). While this seems like "many" discontinuities, the union of $10^6$ hyperplanes in $\mathbb{R}^{84×84×4}$ (Atari observation space) still has Lebesgue measure zero—an uncountable space minus countably many codimension-1 sets. Measurability is preserved even for massive networks.
+**Why measurability holds:**
+- Each affine layer $\text{Linear}_k: \mathbb{R}^{n_k} \to \mathbb{R}^{n_{k+1}}$ is continuous, hence Borel measurable
+- Each ReLU layer $\text{ReLU}_k: \mathbb{R}^{n_k} \to \mathbb{R}^{n_k}$ is continuous (continuous in each component), hence Borel measurable
+- By Proposition 3.2, a composition of continuous functions is continuous, hence measurable
+- The full network $\text{NN}_\theta$ is therefore continuous and Borel measurable
+- Composing the measurable feature map $\phi$ with the continuous network $\text{NN}_\theta$ (via Proposition 3.2) yields a measurable value function $V_\theta$
+
+**Non-differentiability vs. continuity:**
+While ReLU is **non-differentiable** at points where the pre-activation equals zero (forming hyperplanes $\{x \in \mathbb{R}^d : w^T x + b = 0\}$ in the input space), these sets have **Lebesgue measure zero** in $\mathbb{R}^d$. However, for measurability purposes, this is irrelevant—ReLU networks are **everywhere continuous**, not merely "continuous almost everywhere." Continuity is strictly stronger than Borel measurability, so the argument is even simpler than an "a.e. continuity" approach would suggest.
+
+**Practical implication:** Modern deep RL uses ReLU networks with $10^4$–$10^6$ neurons (e.g., Atari DQN has ~$10^6$ parameters). While these networks are non-differentiable on a union of measure-zero hyperplanes (one per neuron), they remain **continuous everywhere**. Measurability is preserved, ensuring that expectations like $\mathbb{E}_{s \sim \rho}[V_\theta(s)]$ are well-defined.
 
 **Technical note:** Even if we had discontinuities on a measure-positive set, compositions of measurable functions remain measurable (though continuity is not preserved). Measurability is preserved under far more general operations than continuity, which is why it is the correct framework for RL function approximators.
 
@@ -329,18 +350,18 @@ In deep Q-learning:
 
 **Why $Q_\theta$ is measurable:** The DQN architecture is a composition:
    $$Q_\theta = \text{Linear}_3 \circ \text{ReLU}_2 \circ \text{Conv}_2 \circ \text{ReLU}_1 \circ \text{Conv}_1$$
-   Each convolutional layer $\text{Conv}_k: \mathbb{R}^{n×m×c} \to \mathbb{R}^{n'×m'×c'}$ is a **linear map** (matrix multiplication in tensor form) followed by bias addition—hence continuous, therefore Borel measurable. Each ReLU layer is continuous a.e. (discontinuous on measure-zero hyperplanes). By Proposition 3.2 applied iteratively:
-   - $\text{Conv}_1$ measurable (continuous)
-   - $\text{ReLU}_1$ measurable (continuous a.e., Proposition 3.2 applies)
-   - $\text{Conv}_2 \circ \text{ReLU}_1$ measurable (Proposition 3.2: continuous ∘ measurable)
-   - Continuing this composition, $Q_\theta$ is measurable.
+   Each convolutional layer $\text{Conv}_k: \mathbb{R}^{n×m×c} \to \mathbb{R}^{n'×m'×c'}$ is a **linear map** (matrix multiplication in tensor form) followed by bias addition—hence continuous, therefore Borel measurable. Each ReLU layer is continuous everywhere (non-differentiable on measure-zero sets, but still continuous). By Proposition 3.2 applied iteratively:
+   - $\text{Conv}_1$ is continuous (hence measurable)
+   - $\text{ReLU}_1$ is continuous (hence measurable)
+   - $\text{Conv}_2 \circ \text{ReLU}_1$ is measurable (Proposition 3.2: continuous ∘ measurable)
+   - Continuing this composition, $Q_\theta$ is measurable
 
-   **Key insight:** Proposition 3.2 (continuous ∘ measurable = measurable) applies to **each layer**, ensuring the full network is measurable despite ReLU discontinuities.
+   **Key insight:** Proposition 3.2 (continuous ∘ measurable = measurable) applies to **each layer**, ensuring the full network is measurable.
 
 - By Proposition 3.2, $s \mapsto Q_\theta(s, a)$ is measurable for each action $a$.
 - This ensures the expected Q-value $\mathbb{E}_{s \sim \rho}[Q_\theta(s,a)]$ is well-defined (integration of a measurable function with respect to a probability measure).
 
-**Extension to policy gradients:** Stochastic policies in actor-critic methods (e.g., PPO [@schulman:ppo:2017], SAC [@haarnoja:sac:2018]) use neural networks to output distribution parameters (e.g., mean and variance of a Gaussian). As long as the network $\pi_\theta: \mathcal{S} \to \mathbb{R}^{2|\\mathcal{A}|}$ (outputting $\mu, \sigma$ per action) is measurable and the Gaussian density $(a, \mu, \sigma) \mapsto \mathcal{N}(a; \mu, \sigma^2)$ is continuous in $(\mu, \sigma)$ (which it is), the policy density $\pi_\theta(a|s)$ is jointly measurable in $(s, a)$. This ensures policy gradient objectives are well-defined expectations.
+**Extension to policy gradients:** Stochastic policies in actor-critic methods (e.g., PPO [@schulman:ppo:2017], SAC [@haarnoja:sac:2018]) use neural networks to output distribution parameters (e.g., mean and variance of a Gaussian). As long as the network $\pi_\theta: \mathcal{S} \to \mathbb{R}^{2|\mathcal{A}|}$ (outputting $\mu, \sigma$ per action) is measurable and the Gaussian density $(a, \mu, \sigma) \mapsto \mathcal{N}(a; \mu, \sigma^2)$ is continuous in $(\mu, \sigma)$ (which it is), the policy density $\pi_\theta(a|s)$ is jointly measurable in $(s, a)$. This ensures policy gradient objectives are well-defined expectations.
 
 ---
 
@@ -354,11 +375,11 @@ We have developed three foundational tools:
 
 3. **Measurability under operations** (Exercise 3) guarantees that:
    - Arithmetic combinations of measurable functions (like Bellman updates) remain measurable
-   - Neural network policies and value functions (even with ReLU discontinuities) are well-defined probabilistic objects
+   - Neural network policies and value functions (continuous, but non-differentiable at measure-zero sets) are well-defined probabilistic objects
    - Expectations like $\mathbb{E}[V_\theta(S)]$ are mathematically meaningful
 
 These techniques recur throughout measure-theoretic RL. Mastering them now provides the foundation for rigorous convergence analysis in later weeks.
-[[Day_1_FINAL#]]
+[[Day_1_FINAL]]
 
 # Day 1 Exercises: Foundational Tools for Measure-Theoretic RL
 
@@ -413,7 +434,7 @@ $$\mathbb{P}_\pi\left(\text{visit every } s \in \mathcal{S} \text{ infinitely of
 
 > **Note on continuous state spaces:** For **uncountable** $\mathcal{S}$ (e.g., $\mathbb{R}^n$ in continuous control), visiting every individual state is impossible—the trajectory is countable while $\mathbb{R}^n$ is uncountable. We instead require **recurrence** on regions or **ergodicity** (Weeks 9-10, 17-22). This distinction is subtle but crucial, and we develop the proper framework for continuous spaces when we study ergodic theory (Week 9-10). For now, focus on finite/countable spaces where the $\limsup$ characterization is exact.
 
-**Why this matters:** Q-learning convergence (Week 34) requires visiting every state-action pair $(s,a)$ infinitely often. Characterizing this event precisely is where the $\limsup$ machinery becomes essential [@watkins:qlearning:1992; @tsitsiklis:q_learning:1994] (asynchronous updates and convergence conditions).
+**Why this matters:** Q-learning convergence (Week 34) requires visiting every state-action pair $(s,a)$ infinitely often. Characterizing this event precisely is where the $\limsup$ machinery becomes essential [@tsitsiklis:q_learning:1994].
 
 **Additional applications** (to be developed later):
 - Q-learning convergence (Week 34): requires visiting all $(s,a)$ infinitely often
@@ -516,7 +537,7 @@ Not all measures are created equal. The behavior of integrals and the validity o
    $$\mathbb{E}_{s \sim \rho, a \sim \pi(\cdot|s)}[\nabla \log \pi(a|s) Q(s,a)] = \int_{\mathcal{S}} \int_{\mathcal{A}} \nabla \log \pi(a|s) Q(s,a) \, \pi(da|s) \, \rho(ds)$$
    requires Fubini-Tonelli to interchange integration order (from $\int_{\mathcal{S}} \int_{\mathcal{A}}$ to $\int_{\mathcal{A}} \int_{\mathcal{S}}$ when needed for derivations), which demands $\sigma$-finiteness of both $\mathcal{S}$ and $\mathcal{A}$ [@folland:real_analysis:1999, §2.4]. This is essential for deriving the policy gradient theorem (Week 35).
 
-   **Note:** For **deterministic policies** $\pi: \mathcal{S} \to \mathcal{A}$, iterated integrals suffice, and $\sigma$-finiteness is not required for Fubini. The subtlety arises only for stochastic policies over joint $(s,a)$ spaces.
+   **Clarification on deterministic vs. stochastic policies:** For **deterministic policies** $\pi: \mathcal{S} \to \mathcal{A}$, we compute expectations as $\mathbb{E}_{s \sim \rho}[f(s, \pi(s))] = \int_{\mathcal{S}} f(s, \pi(s)) \, \rho(ds)$, which is a single integral over $\mathcal{S}$ only—no product measure is involved, and $\sigma$-finiteness is not required for this operation. The subtlety arises only for **stochastic policies**, where $\pi(\cdot|s)$ is a transition kernel (a family of probability measures on $\mathcal{A}$ indexed by $s$). The joint expectation over $(s,a)$ involves product measure structure, and Fubini-Tonelli's applicability depends on $\sigma$-finiteness of the underlying spaces. This distinction becomes critical when deriving policy gradient theorems for stochastic policies (Week 35).
 
 2. **Radon-Nikodym Theorem (Week 3):** Existence of probability densities—likelihood ratios for importance sampling (Week 38), policy gradient theorems [@sutton:policy_gradient:2000] (Week 35)—requires $\sigma$-finiteness [@folland:real_analysis:1999, §3.2].
 
@@ -530,7 +551,7 @@ We recall key definitions from Day 1 §II-III:
 
 **Definition 2.1 (Measure).** Let $(X, \mathcal{F})$ be a measurable space. A function $\mu: \mathcal{F} \to [0, \infty]$ is a **measure** if:
 1.  $\mu(\emptyset) = 0$.
-2.  (Countable Additivity) For any countable collection $\{A_n\}_{n=1}^{\\infty}$ of pairwise disjoint sets in $\mathcal{F}$,
+2.  (Countable Additivity) For any countable collection $\{A_n\}_{n=1}^{\infty}$ of pairwise disjoint sets in $\mathcal{F}$,
     $$ \mu\left(\bigcup_{n=1}^{\infty} A_n\right) = \sum_{n=1}^{\infty} \mu(A_n) $$
 
 **Definition 2.2 ($\sigma$-Finite Measure).** A measure $\mu$ on $(X, \mathcal{F})$ is **$\sigma$-finite** if there exists a countable collection $\{E_n\}_{n=1}^{\infty} \subseteq \mathcal{F}$ such that:
@@ -576,7 +597,7 @@ We must ensure these operations preserve measurability, so that expectations rem
 **(i) Sum is measurable:**
 We show $\{x \mid f(x)+g(x) < a\} \in \mathcal{F}$ for any $a \in \mathbb{R}$.
 
-**Why this suffices:** The collection $\{(-\infty, a) : a \in \mathbb{R}\}$ of half-open intervals generates the Borel $\sigma$-algebra $\mathcal{B}(\mathbb{R})$ (as noted in Day 1 §I.A, Remark on Generating Classes). By the **generating class criterion** (Lemma 3.1 below), checking preimages for this generating class suffices to prove measurability. We formalize this principle rigorously in Part B.
+**Why this suffices:** The collection $\{(-\infty, a) : a \in \mathbb{R}\}$ of open rays generates the Borel $\sigma$-algebra $\mathcal{B}(\mathbb{R})$ (as noted in Day 1 §I.A, Remark on Generating Classes). By the **generating class criterion** (Lemma 3.1 below), checking preimages for this generating class suffices to prove measurability. We formalize this principle rigorously in Part B.
 
 The key insight: $f(x) + g(x) < a$ if and only if there exists $q \in \mathbb{Q}$ with $f(x) < q$ and $g(x) < a-q$. Thus:
 $$
@@ -592,6 +613,8 @@ $$
 = \{x \mid f(x) < \sqrt{a}\} \cap \{x \mid f(x) > -\sqrt{a}\}
 $$
 
+For $a < 0$, the set $\{x \mid f(x)^2 < a\} = \emptyset$ (empty set) since squares are non-negative. In both cases, the preimage is measurable.
+
 Both sets are measurable, so $f^2$ is measurable. By (i), $f+g$ is measurable, so $(f+g)^2$ is measurable. Using the identity:
 $$
 f \cdot g = \frac{1}{2}((f+g)^2 - f^2 - g^2)
@@ -600,6 +623,17 @@ we conclude $f \cdot g$ is measurable as a linear combination of measurable func
 $\square$
 
 *Remark (Extension to $\mathbb{R}^n$).* The proof above applies **verbatim** to functions $f, g: (X, \mathcal{F}) \to (\mathbb{R}^n, \mathcal{B}(\mathbb{R}^n))$ by working component-wise: if $f = (f_1, \ldots, f_n)$ and $g = (g_1, \ldots, g_n)$ are measurable, then $f + g = (f_1 + g_1, \ldots, f_n + g_n)$ is measurable since each component $f_i + g_i$ is measurable by the scalar case. This is crucial for feature maps $\phi: \mathcal{S} \to \mathbb{R}^d$ in deep RL (Week 34-35).
+
+*Remark (On Generality).* The proof uses only the density of $\mathbb{Q}$ in $\mathbb{R}$ and basic set operations.
+
+**For addition and scalar multiplication**, the result extends immediately to measurable functions taking values in any **second-countable topological vector space** (e.g., $\mathbb{R}^n$, $\ell^2$, $C([0,1])$), where these operations are continuous.
+
+**For products**, we must restrict to spaces with compatible algebraic structure: **topological algebras** where a continuous bilinear multiplication map $m: X \times X \to X$ is defined. Examples include:
+- $\mathbb{R}^n$ with componentwise product
+- $C(K)$ (continuous functions on compact $K$) with pointwise product
+- $L^\infty$ with pointwise product
+
+In a general topological vector space like $\ell^2$, pointwise multiplication need not map $\ell^2 \times \ell^2 \to \ell^2$ (the product of two square-summable sequences need not be square-summable). More precisely, whenever a continuous **bilinear** map $m: X \times X \to Y$ is given, the composition $(f,g) \mapsto m(f,g)$ preserves measurability. For reinforcement learning—where state spaces are subsets of $\mathbb{R}^n$ and value functions are real-valued—the statement above is the natural form. We will revisit this generality in **Week 12** when developing Banach-valued measurable functions for operator-theoretic approaches to MDPs.
 
 ### Part B: Closure under Composition with Continuous Functions
 
@@ -629,7 +663,7 @@ This strategy is called the **good sets principle** (or **Dynkin class method**)
 
 *Proof of Proposition 3.2.*
 
-Let $\mathcal{O}(\mathbb{R})$ denote the collection of open sets in $\mathbb{R}$. It is well-known that $\sigma(\mathcal{O}(\mathbb{R})) = \mathcal{B}(\mathbb{R})$. By Lemma 3.1, it suffices to show $h^{-1}(U) \in \mathcal{F}$ for every open set $U \subseteq \mathbb{R}$.
+Let $\mathcal{O}(\mathbb{R})$ denote the collection of open sets in $\mathbb{R}$. It is well-known that $\sigma(\mathcal{O}(\mathbb{R})) = \mathcal{B}(\mathbb{R})$. By the generator criterion (Lemma 3.1), it suffices to check preimages of open sets. That is, we need only show $h^{-1}(U) \in \mathcal{F}$ for every open set $U \subseteq \mathbb{R}$.
 
 **Step 1:** Express the preimage using composition.
 
@@ -655,28 +689,36 @@ Since $h^{-1}(U) \in \mathcal{F}$ for all $U \in \mathcal{O}(\mathbb{R})$, and $
 
   **Notation.** Throughout RL theory, we use the following standard notation for neural network function approximators:
   - $\text{NN}_\theta: \mathbb{R}^d \to \mathbb{R}$ denotes a **neural network** with parameters $\theta$ (weights and biases), mapping $d$-dimensional feature vectors to scalar outputs (e.g., value function estimates)
-  - For Q-functions (state-action value functions): $\text{NN}_\theta: \mathbb{R}^d \to \mathbb{R}^{|\mathcal{A}|}$ outputs a vector of Q-values, where $\mathcal{A}$ denotes the action space and $|\mathcal{A}|$ is the number of available actions (e.g., for Atari games with 18 actions, $|\mathcal{A}| = 18$, so the network
-  outputs $\mathbb{R}^{18}$)
+  - For Q-functions (state-action value functions): $\text{NN}_\theta: \mathbb{R}^d \to \mathbb{R}^{|\mathcal{A}|}$ outputs a vector of Q-values, where $\mathcal{A}$ denotes the action space and $|\mathcal{A}|$ is the number of available actions (e.g., for Atari games with 18 actions, $|\mathcal{A}| = 18$, so the network outputs $\mathbb{R}^{18}$)
   - The subscript $\theta$ emphasizes the parametrization, distinguishing different network instantiations during training
 
-**Corollary 3.3 (Measurability of Neural Network Value Functions).** Let $(\mathcal{S}, \mathcal{F}_\mathcal{S})$ be a measurable state space. If $\phi: \mathcal{S} \to \mathbb{R}^d$ is measurable and the neural network $\text{NN}_\theta: \mathbb{R}^d \to \mathbb{R}$ is continuous **Lebesgue-almost everywhere** (i.e., continuous except on a set of Lebesgue measure zero in $\mathbb{R}^d$), then the composed value function $V_\theta = \text{NN}_\theta \circ \phi: \mathcal{S} \to \mathbb{R}$ is measurable.
+**Corollary 3.3 (Measurability of Neural Network Value Functions).** Let $(\mathcal{S}, \mathcal{F}_\mathcal{S})$ be a measurable state space. If $\phi: \mathcal{S} \to \mathbb{R}^d$ is measurable and the neural network $\text{NN}_\theta: \mathbb{R}^d \to \mathbb{R}$ is continuous, then the composed value function $V_\theta = \text{NN}_\theta \circ \phi: \mathcal{S} \to \mathbb{R}$ is measurable.
 
-**Why neural networks are measurable (addressing ReLU discontinuities):**
+**Why neural networks are measurable (addressing ReLU non-differentiability):**
 
-Modern deep RL uses neural networks with ReLU activations. A common misconception is that "ReLU is continuous except at a single point (0)." This statement applies to the **scalar function** $\text{ReLU}(x) = \max(0, x)$ on $\mathbb{R}$. However, ReLU layers apply this element-wise to vectors:
+Modern deep RL uses neural networks with ReLU activations. A common question arises: "Is ReLU continuous?" The answer is **yes**—ReLU is continuous everywhere, though it is **non-differentiable** at a single point (0).
+
+**Clarifying ReLU structure in layers:**
+
+The **scalar ReLU function** $\text{ReLU}(x) = \max(0, x)$ on $\mathbb{R}$ is continuous at every point, including $x=0$ (left and right limits both equal 0). However, ReLU layers apply this element-wise to vectors:
 $$ \text{ReLU}(\mathbf{x}) = (\max(0, x_1), \ldots, \max(0, x_d)) $$
 
-Each neuron in a ReLU network introduces discontinuities on a hyperplane $\{x \in \mathbb{R}^d : w^T x + b = 0\}$, which has Lebesgue measure zero in $\mathbb{R}^d$. A composition of ReLU layers thus has discontinuities on **countably many hyperplanes** (one per neuron across all layers), each of measure zero.
+A feedforward ReLU network is a composition:
+$$ \text{NN}_\theta = \text{Linear}_L \circ \text{ReLU}_{L-1} \circ \text{Linear}_{L-1} \circ \cdots \circ \text{ReLU}_1 \circ \text{Linear}_1 $$
 
-**Why measurability still holds:**
-- **Fact from real analysis** [@folland:real_analysis:1999, Proposition 2.8]: A function $f: \mathbb{R}^d \to \mathbb{R}$ that is continuous except on a set of Lebesgue measure zero is Borel measurable.
-- Each hyperplane of ReLU discontinuity $\{x : w^T x + b = 0\}$ has measure zero in $\mathbb{R}^d$ (it is a $(d-1)$-dimensional affine subspace).
-- A feedforward ReLU network with $N$ neurons has discontinuities on at most $N$ hyperplanes (one per neuron).
-- The countable union of measure-zero sets has measure zero.
-- Therefore, ReLU networks are continuous almost everywhere, hence Borel measurable.
-- By Proposition 3.2, their composition with measurable feature maps yields measurable value/policy functions.
+where each $\text{Linear}_k$ is an affine map (matrix multiplication + bias), which is continuous. Each ReLU layer is continuous (as the componentwise max of continuous functions).
 
-**Practical implication:** Modern deep RL uses ReLU networks with $10^4$–$10^6$ neurons (e.g., Atari DQN has ~$10^6$ parameters). While this seems like "many" discontinuities, the union of $10^6$ hyperplanes in $\mathbb{R}^{84$\times$84$\times$4}$ (Atari observation space) still has Lebesgue measure zero—an uncountable space minus countably many codimension-1 sets. Measurability is preserved even for massive networks.
+**Why measurability holds:**
+- Each affine layer $\text{Linear}_k: \mathbb{R}^{n_k} \to \mathbb{R}^{n_{k+1}}$ is continuous, hence Borel measurable
+- Each ReLU layer $\text{ReLU}_k: \mathbb{R}^{n_k} \to \mathbb{R}^{n_k}$ is continuous (continuous in each component), hence Borel measurable
+- By Proposition 3.2, a composition of continuous functions is continuous, hence measurable
+- The full network $\text{NN}_\theta$ is therefore continuous and Borel measurable
+- Composing the measurable feature map $\phi$ with the continuous network $\text{NN}_\theta$ (via Proposition 3.2) yields a measurable value function $V_\theta$
+
+**Non-differentiability vs. continuity:**
+While ReLU is **non-differentiable** at points where the pre-activation equals zero (forming hyperplanes $\{x \in \mathbb{R}^d : w^T x + b = 0\}$ in the input space), these sets have **Lebesgue measure zero** in $\mathbb{R}^d$. However, for measurability purposes, this is irrelevant—ReLU networks are **everywhere continuous**, not merely "continuous almost everywhere." Continuity is strictly stronger than Borel measurability, so the argument is even simpler than an "a.e. continuity" approach would suggest.
+
+**Practical implication:** Modern deep RL uses ReLU networks with $10^4$–$10^6$ neurons (e.g., Atari DQN has ~$10^6$ parameters). While these networks are non-differentiable on a union of measure-zero hyperplanes (one per neuron), they remain **continuous everywhere**. Measurability is preserved, ensuring that expectations like $\mathbb{E}_{s \sim \rho}[V_\theta(s)]$ are well-defined.
 
 **Technical note:** Even if we had discontinuities on a measure-positive set, compositions of measurable functions remain measurable (though continuity is not preserved). Measurability is preserved under far more general operations than continuity, which is why it is the correct framework for RL function approximators.
 
@@ -689,18 +731,18 @@ In deep Q-learning:
 
 **Why $Q_\theta$ is measurable:** The DQN architecture is a composition:
    $$Q_\theta = \text{Linear}_3 \circ \text{ReLU}_2 \circ \text{Conv}_2 \circ \text{ReLU}_1 \circ \text{Conv}_1$$
-   Each convolutional layer $\text{Conv}_k: \mathbb{R}^{n$\times$m$\times$c} \to \mathbb{R}^{n'$\times$m'$\times$c'}$ is a **linear map** (matrix multiplication in tensor form) followed by bias addition—hence continuous, therefore Borel measurable. Each ReLU layer is continuous a.e. (discontinuous on measure-zero hyperplanes). By Proposition 3.2 applied iteratively:
-   - $\text{Conv}_1$ measurable (continuous)
-   - $\text{ReLU}_1$ measurable (continuous a.e., Proposition 3.2 applies)
-   - $\text{Conv}_2 \circ \text{ReLU}_1$ measurable (Proposition 3.2: continuous ∘ measurable)
-   - Continuing this composition, $Q_\theta$ is measurable.
+   Each convolutional layer $\text{Conv}_k: \mathbb{R}^{n$\times$m$\times$c} \to \mathbb{R}^{n'$\times$m'$\times$c'}$ is a **linear map** (matrix multiplication in tensor form) followed by bias addition—hence continuous, therefore Borel measurable. Each ReLU layer is continuous everywhere (non-differentiable on measure-zero sets, but still continuous). By Proposition 3.2 applied iteratively:
+   - $\text{Conv}_1$ is continuous (hence measurable)
+   - $\text{ReLU}_1$ is continuous (hence measurable)
+   - $\text{Conv}_2 \circ \text{ReLU}_1$ is measurable (Proposition 3.2: continuous ∘ measurable)
+   - Continuing this composition, $Q_\theta$ is measurable
 
-   **Key insight:** Proposition 3.2 (continuous ∘ measurable = measurable) applies to **each layer**, ensuring the full network is measurable despite ReLU discontinuities.
+   **Key insight:** Proposition 3.2 (continuous ∘ measurable = measurable) applies to **each layer**, ensuring the full network is measurable.
 
 - By Proposition 3.2, $s \mapsto Q_\theta(s, a)$ is measurable for each action $a$.
 - This ensures the expected Q-value $\mathbb{E}_{s \sim \rho}[Q_\theta(s,a)]$ is well-defined (integration of a measurable function with respect to a probability measure).
 
-**Extension to policy gradients:** Stochastic policies in actor-critic methods (e.g., PPO [@schulman:ppo:2017], SAC [@haarnoja:sac:2018]) use neural networks to output distribution parameters (e.g., mean and variance of a Gaussian). As long as the network $\pi_\theta: \mathcal{S} \to \mathbb{R}^{2|\\mathcal{A}|}$ (outputting $\mu, \sigma$ per action) is measurable and the Gaussian density $(a, \mu, \sigma) \mapsto \mathcal{N}(a; \mu, \sigma^2)$ is continuous in $(\mu, \sigma)$ (which it is), the policy density $\pi_\theta(a|s)$ is jointly measurable in $(s, a)$. This ensures policy gradient objectives are well-defined expectations.
+**Extension to policy gradients:** Stochastic policies in actor-critic methods (e.g., PPO [@schulman:ppo:2017], SAC [@haarnoja:sac:2018]) use neural networks to output distribution parameters (e.g., mean and variance of a Gaussian). As long as the network $\pi_\theta: \mathcal{S} \to \mathbb{R}^{2|\mathcal{A}|}$ (outputting $\mu, \sigma$ per action) is measurable and the Gaussian density $(a, \mu, \sigma) \mapsto \mathcal{N}(a; \mu, \sigma^2)$ is continuous in $(\mu, \sigma)$ (which it is), the policy density $\pi_\theta(a|s)$ is jointly measurable in $(s, a)$. This ensures policy gradient objectives are well-defined expectations.
 
 ---
 
@@ -714,7 +756,7 @@ We have developed three foundational tools:
 
 3. **Measurability under operations** (Exercise 3) guarantees that:
    - Arithmetic combinations of measurable functions (like Bellman updates) remain measurable
-   - Neural network policies and value functions (even with ReLU discontinuities) are well-defined probabilistic objects
+   - Neural network policies and value functions (continuous, but non-differentiable at measure-zero sets) are well-defined probabilistic objects
    - Expectations like $\mathbb{E}[V_\theta(S)]$ are mathematically meaningful
 
 These techniques recur throughout measure-theoretic RL. Mastering them now provides the foundation for rigorous convergence analysis in later weeks.
