@@ -81,7 +81,7 @@
 
 ## Introduction
 
-This appendix provides a hands-on tutorial for implementing the complete Tic-Tac-Toe project showcased throughout the book. While Professor Dubois rigorously proved the mathematical foundations (Weeks 5-12: Markov chains, Week 24: minimax theorem, Week 25-28: MDPs), we now roll up our sleeves and build the actual system.
+This appendix provides a hands-on tutorial for implementing the complete Tic-Tac-Toe project showcased throughout the book. While we rigorously proved the mathematical foundations (Weeks 5-12: Markov chains, Week 24: minimax theorem, Week 25-28: MDPs), we now roll up our sleeves and build the actual system.
 
 **What You'll Build:**
 - Generic game interface (BaseGameEnv) for all two-player zero-sum games

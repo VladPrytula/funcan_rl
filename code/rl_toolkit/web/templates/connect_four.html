@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Four - MCTS AI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .theory-note {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .theory-note strong {
+            color: #667eea;
+        }
+
+        .main-content {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .game-area {
+            flex: 1;
+            min-width: 500px;
+            max-width: 650px;
+        }
+
+        .sidebar {
+            flex: 0 0 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .board-container {
+            background: #0066cc;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .column-labels {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .column-label {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: white;
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .column-label:hover:not(.disabled) {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .column-label.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            position: relative;
+        }
+
+        .cell {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .cell.empty {
+            background: #004999;
+        }
+
+        .cell.player-1 {
+            background: radial-gradient(circle, #ff4444 0%, #cc0000 100%);
+            box-shadow: 0 4px 8px rgba(255, 68, 68, 0.4);
+        }
+
+        .cell.player-2 {
+            background: radial-gradient(circle, #ffeb3b 0%, #fbc02d 100%);
+            box-shadow: 0 4px 8px rgba(255, 235, 59, 0.4);
+        }
+
+        .cell.highlight {
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .cell .eval-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+            display: none;
+        }
+
+        .cell.show-eval .eval-overlay {
+            display: block;
+        }
+
+        .panel {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .panel h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .game-info {
+            display: grid;
+            gap: 10px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+
+        .info-item strong {
+            color: #667eea;
+        }
+
+        .status-message {
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .status-human-turn {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .status-ai-turn {
+            background: #fff9c4;
+            color: #f57f17;
+        }
+
+        .status-game-over {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: white;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .settings-group {
+            margin-bottom: 20px;
+        }
+
+        .settings-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .mcts-stats {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .mcts-stats.visible {
+            display: block;
+        }
+
+        .stats-table {
+            width: 100%;
+            font-size: 0.85em;
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .stats-table thead {
+            background: #667eea;
+            color: white;
+        }
+
+        .stats-table th,
+        .stats-table td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .stats-table tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        .stats-table .best-move {
+            background: #fff9c4;
+            font-weight: bold;
+        }
+
+        .value-positive {
+            color: #4caf50;
+        }
+
+        .value-negative {
+            color: #f44336;
+        }
+
+        .value-neutral {
+            color: #666;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                flex: 1;
+                max-width: 100%;
+            }
+
+            .game-area {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔴 Connect Four 🟡</h1>
+            <p>Play against Monte Carlo Tree Search AI</p>
+            <div class="theory-note">
+                <strong>Theory Connection (Syllabus Week 27-28):</strong><br>
+                [THM-28.X.Y]: MCTS with UCT achieves logarithmic regret per node<br>
+                UCT formula: Q(s,a) + c√(ln N(s) / N(s,a))<br>
+                Each tree node is a multi-armed bandit problem
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="game-area">
+                <div id="status-message" class="status-message status-human-turn">
+                    Your turn! Click a column to drop your piece.
+                </div>
+
+                <div class="board-container">
+                    <div class="column-labels" id="column-labels">
+                        <!-- Column labels (a-g) will be inserted here -->
+                    </div>
+                    <div class="board" id="board">
+                        <!-- Board cells will be inserted here -->
+                    </div>
+                </div>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>AI is thinking...</p>
+                </div>
+
+                <div class="mcts-stats" id="mcts-stats">
+                    <h3>MCTS Search Tree Statistics</h3>
+                    <p style="font-size: 0.9em; color: #666; margin-bottom: 10px;">
+                        Theory: UCT guides selection. Best move = argmax N(s,a) (most visited)
+                    </p>
+                    <table class="stats-table">
+                        <thead>
+                            <tr>
+                                <th>Column</th>
+                                <th>Visits</th>
+                                <th>Q-value</th>
+                                <th>UCT</th>
+                                <th>Assessment</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stats-body">
+                            <!-- MCTS stats will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="panel">
+                    <h3>Game Info</h3>
+                    <div class="game-info">
+                        <div class="info-item">
+                            <span><strong>You:</strong></span>
+                            <span id="human-symbol">🔴 (Red)</span>
+                        </div>
+                        <div class="info-item">
+                            <span><strong>AI:</strong></span>
+                            <span id="ai-symbol">🟡 (Yellow)</span>
+                        </div>
+                        <div class="info-item">
+                            <span><strong>Move Count:</strong></span>
+                            <span id="move-count">0</span>
+                        </div>
+                        <div class="info-item">
+                            <span><strong>Board Size:</strong></span>
+                            <span id="board-size">6×7</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Controls</h3>
+                    <div class="controls">
+                        <button class="btn-primary" onclick="newGame()">New Game</button>
+                        <button class="btn-secondary" onclick="newGameAIFirst()">AI Plays First</button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>MCTS Settings</h3>
+                    <div class="settings-group">
+                        <label for="sim-slider">
+                            Simulations: <strong id="sim-value">1000</strong>
+                        </label>
+                        <input
+                            type="range"
+                            id="sim-slider"
+                            min="100"
+                            max="3200"
+                            step="100"
+                            value="1000"
+                            oninput="updateSimulations(this.value)"
+                        >
+                        <small style="color: #666;">
+                            More simulations → stronger AI, slower moves
+                        </small>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input
+                            type="checkbox"
+                            id="show-thinking"
+                            onchange="toggleShowThinking(this.checked)"
+                        >
+                        <label for="show-thinking" style="margin: 0;">
+                            Show AI Thinking (MCTS stats)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Search Statistics</h3>
+                    <div class="game-info">
+                        <div class="info-item">
+                            <span><strong>Nodes Explored:</strong></span>
+                            <span id="nodes-explored">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span><strong>Tree Depth:</strong></span>
+                            <span id="tree-depth">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span><strong>Simulations:</strong></span>
+                            <span id="simulations-used">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        let gameState = {
+            board: [],
+            currentPlayer: 1,
+            legalMoves: [],
+            rows: 6,
+            cols: 7,
+            isGameOver: false,
+            humanPlayer: 1,
+            aiPlayer: -1,
+            showThinking: false,
+            numSimulations: 1000
+        };
+
+        // Initialize game on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            newGame();
+        });
+
+        function initBoard() {
+            const board = document.getElementById('board');
+            const labels = document.getElementById('column-labels');
+
+            board.innerHTML = '';
+            labels.innerHTML = '';
+
+            // Create column labels
+            for (let col = 0; col < gameState.cols; col++) {
+                const label = document.createElement('div');
+                label.className = 'column-label';
+                label.textContent = String.fromCharCode(97 + col); // a, b, c, ...
+                label.onclick = () => makeHumanMove(col);
+                label.dataset.col = col;
+                labels.appendChild(label);
+            }
+
+            // Create board cells (top to bottom in HTML, reverse order for rendering)
+            for (let row = gameState.rows - 1; row >= 0; row--) {
+                for (let col = 0; col < gameState.cols; col++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell empty';
+                    cell.dataset.row = row;
+                    cell.dataset.col = col;
+                    cell.innerHTML = '<div class="eval-overlay"></div>';
+                    board.appendChild(cell);
+                }
+            }
+
+            updateBoardDisplay();
+        }
+
+        function updateBoardDisplay() {
+            const cells = document.querySelectorAll('.cell');
+            const labels = document.querySelectorAll('.column-label');
+
+            // Update cells
+            for (let i = 0; i < cells.length; i++) {
+                const cell = cells[i];
+                const row = parseInt(cell.dataset.row);
+                const col = parseInt(cell.dataset.col);
+                const index = row * gameState.cols + col;
+                const value = gameState.board[index];
+
+                cell.className = 'cell';
+                if (value === 0) {
+                    cell.classList.add('empty');
+                } else if (value === 1) {
+                    cell.classList.add('player-1');
+                } else {
+                    cell.classList.add('player-2');
+                }
+            }
+
+            // Update column labels (disable full columns)
+            labels.forEach((label, col) => {
+                if (gameState.legalMoves.includes(col)) {
+                    label.classList.remove('disabled');
+                } else {
+                    label.classList.add('disabled');
+                }
+            });
+
+            // Update move count
+            document.getElementById('move-count').textContent =
+                gameState.board.filter(x => x !== 0).length;
+        }
+
+        function updateStatusMessage(message, type = 'human') {
+            const statusEl = document.getElementById('status-message');
+            statusEl.textContent = message;
+            statusEl.className = 'status-message';
+
+            if (type === 'human') {
+                statusEl.classList.add('status-human-turn');
+            } else if (type === 'ai') {
+                statusEl.classList.add('status-ai-turn');
+            } else if (type === 'game-over') {
+                statusEl.classList.add('status-game-over');
+            }
+        }
+
+        async function newGame() {
+            try {
+                const response = await fetch('/api/new-game', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        rows: 6,
+                        cols: 7,
+                        num_simulations: gameState.numSimulations,
+                        ai_first: false
+                    })
+                });
+
+                const data = await response.json();
+                gameState.board = data.board;
+                gameState.currentPlayer = data.current_player;
+                gameState.legalMoves = data.legal_moves;
+                gameState.rows = data.rows;
+                gameState.cols = data.cols;
+                gameState.isGameOver = false;
+                gameState.humanPlayer = 1;
+                gameState.aiPlayer = -1;
+
+                initBoard();
+                updateStatusMessage('Your turn! Click a column to drop your piece.', 'human');
+                document.getElementById('mcts-stats').classList.remove('visible');
+
+                // Update game info
+                document.getElementById('human-symbol').textContent = '🔴 (Red)';
+                document.getElementById('ai-symbol').textContent = '🟡 (Yellow)';
+                document.getElementById('board-size').textContent = `${data.rows}×${data.cols}`;
+            } catch (error) {
+                console.error('Error starting new game:', error);
+                alert('Failed to start new game. Please try again.');
+            }
+        }
+
+        async function newGameAIFirst() {
+            try {
+                const response = await fetch('/api/new-game', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        rows: 6,
+                        cols: 7,
+                        num_simulations: gameState.numSimulations,
+                        ai_first: true
+                    })
+                });
+
+                const data = await response.json();
+                gameState.board = data.board;
+                gameState.currentPlayer = data.current_player;
+                gameState.legalMoves = data.legal_moves;
+                gameState.rows = data.rows;
+                gameState.cols = data.cols;
+                gameState.isGameOver = false;
+                gameState.humanPlayer = -1;
+                gameState.aiPlayer = 1;
+
+                initBoard();
+                updateStatusMessage('Your turn! Click a column to drop your piece.', 'human');
+                document.getElementById('mcts-stats').classList.remove('visible');
+
+                // Update game info
+                document.getElementById('human-symbol').textContent = '🟡 (Yellow)';
+                document.getElementById('ai-symbol').textContent = '🔴 (Red)';
+                document.getElementById('board-size').textContent = `${data.rows}×${data.cols}`;
+            } catch (error) {
+                console.error('Error starting new game:', error);
+                alert('Failed to start new game. Please try again.');
+            }
+        }
+
+        async function makeHumanMove(col) {
+            if (gameState.isGameOver) {
+                return;
+            }
+
+            if (gameState.currentPlayer !== gameState.humanPlayer) {
+                return;
+            }
+
+            if (!gameState.legalMoves.includes(col)) {
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/make-move', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ column: col })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    alert(error.error || 'Invalid move');
+                    return;
+                }
+
+                const data = await response.json();
+                gameState.board = data.board;
+                gameState.currentPlayer = data.current_player;
+                gameState.legalMoves = data.legal_moves;
+
+                updateBoardDisplay();
+
+                // Highlight last move
+                const cells = document.querySelectorAll('.cell');
+                cells.forEach(cell => {
+                    if (parseInt(cell.dataset.row) === data.move_row &&
+                        parseInt(cell.dataset.col) === col) {
+                        cell.classList.add('highlight');
+                        setTimeout(() => cell.classList.remove('highlight'), 500);
+                    }
+                });
+
+                if (data.is_terminal) {
+                    handleGameOver(data.result);
+                } else {
+                    updateStatusMessage('AI is thinking...', 'ai');
+                    await makeAIMove();
+                }
+            } catch (error) {
+                console.error('Error making move:', error);
+                alert('Failed to make move. Please try again.');
+            }
+        }
+
+        async function makeAIMove() {
+            document.getElementById('loading').classList.add('active');
+
+            try {
+                const response = await fetch('/api/ai-move', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        show_thinking: gameState.showThinking
+                    })
+                });
+
+                const data = await response.json();
+                gameState.board = data.board;
+                gameState.currentPlayer = data.current_player;
+                gameState.legalMoves = data.legal_moves;
+
+                updateBoardDisplay();
+
+                // Highlight last move
+                const cells = document.querySelectorAll('.cell');
+                cells.forEach(cell => {
+                    if (parseInt(cell.dataset.row) === data.move_row &&
+                        parseInt(cell.dataset.col) === data.move) {
+                        cell.classList.add('highlight');
+                        setTimeout(() => cell.classList.remove('highlight'), 500);
+                    }
+                });
+
+                // Update statistics
+                if (data.stats) {
+                    document.getElementById('nodes-explored').textContent = data.stats.nodes_explored;
+                    document.getElementById('tree-depth').textContent = data.stats.max_tree_depth;
+                    document.getElementById('simulations-used').textContent = data.stats.simulations;
+                }
+
+                // Show MCTS statistics if requested
+                if (data.evaluations && gameState.showThinking) {
+                    displayMCTSStats(data.evaluations);
+                }
+
+                if (data.is_terminal) {
+                    handleGameOver(data.result);
+                } else {
+                    updateStatusMessage('Your turn! Click a column to drop your piece.', 'human');
+                }
+            } catch (error) {
+                console.error('Error making AI move:', error);
+                alert('AI move failed. Please try again.');
+            } finally {
+                document.getElementById('loading').classList.remove('active');
+            }
+        }
+
+        function displayMCTSStats(evaluations) {
+            const statsBody = document.getElementById('stats-body');
+            const statsContainer = document.getElementById('mcts-stats');
+
+            statsBody.innerHTML = '';
+
+            // Sort by column index
+            const sortedEvals = Object.entries(evaluations).sort((a, b) => parseInt(a[0]) - parseInt(b[0]));
+
+            for (const [col, data] of sortedEvals) {
+                const row = document.createElement('tr');
+                if (data.is_best) {
+                    row.classList.add('best-move');
+                }
+
+                const colName = String.fromCharCode(97 + parseInt(col));
+                const valueClass = data.value > 0.3 ? 'value-positive' :
+                                  data.value < -0.3 ? 'value-negative' : 'value-neutral';
+
+                row.innerHTML = `
+                    <td><strong>${colName}</strong></td>
+                    <td>${data.visits}</td>
+                    <td class="${valueClass}">${data.value > 0 ? '+' : ''}${data.value.toFixed(2)}</td>
+                    <td>${data.uct_score.toFixed(3)}</td>
+                    <td style="text-align: left; font-size: 0.85em;">
+                        ${data.reasoning}${data.is_best ? ' ⭐' : ''}
+                    </td>
+                `;
+                statsBody.appendChild(row);
+            }
+
+            statsContainer.classList.add('visible');
+        }
+
+        function handleGameOver(result) {
+            gameState.isGameOver = true;
+
+            if (result > 0 && gameState.humanPlayer === 1 ||
+                result < 0 && gameState.humanPlayer === -1) {
+                updateStatusMessage('🎉 You win! Congratulations!', 'game-over');
+            } else if (result < 0 && gameState.humanPlayer === 1 ||
+                       result > 0 && gameState.humanPlayer === -1) {
+                updateStatusMessage('🤖 AI wins! Good try!', 'game-over');
+            } else {
+                updateStatusMessage('🤝 Draw! Well played!', 'game-over');
+            }
+        }
+
+        async function updateSimulations(value) {
+            gameState.numSimulations = parseInt(value);
+            document.getElementById('sim-value').textContent = value;
+
+            try {
+                await fetch('/api/update-settings', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        num_simulations: gameState.numSimulations
+                    })
+                });
+            } catch (error) {
+                console.error('Error updating settings:', error);
+            }
+        }
+
+        function toggleShowThinking(checked) {
+            gameState.showThinking = checked;
+            if (!checked) {
+                document.getElementById('mcts-stats').classList.remove('visible');
+            }
+        }
+    </script>
+</body>
+</html>

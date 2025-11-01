@@ -200,8 +200,8 @@ If you use this code in your research or teaching, please cite:
 
 ```bibtex
 @book{2026measure,
-  title={From Measure Theory to Deep Reinforcement Learning},
-  author={},
+  title={From Measure Theory to Alpha Go},
+  author={Vlad Prytula},
   publisher={},
   year={2026}
 }
@@ -227,5 +227,3 @@ Inspired by:
 - Sutton & Barto's *Reinforcement Learning: An Introduction*
 - OpenAI Spinning Up
 - DeepMind's AlphaZero paper
-
-

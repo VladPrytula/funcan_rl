@@ -141,6 +141,190 @@ def board_to_string(board: np.ndarray) -> str:
     return board.tobytes().hex()
 
 
+def get_position_name(index: int, board_size: int) -> str:
+    """
+    Convert flattened board index to algebraic notation (for square boards).
+
+    Algebraic notation: column letter (a-z) + row number (1-based).
+    Examples: a1, b2, c3 for 3×3 board; a1-d4 for 4×4 board.
+
+    Parameters
+    ----------
+    index : int
+        Flattened board index (row-major order)
+    board_size : int
+        Size of the square board (n×n)
+
+    Returns
+    -------
+    str
+        Algebraic notation position name
+
+    Examples
+    --------
+    >>> get_position_name(0, 3)  # Top-left of 3×3
+    'a1'
+    >>> get_position_name(4, 3)  # Center of 3×3
+    'b2'
+    >>> get_position_name(8, 3)  # Bottom-right of 3×3
+    'c3'
+    """
+    row = index // board_size
+    col = index % board_size
+    col_letter = chr(ord('a') + col)
+    row_number = row + 1
+    return f'{col_letter}{row_number}'
+
+
+def get_position_name_rect(index: int, rows: int, cols: int) -> str:
+    """
+    Convert flattened board index to algebraic notation (for rectangular boards).
+
+    Extension of get_position_name for boards where rows ≠ cols.
+    Algebraic notation: column letter (a-z) + row number (1-based).
+
+    Parameters
+    ----------
+    index : int
+        Flattened board index (row-major order)
+    rows : int
+        Number of rows
+    cols : int
+        Number of columns
+
+    Returns
+    -------
+    str
+        Algebraic notation position name
+
+    Examples
+    --------
+    >>> get_position_name_rect(0, 6, 7)  # Bottom-left of Connect Four (6×7)
+    'a1'
+    >>> get_position_name_rect(41, 6, 7)  # Top-right of Connect Four
+    'g6'
+    >>> get_position_name_rect(20, 6, 7)  # Middle of Connect Four
+    'd3'
+    """
+    row = index // cols
+    col = index % cols
+    col_letter = chr(ord('a') + col)
+    row_number = row + 1
+    return f'{col_letter}{row_number}'
+
+
+def parse_position_name(position: str, board_size: int) -> int:
+    """
+    Convert algebraic notation to flattened board index (for square boards).
+
+    Inverse of get_position_name.
+
+    Parameters
+    ----------
+    position : str
+        Algebraic notation position (e.g., 'a1', 'b2')
+    board_size : int
+        Size of the square board (n×n)
+
+    Returns
+    -------
+    int
+        Flattened board index
+
+    Raises
+    ------
+    ValueError
+        If position format is invalid
+
+    Examples
+    --------
+    >>> parse_position_name('a1', 3)
+    0
+    >>> parse_position_name('b2', 3)
+    4
+    >>> parse_position_name('c3', 3)
+    8
+    """
+    if len(position) < 2:
+        raise ValueError(f"Invalid position format: {position}")
+
+    col_letter = position[0].lower()
+    row_str = position[1:]
+
+    if not ('a' <= col_letter <= 'z'):
+        raise ValueError(f"Invalid column letter: {col_letter}")
+
+    try:
+        row_number = int(row_str)
+    except ValueError:
+        raise ValueError(f"Invalid row number: {row_str}")
+
+    col = ord(col_letter) - ord('a')
+    row = row_number - 1
+
+    if row < 0 or row >= board_size or col < 0 or col >= board_size:
+        raise ValueError(f"Position {position} out of bounds for {board_size}×{board_size} board")
+
+    return row * board_size + col
+
+
+def parse_position_name_rect(position: str, rows: int, cols: int) -> int:
+    """
+    Convert algebraic notation to flattened board index (for rectangular boards).
+
+    Inverse of get_position_name_rect.
+
+    Parameters
+    ----------
+    position : str
+        Algebraic notation position (e.g., 'a1', 'g6')
+    rows : int
+        Number of rows
+    cols : int
+        Number of columns
+
+    Returns
+    -------
+    int
+        Flattened board index
+
+    Raises
+    ------
+    ValueError
+        If position format is invalid
+
+    Examples
+    --------
+    >>> parse_position_name_rect('a1', 6, 7)
+    0
+    >>> parse_position_name_rect('d3', 6, 7)
+    20
+    >>> parse_position_name_rect('g6', 6, 7)
+    41
+    """
+    if len(position) < 2:
+        raise ValueError(f"Invalid position format: {position}")
+
+    col_letter = position[0].lower()
+    row_str = position[1:]
+
+    if not ('a' <= col_letter <= 'z'):
+        raise ValueError(f"Invalid column letter: {col_letter}")
+
+    try:
+        row_number = int(row_str)
+    except ValueError:
+        raise ValueError(f"Invalid row number: {row_str}")
+
+    col = ord(col_letter) - ord('a')
+    row = row_number - 1
+
+    if row < 0 or row >= rows or col < 0 or col >= cols:
+        raise ValueError(f"Position {position} out of bounds for {rows}×{cols} board")
+
+    return row * cols + col
+
+
 def print_move_prompt(legal_moves: np.ndarray, board_shape: tuple) -> None:
     """
     Print available moves in human-readable format.

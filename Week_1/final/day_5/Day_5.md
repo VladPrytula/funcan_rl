@@ -127,7 +127,7 @@ Without these bounds, DCT fails, and convergence is not guaranteed.
 
 This rigorous construction ensures that expectations $\mathbb{E}_{s' \sim P(\cdot|s,a)}[V(s')]$ are well-defined.
 
-Dubois note (kernel measurability). For each fixed $(s,a)$, Carathéodory yields a bona fide probability measure $P(\cdot\mid s,a)$ on $(\mathcal{S}, \mathcal{B}(\mathcal{S}))$. To obtain a Markov kernel, one also requires measurability of the parameter map: if the density $p(s'\mid s,a)$ is jointly measurable in $(s,a,s')$ and integrable on Borel sets, then for every Borel $B$, the map $(s,a) \mapsto P(B\mid s,a) = \int_B p(s'\mid s,a)\,ds'$ is measurable. Thus $(\mathcal{S}\times\mathcal{A}, \mathcal{B}(\mathcal{S}\times\mathcal{A})) \to [0,1]$ is measurable for each $B$, and $P$ is a Markov kernel in the strict sense.
+Note (kernel measurability). For each fixed $(s,a)$, Carathéodory yields a bona fide probability measure $P(\cdot\mid s,a)$ on $(\mathcal{S}, \mathcal{B}(\mathcal{S}))$. To obtain a Markov kernel, one also requires measurability of the parameter map: if the density $p(s'\mid s,a)$ is jointly measurable in $(s,a,s')$ and integrable on Borel sets, then for every Borel $B$, the map $(s,a) \mapsto P(B\mid s,a) = \int_B p(s'\mid s,a)\,ds'$ is measurable. Thus $(\mathcal{S}\times\mathcal{A}, \mathcal{B}(\mathcal{S}\times\mathcal{A})) \to [0,1]$ is measurable for each $B$, and $P$ is a Markov kernel in the strict sense.
 
 ---
 

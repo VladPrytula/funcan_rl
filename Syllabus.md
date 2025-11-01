@@ -109,7 +109,7 @@ Lab Session 1: [Component] (90 min)
 ```
 
 **Content:**
-- Theory recaps before each lab (bridge to Dubois's proofs)
+- Theory recaps before each lab (bridge to Math's proofs)
 - Complete, runnable code with explanations
 - Time-calibrated tasks (each with explicit duration)
 - Exercises testing understanding
@@ -130,8 +130,8 @@ Lab Session 1: [Component] (90 min)
 4. Never see "why" visually
 
 **This course:**
-1. Read theorem → See it proven (Dubois, Weeks 1-41)
-2. See production code → Understand design choices (Rubin, RL implementations)
+1. Read theorem → See it proven (Weeks 1-41)
+2. See production code → Understand design choices (RL implementations)
 3. Run with `--show-thinking` → Watch algorithm work (visualization)
 4. Play against AI → Feel optimal vs. heuristic (hands-on)
 

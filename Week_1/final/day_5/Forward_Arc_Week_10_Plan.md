@@ -58,7 +58,7 @@ This week fulfills that promise. We extend Carathéodory's machinery from $\math
    - For each $s \in \mathcal{S}$: $P(s, \cdot)$ is a probability measure on $(\mathcal{S}, \mathcal{F})$
    - For each $A \in \mathcal{F}$: $P(\cdot, A)$ is $\mathcal{F}$-measurable
 
-2. **Week 1 Callback**: Recall Day 5, Dubois note on kernel measurability:
+2. **Week 1 Callback**: Recall Day 5, the note on kernel measurability:
    > "For each fixed $(s,a)$, Carathéodory yields a probability measure $P(\cdot \mid s,a)$ on $(\mathcal{S}, \mathcal{B}(\mathcal{S}))$. To obtain a Markov kernel, one also requires measurability of the parameter map: if the density $p(s' \mid s,a)$ is jointly measurable in $(s,a,s')$, then $(s,a) \mapsto P(B \mid s,a)$ is measurable for each Borel $B$."
 
    We now make this rigorous for general $(\mathcal{S}, \mathcal{F})$ beyond $\mathbb{R}^n$.
